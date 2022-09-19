@@ -26,10 +26,10 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner;
-import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
+import org.firstinspires.ftc.teamcode.Auto.trajectorysequence.TrajectorySequence;
+import org.firstinspires.ftc.teamcode.Auto.trajectorysequence.TrajectorySequenceBuilder;
+import org.firstinspires.ftc.teamcode.Auto.trajectorysequence.TrajectorySequenceRunner;
+import org.firstinspires.ftc.teamcode.Auto.util.LynxModuleUtil;
 
 import java.util.Arrays;
 import java.util.List;
