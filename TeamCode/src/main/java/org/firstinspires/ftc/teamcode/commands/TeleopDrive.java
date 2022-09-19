@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
-public class TeleOpDrive implements DiInterfaces.ITickable{
+public class TeleopDrive implements DiInterfaces.ITickable{
     @DiContainer.Inject()
     Telemetry telemetry;
     @DiContainer.Inject()

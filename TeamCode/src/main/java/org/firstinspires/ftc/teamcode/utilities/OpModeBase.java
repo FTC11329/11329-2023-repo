@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.robot.Robot;
 
 import org.firstinspires.ftc.teamcode.RobotConfig;
 
+import org.firstinspires.ftc.teamcode.subsystems.Slides;
 import org.firstinspires.ftc.teamcode.utilities.DiOpMode;
 
 import java.lang.reflect.InvocationTargetException;
@@ -24,9 +25,20 @@ public abstract class OpModeBase extends DiOpMode {
 
     @Override
     public void Install() throws IllegalAccessException, InstantiationException, InvocationTargetException {
-        Container.bindInstance(GetSide()); // works for bindinstance original "Container.BindInstance(GetSide());"
+        //this declares the motors and classes allowed to be injected with the @Inject() function in all future OpModes (both teleop and autonomouse)
+        //If a certin motor or class is only used in teleop then you can "bindInstance()" in the TeleopBase script
+        //the .withId() determines the name used to get the motor or clas in teh @Inject(id=x) function
+        Container.bindInstance(GetSide());
 
+        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.frontLeftMotorName)).withId("frontLeftMotor");
+        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.frontRightMotorName)).withId("frontRightMotor");
+        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.backLeftMotorName)).withId("backLeftMotor");
+        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.backRightMotorName)).withId("backRightMotor");
+
+        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.leftSlideMotor)).withId("leftSlideMotor");
+        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.rightSlideMotor)).withId("rightSlideMotor");
         Container.bind(Drivetrain.class).asSingle();
+        Container.bind(Slides.class).asSingle();
         InstallLower();
     }
 }

@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
 
-public class Manipulator implements DiInterfaces.ITickable {
+public class TeleopArm implements DiInterfaces.ITickable {
     @DiContainer.Inject(id ="gamepad2")
     public Gamepad gamepad2;
     @DiContainer.Inject()

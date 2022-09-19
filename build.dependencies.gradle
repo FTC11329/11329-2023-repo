@@ -21,6 +21,7 @@ dependencies {
     implementation 'org.firstinspires.ftc:gameAssets-PowerPlay:1.0.0'
     implementation group: 'com.fizzyapple12.javadi', name: 'javadi', version: '1.1.0'
     implementation 'com.acmerobotics.dashboard:dashboard:0.4.4'
+    implementation group: 'org.openftc', name: 'easyopencv', version: '1.5.2'
 
 
 }
