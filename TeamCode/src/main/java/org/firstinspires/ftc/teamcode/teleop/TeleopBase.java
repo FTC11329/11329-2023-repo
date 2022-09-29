@@ -16,8 +16,8 @@ public abstract class TeleopBase extends OpModeBase {
         Container.bindInstance(gamepad1).withId("gamepad1");
         Container.bindInstance(gamepad2).withId("gamepad2");
 
-        Container.bind(TeleopDrive.class).asSingle();
-        Container.bind(TeleopArm.class).asSingle();
+        /*Container.bind(TeleopDrive.class).asSingle();
+        Container.bind(TeleopArm.class).asSingle();*/
 
     }
 }

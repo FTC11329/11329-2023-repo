@@ -10,4 +10,5 @@ public class TeleopBlue extends TeleopBase {
     public RobotSide GetSide() {
         return RobotSide.Blue;
     }
+
 }
