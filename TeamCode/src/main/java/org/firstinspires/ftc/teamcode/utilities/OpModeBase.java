@@ -38,7 +38,7 @@ public abstract class OpModeBase extends DiOpMode {
         Container.bindInstance(GetSide());
 
 
-        Container.bindInstance(
+        /*Container.bindInstance(
                         OpenCvCameraFactory
                                 .getInstance()
                                 .createWebcam(
@@ -49,18 +49,19 @@ public abstract class OpModeBase extends DiOpMode {
                                                         "id",
                                                         hardwareMap.appContext.getPackageName()
                                                 )))
-                .withId("webcam");
+                .withId("webcam");*/
 
-        /*Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.frontLeftMotorName)).withId("frontLeftMotor");
+        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.frontLeftMotorName)).withId("frontLeftMotor");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.frontRightMotorName)).withId("frontRightMotor");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.backLeftMotorName)).withId("backLeftMotor");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.backRightMotorName)).withId("backRightMotor");
 
-        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.leftSlideMotor)).withId("leftSlideMotor");
-        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.rightSlideMotor)).withId("rightSlideMotor");
+        //Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.leftSlideMotor)).withId("leftSlideMotor");
+        //Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.rightSlideMotor)).withId("rightSlideMotor");
+        //Container.bind(Drivetrain.class).asSingle();
+        //Container.bind(Slides.class).asSingle();
+        //Container.bind(ComputerVision.class).asSingle();
         Container.bind(Drivetrain.class).asSingle();
-        Container.bind(Slides.class).asSingle();*/
-        Container.bind(ComputerVision.class).asSingle();
         InstallLower();
     }
 }

@@ -15,9 +15,9 @@ public abstract class TeleopBase extends OpModeBase {
     public void InstallLower() throws InvocationTargetException, IllegalAccessException, InstantiationException {
         Container.bindInstance(gamepad1).withId("gamepad1");
         Container.bindInstance(gamepad2).withId("gamepad2");
-
-        /*Container.bind(TeleopDrive.class).asSingle();
-        Container.bind(TeleopArm.class).asSingle();*/
+        //Container.bindInstance(TeleopBlue.class).asSingle();
+        Container.bind(TeleopDrive.class).asSingle();
+        //Container.bind(TeleopArm.class).asSingle();
 
     }
 }

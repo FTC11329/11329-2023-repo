@@ -15,9 +15,9 @@ public class TeleopDrive implements DiInterfaces.ITickable{
     public Gamepad gamepad1;
     @Override
     public void onTick(){
-        double vertical = -drivetrain.powerCurve(gamepad1.left_stick_y);
-        double horizontal = -drivetrain.powerCurve(gamepad1.left_stick_x);
-        double rotational = drivetrain.powerCurve(gamepad1.right_stick_x);
+        double vertical = -gamepad1.left_stick_y;
+        double horizontal = -gamepad1.left_stick_x;
+        double rotational = gamepad1.right_stick_x;
 
         drivetrain.MecanumDrive(vertical, horizontal, rotational, 0.7);
     }
