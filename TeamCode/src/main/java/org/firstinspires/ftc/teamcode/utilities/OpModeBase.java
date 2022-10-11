@@ -59,7 +59,7 @@ public abstract class OpModeBase extends DiOpMode {
         //Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.leftSlideMotor)).withId("leftSlideMotor");
         //Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.rightSlideMotor)).withId("rightSlideMotor");
         //Container.bind(Drivetrain.class).asSingle();
-        //Container.bind(Slides.class).asSingle();
+        Container.bind(Slides.class).asSingle();
         //Container.bind(ComputerVision.class).asSingle();
         Container.bind(Drivetrain.class).asSingle();
         InstallLower();

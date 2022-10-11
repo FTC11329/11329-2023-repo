@@ -12,10 +12,11 @@ public class Slides  implements DiInterfaces.IDisposable, DiInterfaces.IInitiali
     @DiContainer.Inject(id="rightSlideMotor")
     DcMotorEx rightSlideMotor;
 
-    public void moveSlidesWithPower(double speed) {
+    public void moveSlides(double speed) {
         leftSlideMotor.setPower(speed);
-        rightSlideMotor.setPower(speed);
+        rightSlideMotor.setPower(-speed);
     }
+
 
     @Override
     public void onInitialize() {
