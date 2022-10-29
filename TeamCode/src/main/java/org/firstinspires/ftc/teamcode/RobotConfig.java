@@ -13,4 +13,9 @@ public class RobotConfig {
         public static String rightSlideMotor = "rightSlideMotor";
         public static String leftSlideMotor = "leftSlideMotor";
     }
+    public static class Claw{
+        public static int clawMinRange = 0;
+        public static int clawMaxRange = 1;
+    }
+
 }

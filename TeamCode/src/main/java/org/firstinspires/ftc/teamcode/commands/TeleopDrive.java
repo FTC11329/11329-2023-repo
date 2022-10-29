@@ -25,13 +25,15 @@ public class TeleopDrive implements DiInterfaces.ITickable {
         double rotational = gamepad1.right_stick_x;
         double upPower = gamepad1.left_trigger;
         double downPower = gamepad1.right_trigger;
-        
+        //doubles reading for probably more accuracy or something because java idk
         slides.moveSlides(upPower - downPower);
         drivetrain.MecanumDrive(vertical, horizontal, rotational, 0.7);
     }
 }
-//teagan was here
+//Teagan was defenetly here. ya totally shure allen
 /*
-russian jets at 5.32234791 2.3138492 CHEAP
+russian jets at N5.32234791 W2.3138492 CHEAP
+192.168.4.382.930.171
 russian jets for $5? satisfactory!
+somebody once told me that the world was gonna roll me and i ain't the charpest tool in the shed and she was looking kinda dumb with a finger and a thumb in the shape of an l on her forehead and the years start coming and they don't stop coming and fed to the rures and you hit the ground ruunning. didnt make sense not to live for fun, your brain gets smart Iff you see this
  */

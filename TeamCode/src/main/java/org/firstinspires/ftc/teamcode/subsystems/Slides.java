@@ -17,7 +17,6 @@ public class Slides  implements DiInterfaces.IDisposable, DiInterfaces.IInitiali
         rightSlideMotor.setPower(-speed);
     }
 
-
     @Override
     public void onInitialize() {
         leftSlideMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
