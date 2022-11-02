@@ -1,10 +1,15 @@
 package org.firstinspires.ftc.teamcode.utilities;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.RobotConfig;
+import org.firstinspires.ftc.teamcode.subsystems.Arm;
+import org.firstinspires.ftc.teamcode.subsystems.Claw;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
+import org.openftc.easyopencv.OpenCvCameraFactory;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -23,7 +28,7 @@ public abstract class OpModeBase extends DiOpMode {
         Container.bindInstance(GetSide());
 
 
-        /*Container.bindInstance(
+        Container.bindInstance(
                         OpenCvCameraFactory
                                 .getInstance()
                                 .createWebcam(
@@ -34,17 +39,22 @@ public abstract class OpModeBase extends DiOpMode {
                                                         "id",
                                                         hardwareMap.appContext.getPackageName()
                                                 )))
-                .withId("webcam");*/
+                .withId("webcam");
 
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.frontLeftMotorName)).withId("frontLeftMotor");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.frontRightMotorName)).withId("frontRightMotor");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.backLeftMotorName)).withId("backLeftMotor");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.backRightMotorName)).withId("backRightMotor");
-
-        //Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.leftSlideMotor)).withId("leftSlideMotor");
-        //Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.rightSlideMotor)).withId("rightSlideMotor");
-        //Container.bind(Drivetrain.class).asSingle();
+        Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Arm.armServo1)).withId("armServo1");
+        Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Arm.armServo2)).withId("armServo2");
+        Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.clawServo)).withId("clawServo");
+        Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.handServo1)).withId("handServo1");
+        Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.handServo2)).withId("handServo2");
+        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.leftSlideMotor)).withId("leftSlideMotor");
+        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.rightSlideMotor)).withId("rightSlideMotor");
         Container.bind(Slides.class).asSingle();
+        Container.bind(Arm.class);
+        Container.bind(Claw.class);
         //Container.bind(ComputerVision.class).asSingle();
         Container.bind(Drivetrain.class).asSingle();
         InstallLower();

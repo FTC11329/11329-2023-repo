@@ -9,7 +9,10 @@ import org.firstinspires.ftc.teamcode.RobotConfig;
 public class Claw implements DiInterfaces.IDisposable, DiInterfaces.IInitializable {
     @DiContainer.Inject(id="clawServo")
     Servo closeClaw;
-
+    @DiContainer.Inject(id="handServo1")
+    public Servo handWave1;
+    @DiContainer.Inject(id="handServo2")
+    public Servo handWave2;
 
     @Override
     public void onInitialize() {
@@ -21,6 +24,10 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.IInitializab
     }
     public void openClaw(){
         closeClaw.setPosition(1.0);
+    }
+    public void setClawPower(double clawSpeed){
+        handWave1.setPosition(handWave1.getPosition() + RobotConfig.Claw.handSpeed*clawSpeed);
+        handWave2.setPosition(handWave2.getPosition() - RobotConfig.Claw.handSpeed*clawSpeed);
     }
 
     @Override
