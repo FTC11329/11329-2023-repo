@@ -1,12 +1,7 @@
 package org.firstinspires.ftc.teamcode.utilities;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 import com.fizzyapple12.javadi.DiContainer;
-import com.fizzyapple12.javadi.*;
-import com.fizzyapple12.javadi.DiInterfaces.IInitializable;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import java.lang.reflect.InvocationTargetException;
 
