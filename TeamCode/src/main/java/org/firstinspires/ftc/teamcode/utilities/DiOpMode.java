@@ -18,7 +18,6 @@ public abstract class DiOpMode extends OpMode {
             Install();
         } catch (Exception e) {
             telemetry.log().add("Failed to Init, robot will die now");
-            telemetry.log().add(e.getMessage());
         }
 
         Container.onInject();

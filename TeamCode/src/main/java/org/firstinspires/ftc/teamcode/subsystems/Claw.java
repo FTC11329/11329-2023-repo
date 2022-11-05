@@ -16,20 +16,16 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.IInitializab
 
     @Override
     public void onInitialize() {
-        closeClaw.scaleRange(RobotConfig.Claw.clawMinRange, RobotConfig.Claw.clawMaxRange);
-    }
 
-    public void closeClaw(){
-        closeClaw.setPosition(0.0);
     }
-    public void openClaw(){
-        closeClaw.setPosition(1.0);
+    public void setClawPower(double armSpeed){
+        handWave1.setPosition(handWave1.getPosition() + RobotConfig.Claw.handSpeed * armSpeed);
+        handWave2.setPosition(handWave2.getPosition() - RobotConfig.Claw.handSpeed * armSpeed);
     }
-    public void setClawPower(double clawSpeed){
-        handWave1.setPosition(handWave1.getPosition() + RobotConfig.Claw.handSpeed*clawSpeed);
-        handWave2.setPosition(handWave2.getPosition() - RobotConfig.Claw.handSpeed*clawSpeed);
+    public void setPos(double pos){
+        handWave2.setPosition(pos);
+        handWave1.setPosition(pos);
     }
-
     @Override
     public void onDispose() {
 

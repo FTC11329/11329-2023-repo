@@ -28,7 +28,7 @@ public abstract class OpModeBase extends DiOpMode {
         Container.bindInstance(GetSide());
 
 
-        Container.bindInstance(
+        /*Container.bindInstance(
                         OpenCvCameraFactory
                                 .getInstance()
                                 .createWebcam(
@@ -39,7 +39,7 @@ public abstract class OpModeBase extends DiOpMode {
                                                         "id",
                                                         hardwareMap.appContext.getPackageName()
                                                 )))
-                .withId("webcam");
+                .withId("webcam");*/
 
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.frontLeftMotorName)).withId("frontLeftMotor");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.frontRightMotorName)).withId("frontRightMotor");
@@ -50,11 +50,11 @@ public abstract class OpModeBase extends DiOpMode {
         Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.clawServo)).withId("clawServo");
         Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.handServo1)).withId("handServo1");
         Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.handServo2)).withId("handServo2");
-        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.leftSlideMotor)).withId("leftSlideMotor");
-        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.rightSlideMotor)).withId("rightSlideMotor");
-        Container.bind(Slides.class).asSingle();
-        Container.bind(Arm.class);
-        Container.bind(Claw.class);
+        //Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.leftSlideMotor)).withId("leftSlideMotor");
+        //Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.rightSlideMotor)).withId("rightSlideMotor");
+        //Container.bind(Slides.class).asSingle();
+        Container.bind(Arm.class).asSingle();
+        Container.bind(Claw.class).asSingle();
         //Container.bind(ComputerVision.class).asSingle();
         Container.bind(Drivetrain.class).asSingle();
         InstallLower();

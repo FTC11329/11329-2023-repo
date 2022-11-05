@@ -22,6 +22,10 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.IDisposabl
         arm1.setPosition(arm1.getPosition()+ RobotConfig.Arm.armSpeed*armSpeed);
         arm2.setPosition(arm2.getPosition()- RobotConfig.Arm.armSpeed*armSpeed);
     }
+    public void setPos(double pos) {
+    arm1.setPosition(pos);
+    arm2.setPosition(pos);
+    }
     @Override
     public void onDispose() {
 
