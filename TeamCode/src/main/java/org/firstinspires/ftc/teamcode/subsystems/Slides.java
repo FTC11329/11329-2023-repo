@@ -14,7 +14,7 @@ public class Slides  implements DiInterfaces.IDisposable, DiInterfaces.IInitiali
 
     public void moveSlides(double speed) {
         leftSlideMotor.setPower(speed);
-        rightSlideMotor.setPower(-speed);
+        rightSlideMotor.setPower(speed);
     }
 
     @Override

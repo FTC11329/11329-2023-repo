@@ -15,8 +15,8 @@ public class TeleopDrive implements DiInterfaces.ITickable {
     Telemetry telemetry;
     @DiContainer.Inject()
     Drivetrain drivetrain;
-    //@DiContainer.Inject()
-    //Slides slides;
+    @DiContainer.Inject()
+    Slides slides;
     @DiContainer.Inject(id = "gamepad1")
     public Gamepad gamepad1;
     @DiContainer.Inject(id="gamepad2")
@@ -36,7 +36,7 @@ public class TeleopDrive implements DiInterfaces.ITickable {
         double armPower = gamepad2.left_stick_x;
         double handPower = gamepad2.right_stick_x;
         //doubles reading for probably more accuracy or something because java idk
-        //slides.moveSlides(upPower - downPower);
+        slides.moveSlides(upPower - downPower);
         drivetrain.MecanumDrive(vertical, horizontal, rotational, 0.7);
         arm.setArmSpeed(armPower);
         claw.setClawPower(handPower);

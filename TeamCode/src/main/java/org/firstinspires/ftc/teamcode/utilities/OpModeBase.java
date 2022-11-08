@@ -50,9 +50,9 @@ public abstract class OpModeBase extends DiOpMode {
         Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.clawServo)).withId("clawServo");
         Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.handServo1)).withId("handServo1");
         Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.handServo2)).withId("handServo2");
-        //Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.leftSlideMotor)).withId("leftSlideMotor");
-        //Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.rightSlideMotor)).withId("rightSlideMotor");
-        //Container.bind(Slides.class).asSingle();
+        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.leftSlideMotor)).withId("leftSlideMotor");
+        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.rightSlideMotor)).withId("rightSlideMotor");
+        Container.bind(Slides.class).asSingle();
         Container.bind(Arm.class).asSingle();
         Container.bind(Claw.class).asSingle();
         //Container.bind(ComputerVision.class).asSingle();
