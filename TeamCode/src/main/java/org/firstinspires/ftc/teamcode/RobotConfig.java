@@ -22,13 +22,15 @@ public class RobotConfig {
 
     public static int clawMinRange = 0;
     public static int clawMaxRange = 1;
-    public static double handSpeed = 0.0008;
+    public static double handSpeed = 0.00328;
     public static String clawServo = "clawServo";
     public static String handServo1 = "handServo1";
     public static String handServo2 = "handServo2";
+    public static double closePos = 0.3;
+    public static double openPos = 0;
   }
   public static class Arm{
-    public static double armSpeed = 0.0008;
+    public static double armSpeed = 0.0015;
     public static String armServo1 = "armServo1";
     public static String armServo2 = "armServo2";
   }

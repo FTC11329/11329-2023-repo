@@ -5,6 +5,7 @@ import com.fizzyapple12.javadi.DiInterfaces;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.RobotConfig;
 import org.firstinspires.ftc.teamcode.subsystems.Claw;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
@@ -33,17 +34,17 @@ public class TeleopDrive implements DiInterfaces.ITickable {
         double rotational = gamepad1.right_stick_x;
         double upPower = gamepad2.left_trigger;
         double downPower = gamepad2.right_trigger;
-        double armPower = gamepad2.left_stick_x;
+        boolean grab = gamepad2.right_bumper;
+        double armPower = -gamepad2.left_stick_x;
         double handPower = gamepad2.right_stick_x;
         //doubles reading for probably more accuracy or something because java idk
         slides.moveSlides(upPower - downPower);
         drivetrain.MecanumDrive(vertical, horizontal, rotational, 0.7);
         arm.setArmSpeed(armPower);
         claw.setClawPower(handPower);
-        if(gamepad2.y){
-            arm.setPos(0.5);
-            claw.setPos(0.5);
-        }
+        if(grab){claw.grab();}
+        else {claw.ungrab();}
+
     }
 }
 //Teagan was defenetly here. ya totally shure allen
