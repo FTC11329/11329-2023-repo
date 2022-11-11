@@ -4,8 +4,8 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import android.annotation.SuppressLint;
 
 import com.acmerobotics.dashboard.FtcDashboard;
-import com.fizzyapple12.javadi.DiContainer;
-import com.fizzyapple12.javadi.DiInterfaces;
+import org.firstinspires.ftc.teamcode.javadi.DiContainer;
+import org.firstinspires.ftc.teamcode.javadi.DiInterfaces;
 
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;

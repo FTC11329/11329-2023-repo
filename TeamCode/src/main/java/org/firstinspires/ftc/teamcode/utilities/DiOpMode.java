@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.utilities;
 
-import com.fizzyapple12.javadi.DiContainer;
+import org.firstinspires.ftc.teamcode.javadi.DiContainer;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import java.lang.reflect.InvocationTargetException;
@@ -18,6 +18,7 @@ public abstract class DiOpMode extends OpMode {
             Install();
         } catch (Exception e) {
             telemetry.log().add("Failed to Init, robot will die now");
+            telemetry.log().add(e.toString());
         }
 
         Container.onInject();

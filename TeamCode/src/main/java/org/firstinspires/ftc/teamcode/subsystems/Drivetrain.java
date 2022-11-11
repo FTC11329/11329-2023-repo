@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems;
-import com.fizzyapple12.javadi.DiContainer;
-import com.fizzyapple12.javadi.DiInterfaces;
+import org.firstinspires.ftc.teamcode.javadi.DiContainer;
+import org.firstinspires.ftc.teamcode.javadi.DiInterfaces;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
