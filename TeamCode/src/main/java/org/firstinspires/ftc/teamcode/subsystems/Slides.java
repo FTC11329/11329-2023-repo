@@ -45,7 +45,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     public void onInitialize() {
         setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         zero();
-        setTargetPositionTolerance(20);
+        setTargetPositionTolerance(100);
         setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         leftSlideMotor.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -58,6 +58,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     public void setTargetPositionTolerance(int tolerance) {
         leftSlideMotor.setTargetPositionTolerance(tolerance);
         rightSlideMotor.setTargetPositionTolerance(tolerance);
+
     }
 
     public void zero() {

@@ -38,7 +38,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         double upPower = gamepad2.left_trigger;
         double downPower = gamepad2.right_trigger;
         boolean grab = gamepad2.right_bumper;
-        double armPower = -gamepad2.left_stick_x;
+        double armPower = -gamepad2.left_stick_y;
         double handPower = gamepad2.right_stick_x;
         //doubles reading for probably more accuracy or something because java idk
         //slides.moveSlides(upPower - downPower);
@@ -49,11 +49,8 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         drivetrain.MecanumDrive(vertical, horizontal, rotational, 0.7);
         arm.setArmSpeed(armPower);
         claw.setClawPower(handPower);
-        if (grab) {
-            claw.grab();
-        } else {
-            claw.ungrab();
-        }
+        if (grab) claw.toggle();
+        else claw.resetToggle();
         slides.displayToTelemetry();
         arm.displayToTelemetry();
         telemetry.update();
@@ -68,20 +65,21 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             arm.setPos(RobotConfig.Presets.Arm1HighRev);
         }
         // Medium
-        if (gamepad1.dpad_right || gamepad1.b) {
+        if (gamepad1.dpad_right || gamepad1.x) {
             slidePosition = RobotConfig.Presets.SlidesMed;
             arm.setPos(RobotConfig.Presets.Arm1Med);
         }
         // Low
-        if (gamepad1.dpad_down || gamepad1.a) {
-            slidePosition = RobotConfig.Presets.SlidesLow;
-            arm.setPos(RobotConfig.Presets.Arm1Low);
+        if (gamepad1.dpad_down || gamepad1.y) {
+            slidePosition = RobotConfig.Presets.SlidesPickup;
+            arm.setPos(RobotConfig.Presets.Arm1Pickup);
         }
     }
 
     @Override
     public void onInitialize() {
 //        arm.gotoZero();
+        arm.setPos(1);
     }
 }
 //Teagan was defenetly here. ya totally shure allen

@@ -42,7 +42,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.IDisposabl
     }
 
     public void gotoZero() {
-        setPos(0.0);
+        setPos(1.0);
     }
 
     @Override
