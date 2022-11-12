@@ -16,7 +16,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     @DiContainer.Inject()
     Telemetry telemetry;
 
-    DcMotor.RunMode currentRunmode = DcMotor.RunMode.STOP_AND_RESET_ENCODER;
+    DcMotor.RunMode currentRunmode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
 
     public void setMode(DcMotorEx.RunMode runMode) {
         if (runMode != currentRunmode) {
@@ -43,6 +43,9 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
 
     @Override
     public void onInitialize() {
+        setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        zero();
+        setTargetPositionTolerance(20);
         setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         leftSlideMotor.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -50,6 +53,16 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
 
         rightSlideMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         rightSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
+    public void setTargetPositionTolerance(int tolerance) {
+        leftSlideMotor.setTargetPositionTolerance(tolerance);
+        rightSlideMotor.setTargetPositionTolerance(tolerance);
+    }
+
+    public void zero() {
+        leftSlideMotor.setTargetPosition(0);
+        rightSlideMotor.setTargetPosition(0);
     }
 
     @Override
