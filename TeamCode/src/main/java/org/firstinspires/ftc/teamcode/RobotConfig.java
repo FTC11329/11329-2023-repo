@@ -11,7 +11,27 @@ public class RobotConfig {
     public static String backLeftMotorName = "backLeft";
     public static String backRightMotorName = "backRight";
   }
+  public static class Presets{
+    //High
+    public static int SlidesHigh  = -370;
+    public static double Arm1High = 0.523;
+    public static double Arm2High = 0.467;
 
+    //High Reverse
+    public static int SlidesHighRev  = -595;
+    public static double Arm1HighRev = 0.325;
+    public static double Arm2HighRev = 0.675;
+
+    //Medium
+    public static int SlidesMed  = 0;
+    public static double Arm1Med = 0.496;
+    public static double Arm2Med = 0.503;
+
+    //Low
+    public static int SlidesLow  = -1000;
+    public static double Arm1Low = 1;
+    public static double Arm2Low = 0;
+  }
   public static class Slides {
 
     public static String rightSlideMotor = "rightSlideMotor";

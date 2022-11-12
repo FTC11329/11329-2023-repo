@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.commands;
 import com.fizzyapple12.javadi.DiContainer;
 import com.fizzyapple12.javadi.DiInterfaces;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.robot.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotConfig;
@@ -11,7 +12,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
 import org.firstinspires.ftc.teamcode.subsystems.Arm;
 
-public class TeleopDrive implements DiInterfaces.ITickable {
+public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitializable {
     @DiContainer.Inject()
     Telemetry telemetry;
     @DiContainer.Inject()
@@ -20,12 +21,14 @@ public class TeleopDrive implements DiInterfaces.ITickable {
     Slides slides;
     @DiContainer.Inject(id = "gamepad1")
     public Gamepad gamepad1;
-    @DiContainer.Inject(id="gamepad2")
+    @DiContainer.Inject(id = "gamepad2")
     public Gamepad gamepad2;
     @DiContainer.Inject()
     public Arm arm;
     @DiContainer.Inject()
     public Claw claw;
+
+    public int slidePosition = 0;
 
     @Override
     public void onTick() {
@@ -38,13 +41,48 @@ public class TeleopDrive implements DiInterfaces.ITickable {
         double armPower = -gamepad2.left_stick_x;
         double handPower = gamepad2.right_stick_x;
         //doubles reading for probably more accuracy or something because java idk
-        slides.moveSlides(upPower - downPower);
+        //slides.moveSlides(upPower - downPower);
+
+        slidePosition += upPower - downPower;
+        slidePosition = Math.min(slidePosition, 0);
+        slides.toPosition(slidePosition);
+
         drivetrain.MecanumDrive(vertical, horizontal, rotational, 0.7);
         arm.setArmSpeed(armPower);
         claw.setClawPower(handPower);
-        if(grab){claw.grab();}
-        else {claw.ungrab();}
+        if (grab) {
+            claw.grab();
+        } else {
+            claw.ungrab();
+        }
+        slides.displayToTelemetry();
+        arm.displayToTelemetry();
+        telemetry.update();
+        //High
+        if (gamepad2.y) {
+            slidePosition = RobotConfig.Presets.SlidesHigh;
+            arm.setPos(RobotConfig.Presets.Arm1High);
+        }
+        //High Reverse
+        if (gamepad2.b) {
+            slidePosition = RobotConfig.Presets.SlidesHighRev;
+            arm.setPos(RobotConfig.Presets.Arm1HighRev);
+        }
+        //Medium
+        if (gamepad1.x) {
+            slidePosition = RobotConfig.Presets.SlidesMed;
+            arm.setPos(RobotConfig.Presets.Arm1Med);
+        }
+        //Low
+        if (gamepad1.a) {
+            slidePosition = RobotConfig.Presets.SlidesLow;
+            arm.setPos(RobotConfig.Presets.Arm1Low);
+        }
+    }
 
+    @Override
+    public void onInitialize() {
+        arm.gotoZero();
     }
 }
 //Teagan was defenetly here. ya totally shure allen
