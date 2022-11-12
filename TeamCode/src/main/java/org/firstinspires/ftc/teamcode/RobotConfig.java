@@ -57,7 +57,7 @@ public class RobotConfig {
     }
 
     public static class Arm {
-        public static double armSpeed = 0.003;
+        public static double armSpeed = 0.007;
         public static String armServo1 = "armServo1";
         public static String armServo2 = "armServo2";
     }
