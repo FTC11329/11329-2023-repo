@@ -5,6 +5,7 @@ import com.fizzyapple12.javadi.DiInterfaces;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.robot.Robot;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotConfig;
 
 public class Claw implements DiInterfaces.IDisposable, DiInterfaces.IInitializable {
@@ -14,7 +15,8 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.IInitializab
     public Servo handWave1;
     @DiContainer.Inject(id = "handServo2")
     public Servo handWave2;
-
+    @DiContainer.Inject()
+    Telemetry telemetry;
     private boolean grabbing = false;
     private boolean grabbingDebounce = false;
 
@@ -24,12 +26,13 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.IInitializab
     }
 
     public void setClawPower(double armSpeed) {
-        handWave1.setPosition(handWave1.getPosition() + RobotConfig.Claw.handSpeed * armSpeed);
-        handWave2.setPosition(handWave2.getPosition() - RobotConfig.Claw.handSpeed * armSpeed);
+        setPos(handWave1.getPosition() + RobotConfig.Arm.armSpeed * armSpeed);
+        //handWave1.setPosition(handWave1.getPosition() + RobotConfig.Claw.handSpeed * armSpeed);
+        //handWave2.setPosition(handWave2.getPosition() - RobotConfig.Claw.handSpeed * armSpeed);
     }
 
     public void setPos(double pos) {
-        handWave2.setPosition(pos);
+        handWave2.setPosition(1.0- pos);
         handWave1.setPosition(pos);
     }
 
@@ -55,7 +58,10 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.IInitializab
         grabbing = false;
         closeClaw.setPosition(RobotConfig.Claw.openPos);
     }
-
+    public void displayToTelemetry() {
+        telemetry.addData("Hand1", handWave1.getPosition());
+        telemetry.addData("Hand2", handWave2.getPosition());
+    }
     @Override
     public void onDispose() {
 

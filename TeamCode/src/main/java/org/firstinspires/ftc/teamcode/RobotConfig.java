@@ -14,28 +14,28 @@ public class RobotConfig {
 
     public static class Presets {
         //High
-        public static int SlidesHigh = 0;
-        public static double Arm1High = 0.48;
-        public static double Arm2High = 0.467;
+        public static int SlidesHigh = -414;
+        public static int Arm1High = 1;
 
         //High Reverse
-        public static int SlidesHighRev = -300;
-        public static double Arm1HighRev = 0.316;
-        public static double Arm2HighRev = 0.675;
+        public static int SlidesHighRev = -853;
+        public static int Arm1HighRev = 1;
 
         //Medium
         public static int SlidesMed = 0;
-        public static double Arm1Med = 0.457;
-        public static double Arm2Med = 0.503;
+        public static int Arm1Med = 1;
+
+        //Medium Reverse
+        public static int SlidesMedRev = -56;
+        public static int Arm1MedRev = 1;
 
         //Low
-        public static int SlidesLow = -1080;
-        public static double Arm1Low = 1;
-        public static double Arm2Low = 0;
+        public static int SlidesLow = -1314;
+        public static int Arm1Low = 1;
 
         //Pick up
         public static int SlidesPickup = 0;
-        public static double Arm1Pickup = 1;
+        public static int Arm1Pickup = 1;
     }
 
     public static class Slides {
@@ -48,7 +48,7 @@ public class RobotConfig {
 
         public static int clawMinRange = 0;
         public static int clawMaxRange = 1;
-        public static double handSpeed = 0.00328;
+        public static double handSpeed = 0.0055;
         public static String clawServo = "clawServo";
         public static String handServo1 = "handServo1";
         public static String handServo2 = "handServo2";
