@@ -38,48 +38,60 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         double upPower = gamepad2.left_trigger;
         double downPower = gamepad2.right_trigger;
         boolean grab = gamepad2.right_bumper;
-        double armPower = -gamepad2.left_stick_y;
-        double handPower = gamepad2.right_stick_x;
+        double armPower = gamepad2.left_stick_y;
+        double handPower = gamepad2.right_stick_y;
         //doubles reading for probably more accuracy or something because java idk
         //slides.moveSlides(upPower - downPower);
 
         slidePosition += (upPower - downPower) * 10;
+        slidePosition = Math.min(slidePosition, 0);
         slides.toPosition(slidePosition);
 
         drivetrain.MecanumDrive(vertical, horizontal, rotational, 0.7);
-        arm.setArmSpeed(armPower);
+        arm.setPower(armPower);
         claw.setClawPower(handPower);
         if (grab) claw.toggle();
         else claw.resetToggle();
         slides.displayToTelemetry();
         arm.displayToTelemetry();
+        claw.displayToTelemetry();
         telemetry.update();
         // High
-        if (gamepad2.dpad_left) {
+        if (gamepad2.dpad_up) {
             slidePosition = RobotConfig.Presets.SlidesHigh;
-            arm.setPos(RobotConfig.Presets.Arm1High);
+            arm.toPosition(RobotConfig.Presets.Arm1High);
         }
         // High Reverse
-        if (gamepad2.dpad_up) {
+        if (gamepad2.y) {
             slidePosition = RobotConfig.Presets.SlidesHighRev;
-            arm.setPos(RobotConfig.Presets.Arm1HighRev);
+            arm.toPosition(RobotConfig.Presets.Arm1HighRev);
         }
         // Medium
-        if (gamepad1.dpad_right || gamepad1.x) {
+        if (gamepad2.dpad_right) {
             slidePosition = RobotConfig.Presets.SlidesMed;
-            arm.setPos(RobotConfig.Presets.Arm1Med);
+            arm.toPosition(RobotConfig.Presets.Arm1Med);
+        }
+        //Medium Reverse
+        if (gamepad2.x) {
+            slidePosition = RobotConfig.Presets.SlidesMedRev;
+            arm.toPosition(RobotConfig.Presets.Arm1MedRev);
         }
         // Low
-        if (gamepad1.dpad_down || gamepad1.y) {
+        if (gamepad2.dpad_down) {
+            slidePosition = RobotConfig.Presets.SlidesLow;
+            arm.toPosition(RobotConfig.Presets.Arm1Low);
+        }
+        //Pickup
+        if(gamepad2.a){
             slidePosition = RobotConfig.Presets.SlidesPickup;
-            arm.setPos(RobotConfig.Presets.Arm1Pickup);
+            arm.toPosition(RobotConfig.Presets.Arm1Pickup);
         }
     }
 
     @Override
     public void onInitialize() {
-//        arm.gotoZero();
-        arm.setPos(1);
+        //arm.gotoZero();
+        //arm.toPosition(1);
     }
 }
 //Teagan was defenetly here. ya totally shure allen
