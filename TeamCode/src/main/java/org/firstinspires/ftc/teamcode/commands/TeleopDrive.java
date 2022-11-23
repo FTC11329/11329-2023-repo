@@ -46,24 +46,31 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         //doubles reading for probably more accuracy or something because java idk
         //slides.moveSlides(upPower - downPower);
 
-        slidePosition += (upPower - downPower) * 10;
-        slidePosition = Math.min(slidePosition, 0);
-        slides.toPosition(slidePosition);
-
         if (gamepad1.right_bumper) {
             maxSpeed = 0.3;
         } else {
             maxSpeed = 0.5;
         }
+
         drivetrain.MecanumDrive(vertical, horizontal, rotational, maxSpeed);
+
+        slidePosition += (upPower - downPower) * 10;
+        slidePosition = Math.min(slidePosition, 0);
+        slides.toPosition(slidePosition);
+
         arm.setPower(armPower);
+
         claw.setClawPower(handPower);
+
         if (grab) claw.toggle();
         else claw.resetToggle();
+
         slides.displayToTelemetry();
         arm.displayToTelemetry();
         claw.displayToTelemetry();
+
         telemetry.update();
+
         // High
         if (gamepad2.dpad_up) {
             slidePosition = RobotConfig.Presets.SlidesHigh;
