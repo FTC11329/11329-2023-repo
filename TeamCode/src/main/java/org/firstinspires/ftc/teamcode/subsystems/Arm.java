@@ -40,6 +40,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     @Override
     public void onTick() {
         targetPosition += power * RobotConfig.Arm.armSpeed;
+        targetPosition = Math.min(Math.max(targetPosition, RobotConfig.Arm.minArmPosition), RobotConfig.Arm.maxArmPosition);
         arm.setTargetPosition((int) targetPosition);
     }
 

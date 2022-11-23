@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.utilities;
 
+import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -48,6 +49,7 @@ public abstract class OpModeBase extends DiOpMode {
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Arm.arm)).withId("arm");
 
         Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.clawServo)).withId("clawServo");
+        Container.bindInstance(hardwareMap.get(RevColorSensorV3.class, RobotConfig.Claw.colorSensor)).withId("colorSensor");
 
         Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.handServo1)).withId("handServo1");
         Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.handServo2)).withId("handServo2");

@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Claw;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
 import org.firstinspires.ftc.teamcode.subsystems.Arm;
+import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitializable {
     @DiContainer.Inject()
@@ -30,6 +31,9 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
     @DiContainer.Inject()
     public Claw claw;
 
+    @DiContainer.Inject
+    public RobotSide side;
+
     public int slidePosition = 0;
     private double maxSpeed;
 
@@ -41,8 +45,8 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         double upPower = gamepad2.left_trigger;
         double downPower = gamepad2.right_trigger;
         boolean grab = gamepad2.right_bumper;
-        double armPower = gamepad2.left_stick_y;
-        double handPower = gamepad2.right_stick_y;
+        double armPower = -gamepad2.left_stick_y;
+        double wristPower = gamepad2.right_stick_y;
         //doubles reading for probably more accuracy or something because java idk
         //slides.moveSlides(upPower - downPower);
 
@@ -54,13 +58,17 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
 
         drivetrain.MecanumDrive(vertical, horizontal, rotational, maxSpeed);
 
-        slidePosition += (upPower - downPower) * 10;
-        slidePosition = Math.min(slidePosition, 0);
+        slidePosition += (upPower - downPower) * RobotConfig.Slides.slidePower;
+        slidePosition = Math.max(Math.min(slidePosition, RobotConfig.Slides.minSlidePosition), RobotConfig.Slides.maxSlidePosition);
         slides.toPosition(slidePosition);
+
+        telemetry.addData("slidesTarget", slidePosition);
 
         arm.setPower(armPower);
 
-        claw.setClawPower(handPower);
+        claw.setWristPower(wristPower);
+
+        //if (slidePosition > RobotConfig.Claw.maxAutoGrabHeight && claw.isConePresent() && claw.getConeColor() == ((side == RobotSide.Red) ? Claw.ConeColor.RED : Claw.ConeColor.BLUE)) claw.ungrab();
 
         if (grab) claw.toggle();
         else claw.resetToggle();
@@ -87,7 +95,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             arm.toPosition(RobotConfig.Presets.Arm1Med);
         }
         //Medium Reverse
-        if (gamepad2.x) {
+        if (gamepad2.b) {
             slidePosition = RobotConfig.Presets.SlidesMedRev;
             arm.toPosition(RobotConfig.Presets.Arm1MedRev);
         }
@@ -97,9 +105,13 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             arm.toPosition(RobotConfig.Presets.Arm1Low);
         }
         //Pickup
-        if(gamepad2.a){
+        if (gamepad2.a){
             slidePosition = RobotConfig.Presets.SlidesPickup;
             arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+        }
+        if (gamepad1.x) {
+            slidePosition = RobotConfig.Presets.SlidesPickupRev;
+            arm.toPosition(RobotConfig.Presets.Arm1PickupRev);
         }
     }
 
