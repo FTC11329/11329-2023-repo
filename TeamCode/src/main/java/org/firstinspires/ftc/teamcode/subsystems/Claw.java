@@ -32,7 +32,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.IInitializab
     }
 
     public void setPos(double pos) {
-        handWave2.setPosition(1.0- pos);
+        handWave2.setPosition(1.0 - pos);
         handWave1.setPosition(pos);
     }
 
@@ -59,8 +59,8 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.IInitializab
         closeClaw.setPosition(RobotConfig.Claw.openPos);
     }
     public void displayToTelemetry() {
-        telemetry.addData("Hand1", handWave1.getPosition());
-        telemetry.addData("Hand2", handWave2.getPosition());
+        telemetry.addData("Hand1 Position", handWave1.getPosition());
+        telemetry.addData("Hand2 Position", handWave2.getPosition());
     }
     @Override
     public void onDispose() {
