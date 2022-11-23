@@ -51,6 +51,7 @@ public class Drivetrain implements DiInterfaces.IInitializable, DiInterfaces.IDi
         frontLeftMotor.setPower(-(-clockwise + horizontal - vertical) * maxSpeed);
         backLeftMotor.setPower(-(-clockwise - horizontal - vertical) * maxSpeed);
     }
+
     public double powerCurve(double stickInput){
         if(stickInput > 1){return 1;}
         else if (stickInput<-1){return -1;}
