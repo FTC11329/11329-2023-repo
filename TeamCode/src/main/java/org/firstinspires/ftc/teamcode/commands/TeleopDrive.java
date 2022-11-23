@@ -17,7 +17,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
     Telemetry telemetry;
     @DiContainer.Inject()
     Drivetrain drivetrain;
-    @DiContainer.Inject()
+    /*@DiContainer.Inject()
     Slides slides;
     @DiContainer.Inject(id = "gamepad1")
     public Gamepad gamepad1;
@@ -26,13 +26,14 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
     @DiContainer.Inject()
     public Arm arm;
     @DiContainer.Inject()
-    public Claw claw;
+    public Claw claw;*/
 
     public int slidePosition = 0;
+    private double maxSpeed;
 
     @Override
     public void onTick() {
-        double vertical = -gamepad1.left_stick_y;
+        /*double vertical = -gamepad1.left_stick_y;
         double horizontal = -gamepad1.left_stick_x;
         double rotational = gamepad1.right_stick_x;
         double upPower = gamepad2.left_trigger;
@@ -47,7 +48,12 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         slidePosition = Math.min(slidePosition, 0);
         slides.toPosition(slidePosition);
 
-        drivetrain.MecanumDrive(vertical, horizontal, rotational, 0.7);
+        if (gamepad1.right_bumper) {
+            maxSpeed = 0.3;
+        } else {
+            maxSpeed = 0.5;
+        }
+        drivetrain.MecanumDrive(vertical, horizontal, rotational, maxSpeed);
         arm.setPower(armPower);
         claw.setClawPower(handPower);
         if (grab) claw.toggle();
@@ -85,7 +91,12 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if(gamepad2.a){
             slidePosition = RobotConfig.Presets.SlidesPickup;
             arm.toPosition(RobotConfig.Presets.Arm1Pickup);
-        }
+        }*/
+
+        telemetry.addData("frontLeft", drivetrain.frontLeftMotor.getCurrentPosition());
+        telemetry.addData("backLeft", drivetrain.backLeftMotor.getCurrentPosition());
+        telemetry.addData("frontRight", drivetrain.frontRightMotor.getCurrentPosition());
+        telemetry.addData("backRight", drivetrain.backRightMotor.getCurrentPosition());
     }
 
     @Override

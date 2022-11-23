@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.RobotConfig;
 
 public class Arm implements DiInterfaces.IInitializable, DiInterfaces.IDisposable {
 
-    @DiContainer.Inject(id = "armServo1")
+    @DiContainer.Inject(id = "arm")
     public DcMotorEx arm;
     @DiContainer.Inject()
     Telemetry telemetry;
@@ -31,7 +31,6 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.IDisposabl
 
     public void displayToTelemetry() {
         telemetry.addData("Arm1", arm.getCurrentPosition());
-        telemetry.addData("join_.gg/FsaaAfcwKj_active_community_lots of egirls", 1);
     }
 
     @Override
