@@ -53,7 +53,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad1.right_bumper) {
             maxSpeed = 0.3;
         } else {
-            maxSpeed = 0.5;
+            maxSpeed = 0.7;
         }
 
         drivetrain.MecanumDrive(vertical, horizontal, rotational, maxSpeed);
@@ -88,6 +88,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad2.y) {
             slidePosition = RobotConfig.Presets.SlidesHighRev;
             arm.toPosition(RobotConfig.Presets.Arm1HighRev);
+            claw.ungrab();
         }
         // Medium
         if (gamepad2.dpad_right) {
@@ -98,6 +99,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad2.b) {
             slidePosition = RobotConfig.Presets.SlidesMedRev;
             arm.toPosition(RobotConfig.Presets.Arm1MedRev);
+            claw.ungrab();
         }
         // Low
         if (gamepad2.dpad_down) {
@@ -108,7 +110,9 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad2.a){
             slidePosition = RobotConfig.Presets.SlidesPickup;
             arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+            claw.grab();
         }
+        //Pickup Reverse
         if (gamepad1.x) {
             slidePosition = RobotConfig.Presets.SlidesPickupRev;
             arm.toPosition(RobotConfig.Presets.Arm1PickupRev);
