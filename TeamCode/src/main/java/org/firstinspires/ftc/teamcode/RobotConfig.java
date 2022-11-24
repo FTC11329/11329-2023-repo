@@ -71,7 +71,7 @@ public class RobotConfig {
 
     public static class Arm {
         public static double armSpeed = 8;
-        public static double armPower = 1;
+        public static double armPower = 0.25;
         public static String arm = "arm";
 
         public static int maxArmPosition = 890;
