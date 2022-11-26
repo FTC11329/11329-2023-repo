@@ -51,9 +51,9 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         //slides.moveSlides(upPower - downPower);
 
         if (gamepad1.right_bumper) {
-            maxSpeed = 0.3;
+            maxSpeed = RobotConfig.Drivetrain.slowSpeed;
         } else {
-            maxSpeed = 0.7;
+            maxSpeed = RobotConfig.Drivetrain.fastSpeed;
         }
 
         drivetrain.MecanumDrive(vertical, horizontal, rotational, maxSpeed);
@@ -70,6 +70,8 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
 
         //if (slidePosition > RobotConfig.Claw.maxAutoGrabHeight && claw.isConePresent() && claw.getConeColor() == ((side == RobotSide.Red) ? Claw.ConeColor.RED : Claw.ConeColor.BLUE)) claw.ungrab();
 
+        if (gamepad1.left_bumper) claw.grab();
+
         if (grab) claw.toggle();
         else claw.resetToggle();
 
@@ -83,39 +85,46 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad2.dpad_up) {
             slidePosition = RobotConfig.Presets.SlidesHigh;
             arm.toPosition(RobotConfig.Presets.Arm1High);
+            claw.setPos(RobotConfig.Presets.WristPickup);
         }
         // High Reverse
         if (gamepad2.y) {
             slidePosition = RobotConfig.Presets.SlidesHighRev;
             arm.toPosition(RobotConfig.Presets.Arm1HighRev);
             claw.ungrab();
+            claw.setPos(RobotConfig.Presets.WristPickup);
         }
         // Medium
         if (gamepad2.dpad_right) {
             slidePosition = RobotConfig.Presets.SlidesMed;
             arm.toPosition(RobotConfig.Presets.Arm1Med);
+            claw.setPos(RobotConfig.Presets.WristPickup);
         }
         //Medium Reverse
         if (gamepad2.b) {
             slidePosition = RobotConfig.Presets.SlidesMedRev;
             arm.toPosition(RobotConfig.Presets.Arm1MedRev);
             claw.ungrab();
+            claw.setPos(RobotConfig.Presets.WristPickup);
         }
         // Low
         if (gamepad2.dpad_down) {
             slidePosition = RobotConfig.Presets.SlidesLow;
             arm.toPosition(RobotConfig.Presets.Arm1Low);
+            claw.setPos(RobotConfig.Presets.WristPickup);
         }
         //Pickup
         if (gamepad2.a){
             slidePosition = RobotConfig.Presets.SlidesPickup;
             arm.toPosition(RobotConfig.Presets.Arm1Pickup);
             claw.grab();
+            claw.setPos(RobotConfig.Presets.WristPickup);
         }
         //Pickup Reverse
         if (gamepad1.x) {
             slidePosition = RobotConfig.Presets.SlidesPickupRev;
             arm.toPosition(RobotConfig.Presets.Arm1PickupRev);
+            claw.setPos(RobotConfig.Presets.WristPickupRev);
         }
     }
 
