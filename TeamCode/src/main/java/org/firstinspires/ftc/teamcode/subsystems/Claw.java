@@ -14,9 +14,9 @@ import org.firstinspires.ftc.teamcode.RobotConfig;
 public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, DiInterfaces.IInitializable {
     @DiContainer.Inject(id = "clawServo")
     Servo closeClaw;
-    @DiContainer.Inject(id = "handServo1")
+    @DiContainer.Inject(id = "wristServo1")
     public Servo handWave1;
-    @DiContainer.Inject(id = "handServo2")
+    @DiContainer.Inject(id = "wristServo2")
     public Servo handWave2;
     @DiContainer.Inject(id = "colorSensor")
     public RevColorSensorV3 colorSensor;
@@ -36,6 +36,9 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
 
     @Override
     public void onInitialize() {
+        setPos(1);
+        handWave2.setPosition(1.0 - targetPosition);
+        handWave1.setPosition(targetPosition);
     }
 
     @Override
@@ -51,7 +54,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         power = wristPower;
     }
 
-    private void setPos(double pos) {
+    public void setPos(double pos) {
         targetPosition = pos;
         power = 0;
     }

@@ -10,36 +10,40 @@ public class RobotConfig {
         public static String frontRightMotorName = "frontRight";
         public static String backLeftMotorName = "backLeft";
         public static String backRightMotorName = "backRight";
+        public static double slowSpeed = 0.2;
+        public static double fastSpeed = 0.5;//0.5
     }
 
     public static class Presets {
         //High
-        public static int SlidesHigh = -724;
-        public static int Arm1High = 364;
+        public static int SlidesHigh = -905;
+        public static int Arm1High = 386;
 
         //High Reverse
-        public static int SlidesHighRev = -1111;
-        public static int Arm1HighRev = 601;
+        public static int SlidesHighRev = -1582;
+        public static int Arm1HighRev = 628;
 
         //Medium
         public static int SlidesMed = 0;
-        public static int Arm1Med = 344;
+        public static int Arm1Med = 355;
 
         //Medium Reverse
-        public static int SlidesMedRev = -257;
-        public static int Arm1MedRev = 600;
+        public static int SlidesMedRev = -500;
+        public static int Arm1MedRev = 609;
 
         //Low
-        public static int SlidesLow = -1314;
-        public static int Arm1Low = 0;
+        public static int SlidesLow = -1740;
+        public static int Arm1Low = 25;
 
         //Pick up
         public static int SlidesPickup = 0;
         public static int Arm1Pickup = 0;
+        public static double WristPickup = 0.664;
 
         //Pick up Reverse
         public static int SlidesPickupRev = 0;
         public static int Arm1PickupRev = 890;
+        public static double WristPickupRev = 0;
     }
 
     public static class Slides {
@@ -47,7 +51,7 @@ public class RobotConfig {
         public static String rightSlideMotor = "rightSlideMotor";
         public static String leftSlideMotor = "leftSlideMotor";
 
-        public static int maxSlidePosition = -1600;
+        public static int maxSlidePosition = -2200;
         public static int minSlidePosition = 0;
 
         public static double slidePower = 30;
@@ -57,13 +61,13 @@ public class RobotConfig {
 
         public static int clawMinRange = 0;
         public static int clawMaxRange = 1;
-        public static double wristSpeed = 0.04;
+        public static double wristSpeed = 0.02;
         public static String clawServo = "clawServo";
         public static String colorSensor = "colorSensor";
-        public static String handServo1 = "handServo1";
-        public static String handServo2 = "handServo2";
+        public static String handServo1 = "wristServo1";
+        public static String handServo2 = "wristServo2";
         public static double closePos = 0.3;
-        public static double openPos = 0;
+        public static double openPos = 0.066;
 
         public static double maxConeDistance = 5;
         public static int maxAutoGrabHeight = -200;
@@ -71,7 +75,8 @@ public class RobotConfig {
 
     public static class Arm {
         public static double armSpeed = 8;
-        public static double armPower = 0.25;
+        public static double armPowerSlow = 0.2;
+        public static double armPowerFast = 0.4;
         public static String arm = "arm";
 
         public static int maxArmPosition = 890;

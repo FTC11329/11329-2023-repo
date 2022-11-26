@@ -24,8 +24,8 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
             leftSlideMotor.setMode(runMode);
             rightSlideMotor.setMode(runMode);
             if (runMode == DcMotor.RunMode.RUN_TO_POSITION) {
-                leftSlideMotor.setPower(0.8);
-                rightSlideMotor.setPower(0.8);
+                leftSlideMotor.setPower(1);
+                rightSlideMotor.setPower(1);
             }
         }
     }

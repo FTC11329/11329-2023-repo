@@ -5,6 +5,7 @@ import com.fizzyapple12.javadi.DiInterfaces;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.robot.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotConfig;
@@ -25,7 +26,6 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     public DcMotorEx arm;
     @DiContainer.Inject()
     Telemetry telemetry;
-
     double targetPosition = 0;
     double power;
 
@@ -34,7 +34,12 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
         arm.setTargetPosition(0);
         arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         arm.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        arm.setPower(RobotConfig.Arm.armPower);
+        arm.setPower(RobotConfig.Arm.armPowerFast);
+    }
+    public void setPIDpower(boolean goingUp){
+        arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        if (goingUp) arm.setPower(RobotConfig.Arm.armPowerFast);
+        else arm.setPower(RobotConfig.Arm.armPowerSlow);
     }
 
     @Override
@@ -42,6 +47,13 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
         targetPosition += power * RobotConfig.Arm.armSpeed;
         targetPosition = Math.min(Math.max(targetPosition, RobotConfig.Arm.minArmPosition), RobotConfig.Arm.maxArmPosition);
         arm.setTargetPosition((int) targetPosition);
+        double currentPosition = arm.getCurrentPosition();
+        if ((targetPosition > currentPosition && currentPosition < 480) || (targetPosition < currentPosition && currentPosition > 480)) {
+            setPIDpower(true);
+        } else {
+            //low power
+            setPIDpower(false);
+        }
     }
 
     public void toPosition(int pos) {
