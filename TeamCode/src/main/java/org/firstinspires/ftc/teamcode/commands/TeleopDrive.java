@@ -46,7 +46,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         double downPower = gamepad2.right_trigger;
         boolean grab = gamepad2.right_bumper;
         double armPower = -gamepad2.left_stick_y;
-        double wristPower = gamepad2.right_stick_y;
+        double wristPower = -gamepad2.right_stick_y;
         //doubles reading for probably more accuracy or something because java idk
         //slides.moveSlides(upPower - downPower);
 
@@ -121,11 +121,11 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPos(RobotConfig.Presets.WristPickup);
         }
         //Pickup Reverse
-        if (gamepad1.x) {
+        /*if (gamepad2.x) {
             slidePosition = RobotConfig.Presets.SlidesPickupRev;
             arm.toPosition(RobotConfig.Presets.Arm1PickupRev);
             claw.setPos(RobotConfig.Presets.WristPickupRev);
-        }
+        }*/
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.fizzyapple12.javadi.DiContainer;
 import com.fizzyapple12.javadi.DiInterfaces;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.robot.Robot;
 
@@ -30,11 +31,12 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     double power;
 
     @Override
-    public void onInitialize() {
+    public void onInitialize(){
         arm.setTargetPosition(0);
         arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         arm.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         arm.setPower(RobotConfig.Arm.armPowerFast);
+        arm.setDirection(DcMotorSimple.Direction.REVERSE);
     }
     public void setPIDpower(boolean goingUp){
         arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
