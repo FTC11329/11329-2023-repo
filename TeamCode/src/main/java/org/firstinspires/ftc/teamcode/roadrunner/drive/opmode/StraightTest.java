@@ -17,14 +17,16 @@ import org.firstinspires.ftc.teamcode.roadrunner.drive.GlacierDrive;
 @Autonomous(group = "drive")
 public class StraightTest extends LinearOpMode {
     public static double DISTANCE = 60; // in
-
+    public static Pose2d STARTING_POSE = new Pose2d(-47.5, 36);
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
+
         GlacierDrive drive = new GlacierDrive(hardwareMap);
 
-        Trajectory trajectory = drive.trajectoryBuilder(new Pose2d())
+        drive.setPoseEstimate(STARTING_POSE);
+        Trajectory trajectory = drive.trajectoryBuilder(STARTING_POSE)
                 .forward(DISTANCE)
                 .build();
 
