@@ -22,7 +22,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     public RevColorSensorV3 colorSensor;
     @DiContainer.Inject()
     Telemetry telemetry;
-    private boolean grabbing = false;
+    private boolean grabbing = true;
     private boolean grabbingDebounce = false;
 
     double power = 0;
@@ -36,7 +36,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
 
     @Override
     public void onInitialize() {
-        setPos(1);
+        setPos(0.85);
         handWave2.setPosition(1.0 - targetPosition);
         handWave1.setPosition(targetPosition);
     }

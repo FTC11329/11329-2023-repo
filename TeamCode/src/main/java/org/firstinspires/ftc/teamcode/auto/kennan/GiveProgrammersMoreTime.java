@@ -27,11 +27,11 @@ public class GiveProgrammersMoreTime extends LinearOpMode {
         }
 
         if (april.getAprilTag() == 0) {
-            trajectorySequence = drive.trajectorySequenceBuilder(drive.getPoseEstimate()).forward(5).strafeLeft(55).forward(40).build();
+            trajectorySequence = drive.trajectorySequenceBuilder(drive.getPoseEstimate()).forward(5).strafeLeft(25).forward(20).build();
         } else if (april.getAprilTag() == 1) {
-            trajectorySequence = drive.trajectorySequenceBuilder(drive.getPoseEstimate()).forward(5).strafeRight(15).forward(40).build();
+            trajectorySequence = drive.trajectorySequenceBuilder(drive.getPoseEstimate()).forward(5).strafeRight(10).forward(20).build();
         } else {
-            trajectorySequence = drive.trajectorySequenceBuilder(drive.getPoseEstimate()).forward(5).strafeRight(75).forward(40).build();
+            trajectorySequence = drive.trajectorySequenceBuilder(drive.getPoseEstimate()).forward(5).strafeRight(40).forward(20).build();
         }
 
         drive.followTrajectorySequence(trajectorySequence);
