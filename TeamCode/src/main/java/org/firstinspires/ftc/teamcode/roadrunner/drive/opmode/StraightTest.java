@@ -8,6 +8,7 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.roadrunner.drive.GlacierDrive;
 
 /*
@@ -17,16 +18,14 @@ import org.firstinspires.ftc.teamcode.roadrunner.drive.GlacierDrive;
 @Autonomous(group = "drive")
 public class StraightTest extends LinearOpMode {
     public static double DISTANCE = 60; // in
-    public static Pose2d STARTING_POSE = new Pose2d(-47.5, 36);
+
     @Override
     public void runOpMode() throws InterruptedException {
-        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
-
+        Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
 
         GlacierDrive drive = new GlacierDrive(hardwareMap);
 
-        drive.setPoseEstimate(STARTING_POSE);
-        Trajectory trajectory = drive.trajectoryBuilder(STARTING_POSE)
+        Trajectory trajectory = drive.trajectoryBuilder(new Pose2d())
                 .forward(DISTANCE)
                 .build();
 
