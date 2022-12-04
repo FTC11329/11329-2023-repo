@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import org.firstinspires.ftc.teamcode.javadi.DiContainer;
-import org.firstinspires.ftc.teamcode.javadi.DiInterfaces;
+import com.fizzyapple12.javadi.DiContainer;
+import com.fizzyapple12.javadi.DiInterfaces;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.RobotConfig;

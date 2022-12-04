@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.Auto.drive.blue;
 
-import org.firstinspires.ftc.teamcode.javadi.DiContainer;
+import com.fizzyapple12.javadi.DiContainer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
