@@ -49,9 +49,10 @@ public class TestAuto extends RoadRunnerAutoBase {
                 })
 
                 .splineToLinearHeading(new Pose2d(63,-4, Math.toRadians(90)), Math.toRadians(0))
-                .lineTo(new Vector2d(63,-2))
+                .lineTo(new Vector2d(63,-3))
                 //.lineToLinearHeading(new Pose2d(62, 4 ,Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(0, ()-> {claw.grab();})
+                .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickupTopRev);
                     arm.toPosition(RobotConfig.Presets.Arm1PickupTopRev);
@@ -71,9 +72,32 @@ public class TestAuto extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPickupRev);
                 })
                 .waitSeconds(1)
-                .lineTo(new Vector2d(63,-1))
-                .UNSTABLE_addTemporalMarkerOffset(2, ()-> {claw.grab();});
+                .lineTo(new Vector2d(63,-2))
+                .UNSTABLE_addTemporalMarkerOffset(2, ()-> {claw.grab();})
+                .waitSeconds(2.5)
 
+        //---------------------------------another ONE --------------------------------
+        .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
+            slides.toPosition(RobotConfig.Presets.SlidesPickupTopRev+100);
+            arm.toPosition(RobotConfig.Presets.Arm1PickupTopRev);
+            claw.setPos(RobotConfig.Presets.WristPickupTopRev);
+        })
+                .lineTo(new Vector2d(51,-4))
+                .lineTo(new Vector2d(51,-18))
+                .lineTo(new Vector2d(51,-25))
+
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {claw.ungrab();})
+                .UNSTABLE_addTemporalMarkerOffset(1, () -> {slides.toPosition(RobotConfig.Presets.SlidesHigh-250);})
+                .waitSeconds(1)
+                .lineTo(new Vector2d(51,-4))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    slides.toPosition(RobotConfig.Presets.SlidesHigh-1050);
+                    arm.toPosition(RobotConfig.Presets.Arm1High-140);
+                    claw.setPos(RobotConfig.Presets.WristPickupRev);
+                })
+                .waitSeconds(1)
+                .lineTo(new Vector2d(63,-2))
+                .UNSTABLE_addTemporalMarkerOffset(2, ()-> {claw.grab();});
                 //.splineTo(new Vector2d(0, 0), Math.toRadians(180));
     }
 
