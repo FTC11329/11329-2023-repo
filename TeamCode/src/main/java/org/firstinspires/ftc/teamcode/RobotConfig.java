@@ -38,19 +38,24 @@ public class RobotConfig {
         //Pick up
         public static int SlidesPickup = 0;
         public static int Arm1Pickup = 0;
-        public static double WristPickup = 0.500;
+        public static double WristPickup = 0.345;
 
         //Pick up Reverse
         public static int SlidesPickupRev = 0;
         public static int Arm1PickupRev = 890;
-        public static double WristPickupRev = 0;
+        public static double WristPickupRev = 1;
+
+        //Pick up top cone
+        public static int SlidesPickupTopRev = -616;
+        public static int Arm1PickupTopRev = 890;
+        public static double WristPickupTopRev = 1;
     }
 
     public static class Slides {
 
         public static String rightSlideMotor = "rightSlideMotor";
         public static String leftSlideMotor = "leftSlideMotor";
-
+        public static String limitSwitch = "armLimitSwitch";
         public static int maxSlidePosition = -2200;
         public static int minSlidePosition = 0;
 
@@ -81,5 +86,9 @@ public class RobotConfig {
 
         public static int maxArmPosition = 890;
         public static int minArmPosition = 0;
+    }
+
+    public static class Wrist {
+        public static double startingPosition = 0.68;
     }
 }

@@ -2,11 +2,13 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.fizzyapple12.javadi.DiContainer;
 import com.fizzyapple12.javadi.DiInterfaces;
+import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.robot.Robot;
+
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotConfig;
@@ -27,9 +29,13 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     public DcMotorEx arm;
     @DiContainer.Inject()
     Telemetry telemetry;
+
+    @DiContainer.Inject(id="armLimitSwitch")
+    RevTouchSensor limitSwitch;
+
     double targetPosition = 0;
     double power;
-
+    int slidesOffset = 0;
     @Override
     public void onInitialize(){
         arm.setTargetPosition(0);
@@ -48,13 +54,16 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     public void onTick() {
         targetPosition += power * RobotConfig.Arm.armSpeed;
         targetPosition = Math.min(Math.max(targetPosition, RobotConfig.Arm.minArmPosition), RobotConfig.Arm.maxArmPosition);
-        arm.setTargetPosition((int) targetPosition);
-        double currentPosition = arm.getCurrentPosition();
+        arm.setTargetPosition((int) targetPosition -slidesOffset);
+        double currentPosition = arm.getCurrentPosition() -slidesOffset;
         if ((targetPosition > currentPosition && currentPosition < 480) || (targetPosition < currentPosition && currentPosition > 480)) {
             setPIDpower(true);
         } else {
             //low power
             setPIDpower(false);
+        }
+        if(limitSwitch.isPressed()){
+            slidesOffset = arm.getCurrentPosition();
         }
     }
 

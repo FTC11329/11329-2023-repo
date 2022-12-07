@@ -36,7 +36,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
 
     @Override
     public void onInitialize() {
-        setPos(0.85);
+        setPos(RobotConfig.Wrist.startingPosition);
         handWave2.setPosition(1.0 - targetPosition);
         handWave1.setPosition(targetPosition);
     }

@@ -20,7 +20,7 @@ public class April {
     private int ID_TAG_OF_INTEREST = 18; // Tag ID 18 from the 36h11 family
     private CoolerAprilTagDetectionPipeline coolerAprilTagDetectionPipeline;
 
-    April(HardwareMap hardwareMap) {
+    public April(HardwareMap hardwareMap) {
         camera = new CameraSubsystem(hardwareMap);
         coolerAprilTagDetectionPipeline =
                 new CoolerAprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
