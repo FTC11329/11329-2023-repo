@@ -5,7 +5,6 @@ import com.fizzyapple12.javadi.DiInterfaces;
 import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.robot.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -61,9 +60,9 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
 
     public void toggle() {
         if (grabbing && !grabbingDebounce) {
-            ungrab();
-        } else if (!grabbing && !grabbingDebounce) {
             grab();
+        } else if (!grabbing && !grabbingDebounce) {
+            ungrab();
         }
         grabbingDebounce = true;
     }
@@ -72,12 +71,12 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         grabbingDebounce = false;
     }
 
-    public void grab() {
+    public void ungrab() {
         grabbing = true;
         closeClaw.setPosition(RobotConfig.Claw.closePos);
     }
 
-    public void ungrab() {
+    public void grab() {
         grabbing = false;
         closeClaw.setPosition(RobotConfig.Claw.openPos);
     }
@@ -107,6 +106,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
 
         telemetry.addData("Cone Color", getConeColor());
     }
+
     @Override
     public void onDispose() {
 

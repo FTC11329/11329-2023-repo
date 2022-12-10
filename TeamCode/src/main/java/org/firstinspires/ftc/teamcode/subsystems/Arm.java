@@ -21,7 +21,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
      * and don't rely on subsystems being called in
      * loops to run logic, I created ITickable for a
      * reason.
-     *                                       - Hazel
+     * - Hazel
      * !!! ------------------------------------- !!!
      */
 
@@ -30,21 +30,23 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     @DiContainer.Inject()
     Telemetry telemetry;
 
-    @DiContainer.Inject(id="armLimitSwitch")
+    @DiContainer.Inject(id = "armLimitSwitch")
     RevTouchSensor limitSwitch;
 
     double targetPosition = 0;
     double power;
     int slidesOffset = 0;
+
     @Override
-    public void onInitialize(){
+    public void onInitialize() {
         arm.setTargetPosition(0);
         arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         arm.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         arm.setPower(RobotConfig.Arm.armPowerFast);
         arm.setDirection(DcMotorSimple.Direction.REVERSE);
     }
-    public void setPIDpower(boolean goingUp){
+
+    public void setPIDpower(boolean goingUp) {
         arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         if (goingUp) arm.setPower(RobotConfig.Arm.armPowerFast);
         else arm.setPower(RobotConfig.Arm.armPowerSlow);
@@ -54,15 +56,15 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     public void onTick() {
         targetPosition += power * RobotConfig.Arm.armSpeed;
         targetPosition = Math.min(Math.max(targetPosition, RobotConfig.Arm.minArmPosition), RobotConfig.Arm.maxArmPosition);
-        arm.setTargetPosition((int) targetPosition -slidesOffset);
-        double currentPosition = arm.getCurrentPosition() -slidesOffset;
+        arm.setTargetPosition((int) targetPosition - slidesOffset);
+        double currentPosition = arm.getCurrentPosition() - slidesOffset;
         if ((targetPosition > currentPosition && currentPosition < 480) || (targetPosition < currentPosition && currentPosition > 480)) {
             setPIDpower(true);
         } else {
             //low power
             setPIDpower(false);
         }
-        if(limitSwitch.isPressed()){
+        if (limitSwitch.isPressed()) {
             slidesOffset = arm.getCurrentPosition();
         }
     }

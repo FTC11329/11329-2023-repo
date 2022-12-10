@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.commands;
 import com.fizzyapple12.javadi.DiContainer;
 import com.fizzyapple12.javadi.DiInterfaces;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.robot.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotConfig;
@@ -70,7 +69,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
 
         //if (slidePosition > RobotConfig.Claw.maxAutoGrabHeight && claw.isConePresent() && claw.getConeColor() == ((side == RobotSide.Red) ? Claw.ConeColor.RED : Claw.ConeColor.BLUE)) claw.ungrab();
 
-        if (gamepad1.left_bumper) claw.grab();
+        if (gamepad1.left_bumper) claw.ungrab();
 
         if (grab) claw.toggle();
         else claw.resetToggle();
@@ -91,7 +90,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad2.y) {
             slidePosition = RobotConfig.Presets.SlidesHighRev;
             arm.toPosition(RobotConfig.Presets.Arm1HighRev);
-            claw.ungrab();
+            claw.grab();
             claw.setPos(RobotConfig.Presets.WristPickup);
         }
         // Medium
@@ -104,7 +103,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad2.b) {
             slidePosition = RobotConfig.Presets.SlidesMedRev;
             arm.toPosition(RobotConfig.Presets.Arm1MedRev);
-            claw.ungrab();
+            claw.grab();
             claw.setPos(RobotConfig.Presets.WristPickup);
         }
         // Low
@@ -114,10 +113,10 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPos(RobotConfig.Presets.WristPickup);
         }
         //Pickup
-        if (gamepad2.a){
+        if (gamepad2.a) {
             slidePosition = RobotConfig.Presets.SlidesPickup;
             arm.toPosition(RobotConfig.Presets.Arm1Pickup);
-            claw.grab();
+            claw.ungrab();
             claw.setPos(RobotConfig.Presets.WristPickup);
         }
         //Pickup Reverse
