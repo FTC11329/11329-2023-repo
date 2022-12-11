@@ -35,6 +35,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
 
     public int slidePosition = 0;
     private double maxSpeed;
+    public boolean reverse = false;
 
     @Override
     public void onTick() {
@@ -81,10 +82,16 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         telemetry.update();
 
         // High
-        if (gamepad2.dpad_up) {
+        if (gamepad2.dpad_up && !reverse) {
             slidePosition = RobotConfig.Presets.SlidesHigh;
             arm.toPosition(RobotConfig.Presets.Arm1High);
             claw.setPos(RobotConfig.Presets.WristPickup);
+        }
+        // High From Reverse Pickup
+        if (gamepad2.dpad_up && reverse) {
+            slidePosition = RobotConfig.Presets.SlidesHighFromRev;
+            arm.toPosition(RobotConfig.Presets.Arm1HighFromRev);
+            claw.setPos(RobotConfig.Presets.WristPickupRev);
         }
         // High Reverse
         if (gamepad2.y) {
@@ -94,10 +101,16 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPos(RobotConfig.Presets.WristPickup);
         }
         // Medium
-        if (gamepad2.dpad_right) {
+        if (gamepad2.dpad_right && !reverse) {
             slidePosition = RobotConfig.Presets.SlidesMed;
             arm.toPosition(RobotConfig.Presets.Arm1Med);
             claw.setPos(RobotConfig.Presets.WristPickup);
+        }
+        // Medium From Reverse Pickup
+        if (gamepad2.dpad_right && reverse) {
+            slidePosition = RobotConfig.Presets.SlidesMedFromRev;
+            arm.toPosition(RobotConfig.Presets.Arm1MedFromRev);
+            claw.setPos(RobotConfig.Presets.WristPickupRev);
         }
         //Medium Reverse
         if (gamepad2.b) {
@@ -116,15 +129,18 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad2.a) {
             slidePosition = RobotConfig.Presets.SlidesPickup;
             arm.toPosition(RobotConfig.Presets.Arm1Pickup);
-            claw.ungrab();
             claw.setPos(RobotConfig.Presets.WristPickup);
+            claw.ungrab();
+            reverse = false;
         }
         //Pickup Reverse
-        /*if (gamepad2.x) {
+        if (gamepad2.x) {
             slidePosition = RobotConfig.Presets.SlidesPickupRev;
             arm.toPosition(RobotConfig.Presets.Arm1PickupRev);
             claw.setPos(RobotConfig.Presets.WristPickupRev);
-        }*/
+            claw.grab();
+            reverse = true;
+        }
     }
 
     @Override

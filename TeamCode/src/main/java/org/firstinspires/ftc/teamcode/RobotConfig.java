@@ -19,6 +19,10 @@ public class RobotConfig {
         public static int SlidesHigh = -905;
         public static int Arm1High = 386;
 
+        //High From Reverse Pickup
+        public static int SlidesHighFromRev = -1955;
+        public static int Arm1HighFromRev = 246;
+
         //High Reverse
         public static int SlidesHighRev = -1582;
         public static int Arm1HighRev = 628;
@@ -26,6 +30,10 @@ public class RobotConfig {
         //Medium
         public static int SlidesMed = 0;
         public static int Arm1Med = 355;
+
+        //Medium From Reverse Pickup
+        public static int SlidesMedFromRev = -150;
+        public static int Arm1MedFromRev = 231;
 
         //Medium Reverse
         public static int SlidesMedRev = -500;
