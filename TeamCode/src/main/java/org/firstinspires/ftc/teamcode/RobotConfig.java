@@ -94,6 +94,11 @@ public class RobotConfig {
 
         public static int maxArmPosition = 890;
         public static int minArmPosition = 0;
+
+        public static double kp;
+        public static double ki;
+        public static double kd;
+        public static double kf;
     }
 
     public static class Wrist {

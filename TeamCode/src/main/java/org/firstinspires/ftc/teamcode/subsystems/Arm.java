@@ -6,12 +6,15 @@ import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.robot.Robot;
 
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotConfig;
+import org.firstinspires.ftc.teamcode.roadrunner.drive.GlacierDrive;
+import org.firstinspires.ftc.teamcode.utilities.CustomPID;
 
 public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable, DiInterfaces.IDisposable {
 
@@ -21,7 +24,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
      * and don't rely on subsystems being called in
      * loops to run logic, I created ITickable for a
      * reason.
-     * - Hazel
+     *                                       - Hazel
      * !!! ------------------------------------- !!!
      */
 
@@ -30,43 +33,55 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     @DiContainer.Inject()
     Telemetry telemetry;
 
-    @DiContainer.Inject(id = "armLimitSwitch")
-    RevTouchSensor limitSwitch;
+
 
     double targetPosition = 0;
     double power;
+
+    double zeroAngle = 212;
+    //455 straight UP
+    double tickToDegrees = 0.3703;
+    private CustomPID armPID;
+    //private double powerMod = GlacierDrive.armPowerSlow;
     int slidesOffset = 0;
-
     @Override
-    public void onInitialize() {
+    public void onInitialize(){
         arm.setTargetPosition(0);
-        arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        arm.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         arm.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        arm.setPower(RobotConfig.Arm.armPowerFast);
+        //arm.setPower(GlacierDrive.armPower);
         arm.setDirection(DcMotorSimple.Direction.REVERSE);
+        //arm.setPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION, new PIDFCoefficients(10,0.049988,0,0));
+        //arm.setPositionPIDFCoefficients(GlacierDrive.PP);
+        //arm.setVelocityPIDFCoefficients(GlacierDrive.VP, GlacierDrive.I, GlacierDrive.D, GlacierDrive.F);
+        armPID = new CustomPID(RobotConfig.Arm.kp, RobotConfig.Arm.ki, RobotConfig.Arm.kd, RobotConfig.Arm.kf);
     }
+    public void setPIDpower(boolean goingUp){
+        //arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        //if (goingUp) powerMod = GlacierDrive.armPower;//arm.setPower(RobotConfig.Arm.);
+        //else powerMod = GlacierDrive.armPowerSlow;//arm.setPower(RobotConfig.Arm.armPowerSlow);
 
-    public void setPIDpower(boolean goingUp) {
-        arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        if (goingUp) arm.setPower(RobotConfig.Arm.armPowerFast);
-        else arm.setPower(RobotConfig.Arm.armPowerSlow);
     }
 
     @Override
     public void onTick() {
         targetPosition += power * RobotConfig.Arm.armSpeed;
         targetPosition = Math.min(Math.max(targetPosition, RobotConfig.Arm.minArmPosition), RobotConfig.Arm.maxArmPosition);
-        arm.setTargetPosition((int) targetPosition - slidesOffset);
-        double currentPosition = arm.getCurrentPosition() - slidesOffset;
-        if ((targetPosition > currentPosition && currentPosition < 480) || (targetPosition < currentPosition && currentPosition > 480)) {
+        armPID.setTargetPosition(targetPosition);
+
+        //telemetry.addData("ArmAngleEsitmation:",(arm.getCurrentPosition()-zeroAngle)*tickToDegrees );
+        double armPow = armPID.getPIDfOutput(arm.getCurrentPosition(), (arm.getCurrentPosition()-zeroAngle)*tickToDegrees);
+        telemetry.addData("ArmPower:", armPow);
+        arm.setPower(armPow);
+        //arm.setTargetPosition((int) targetPosition);
+        //double currentPosition = arm.getCurrentPosition();
+       /* if ((targetPosition > currentPosition && currentPosition < 480) || (targetPosition < currentPosition && currentPosition > 480)) {
             setPIDpower(true);
         } else {
             //low power
             setPIDpower(false);
-        }
-        if (limitSwitch.isPressed()) {
-            slidesOffset = arm.getCurrentPosition();
-        }
+        }*/
+
     }
 
     public void toPosition(int pos) {
@@ -81,7 +96,9 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     public void displayToTelemetry() {
         telemetry.addData("Arm Position", arm.getCurrentPosition());
         telemetry.addData("Arm Target Position", targetPosition);
-        telemetry.addData("Arm Power", power);
+        telemetry.addData("Arm Power", arm.getPower());
+
+        telemetry.addData("PIDF : ", arm.getPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION));
     }
 
     @Override
