@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.auto.kennan;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.auto.kennan.April;
 import org.firstinspires.ftc.teamcode.roadrunner.drive.GlacierDrive;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
 
+@Disabled
 @Autonomous(name = "Scrimmage Auto")
 public class GiveProgrammersMoreTime extends LinearOpMode {
     private GlacierDrive drive;

@@ -30,7 +30,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
     @DiContainer.Inject()
     public Claw claw;
 
-    @DiContainer.Inject
+    @DiContainer.Inject()
     public RobotSide side;
 
     public int slidePosition = 0;

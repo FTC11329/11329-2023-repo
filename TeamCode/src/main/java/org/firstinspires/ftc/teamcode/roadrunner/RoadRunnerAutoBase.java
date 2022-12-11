@@ -87,8 +87,7 @@ public abstract class RoadRunnerAutoBase extends OpModeBase {
                 BuildParkThree(endTrajectorySequenceBuilder);
                 break;
             default:
-                // TODO: not this
-                BuildParkThree(endTrajectorySequenceBuilder);
+                BuildParkOne(endTrajectorySequenceBuilder);
                 break;
         }
 

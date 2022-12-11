@@ -17,11 +17,12 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Test Road Runner Autos", group = "test")
+@Autonomous(name = "*RUN THIS* Roadrunner", group = "test")
 public class TestAuto extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
+
 
     @Override
     public void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException {
