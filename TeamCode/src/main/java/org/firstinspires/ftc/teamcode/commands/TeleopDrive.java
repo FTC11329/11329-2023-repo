@@ -6,10 +6,10 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotConfig;
+import org.firstinspires.ftc.teamcode.subsystems.Arm;
 import org.firstinspires.ftc.teamcode.subsystems.Claw;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
-import org.firstinspires.ftc.teamcode.subsystems.Arm;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitializable {
@@ -138,7 +138,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             slidePosition = RobotConfig.Presets.SlidesPickupRev;
             arm.toPosition(RobotConfig.Presets.Arm1PickupRev);
             claw.setPos(RobotConfig.Presets.WristPickupRev);
-            claw.grab();
+            claw.ungrab();
             reverse = true;
         }
     }
