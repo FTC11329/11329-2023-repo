@@ -34,8 +34,8 @@ public class LeftAuto extends RoadRunnerAutoBase {
                 .addDisplacementMarker(() -> {
                     claw.grab();
                 })
-                //.strafeRight(1)
-                .splineToLinearHeading(new Pose2d(8, 4, Math.toRadians(0)), Math.toRadians(0))
+                .strafeRight(2)
+                .forward(40)
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesHigh);
@@ -43,7 +43,7 @@ public class LeftAuto extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
 
-                .splineToLinearHeading(new Pose2d(63, -4, Math.toRadians(-90)), Math.toRadians(0))
+                .splineToLinearHeading(new Pose2d(63, -4, Math.toRadians(-90)), Math.toRadians(180))
                 .lineTo(new Vector2d(63, 3))
                 //.lineToLinearHeading(new Pose2d(62, 4 ,Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -106,9 +106,7 @@ public class LeftAuto extends RoadRunnerAutoBase {
                 .lineTo(new Vector2d(63, 2))
                 .UNSTABLE_addTemporalMarkerOffset(3, () -> {
                     claw.ungrab();
-                })
-
-        ;
+                });
         //.splineTo(new Vector2d(0, 0), Math.toRadians(180));
     }
 

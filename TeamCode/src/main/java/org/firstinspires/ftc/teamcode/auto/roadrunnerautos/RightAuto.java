@@ -4,7 +4,6 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotConfig;
 import org.firstinspires.ftc.teamcode.roadrunner.RoadRunnerAutoBase;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequenceBuilder;
@@ -31,12 +30,13 @@ public class RightAuto extends RoadRunnerAutoBase {
     @Override
     public void Build(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         claw.grab();
-        trajectorySequenceBuilder
-                .addDisplacementMarker(() -> {
+        trajectorySequenceBuilder.addDisplacementMarker(() -> {
                     claw.grab();
                 })
                 //.strafeRight(1)
-                .splineToLinearHeading(new Pose2d(8, -4, Math.toRadians(0)), Math.toRadians(0))
+                //.forward(40)
+
+                .splineTo(new Vector2d(8, -4), Math.toRadians(0))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesHigh);
@@ -77,8 +77,7 @@ public class RightAuto extends RoadRunnerAutoBase {
                 .lineTo(new Vector2d(63, -2))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                     claw.ungrab();
-                })
-                .waitSeconds(1.3)
+                }).waitSeconds(1.3)
 
                 //---------------------------------another ONE --------------------------------
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
@@ -107,48 +106,38 @@ public class RightAuto extends RoadRunnerAutoBase {
                 .lineTo(new Vector2d(63, -2))
                 .UNSTABLE_addTemporalMarkerOffset(3, () -> {
                     claw.ungrab();
-                })
-
-        ;
-        //.splineTo(new Vector2d(0, 0), Math.toRadians(180));
+                });
     }
 
     @Override
     public void BuildParkOne(TrajectorySequenceBuilder trajectorySequenceBuilder) {
-        trajectorySequenceBuilder
-                .UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesPickup);
-                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
-                    claw.setPos(RobotConfig.Wrist.startingPosition);
-                })
-                .strafeLeft(13)
-                .forward(21);
+        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
+            slides.toPosition(RobotConfig.Presets.SlidesPickup);
+            arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+            claw.setPos(RobotConfig.Wrist.startingPosition);
+        }).strafeLeft(13).forward(21);
         //.splineTo(new Vector2d(50, 20), Math.toRadians(0));
     }
 
     @Override
     public void BuildParkTwo(TrajectorySequenceBuilder trajectorySequenceBuilder) {
-        trajectorySequenceBuilder
-                .UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
+        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
                 //.lineToConstantHeading(new Vector2d(55, -3)).strafeLeft(3);
-                .back(1)
-                .strafeLeft(15);
+                .back(1).strafeLeft(15);
         //.splineTo(new Vector2d(50, -3), Math.toRadians(0));
     }
 
     @Override
     public void BuildParkThree(TrajectorySequenceBuilder trajectorySequenceBuilder) {
-        trajectorySequenceBuilder
-                .UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
+        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
-                })
-                .strafeLeft(13)
+                }).strafeLeft(13)
                 //.lineToConstantHeading(new Vector2d(55, -3))
                 .back(23);
         // .splineTo(new Vector2d(50, -29), Math.toRadians(0));

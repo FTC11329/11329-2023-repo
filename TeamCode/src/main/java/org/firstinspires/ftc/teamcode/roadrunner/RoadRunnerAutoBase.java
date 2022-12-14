@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.roadrunner;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.qualcomm.robotcore.robot.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.auto.kennan.April;
@@ -34,6 +33,7 @@ public abstract class RoadRunnerAutoBase extends OpModeBase {
     TrajectorySequenceBuilder trajectorySequenceBuilder;
     private Pose2d red = new Pose2d(0, 0);
     private Pose2d blue = new Pose2d(0, 10);
+
     @Override
     public void InstallLower() throws IllegalAccessException, InvocationTargetException, InstantiationException {
         glacierDrive = new GlacierDrive(hardwareMap);
@@ -60,7 +60,7 @@ public abstract class RoadRunnerAutoBase extends OpModeBase {
                 red :
                 blue);
 
-        trajectorySequenceBuilder = glacierDrive.trajectorySequenceBuilder(GetSide() ==RobotSide.Red ? red:blue);
+        trajectorySequenceBuilder = glacierDrive.trajectorySequenceBuilder(GetSide() == RobotSide.Red ? red : blue);
         Build(trajectorySequenceBuilder);
 
         builtTrajectorySequence = trajectorySequenceBuilder.build();
