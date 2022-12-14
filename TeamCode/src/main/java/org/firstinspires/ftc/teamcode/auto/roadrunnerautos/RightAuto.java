@@ -121,8 +121,8 @@ public class RightAuto extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .strafeLeft(20)
-                .forward(20);
+                .strafeLeft(13)
+                .forward(21);
         //.splineTo(new Vector2d(50, 20), Math.toRadians(0));
     }
 
@@ -136,7 +136,7 @@ public class RightAuto extends RoadRunnerAutoBase {
                 })
                 //.lineToConstantHeading(new Vector2d(55, -3)).strafeLeft(3);
                 .back(1)
-                .strafeLeft(20);
+                .strafeLeft(15);
         //.splineTo(new Vector2d(50, -3), Math.toRadians(0));
     }
 
@@ -148,14 +148,14 @@ public class RightAuto extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .strafeLeft(5)
+                .strafeLeft(13)
                 //.lineToConstantHeading(new Vector2d(55, -3))
-                .back(16);
+                .back(23);
         // .splineTo(new Vector2d(50, -29), Math.toRadians(0));
     }
 
     @Override
     public RobotSide GetSide() {
-        return RobotSide.Blue;
+        return RobotSide.Red;
     }
 }
