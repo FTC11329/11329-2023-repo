@@ -43,7 +43,6 @@ public class LeftAuto extends RoadRunnerAutoBase {
                 })
 
                 .splineToLinearHeading(new Pose2d(-63, -4, Math.toRadians(90)), Math.toRadians(0)).lineTo(new Vector2d(-63, -3))
-                //.lineToLinearHeading(new Pose2d(62, 4 ,Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 }).waitSeconds(0.5).UNSTABLE_addTemporalMarkerOffset(0.5, () -> {

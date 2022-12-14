@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 
 public class ComputerVision implements DiInterfaces.IInitializable, DiInterfaces.IDisposable {
-    @DiContainer.Inject(id="webcam")
+    @DiContainer.Inject(id = "webcam")
     OpenCvCamera camera;
 
     @DiContainer.Inject()
@@ -46,7 +46,6 @@ public class ComputerVision implements DiInterfaces.IInitializable, DiInterfaces
     AprilTagDetection tagOfInterest = null;
 
 
-
     @Override
     public void onInitialize() {
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
@@ -54,17 +53,14 @@ public class ComputerVision implements DiInterfaces.IInitializable, DiInterfaces
         FtcDashboard.getInstance().startCameraStream(camera, 0);
 
         camera.setPipeline(aprilTagDetectionPipeline);
-        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
-        {
+        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
-            public void onOpened()
-            {
-                camera.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);
+            public void onOpened() {
+                camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
-            public void onError(int errorCode)
-            {
+            public void onError(int errorCode) {
 
             }
         });
@@ -76,51 +72,37 @@ public class ComputerVision implements DiInterfaces.IInitializable, DiInterfaces
     public int getAprilTagID() {
         ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
 
-        if(currentDetections.size() != 0)
-        {
+        if (currentDetections.size() != 0) {
             boolean tagFound = false;
 
-            for(AprilTagDetection tag : currentDetections)
-            {
-                if(tag.id == ID_TAG_OF_INTEREST)
-                {
+            for (AprilTagDetection tag : currentDetections) {
+                if (tag.id == ID_TAG_OF_INTEREST) {
                     tagOfInterest = tag;
                     tagFound = true;
                     break;
                 }
             }
 
-            if(tagFound)
-            {
+            if (tagFound) {
                 telemetry.addLine("Tag of interest is in sight!\n\nLocation data:");
                 tagToTelemetry(tagOfInterest);
-            }
-            else
-            {
+            } else {
                 telemetry.addLine("Don't see tag of interest :(");
 
-                if(tagOfInterest == null)
-                {
+                if (tagOfInterest == null) {
                     telemetry.addLine("(The tag has never been seen)");
-                }
-                else
-                {
+                } else {
                     telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
                     tagToTelemetry(tagOfInterest);
                 }
             }
 
-        }
-        else
-        {
+        } else {
             telemetry.addLine("Don't see tag of interest :(");
 
-            if(tagOfInterest == null)
-            {
+            if (tagOfInterest == null) {
                 telemetry.addLine("(The tag has never been seen)");
-            }
-            else
-            {
+            } else {
                 telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
                 tagToTelemetry(tagOfInterest);
             }
@@ -128,25 +110,24 @@ public class ComputerVision implements DiInterfaces.IInitializable, DiInterfaces
         }
 
         telemetry.update();
-        if(currentDetections.size() != 0){
+        if (currentDetections.size() != 0) {
             return currentDetections.get(0).id + 1;
-        }
-        else {
+        } else {
             return -1;
         }
     }
 
     @SuppressLint("DefaultLocale")
-    void tagToTelemetry(AprilTagDetection detection)
-    {
+    void tagToTelemetry(AprilTagDetection detection) {
         telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
-        telemetry.addLine(String.format("Translation X: %.2f feet", detection.pose.x*FEET_PER_METER));
-        telemetry.addLine(String.format("Translation Y: %.2f feet", detection.pose.y*FEET_PER_METER));
-        telemetry.addLine(String.format("Translation Z: %.2f feet", detection.pose.z*FEET_PER_METER));
+        telemetry.addLine(String.format("Translation X: %.2f feet", detection.pose.x * FEET_PER_METER));
+        telemetry.addLine(String.format("Translation Y: %.2f feet", detection.pose.y * FEET_PER_METER));
+        telemetry.addLine(String.format("Translation Z: %.2f feet", detection.pose.z * FEET_PER_METER));
         telemetry.addLine(String.format("Rotation Yaw: %.2f degrees", Math.toDegrees(detection.pose.yaw)));
         telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", Math.toDegrees(detection.pose.pitch)));
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
+
     @Override
     public void onDispose() {
         camera.stopStreaming();

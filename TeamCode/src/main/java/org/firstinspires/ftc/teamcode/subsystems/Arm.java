@@ -24,7 +24,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
      * and don't rely on subsystems being called in
      * loops to run logic, I created ITickable for a
      * reason.
-     *                                       - Hazel
+     * - Hazel
      * !!! ------------------------------------- !!!
      */
 
@@ -32,7 +32,6 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     public DcMotorEx arm;
     @DiContainer.Inject()
     Telemetry telemetry;
-
 
 
     double targetPosition = 0;
@@ -44,8 +43,9 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     private CustomPID armPID;
     //private double powerMod = GlacierDrive.armPowerSlow;
     int slidesOffset = 0;
+
     @Override
-    public void onInitialize(){
+    public void onInitialize() {
         arm.setTargetPosition(0);
         arm.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         arm.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
@@ -56,7 +56,8 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
         //arm.setVelocityPIDFCoefficients(GlacierDrive.VP, GlacierDrive.I, GlacierDrive.D, GlacierDrive.F);
         armPID = new CustomPID(RobotConfig.Arm.kp, RobotConfig.Arm.ki, RobotConfig.Arm.kd, RobotConfig.Arm.kf);
     }
-    public void setPIDpower(boolean goingUp){
+
+    public void setPIDpower(boolean goingUp) {
         //arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         //if (goingUp) powerMod = GlacierDrive.armPower;//arm.setPower(RobotConfig.Arm.);
         //else powerMod = GlacierDrive.armPowerSlow;//arm.setPower(RobotConfig.Arm.armPowerSlow);
@@ -70,7 +71,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
         armPID.setTargetPosition(targetPosition);
 
         //telemetry.addData("ArmAngleEsitmation:",(arm.getCurrentPosition()-zeroAngle)*tickToDegrees );
-        double armPow = armPID.getPIDfOutput(arm.getCurrentPosition(), (arm.getCurrentPosition()-zeroAngle)*tickToDegrees);
+        double armPow = armPID.getPIDfOutput(arm.getCurrentPosition(), (arm.getCurrentPosition() - zeroAngle) * tickToDegrees);
         telemetry.addData("ArmPower:", armPow);
         arm.setPower(armPow);
         //arm.setTargetPosition((int) targetPosition);
@@ -96,7 +97,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     public void displayToTelemetry() {
         telemetry.addData("Arm Position", arm.getCurrentPosition());
         telemetry.addData("Arm Target Position", targetPosition);
-        telemetry.addData("Arm Power", arm.getPower());
+        //telemetry.addData("Arm Power", arm.getPower());
 
         telemetry.addData("PIDF : ", arm.getPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION));
     }

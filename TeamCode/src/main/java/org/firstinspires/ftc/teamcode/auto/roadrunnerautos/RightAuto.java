@@ -134,8 +134,9 @@ public class RightAuto extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .lineToConstantHeading(new Vector2d(55, -3)).strafeLeft(3);
-
+                //.lineToConstantHeading(new Vector2d(55, -3)).strafeLeft(3);
+                .back(1)
+                .strafeLeft(20);
         //.splineTo(new Vector2d(50, -3), Math.toRadians(0));
     }
 
@@ -147,8 +148,9 @@ public class RightAuto extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .lineToConstantHeading(new Vector2d(55, -3))
-                .back(20);
+                .strafeLeft(5)
+                //.lineToConstantHeading(new Vector2d(55, -3))
+                .back(16);
         // .splineTo(new Vector2d(50, -29), Math.toRadians(0));
     }
 
