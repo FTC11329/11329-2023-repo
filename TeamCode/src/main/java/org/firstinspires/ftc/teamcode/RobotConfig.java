@@ -20,7 +20,7 @@ public class RobotConfig {
         public static int Arm1High = 386;
 
         //High From Reverse Pickup
-        public static int SlidesHighFromRev = -1900;
+        public static int SlidesHighFromRev = -2000;//-1900;
         public static int Arm1HighFromRev = 246;
 
         //High Reverse
