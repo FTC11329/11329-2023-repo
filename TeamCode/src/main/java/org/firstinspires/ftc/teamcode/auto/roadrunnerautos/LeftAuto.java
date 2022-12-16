@@ -77,7 +77,7 @@ public class LeftAuto extends RoadRunnerAutoBase {
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                     claw.ungrab();
                 })
-                .waitSeconds(1.3)
+                .waitSeconds(0.8)
 
                 //---------------------------------another ONE --------------------------------
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
@@ -86,6 +86,7 @@ public class LeftAuto extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPickupTopRev);
                 })
                 .lineTo(new Vector2d(49, 4))
+                .waitSeconds(0.7)
                 .lineTo(new Vector2d(49, 18))
                 .lineTo(new Vector2d(49, 28))
 
