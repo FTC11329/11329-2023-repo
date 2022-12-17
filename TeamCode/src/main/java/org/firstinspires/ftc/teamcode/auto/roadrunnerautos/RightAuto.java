@@ -82,9 +82,9 @@ public class RightAuto extends RoadRunnerAutoBase {
                 .lineTo(new Vector2d(63, -3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                     claw.ungrab();
-                }).waitSeconds(1.3)
+                }).waitSeconds(1.3);
 
-                //---------------------------------another ONE --------------------------------
+                /*//---------------------------------another ONE --------------------------------
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickupTopRev + 100);
                     arm.toPosition(RobotConfig.Presets.Arm1PickupTopRev);
@@ -111,7 +111,7 @@ public class RightAuto extends RoadRunnerAutoBase {
                 .lineTo(new Vector2d(62.5, -3))
                 .UNSTABLE_addTemporalMarkerOffset(3.5, () -> {
                     claw.ungrab();
-                });
+                });*/
     }
 
     @Override

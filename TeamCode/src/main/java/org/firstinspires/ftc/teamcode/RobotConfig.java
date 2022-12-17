@@ -46,7 +46,7 @@ public class RobotConfig {
         //Pick up
         public static int SlidesPickup = 0;
         public static int Arm1Pickup = 0;
-        public static double WristPickup = 0.345;
+        public static double WristPickup = 0.300;
 
         //Pick up Reverse
         public static int SlidesPickupRev = 0;

@@ -127,8 +127,8 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         }
         // Low from Rev
         if (gamepad2.dpad_down && reverse) {
-            slidePosition = RobotConfig.Presets.SlidesLow;
-            arm.toPosition(RobotConfig.Presets.Arm1Low);
+            slidePosition = 1530;
+            arm.toPosition(51);
             claw.setPos(RobotConfig.Presets.WristPickupRev);
         }
         //Pickup

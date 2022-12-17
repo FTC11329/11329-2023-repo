@@ -84,9 +84,9 @@ public class LeftAutoSame extends RoadRunnerAutoBase {
                 .lineTo(new Vector2d(62, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                     claw.ungrab();
-                }).waitSeconds(1.3)
+                }).waitSeconds(1.3);
 
-                //---------------------------------another ONE --------------------------------
+               /* //---------------------------------another ONE --------------------------------
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickupTopRev + 100);
                     arm.toPosition(RobotConfig.Presets.Arm1PickupTopRev);
@@ -114,7 +114,7 @@ public class LeftAutoSame extends RoadRunnerAutoBase {
                 .UNSTABLE_addTemporalMarkerOffset(3.7, () -> {
                     claw.ungrab();
                 })
-                .waitSeconds(1);
+                .waitSeconds(1);*/
 
     }
 
@@ -127,7 +127,7 @@ public class LeftAutoSame extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
                 .strafeRight(14)
-                .back(23);;
+                .back(23);
         //.splineTo(new Vector2d(50, 20), Math.toRadians(0));
     }
 
