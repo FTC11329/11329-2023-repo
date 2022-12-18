@@ -53,7 +53,7 @@ public class LeftAuto extends RoadRunnerAutoBase {
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickupTopRev);
                     arm.toPosition(RobotConfig.Presets.Arm1PickupTopRev);
-                    claw.setPos(RobotConfig.Presets.WristPickupTopRev);
+                    claw.setPos(RobotConfig.Presets.WristPickupRev);
                 })
                 .lineTo(new Vector2d(49, 4))
                 .lineTo(new Vector2d(49, 18))
@@ -83,7 +83,7 @@ public class LeftAuto extends RoadRunnerAutoBase {
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickupTopRev);
                     arm.toPosition(RobotConfig.Presets.Arm1PickupTopRev);
-                    claw.setPos(RobotConfig.Presets.WristPickupTopRev);
+                    claw.setPos(RobotConfig.Presets.WristPickupRev);
                 })
                 .lineTo(new Vector2d(49, 4))
                 .waitSeconds(0.7)

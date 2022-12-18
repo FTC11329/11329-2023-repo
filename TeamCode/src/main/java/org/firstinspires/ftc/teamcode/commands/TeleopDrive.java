@@ -51,9 +51,9 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         //slides.moveSlides(upPower - downPower);
 
         if (gamepad1.right_bumper) {
-            maxSpeed = RobotConfig.Drivetrain.slowSpeed;
-        } else {
             maxSpeed = RobotConfig.Drivetrain.fastSpeed;
+        } else {
+            maxSpeed = RobotConfig.Drivetrain.slowSpeed;
         }
 
         drivetrain.MecanumDrive(vertical, horizontal, rotational, maxSpeed);
@@ -117,7 +117,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             slidePosition = RobotConfig.Presets.SlidesMedRev;
             arm.toPosition(RobotConfig.Presets.Arm1MedRev);
             claw.grab();
-            claw.setPos(RobotConfig.Presets.WristPickup);
+            claw.setPos(RobotConfig.Presets.WristPlacing);
         }
         // Low
         if (gamepad2.dpad_down) {
@@ -147,6 +147,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.ungrab();
             reverse = true;
         }
+
     }
 
     @Override

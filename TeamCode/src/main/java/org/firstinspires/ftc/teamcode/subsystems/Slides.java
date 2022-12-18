@@ -2,19 +2,22 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.fizzyapple12.javadi.DiContainer;
 import com.fizzyapple12.javadi.DiInterfaces;
+import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializable {
+public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializable, DiInterfaces.ITickable {
     @DiContainer.Inject(id = "leftSlideMotor")
     DcMotorEx leftSlideMotor;
     @DiContainer.Inject(id = "rightSlideMotor")
     DcMotorEx rightSlideMotor;
     @DiContainer.Inject()
     Telemetry telemetry;
+    @DiContainer.Inject(id = "armLimitSwitch")
+    RevTouchSensor limitSwitch;
 
     DcMotor.RunMode currentRunmode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
 
@@ -53,6 +56,16 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
 
         rightSlideMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         rightSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+    }
+    @Override
+    public void onTick() {
+        if (rightSlideMotor.getCurrentPosition() < rightSlideMotor.getTargetPosition() && limitSwitch.isPressed()) {
+            setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        } else {
+            setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
     }
 
     public void setTargetPositionTolerance(int tolerance) {

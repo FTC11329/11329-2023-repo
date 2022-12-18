@@ -58,7 +58,7 @@ public class LeftAutoSame extends RoadRunnerAutoBase {
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickupTopRev);
                     arm.toPosition(RobotConfig.Presets.Arm1PickupTopRev);
-                    claw.setPos(RobotConfig.Presets.WristPickupTopRev);
+                    claw.setPos(RobotConfig.Presets.WristPickupRev);
                 })
                 //go to pickup a cone
                 .lineTo(new Vector2d(51.5, 4))

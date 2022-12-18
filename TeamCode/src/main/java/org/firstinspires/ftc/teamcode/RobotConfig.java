@@ -11,10 +11,14 @@ public class RobotConfig {
         public static String backLeftMotorName = "backLeft";
         public static String backRightMotorName = "backRight";
         public static double slowSpeed = 0.3;
-        public static double fastSpeed = 0.5;//0.5
+        public static double fastSpeed = 0.55;//0.5
     }
 
     public static class Presets {
+
+        //Claw placing
+        public static double WristPlacing = 0.250;
+
         //High
         public static int SlidesHigh = -905;
         public static int Arm1High = 386;
@@ -36,8 +40,8 @@ public class RobotConfig {
         public static int Arm1MedFromRev = 236;
 
         //Medium Reverse
-        public static int SlidesMedRev = -500;
-        public static int Arm1MedRev = 609;
+        public static int SlidesMedRev = -468;
+        public static int Arm1MedRev = 600;
 
         //Low
         public static int SlidesLow = -1740;
@@ -54,9 +58,14 @@ public class RobotConfig {
         public static double WristPickupRev = 1;
 
         //Pick up top cone
+        public static int SlidesPickupTop = -616;
+        public static int Arm1PickupTop = 2;
+
+
+        //Pick up top cone reverse
         public static int SlidesPickupTopRev = -616;
         public static int Arm1PickupTopRev = 890;
-        public static double WristPickupTopRev = 1;
+
     }
 
     public static class Slides {
