@@ -31,7 +31,7 @@ public abstract class RoadRunnerAutoBase extends OpModeBase {
     public abstract void BuildParkThree(TrajectorySequenceBuilder trajectorySequenceBuilder);
 
     TrajectorySequenceBuilder trajectorySequenceBuilder;
-    private Pose2d red = new Pose2d(0, 0);
+    private Pose2d red  = new Pose2d(0, 0);
     private Pose2d blue = new Pose2d(0, 10);
 
     @Override

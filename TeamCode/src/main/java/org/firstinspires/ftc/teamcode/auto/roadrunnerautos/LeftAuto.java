@@ -63,12 +63,12 @@ public class LeftAuto extends RoadRunnerAutoBase {
                     claw.grab();
                 })
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesHigh-300);
+                    slides.toPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 .waitSeconds(1)
                 .lineTo(new Vector2d(49, 4))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesHigh-1150);
+                    slides.toPosition(RobotConfig.Presets.SlidesHigh - 1150);
                     arm.toPosition(RobotConfig.Presets.Arm1High - 140);
                     claw.setPos(RobotConfig.Presets.WristPickupRev);
                 })
@@ -94,12 +94,12 @@ public class LeftAuto extends RoadRunnerAutoBase {
                     claw.grab();
                 })
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesHigh-300);
+                    slides.toPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 .waitSeconds(1)
                 .lineTo(new Vector2d(50, 4))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesHigh-1150);
+                    slides.toPosition(RobotConfig.Presets.SlidesHigh - 1150);
                     arm.toPosition(RobotConfig.Presets.Arm1High - 140);
                     claw.setPos(RobotConfig.Presets.WristPickupRev);
                 })
@@ -120,7 +120,8 @@ public class LeftAuto extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
                 .strafeRight(14)
-                .back(23);;
+                .back(23);
+        ;
         //.splineTo(new Vector2d(50, 20), Math.toRadians(0));
     }
 

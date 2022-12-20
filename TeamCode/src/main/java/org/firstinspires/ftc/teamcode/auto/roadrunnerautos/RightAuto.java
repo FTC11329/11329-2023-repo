@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Right Auto", group = "Competition")
+@Autonomous(name = "Right Auto High", group = "Competition")
 public class RightAuto extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
