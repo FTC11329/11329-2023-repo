@@ -8,17 +8,19 @@ import org.firstinspires.ftc.teamcode.roadrunner.drive.GlacierDrive;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.utilities.OpModeBase;
-import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
 public abstract class RoadRunnerAutoBase extends OpModeBase {
+    private final Pose2d red = new Pose2d(0, 0);
+    private final Pose2d blue = new Pose2d(0, 10);
     protected GlacierDrive glacierDrive;
     protected April april;
     protected int marker;
     protected Telemetry telemetry;
     TrajectorySequence builtTrajectorySequence;
     Thread roadrunnerThread;
+    TrajectorySequenceBuilder trajectorySequenceBuilder;
 
     public abstract void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException;
 
@@ -29,10 +31,6 @@ public abstract class RoadRunnerAutoBase extends OpModeBase {
     public abstract void BuildParkTwo(TrajectorySequenceBuilder trajectorySequenceBuilder);
 
     public abstract void BuildParkThree(TrajectorySequenceBuilder trajectorySequenceBuilder);
-
-    TrajectorySequenceBuilder trajectorySequenceBuilder;
-    private Pose2d red  = new Pose2d(0, 0);
-    private Pose2d blue = new Pose2d(0, 10);
 
     @Override
     public void InstallLower() throws IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -56,11 +54,11 @@ public abstract class RoadRunnerAutoBase extends OpModeBase {
             telemetry.log().add(e.toString());
         }
 
-        glacierDrive.setPoseEstimate(GetSide() == RobotSide.Red ?
-                red :
-                blue);
-
-        trajectorySequenceBuilder = glacierDrive.trajectorySequenceBuilder(GetSide() == RobotSide.Red ? red : blue);
+//        glacierDrive.setPoseEstimate(GetSide() == RobotSide.Red ?
+//                red :
+//                blue);
+//
+        trajectorySequenceBuilder = glacierDrive.trajectorySequenceBuilder(new Pose2d(0, 0));
         Build(trajectorySequenceBuilder);
 
         builtTrajectorySequence = trajectorySequenceBuilder.build();

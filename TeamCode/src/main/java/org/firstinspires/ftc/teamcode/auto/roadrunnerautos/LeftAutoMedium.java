@@ -1,14 +1,7 @@
 package org.firstinspires.ftc.teamcode.auto.roadrunnerautos;
 
-import android.drm.DrmStore;
-
-import androidx.annotation.NonNull;
-
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.profile.VelocityConstraint;
-import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryAccelerationConstraint;
-import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityConstraint;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.RobotConfig;
@@ -21,14 +14,14 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Right Auto Low", group = "Competition")
-public class RightAutoLow extends RoadRunnerAutoBase {
+@Autonomous(name = "Left Auto Medium", group = "Competition")
+public class LeftAutoMedium extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
 
-    Pose2d placeLocation = new Pose2d(46.25, 0, Math.toRadians(310));
-    Vector2d pickupLocation = new Vector2d(51.25, -28);
+    Pose2d placeLocation = new Pose2d(46.25, 0, Math.toRadians(50));
+    Vector2d pickupLocation = new Vector2d(51.25, 28);
 
     @Override
     public void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException {
@@ -52,16 +45,16 @@ public class RightAutoLow extends RoadRunnerAutoBase {
                 })
 
                 //Go to 8, -4 without turning
-                .lineTo(new Vector2d(17, -4))
-
+                .lineTo(new Vector2d(17, 4))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRev);
                 })
 
-                //Go to pole and let go
-                .splineToSplineHeading(placeLocation, Math.toRadians(100))
+                //Go to pole
+                .splineToSplineHeading(placeLocation, Math.toRadians(-100)) // might be 330
 
+                //let go
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
@@ -73,7 +66,7 @@ public class RightAutoLow extends RoadRunnerAutoBase {
                 .waitSeconds(0.2)
 
                 //Go to pickup a cone
-                .splineTo(pickupLocation, Math.toRadians(270))
+                .splineTo(pickupLocation, Math.toRadians(-270))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
@@ -111,7 +104,7 @@ public class RightAutoLow extends RoadRunnerAutoBase {
                 })
 
                 //Go to pickup a cone
-                .splineTo(pickupLocation, Math.toRadians(270))
+                .splineTo(pickupLocation, Math.toRadians(-270))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
@@ -150,7 +143,7 @@ public class RightAutoLow extends RoadRunnerAutoBase {
                 })
 
                 //Go to pickup a cone
-                .splineTo(pickupLocation, Math.toRadians(270))
+                .splineTo(pickupLocation, Math.toRadians(-270))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
@@ -189,7 +182,7 @@ public class RightAutoLow extends RoadRunnerAutoBase {
                 })
 
                 //Go to pickup a cone
-                .splineTo(pickupLocation, Math.toRadians(270))
+                .splineTo(pickupLocation, Math.toRadians(-270))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
@@ -217,44 +210,47 @@ public class RightAutoLow extends RoadRunnerAutoBase {
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
-                .waitSeconds(0.1)
-
-        ;
-
+                .waitSeconds(0.1);
     }
 
     @Override
     public void BuildParkOne(TrajectorySequenceBuilder trajectorySequenceBuilder) {
-        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(3, () -> {
+        trajectorySequenceBuilder
+                .UNSTABLE_addTemporalMarkerOffset(1.2, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .lineTo(new Vector2d(52, 2.5))
-                .lineToLinearHeading(new Pose2d(52, 20, Math.toRadians(270)));
+                .strafeRight(14)
+                .back(23);
     }
 
     @Override
     public void BuildParkTwo(TrajectorySequenceBuilder trajectorySequenceBuilder) {
-        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
-            slides.toPosition(RobotConfig.Presets.SlidesPickup);
-            arm.toPosition(RobotConfig.Presets.Arm1Pickup);
-            claw.setPos(RobotConfig.Wrist.startingPosition);
-        }).lineToLinearHeading(new Pose2d(52, -3, Math.toRadians(270)));
+        trajectorySequenceBuilder
+                .UNSTABLE_addTemporalMarkerOffset(1.2, () -> {
+                    slides.toPosition(RobotConfig.Presets.SlidesPickup);
+                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+                    claw.setPos(RobotConfig.Wrist.startingPosition);
+                })
+                .back(2)
+                .strafeRight(13);
     }
 
     @Override
     public void BuildParkThree(TrajectorySequenceBuilder trajectorySequenceBuilder) {
-        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
+        trajectorySequenceBuilder
+                .UNSTABLE_addTemporalMarkerOffset(1.2, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
-                }).lineToLinearHeading(new Pose2d(52, -27, Math.toRadians(0)))
-                .lineTo(new Vector2d(50.5, -27));
+                })
+                .strafeRight(14)
+                .forward(24);
     }
 
     @Override
     public RobotSide GetSide() {
-        return RobotSide.Red;
+        return RobotSide.Blue;
     }
 }
