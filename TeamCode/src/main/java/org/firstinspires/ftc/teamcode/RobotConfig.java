@@ -104,10 +104,11 @@ public class RobotConfig {
         public static int maxArmPosition = 890;
         public static int minArmPosition = 0;
 
-        public static double kp = 0.005;
-        public static double ki = 0;
-        public static double kd = 0.0005;
-        public static double kf = 0.2;
+        public static double kp = 0.005;//0.005
+        public static double ki = 0;//0
+        // d was too small                                 <--Joke haha funny
+        public static double kd = 0.0005;//0.0005
+        public static double kf = 0.2;//0.2
     }
 
     public static class Wrist {

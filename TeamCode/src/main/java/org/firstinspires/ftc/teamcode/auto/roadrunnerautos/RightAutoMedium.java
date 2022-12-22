@@ -1,7 +1,14 @@
 package org.firstinspires.ftc.teamcode.auto.roadrunnerautos;
 
+import android.drm.DrmStore;
+
+import androidx.annotation.NonNull;
+
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
+import com.acmerobotics.roadrunner.profile.VelocityConstraint;
+import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryAccelerationConstraint;
+import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityConstraint;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.RobotConfig;
@@ -21,7 +28,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
     Slides slides;
 
     Pose2d placeLocation = new Pose2d(46.25, 0, Math.toRadians(310));
-    Vector2d pickupLocation = new Vector2d(51.25, -28);
+    Vector2d pickupLocation = new Vector2d(50.75, -28.5);
 
     @Override
     public void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException {
@@ -210,13 +217,18 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
-                .waitSeconds(0.1);
+
+                .waitSeconds(0.1)
+
+                .UNSTABLE_addTemporalMarkerOffset(0.1, () -> {
+                    claw.grab();
+                });
 
     }
 
     @Override
     public void BuildParkOne(TrajectorySequenceBuilder trajectorySequenceBuilder) {
-        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(3, () -> {
+        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);

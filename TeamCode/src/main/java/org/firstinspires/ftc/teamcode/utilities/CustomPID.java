@@ -46,7 +46,6 @@ public class CustomPID {
         //Sets the postion the motor should go to
         this.lastReference = reference;
         this.reference = desiredPosition;
-
     }
     public void setMaxIntegral(double maxIntegral){
         this.maxIntegral = maxIntegral;

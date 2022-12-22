@@ -20,8 +20,8 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
     Claw claw;
     Slides slides;
 
-    Pose2d placeLocation = new Pose2d(46.25, 0, Math.toRadians(50));
-    Vector2d pickupLocation = new Vector2d(51.25, 28);
+    Pose2d placeLocation = new Pose2d(44.5, 0, Math.toRadians(50));
+    Vector2d pickupLocation = new Vector2d(50.5, 26.75);
 
     @Override
     public void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException {
@@ -210,7 +210,12 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
-                .waitSeconds(0.1);
+
+                .waitSeconds(0.1)
+
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                     claw.grab();
+                });
     }
 
     @Override
