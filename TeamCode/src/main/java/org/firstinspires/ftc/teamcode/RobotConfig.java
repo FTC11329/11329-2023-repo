@@ -24,11 +24,11 @@ public class RobotConfig {
         public static int Arm1High = 386;
 
         //High From Reverse Pickup
-        public static int SlidesHighFromRev = -2000;//-1900;
-        public static int Arm1HighFromRev = 246;
+        public static int SlidesHighFromRev = -2100;//-1900;
+        public static int Arm1HighFromRev = 260;
 
         //High Reverse
-        public static int SlidesHighRev = -1786;
+        public static int SlidesHighRev = -1966;
         public static int Arm1HighRev = 628;
 
         //Medium
@@ -37,15 +37,19 @@ public class RobotConfig {
 
         //Medium From Reverse Pickup
         public static int SlidesMedFromRev = -948;
-        public static int Arm1MedFromRev = 236;
+        public static int Arm1MedFromRev = 206;
 
         //Medium Reverse
-        public static int SlidesMedRev = -468;
+        public static int SlidesMedRev = -715;
         public static int Arm1MedRev = 600;
 
         //Low
         public static int SlidesLow = -1740;
         public static int Arm1Low = 25;
+
+        //Low From Reverse Pickup
+        public static int SlidesLowFromRev = 0;
+        public static int Arm1LowFromRev = 230;
 
         //Pick up
         public static int SlidesPickup = 0;
@@ -55,7 +59,7 @@ public class RobotConfig {
         //Pick up Reverse
         public static int SlidesPickupRev = 0;
         public static int Arm1PickupRev = 890;
-        public static double WristPickupRev = 1;
+        public static double WristPickupRev = 0.964;
 
         //Pick up top cone
         public static int SlidesPickupTop = -616;
@@ -104,10 +108,10 @@ public class RobotConfig {
         public static int maxArmPosition = 890;
         public static int minArmPosition = 0;
 
-        public static double kp = 0.005;//0.005
+        public static double kp = 0;//0.005
         public static double ki = 0;//0
         // d was too small                                 <--Joke haha funny
-        public static double kd = 0.0005;//0.0005
+        public static double kd = 0;//0.0005
         public static double kf = 0.2;//0.2
     }
 
