@@ -54,6 +54,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 //Go to 8, -4 without turning
                 .lineTo(new Vector2d(17, -4))
 
+
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRev);
                 })
@@ -247,17 +248,12 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
     @Override
     public void BuildParkThree(TrajectorySequenceBuilder trajectorySequenceBuilder) {
-        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(0, () -> {
-            slides.toPosition(RobotConfig.Presets.SlidesPickup);
-            arm.toPosition(RobotConfig.Presets.Arm1Pickup);
-            claw.setPos(RobotConfig.Wrist.startingPosition);
-        }).lineToLinearHeading(new Pose2d(50.75, -28, Math.toRadians(270)))
-
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    claw.ungrab();
-                })
-
-        ;
+        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
+                    slides.toPosition(RobotConfig.Presets.SlidesPickup);
+                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+                    claw.setPos(RobotConfig.Wrist.startingPosition);
+                }).lineToLinearHeading(new Pose2d(52, -27, Math.toRadians(0)))
+                .lineTo(new Vector2d(50.5, -27));
     }
 
     @Override
