@@ -24,20 +24,20 @@ public class RobotConfig {
         public static int Arm1High = 386;
 
         //High From Reverse Pickup
-        public static int SlidesHighFromRev = -2100;//-1900;
+        public static int SlidesHighFromRev = -2075;//-1900;
         public static int Arm1HighFromRev = 260;
 
         //High Reverse
         public static int SlidesHighRev = -1966;
-        public static int Arm1HighRev = 628;
+        public static int Arm1HighRev = 610;
 
         //Medium
         public static int SlidesMed = 0;
         public static int Arm1Med = 355;
 
         //Medium From Reverse Pickup
-        public static int SlidesMedFromRev = -948;
-        public static int Arm1MedFromRev = 206;
+        public static int SlidesMedFromRev = -450;
+        public static int Arm1MedFromRev = 300;
 
         //Medium Reverse
         public static int SlidesMedRev = -715;
@@ -80,7 +80,7 @@ public class RobotConfig {
         public static int maxSlidePosition = -2200;
         public static int minSlidePosition = 0;
 
-        public static double slidePower = 50;//30;
+        public static double slidePower = 75;//50;
     }
 
     public static class Claw {
@@ -108,10 +108,10 @@ public class RobotConfig {
         public static int maxArmPosition = 890;
         public static int minArmPosition = 0;
 
-        public static double kp = 0;//0.005
+        public static double kp = 0.005;//0.005
         public static double ki = 0;//0
         // d was too small                                 <--Joke haha funny
-        public static double kd = 0;//0.0005
+        public static double kd = 0.0005;//0.0005
         public static double kf = 0.2;//0.2
     }
 

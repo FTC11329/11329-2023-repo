@@ -37,9 +37,9 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     double targetPosition = 0;
     double power;
 
-    double zeroAngle = 212;
+    double zeroAngle = 199;
     //455 straight UP
-    double tickToDegrees = 0.3703;
+    double tickToDegrees = 0.3854389722;
     private CustomPID armPID;
     //private double powerMod = GlacierDrive.armPowerSlow;
     int slidesOffset = 0;

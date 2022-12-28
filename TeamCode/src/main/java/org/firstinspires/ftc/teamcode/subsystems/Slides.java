@@ -62,6 +62,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     public void onTick() {
         if (rightSlideMotor.getCurrentPosition() < rightSlideMotor.getTargetPosition() && limitSwitch.isPressed()) {
             setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            toPosition(rightSlideMotor.getCurrentPosition());
 
         } else {
             setMode(DcMotor.RunMode.RUN_TO_POSITION);
