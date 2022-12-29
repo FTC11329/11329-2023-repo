@@ -27,7 +27,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
     Claw claw;
     Slides slides;
 
-    Pose2d placeLocation = new Pose2d(46.25, 0, Math.toRadians(310));
+    Pose2d placeLocation = new Pose2d(44.75, -1, Math.toRadians(310));
     Vector2d pickupLocation = new Vector2d(50.75, -28.5);
 
     @Override
@@ -47,7 +47,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
                 //Puts the arm in placing position
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRev);
+                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
@@ -56,7 +56,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1MedRev);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 //Go to pole and let go
@@ -72,6 +72,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 })
                 .waitSeconds(0.2)
 
+                //ANOTHER CONE !!!!!!!!!!!!!!!
                 //Go to pickup a cone
                 .splineTo(pickupLocation, Math.toRadians(270))
 
@@ -87,12 +88,12 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
                 //Going to Medium
                 .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRev);
+                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1MedRev);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(placeLocation)
@@ -125,21 +126,20 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
                 //Going to Medium
                 .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRev);
+                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1MedRev);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(placeLocation)
 
                 //Ungrabs
-                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
-
 
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
@@ -164,12 +164,12 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
                 //Going to Medium
                 .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRev);
+                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1MedRev);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(placeLocation)
@@ -203,12 +203,12 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
                 //Going to Medium
                 .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRev);
+                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1MedRev);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(placeLocation)
@@ -234,12 +234,12 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
                 .lineTo(new Vector2d(52, 2.5))
-                .lineToLinearHeading(new Pose2d(52, 20, Math.toRadians(270)));
+                .lineToLinearHeading(new Pose2d(48, 20, Math.toRadians(270)));
     }
 
     @Override
     public void BuildParkTwo(TrajectorySequenceBuilder trajectorySequenceBuilder) {
-        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
+        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(0, () -> {
             slides.toPosition(RobotConfig.Presets.SlidesPickup);
             arm.toPosition(RobotConfig.Presets.Arm1Pickup);
             claw.setPos(RobotConfig.Wrist.startingPosition);
@@ -248,12 +248,14 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
     @Override
     public void BuildParkThree(TrajectorySequenceBuilder trajectorySequenceBuilder) {
-        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
+        trajectorySequenceBuilder.UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
-                }).lineToLinearHeading(new Pose2d(52, -27, Math.toRadians(0)))
-                .lineTo(new Vector2d(50.5, -27));
+                    claw.ungrab();
+                }).lineToLinearHeading(new Pose2d(52, -27, Math.toRadians(270)))
+                .lineTo(new Vector2d(50.75, -27.5));
+
     }
 
     @Override

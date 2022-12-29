@@ -43,6 +43,10 @@ public class RobotConfig {
         public static int SlidesMedRev = -715;
         public static int Arm1MedRev = 600;
 
+        //Medium Reverse Auto
+        public static int SlidesMedRevAuto = -715;
+        public static int Arm1MedRevAuto = 620;
+
         //Low
         public static int SlidesLow = -1740;
         public static int Arm1Low = 25;
@@ -75,7 +79,7 @@ public class RobotConfig {
     public static class Slides {
 
         public static String rightSlideMotor = "rightSlideMotor";
-        public static String leftSlideMotor = "leftSlideMotor";
+        public static String leftSlideMotor  = "leftSlideMotor";
         public static String limitSwitch = "armLimitSwitch";
         public static int maxSlidePosition = -2200;
         public static int minSlidePosition = 0;

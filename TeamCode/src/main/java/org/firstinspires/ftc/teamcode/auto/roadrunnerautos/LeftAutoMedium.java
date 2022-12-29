@@ -20,8 +20,8 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
     Claw claw;
     Slides slides;
 
-    Pose2d placeLocation = new Pose2d(44.5, 0, Math.toRadians(50));
-    Vector2d pickupLocation = new Vector2d(50.5, 26.75);
+    Pose2d placeLocation = new Pose2d(44.25, -0.25, Math.toRadians(50));
+    Vector2d pickupLocation = new Vector2d(50.75, 27.25);
 
     @Override
     public void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException {
@@ -40,7 +40,7 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
 
                 //Puts the arm in placing position
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRev);
+                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
@@ -48,7 +48,7 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
                 .lineTo(new Vector2d(17, 4))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1MedRev);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 //Go to pole
@@ -80,12 +80,12 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
 
                 //Going to Medium
                 .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRev);
+                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1MedRev);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(placeLocation)
@@ -118,18 +118,18 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
 
                 //Going to Medium
                 .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRev);
+                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1MedRev);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(placeLocation)
 
                 //Ungrabs
-                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
 
@@ -157,12 +157,12 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
 
                 //Going to Medium
                 .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRev);
+                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1MedRev);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(placeLocation)
@@ -196,12 +196,12 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
 
                 //Going to Medium
                 .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRev);
+                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1MedRev);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(placeLocation)
@@ -221,13 +221,15 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
     @Override
     public void BuildParkOne(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
-                .UNSTABLE_addTemporalMarkerOffset(1.2, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .strafeRight(14)
-                .back(23);
+                .lineToLinearHeading(new Pose2d(50.25, 28,Math.toRadians(90)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    claw.ungrab();
+                });
     }
 
     @Override
@@ -238,20 +240,19 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .back(2)
-                .strafeRight(13);
+                .lineToLinearHeading(new Pose2d(49, 3, Math.toRadians(90)));
     }
 
     @Override
     public void BuildParkThree(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
-                .UNSTABLE_addTemporalMarkerOffset(1.2, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .strafeRight(14)
-                .forward(24);
+                .lineToLinearHeading(new Pose2d(52, 0, Math.toRadians(90)))
+                .lineTo(new Vector2d(49,-20));
     }
 
     @Override
