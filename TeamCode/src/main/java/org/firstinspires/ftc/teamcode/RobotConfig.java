@@ -32,7 +32,7 @@ public class RobotConfig {
         public static int Arm1HighRev = 610;
 
         //Medium
-        public static int SlidesMed = 0;
+        public static int SlidesMed = -100;
         public static int Arm1Med = 355;
 
         //Medium From Reverse Pickup

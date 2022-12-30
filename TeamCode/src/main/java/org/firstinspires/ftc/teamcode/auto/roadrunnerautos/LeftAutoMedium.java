@@ -221,6 +221,52 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
     @Override
     public void BuildParkOne(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
+
+                //ANOTHER CONE !!!!!!!!!!!!!!!
+                .waitSeconds(0.05)
+                .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
+                    claw.ungrab();
+                    slides.toPosition(RobotConfig.Presets.SlidesPickup);
+                    arm.toPosition(5);
+                    claw.setPos(RobotConfig.Presets.WristPickup);
+                })
+
+                //Go to pickup a cone
+                .splineTo(pickupLocation, Math.toRadians(-270))
+
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    claw.grab();
+                })
+
+                //Moves off the stack
+                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
+                    slides.toPosition(RobotConfig.Presets.SlidesHigh - 250);
+                })
+                .waitSeconds(0.4)
+
+                //Going to Medium
+                .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
+                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
+                    claw.setPos(RobotConfig.Presets.WristPlacing);
+                })
+
+                .UNSTABLE_addTemporalMarkerOffset(1, () -> {
+                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
+                })
+
+                .lineToLinearHeading(placeLocation)
+
+                //Ungrabs
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    claw.ungrab();
+                })
+
+                .waitSeconds(0.1)
+
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    claw.grab();
+                })
+
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
@@ -235,6 +281,52 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
     @Override
     public void BuildParkTwo(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
+
+                //ANOTHER CONE !!!!!!!!!!!!!!!
+                .waitSeconds(0.05)
+                .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
+                    claw.ungrab();
+                    slides.toPosition(RobotConfig.Presets.SlidesPickup);
+                    arm.toPosition(5);
+                    claw.setPos(RobotConfig.Presets.WristPickup);
+                })
+
+                //Go to pickup a cone
+                .splineTo(pickupLocation, Math.toRadians(-270))
+
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    claw.grab();
+                })
+
+                //Moves off the stack
+                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
+                    slides.toPosition(RobotConfig.Presets.SlidesHigh - 250);
+                })
+                .waitSeconds(0.4)
+
+                //Going to Medium
+                .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
+                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
+                    claw.setPos(RobotConfig.Presets.WristPlacing);
+                })
+
+                .UNSTABLE_addTemporalMarkerOffset(1, () -> {
+                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
+                })
+
+                .lineToLinearHeading(placeLocation)
+
+                //Ungrabs
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    claw.ungrab();
+                })
+
+                .waitSeconds(0.1)
+
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    claw.grab();
+                })
+
                 .UNSTABLE_addTemporalMarkerOffset(1.2, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
@@ -246,13 +338,53 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
     @Override
     public void BuildParkThree(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
+
+                //ANOTHER CONE !!!!!!!!!!!!!!!
+                .waitSeconds(0.05)
+                .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
+                    claw.ungrab();
+                    slides.toPosition(RobotConfig.Presets.SlidesPickup);
+                    arm.toPosition(5);
+                    claw.setPos(RobotConfig.Presets.WristPickup);
+                })
+
+                //Go to pickup a cone
+                .splineTo(pickupLocation, Math.toRadians(-270))
+
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    claw.grab();
+                })
+
+                .waitSeconds(0.2)
+
+                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
+                    slides.toPosition(RobotConfig.Presets.SlidesMed - 150);
+                    arm.toPosition(RobotConfig.Presets.Arm1Med);
+                    claw.setPos(RobotConfig.Presets.WristPickup);
+                })
+
+                .lineToLinearHeading(new Pose2d(50, -17.5, Math.toRadians(138)))
+
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    slides.toPosition(RobotConfig.Presets.SlidesMed);
+                })
+
+                .waitSeconds(0.05)
+
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    claw.ungrab();
+                })
+
+                .waitSeconds(0.25)
+
+                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .lineToLinearHeading(new Pose2d(52, 0, Math.toRadians(90)))
-                .lineTo(new Vector2d(49,-20));
+
+                .lineToLinearHeading(new Pose2d(53,-19, Math.toRadians(180)));
+
     }
 
     @Override
