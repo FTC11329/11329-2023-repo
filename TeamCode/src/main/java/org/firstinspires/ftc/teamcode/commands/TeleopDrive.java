@@ -39,7 +39,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
 
     @Override
     public void onTick() {
-        double vertical = -gamepad1.left_stick_y;
+        double vertical = (-gamepad1.left_stick_y) + gamepad1.right_trigger - gamepad1.left_trigger;
         double horizontal = -gamepad1.left_stick_x;
         double rotational = gamepad1.right_stick_x;
         double upPower = gamepad2.left_trigger;
