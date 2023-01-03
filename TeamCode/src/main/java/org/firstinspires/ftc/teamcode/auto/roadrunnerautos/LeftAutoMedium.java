@@ -20,8 +20,8 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
     Claw claw;
     Slides slides;
 
-    Pose2d placeLocation = new Pose2d(45.75, 0.75, Math.toRadians(50));
-    Vector2d pickupLocation = new Vector2d(51.5, 28);
+    Pose2d placeLocation = new Pose2d(45.7, 1, Math.toRadians(50));
+    Vector2d pickupLocation = new Vector2d(51.25, 28.25);
 
     @Override
     public void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException {
@@ -64,6 +64,7 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
                 .waitSeconds(0.2)
+
 
                 //Go to pickup a cone
                 .splineTo(pickupLocation, Math.toRadians(-270))
@@ -363,7 +364,7 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
 
-                .lineToLinearHeading(new Pose2d(50, -17.5, Math.toRadians(138)))
+                .lineToLinearHeading(new Pose2d(50, -17.75, Math.toRadians(138)))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesMed);

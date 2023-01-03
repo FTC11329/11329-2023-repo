@@ -74,6 +74,11 @@ public class RobotConfig {
         public static int SlidesPickupTopRev = -616;
         public static int Arm1PickupTopRev = 890;
 
+        //Pickup Fallen Cone
+        public static int SlidesPickupFall = -345;
+        public static int Arm1PickupFall = 50;
+        public static double WristPickupFall = 0;
+
     }
 
     public static class Slides {

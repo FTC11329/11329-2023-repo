@@ -152,7 +152,13 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.ungrab();
             reverse = true;
         }
-
+        //Pickup Fallen Cone
+        if (gamepad2.dpad_left && !reverse) {
+            slidePosition = RobotConfig.Presets.SlidesPickupFall;
+            arm.toPosition(RobotConfig.Presets.Arm1PickupFall);
+            claw.setPos(RobotConfig.Presets.WristPickupFall);
+            claw.ungrab();
+        }
     }
 
     @Override
