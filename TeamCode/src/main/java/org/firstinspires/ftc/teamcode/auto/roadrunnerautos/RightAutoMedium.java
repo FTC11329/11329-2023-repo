@@ -1,12 +1,9 @@
 package org.firstinspires.ftc.teamcode.auto.roadrunnerautos;
 
-import android.drm.DrmStore;
-
 import androidx.annotation.NonNull;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.profile.VelocityConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryAccelerationConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityConstraint;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -27,8 +24,8 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
     Claw claw;
     Slides slides;
 
-    Pose2d placeLocation = new Pose2d(45.4, -1, Math.toRadians(310));
-    Vector2d pickupLocation = new Vector2d(50.75, -28);
+    Pose2d placeLocation = new Pose2d(45.75, -1, Math.toRadians(310));
+    Vector2d pickupLocation = new Vector2d(50.5, -28);
 
     @Override
     public void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException {
@@ -47,11 +44,22 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
                 //Puts the arm in placing position
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto-100);
+                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto - 100);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
-                .setConstraints()
+                .setConstraints(new TrajectoryVelocityConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 50;
+                    }
+                }, new TrajectoryAccelerationConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 45;
+                    }
+                })
+
                 //Go to 8, -4 without turning
                 .lineTo(new Vector2d(17, -4))
 
@@ -60,9 +68,10 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                     slides.toPosition(RobotConfig.Presets.SlidesMedRev);
                 })
-                .splineTo(new Vector2d(55,-5), Math.toRadians(0))
+                .splineTo(new Vector2d(55, -5), Math.toRadians(0))
+                .resetConstraints()
                 //Go to pole and let go
-                .lineToLinearHeading(new Pose2d(placeLocation.getX() + 2.25,placeLocation.getY() + 0.25, Math.toRadians(310)))
+                .lineToLinearHeading(new Pose2d(placeLocation.getX() + 2.25, placeLocation.getY() + 0.25, Math.toRadians(310)))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
@@ -227,7 +236,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
     @Override
     public void BuildParkOne(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
-        //ANOTHER CONE !!!!!!!!!!!!!!!
+                //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
                 .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickup);
@@ -250,7 +259,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
 
-                .lineToLinearHeading(new Pose2d(49.5, 18, Math.toRadians(224)))
+                .lineToLinearHeading(new Pose2d(49.5, 18.25, Math.toRadians(224)))
 
                 .waitSeconds(0.05)
 
@@ -266,7 +275,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
 
-                .lineToLinearHeading(new Pose2d(51,18.5, Math.toRadians(180)));
+                .lineToLinearHeading(new Pose2d(51, 18.5, Math.toRadians(180)));
 
     }
 
@@ -328,7 +337,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
         trajectorySequenceBuilder
 
 
-        //ANOTHER CONE !!!!!!!!!!!!!!!
+                //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
                 .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickup);
