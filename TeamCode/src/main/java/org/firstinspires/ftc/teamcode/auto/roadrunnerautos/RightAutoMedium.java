@@ -63,7 +63,6 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 //Go to 8, -4 without turning
                 .lineTo(new Vector2d(17, -4))
 
-
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                     slides.toPosition(RobotConfig.Presets.SlidesMedRev);
