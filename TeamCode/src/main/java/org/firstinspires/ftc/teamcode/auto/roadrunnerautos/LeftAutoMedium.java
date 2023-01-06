@@ -25,7 +25,7 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
     Slides slides;
 
     Pose2d placeLocation = new Pose2d(45.5, 1, Math.toRadians(50));
-    Vector2d pickupLocation = new Vector2d(49, 28.25);
+    Vector2d pickupLocation = new Vector2d(48.25, 28.25);
 
     @Override
     public void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException {
