@@ -284,7 +284,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
 
-                .lineToLinearHeading(new Pose2d(49.5, 18.25, Math.toRadians(224)))
+                .lineToLinearHeading(new Pose2d(48.25, 17.25, Math.toRadians(224)))
 
                 .waitSeconds(0.05)
 
