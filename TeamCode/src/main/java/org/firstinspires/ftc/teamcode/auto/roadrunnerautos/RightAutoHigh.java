@@ -35,7 +35,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
     }
 
     @Override
-    public void Build(TrajectorySequenceBuilder trajectorySequenceBuilder) {
+    public void build(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         claw.grab();
         trajectorySequenceBuilder
                 .addDisplacementMarker(() -> {
@@ -137,7 +137,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
     }
 
     @Override
-    public void BuildParkOne(TrajectorySequenceBuilder trajectorySequenceBuilder) {
+    public void buildParkLeft(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
@@ -183,7 +183,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
     }
 
     @Override
-    public void BuildParkTwo(TrajectorySequenceBuilder trajectorySequenceBuilder) {
+    public void buildParkCenter(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
 
                 //ANOTHER CONE !!!!!!!!!!!!!!!
@@ -232,7 +232,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
     }
 
     @Override
-    public void BuildParkThree(TrajectorySequenceBuilder trajectorySequenceBuilder) {
+    public void buildParkRight(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
 
 

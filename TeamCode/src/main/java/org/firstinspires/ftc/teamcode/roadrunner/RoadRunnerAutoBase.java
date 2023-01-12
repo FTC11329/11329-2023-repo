@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.auto.kennan.April;
+import org.firstinspires.ftc.teamcode.auto.kennan.ParkLocation;
 import org.firstinspires.ftc.teamcode.roadrunner.drive.GlacierDrive;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequenceBuilder;
@@ -16,7 +17,7 @@ public abstract class RoadRunnerAutoBase extends OpModeBase {
     private final Pose2d blue = new Pose2d(0, 10);
     protected GlacierDrive glacierDrive;
     protected April april;
-    protected int marker;
+    protected ParkLocation marker;
     protected Telemetry telemetry;
     TrajectorySequence builtTrajectorySequence;
     Thread roadrunnerThread;
@@ -24,13 +25,13 @@ public abstract class RoadRunnerAutoBase extends OpModeBase {
 
     public abstract void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException;
 
-    public abstract void Build(TrajectorySequenceBuilder trajectorySequenceBuilder);
+    public abstract void build(TrajectorySequenceBuilder trajectorySequenceBuilder);
 
-    public abstract void BuildParkOne(TrajectorySequenceBuilder trajectorySequenceBuilder);
+    public abstract void buildParkLeft(TrajectorySequenceBuilder trajectorySequenceBuilder);
 
-    public abstract void BuildParkTwo(TrajectorySequenceBuilder trajectorySequenceBuilder);
+    public abstract void buildParkCenter(TrajectorySequenceBuilder trajectorySequenceBuilder);
 
-    public abstract void BuildParkThree(TrajectorySequenceBuilder trajectorySequenceBuilder);
+    public abstract void buildParkRight(TrajectorySequenceBuilder trajectorySequenceBuilder);
 
     @Override
     public void InstallLower() throws IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -54,19 +55,15 @@ public abstract class RoadRunnerAutoBase extends OpModeBase {
             telemetry.log().add(e.toString());
         }
 
-//        glacierDrive.setPoseEstimate(GetSide() == RobotSide.Red ?
-//                red :
-//                blue);
-//
         trajectorySequenceBuilder = glacierDrive.trajectorySequenceBuilder(new Pose2d(0, 0));
-        Build(trajectorySequenceBuilder);
+        build(trajectorySequenceBuilder);
 
         builtTrajectorySequence = trajectorySequenceBuilder.build();
     }
 
     @Override
     public void init_loop() {
-        if (april.getAprilTag() != -1) {
+        if (april.getAprilTag() != ParkLocation.UNKNOWN) {
             marker = april.getAprilTag();
             telemetry.addData("April Tag", marker);
             telemetry.update();
@@ -82,14 +79,14 @@ public abstract class RoadRunnerAutoBase extends OpModeBase {
         TrajectorySequence buildEndTrajectorySequence;
 
         switch (marker) {
-            case 1:
-                BuildParkTwo(endTrajectorySequenceBuilder);
+            case CENTER:
+                buildParkCenter(endTrajectorySequenceBuilder);
                 break;
-            case 2:
-                BuildParkThree(endTrajectorySequenceBuilder);
+            case RIGHT:
+                buildParkRight(endTrajectorySequenceBuilder);
                 break;
             default:
-                BuildParkOne(endTrajectorySequenceBuilder);
+                buildParkLeft(endTrajectorySequenceBuilder);
                 break;
         }
 

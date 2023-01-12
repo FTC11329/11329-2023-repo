@@ -35,7 +35,7 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
     }
 
     @Override
-    public void Build(TrajectorySequenceBuilder trajectorySequenceBuilder) {
+    public void build(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         claw.grab();
         trajectorySequenceBuilder
                 .addDisplacementMarker(() -> {
@@ -194,14 +194,14 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
 
                 .lineToLinearHeading(placeLocation)
 
-                //Ungrabs
+                // Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
                 .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
                     claw.grab();
                 })
-                //ANOTHER CONE !!!!!!!!!!!!!!!
+                // ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
                 .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
                     slides.toPosition(RobotConfig.Presets.SlidesPickupTop + 453);
@@ -251,7 +251,7 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
     }
 
     @Override
-    public void BuildParkOne(TrajectorySequenceBuilder trajectorySequenceBuilder) {
+    public void buildParkLeft(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
 
                 //ANOTHER CONE !!!!!!!!!!!!!!!
@@ -325,7 +325,7 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
     }
 
     @Override
-    public void BuildParkTwo(TrajectorySequenceBuilder trajectorySequenceBuilder) {
+    public void buildParkCenter(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
 
                 //ANOTHER CONE !!!!!!!!!!!!!!!
@@ -382,7 +382,7 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
     }
 
     @Override
-    public void BuildParkThree(TrajectorySequenceBuilder trajectorySequenceBuilder) {
+    public void buildParkRight(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
 
                 //ANOTHER CONE !!!!!!!!!!!!!!!

@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.auto.kennan.April;
 import org.firstinspires.ftc.teamcode.roadrunner.drive.GlacierDrive;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
 
@@ -13,7 +12,7 @@ import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySe
 public class GiveProgrammersMoreTime extends LinearOpMode {
     private GlacierDrive drive;
     private April april;
-    private int marker;
+    private ParkLocation marker;
 
     private TrajectorySequence trajectorySequence;
 
@@ -28,11 +27,11 @@ public class GiveProgrammersMoreTime extends LinearOpMode {
             telemetry.update();
         }
 
-        if (april.getAprilTag() == 0) {
+        if (april.getAprilTag() == ParkLocation.LEFT) {
             trajectorySequence = drive.trajectorySequenceBuilder(drive.getPoseEstimate()).forward(5).strafeLeft(25).forward(20).build();
-        } else if (april.getAprilTag() == 1) {
+        } else if (april.getAprilTag() == ParkLocation.CENTER) {
             trajectorySequence = drive.trajectorySequenceBuilder(drive.getPoseEstimate()).forward(5).strafeRight(10).forward(20).build();
-        } else {
+        } else if (april.getAprilTag() == ParkLocation.RIGHT) {
             trajectorySequence = drive.trajectorySequenceBuilder(drive.getPoseEstimate()).forward(5).strafeRight(40).forward(20).build();
         }
 

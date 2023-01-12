@@ -2,10 +2,9 @@ package org.firstinspires.ftc.teamcode.auto.kennan;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import java.util.ArrayList;
-
-import org.firstinspires.ftc.teamcode.subsystems.AprilTagDetectionPipeline;
 import org.openftc.apriltag.AprilTagDetection;
+
+import java.util.ArrayList;
 
 public class April {
     static final double FEET_PER_METER = 3.28084;
@@ -27,12 +26,21 @@ public class April {
         camera.setPipeline(coolerAprilTagDetectionPipeline);
     }
 
-    public int getAprilTag() {
+    public ParkLocation getAprilTag() {
         ArrayList<AprilTagDetection> currentDetections = coolerAprilTagDetectionPipeline.getLatestDetections();
         if (currentDetections.size() > 0) {
             marker = currentDetections.get(0).id;
         }
-        return marker;
+
+        if (marker == 0) {
+            return ParkLocation.LEFT;
+        } else if (marker == 1) {
+            return ParkLocation.CENTER;
+        } else if (marker == 2) {
+            return ParkLocation.RIGHT;
+        } else {
+            return ParkLocation.UNKNOWN;
+        }
     }
 
     public void close() {
