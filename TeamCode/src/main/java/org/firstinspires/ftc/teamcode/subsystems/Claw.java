@@ -9,6 +9,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.RobotConfig;
+import org.firstinspires.ftc.teamcode.commands.TeleopDrive;
+import org.firstinspires.ftc.teamcode.teleop.TeleopBlue;
+import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, DiInterfaces.IInitializable {
     @DiContainer.Inject(id = "clawServo")
@@ -20,9 +23,13 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     @DiContainer.Inject(id = "colorSensor")
     public RevColorSensorV3 colorSensor;
     @DiContainer.Inject()
+    public RobotSide side;
+
+    @DiContainer.Inject()
     Telemetry telemetry;
     private boolean grabbing = true;
     private boolean grabbingDebounce = false;
+    private boolean isAtPreset = false;
 
     double power = 0;
     double targetPosition = 0;
@@ -47,6 +54,9 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
 
         handWave2.setPosition(1.0 - targetPosition);
         handWave1.setPosition(targetPosition);
+        if(!isAtPreset && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))){
+            grab();
+        }
     }
 
     public void setWristPower(double wristPower) {
@@ -90,12 +100,19 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
 
         NormalizedRGBA rgba = colorSensor.getNormalizedColors();
 
-        double RtoG = Math.abs(rgba.red - rgba.green);
-        double GtoB = Math.abs(rgba.green - rgba.blue);
+//        double RtoG = Math.abs(rgba.red - rgba.green);
+//        double GtoB = Math.abs(rgba.green - rgba.blue);
+//        return (RtoG > GtoB) ? ConeColor.RED : ConeColor.BLUE;
 
-        //if (rgba.red > rgba.green && rgba.red > rgba.blue) return ConeColor.RED;
-        //if (rgba.blue > rgba.red && rgba.blue > rgba.green) return ConeColor.BLUE;
-        return (RtoG > GtoB) ? ConeColor.RED : ConeColor.BLUE;
+        //^These lines do the same thing v
+
+        if (rgba.red > rgba.green && rgba.red > rgba.blue  && isConePresent()){
+            return ConeColor.RED;
+        } else if (rgba.blue > rgba.red && rgba.blue > rgba.green && isConePresent()) {
+            return ConeColor.BLUE;
+        } else {
+            return ConeColor.NONE;
+        }
     }
 
     public void displayToTelemetry() {
@@ -105,6 +122,12 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         telemetry.addData("Cone Present", isConePresent());
 
         telemetry.addData("Cone Color", getConeColor());
+    }
+    public boolean getPresetBool(){
+        return isAtPreset;
+    }
+    public void setPresetBool(boolean isAtPreset){
+        this.isAtPreset = isAtPreset;
     }
 
     @Override
