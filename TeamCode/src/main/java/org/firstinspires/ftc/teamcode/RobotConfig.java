@@ -112,7 +112,7 @@ public class RobotConfig {
         public static double closePos = 0.3;
         public static double openPos = 0.066;
 
-        public static double maxConeDistance = 5;
+        public static double maxConeDistance = 8; //CM
         public static int maxAutoGrabHeight = -200;
     }
 
