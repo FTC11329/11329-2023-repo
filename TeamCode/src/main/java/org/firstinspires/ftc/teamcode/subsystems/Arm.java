@@ -72,7 +72,6 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
 
         //telemetry.addData("ArmAngleEsitmation:",(arm.getCurrentPosition()-zeroAngle)*tickToDegrees );
         double armPow = armPID.getPIDfOutput(arm.getCurrentPosition(), (arm.getCurrentPosition() - zeroAngle) * tickToDegrees);
-        telemetry.addData("ArmPower:", armPow);
         arm.setPower(armPow);
         //arm.setTargetPosition((int) targetPosition);
         //double currentPosition = arm.getCurrentPosition();
@@ -99,7 +98,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
         telemetry.addData("Arm Target Position", targetPosition);
         //telemetry.addData("Arm Power", arm.getPower());
 
-        telemetry.addData("PIDF : ", arm.getPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION));
+        telemetry.addData("PIDF ", arm.getPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION));
     }
 
     @Override

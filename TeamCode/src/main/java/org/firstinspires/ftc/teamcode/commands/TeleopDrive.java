@@ -184,6 +184,11 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             preset = false;
             claw.setPresetBool(false);
         }
+        //Drive Preset
+        if (gamepad1.a) {
+            slidePosition = RobotConfig.Presets.DriveSlides;
+            claw.setPos(RobotConfig.Wrist.startingPosition);
+        }
     }
 
     @Override

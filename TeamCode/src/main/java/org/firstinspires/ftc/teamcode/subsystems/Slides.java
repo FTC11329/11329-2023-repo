@@ -16,8 +16,10 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     DcMotorEx rightSlideMotor;
     @DiContainer.Inject()
     Telemetry telemetry;
-    @DiContainer.Inject(id = "armLimitSwitch")
-    RevTouchSensor limitSwitch;
+    @DiContainer.Inject(id = "leftSlideLimitSwitch")
+    RevTouchSensor leftLimitSwitch;
+    @DiContainer.Inject(id = "rightSlideLimitSwitch")
+    RevTouchSensor rightLimitSwitch;
 
     DcMotor.RunMode currentRunmode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
 
@@ -42,6 +44,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     public void displayToTelemetry() {
         telemetry.addData("Left Slide", leftSlideMotor.getCurrentPosition());
         telemetry.addData("Right Slide", rightSlideMotor.getCurrentPosition());
+        telemetry.addData("Slide PIDF Coefficients RUN_TO_POSITION", rightSlideMotor.getPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION));
     }
 
     @Override
@@ -60,12 +63,17 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     }
     @Override
     public void onTick() {
-        if (rightSlideMotor.getCurrentPosition() < rightSlideMotor.getTargetPosition() && limitSwitch.isPressed()) {
-            setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            toPosition(rightSlideMotor.getCurrentPosition());
+        if (rightSlideMotor.getCurrentPosition() < rightSlideMotor.getTargetPosition() && rightLimitSwitch.isPressed()) {
 
-        } else {
-            setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightSlideMotor.setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
+            rightSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightSlideMotor.setTargetPosition(rightSlideMotor.getCurrentPosition());
+        }
+        if (leftSlideMotor.getCurrentPosition() < leftSlideMotor.getTargetPosition() && leftLimitSwitch.isPressed()) {
+
+            leftSlideMotor.setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
+            leftSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            leftSlideMotor.setTargetPosition(rightSlideMotor.getCurrentPosition());
         }
     }
 

@@ -87,6 +87,8 @@ public class RobotConfig {
         public static int Arm1PickupFall = 50;
         public static double WristPickupFall = 0;
 
+        //Drive Position
+        public static int DriveSlides = -1444;
     }
 
     public static class Slides {
