@@ -33,7 +33,6 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     @DiContainer.Inject()
     Telemetry telemetry;
 
-
     double targetPosition = 0;
     double power;
 

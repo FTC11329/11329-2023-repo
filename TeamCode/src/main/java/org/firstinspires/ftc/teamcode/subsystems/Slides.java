@@ -45,6 +45,8 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         telemetry.addData("Left Slide", leftSlideMotor.getCurrentPosition());
         telemetry.addData("Right Slide", rightSlideMotor.getCurrentPosition());
         telemetry.addData("Slide PIDF Coefficients RUN_TO_POSITION", rightSlideMotor.getPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION));
+        telemetry.addData("Left Limit Switch", leftLimitSwitch.isPressed());
+        telemetry.addData("Right Limit Switch", rightLimitSwitch.isPressed());
     }
 
     @Override

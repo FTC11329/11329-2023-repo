@@ -16,6 +16,11 @@ public class RobotConfig {
 
     public static class Presets {
 
+        //Led Power
+        public static double LightPower = 0;
+        public static String LEDName = "LED";
+
+
         //Claw placing
         public static double WristPlacing = 0.250;
 
@@ -95,7 +100,8 @@ public class RobotConfig {
 
         public static String rightSlideMotor = "rightSlideMotor";
         public static String leftSlideMotor  = "leftSlideMotor";
-        public static String limitSwitch = "armLimitSwitch";
+        public static String leftLimitSwitch = "leftSlideLimitSwitch";
+        public static String rightLimitSwitch = "rightSlideLimitSwitch";
         public static int maxSlidePosition = -2200;
         public static int minSlidePosition = 0;
 
@@ -108,7 +114,7 @@ public class RobotConfig {
         public static int clawMaxRange = 1;
         public static double wristSpeed = 0.02;
         public static String clawServo = "clawServo";
-        public static String colorSensor = "colorSensor";
+//        public static String colorSensor = "colorSensor";
         public static String handServo1 = "wristServo1";
         public static String handServo2 = "wristServo2";
         public static double closePos = 0.3;

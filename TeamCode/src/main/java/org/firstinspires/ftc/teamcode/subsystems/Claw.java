@@ -20,8 +20,8 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     public Servo handWave1;
     @DiContainer.Inject(id = "wristServo2")
     public Servo handWave2;
-    @DiContainer.Inject(id = "colorSensor")
-    public RevColorSensorV3 colorSensor;
+    //@DiContainer.Inject(id = "colorSensor")
+    //public RevColorSensorV3 colorSensor;
     @DiContainer.Inject()
     public RobotSide side;
 
@@ -54,9 +54,9 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
 
         handWave2.setPosition(1.0 - targetPosition);
         handWave1.setPosition(targetPosition);
-        if(!isAtPreset && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))){
+        /*if(!isAtPreset && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))){
             grab();
-        }
+        }*/
     }
 
     public void setWristPower(double wristPower) {
@@ -91,11 +91,11 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         closeClaw.setPosition(RobotConfig.Claw.openPos);
     }
 
-    public boolean isConePresent() {
+    /*public boolean isConePresent() {
         return colorSensor.getDistance(DistanceUnit.CM) <= RobotConfig.Claw.maxConeDistance;
-    }
+    }*/
 
-    public ConeColor getConeColor() {
+    /*public ConeColor getConeColor() {
         if (!isConePresent()) return ConeColor.NONE;
 
         NormalizedRGBA rgba = colorSensor.getNormalizedColors();
@@ -113,15 +113,15 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         } else {
             return ConeColor.NONE;
         }
-    }
+    }*/
 
     public void displayToTelemetry() {
         telemetry.addData("Hand1 Position", handWave1.getPosition());
         telemetry.addData("Hand2 Position", handWave2.getPosition());
 
-        telemetry.addData("Cone Present", isConePresent());
+        //telemetry.addData("Cone Present", isConePresent());
 
-        telemetry.addData("Cone Color", getConeColor());
+        //telemetry.addData("Cone Color", getConeColor());
     }
     public boolean getPresetBool(){
         return isAtPreset;

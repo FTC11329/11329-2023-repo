@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.RobotConfig;
 import org.firstinspires.ftc.teamcode.subsystems.Arm;
 import org.firstinspires.ftc.teamcode.subsystems.Claw;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.subsystems.LED;
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 
@@ -46,11 +47,14 @@ public abstract class OpModeBase extends DiOpMode {
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.frontRightMotorName)).withId("frontRightMotor");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.backLeftMotorName)).withId("backLeftMotor");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.backRightMotorName)).withId("backRightMotor");
-        Container.bindInstance(hardwareMap.get(RevTouchSensor.class, RobotConfig.Slides.limitSwitch)).withId(RobotConfig.Slides.limitSwitch);
+        Container.bindInstance(hardwareMap.get(RevTouchSensor.class, RobotConfig.Slides.leftLimitSwitch)).withId("leftSlideLimitSwitch");
+        Container.bindInstance(hardwareMap.get(RevTouchSensor.class, RobotConfig.Slides.rightLimitSwitch)).withId("rightSlideLimitSwitch");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Arm.arm)).withId("arm");
 
         Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.clawServo)).withId("clawServo");
-        Container.bindInstance(hardwareMap.get(RevColorSensorV3.class, RobotConfig.Claw.colorSensor)).withId("colorSensor");
+//        Container.bindInstance(hardwareMap.get(RevColorSensorV3.class, RobotConfig.Claw.colorSensor)).withId("colorSensor");
+        Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Presets.LEDName)).withId("LED");
+
 
         Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.handServo1)).withId("wristServo1");
         Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Claw.handServo2)).withId("wristServo2");
@@ -63,6 +67,7 @@ public abstract class OpModeBase extends DiOpMode {
         Container.bind(Claw.class).asSingle();
         //Container.bind(ComputerVision.class).asSingle();
         Container.bind(Drivetrain.class).asSingle();
+        Container.bind(LED.class).asSingle();
 
         InstallLower();
     }
