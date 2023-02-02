@@ -26,6 +26,7 @@ public class LED implements DiInterfaces.IInitializable, DiInterfaces.IDisposabl
         LED.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
         LED.setPower(RobotConfig.Presets.LightPower);
     }
+    @Override
     public void onTick() {
         LED.setPower(RobotConfig.Presets.LightPower);
     }
