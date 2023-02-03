@@ -17,8 +17,7 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 public class LED implements DiInterfaces.IInitializable, DiInterfaces.IDisposable, DiInterfaces.ITickable {
     @DiContainer.Inject(id = "LED")
     public DcMotorEx LED;
-
-
+    
     @Override
     public void onInitialize() {
         LED.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);

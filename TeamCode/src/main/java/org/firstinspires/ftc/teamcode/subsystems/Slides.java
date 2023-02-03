@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializable, DiInterfaces.ITickable {
+    private final boolean debounceRightLimitSwitch = false;
     @DiContainer.Inject(id = "leftSlideMotor")
     DcMotorEx leftSlideMotor;
     @DiContainer.Inject(id = "rightSlideMotor")
@@ -20,7 +21,6 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     RevTouchSensor leftLimitSwitch;
     @DiContainer.Inject(id = "rightSlideLimitSwitch")
     RevTouchSensor rightLimitSwitch;
-
     DcMotor.RunMode currentRunmode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
 
     public void setMode(DcMotorEx.RunMode runMode) {
@@ -37,8 +37,26 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
 
     public void toPosition(int pos) {
         setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftSlideMotor.setTargetPosition(pos);
-        rightSlideMotor.setTargetPosition(pos);
+
+        if (rightLimitSwitch.isPressed()) {
+            rightSlideMotor.setTargetPosition(Math.min(0, pos));
+        } else if (rightLimitSwitch.isPressed()) {
+            rightSlideMotor.setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
+            rightSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightSlideMotor.setTargetPosition(Math.min(0, pos));
+        } else {
+            rightSlideMotor.setTargetPosition(pos);
+        }
+
+        if (leftLimitSwitch.isPressed()) {
+            leftSlideMotor.setTargetPosition(Math.min(0, pos));
+        } else if (leftLimitSwitch.isPressed()) {
+            leftSlideMotor.setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
+            leftSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            leftSlideMotor.setTargetPosition(Math.min(0, pos));
+        } else {
+            leftSlideMotor.setTargetPosition(pos);
+        }
     }
 
     public void displayToTelemetry() {
@@ -63,20 +81,10 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         rightSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
     }
+
     @Override
     public void onTick() {
-        if (rightSlideMotor.getCurrentPosition() < rightSlideMotor.getTargetPosition() && rightLimitSwitch.isPressed()) {
 
-            rightSlideMotor.setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
-            rightSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            rightSlideMotor.setTargetPosition(rightSlideMotor.getCurrentPosition());
-        }
-        if (leftSlideMotor.getCurrentPosition() < leftSlideMotor.getTargetPosition() && leftLimitSwitch.isPressed()) {
-
-            leftSlideMotor.setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
-            leftSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            leftSlideMotor.setTargetPosition(rightSlideMotor.getCurrentPosition());
-        }
     }
 
     public void setTargetPositionTolerance(int tolerance) {
