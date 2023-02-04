@@ -114,7 +114,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(placeLocation)
+                .lineToLinearHeading(new Pose2d(placeLocation.getX() + 0.5, placeLocation.getY(),placeLocation.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -247,7 +247,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(placeLocation)
+                .lineToLinearHeading(new Pose2d(placeLocation.getX() - 2.3, placeLocation.getY() - 0.8,placeLocation.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -348,7 +348,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(placeLocation)
+                .lineToLinearHeading(new Pose2d(placeLocation.getX() - 2.5, placeLocation.getY() -1,placeLocation.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -363,7 +363,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
                 .waitSeconds(0.1)
-                .lineToLinearHeading(new Pose2d(49, -3, Math.toRadians(90)));
+                .lineToLinearHeading(new Pose2d(49, -4, Math.toRadians(90)));
     }
 
     @Override
@@ -404,7 +404,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(placeLocation)
+                .lineToLinearHeading(new Pose2d(placeLocation.getX() - 2.5, placeLocation.getY() - 1,placeLocation.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -419,7 +419,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
 
-                .lineToLinearHeading(new Pose2d(52.5, -30, Math.toRadians(90)));
+                .lineToLinearHeading(new Pose2d(54, -32, Math.toRadians(90)));
 
     }
 
