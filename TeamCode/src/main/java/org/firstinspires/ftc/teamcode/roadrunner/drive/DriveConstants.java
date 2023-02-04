@@ -55,8 +55,8 @@ public class DriveConstants {
      * motor encoders or have elected not to use them for velocity control, these values should be
      * empirically tuned.
      */
-    public static double kV = 0.0135;
-    public static double kA = 0.0018;
+    public static double kV = 0.01;
+    public static double kA = 0.004;
     public static double kStatic = 0;
 
     /*
