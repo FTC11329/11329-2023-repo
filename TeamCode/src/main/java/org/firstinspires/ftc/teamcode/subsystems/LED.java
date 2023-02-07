@@ -45,8 +45,14 @@ public class LED implements DiInterfaces.IInitializable, DiInterfaces.IDisposabl
 
             power = Math.abs((Math.sin(sinInput)));
         }
-        if (effect == LEDEffect.CONSTANT) {
+        else if (effect == LEDEffect.CONSTANT) {
             power = RobotConfig.LED.CONSTANT_POWER;
+        }
+        else if(effect == LEDEffect.MORSE){
+            power = RobotConfig.LED.Custom.ICEMORSE[((int) (seconds*2))%RobotConfig.LED.Custom.ICEMORSE.length];
+        }
+        else if(effect == LEDEffect.FLASH){
+            power = RobotConfig.LED.Custom.FLASH[((int) (seconds*2))%RobotConfig.LED.Custom.FLASH.length];
         }
 
         return Range.clip(power, 0, 1);

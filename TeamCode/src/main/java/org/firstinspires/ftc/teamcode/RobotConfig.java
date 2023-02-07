@@ -2,6 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 import org.firstinspires.ftc.teamcode.utilities.LEDEffect;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RobotConfig {
 
     //store the config variables, if u don't get this u suck so bad hii allen
@@ -26,6 +29,11 @@ public class RobotConfig {
 
         // in seconds
         public static double BREATH_LENGTH = 2;
+        public static class Custom{
+            public static double iterationSPeed = 3; //cycle through 2 values per second
+            public static double[] FLASH = {0.1, 0.2, 0.3, 0.1, 0.8};
+            public static double[] ICEMORSE = {0.1, 0.1, 1, 0.1, 1,.1, .1, .1, 1, .1, 1, 1, 1, 1, .1, .1, .1, 1 ,1, 1 ,1 ,.1 ,.1, 1,.1 ,1, .1, .1, .1, .1 };//ICERobotics in morse:..-.-...-.--- -...--- - ..-.-...
+        }
     }
 
     public static class Presets {
