@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import org.firstinspires.ftc.teamcode.utilities.LEDEffect;
+
 public class RobotConfig {
 
     //store the config variables, if u don't get this u suck so bad hii allen
@@ -14,12 +16,19 @@ public class RobotConfig {
         public static double fastSpeed = 0.55;//0.5
     }
 
-    public static class Presets {
-
-        //Led Power
-        public static double LightPower = 0.8;
+    public static class LED {
+        public static double MaxLightPower = 0.8;
         public static String LEDName = "LED";
+        public static LEDEffect defaultLEDEffect = LEDEffect.CONSTANT;
 
+        // note: all powers are from 0-1, with normalization to MaxLightPower occuring at the end
+        public static double CONSTANT_POWER = 1;
+
+        // in seconds
+        public static double BREATH_LENGTH = 2;
+    }
+
+    public static class Presets {
 
         //Claw placing
         public static double WristPlacing = 0.250;
@@ -82,7 +91,6 @@ public class RobotConfig {
         public static int SlidesPickupTop = -616;
         public static int Arm1PickupTop = 2;
 
-
         //Pick up top cone reverse
         public static int SlidesPickupTopRev = -616;
         public static int Arm1PickupTopRev = 890;
@@ -99,7 +107,7 @@ public class RobotConfig {
     public static class Slides {
 
         public static String rightSlideMotor = "rightSlideMotor";
-        public static String leftSlideMotor  = "leftSlideMotor";
+        public static String leftSlideMotor = "leftSlideMotor";
         public static String leftLimitSwitch = "leftSlideLimitSwitch";
         public static String rightLimitSwitch = "rightSlideLimitSwitch";
         public static int maxSlidePosition = -2200;
@@ -114,7 +122,7 @@ public class RobotConfig {
         public static int clawMaxRange = 1;
         public static double wristSpeed = 0.02;
         public static String clawServo = "clawServo";
-//        public static String colorSensor = "colorSensor";
+        //        public static String colorSensor = "colorSensor";
         public static String handServo1 = "wristServo1";
         public static String handServo2 = "wristServo2";
         public static double closePos = 0.3;
