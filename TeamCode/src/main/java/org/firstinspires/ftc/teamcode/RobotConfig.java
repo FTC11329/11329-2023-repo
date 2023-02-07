@@ -99,13 +99,13 @@ public class RobotConfig {
     public static class Slides {
 
         public static String rightSlideMotor = "rightSlideMotor";
-        public static String leftSlideMotor = "leftSlideMotor";
+        public static String leftSlideMotor  = "leftSlideMotor";
         public static String leftLimitSwitch = "leftSlideLimitSwitch";
         public static String rightLimitSwitch = "rightSlideLimitSwitch";
         public static int maxSlidePosition = -2200;
-        public static int minSlidePosition = 500;
+        public static int minSlidePosition = 0;
 
-        public static double slidePower = 75;
+        public static double slidePower = 75;//50;
     }
 
     public static class Claw {
@@ -114,7 +114,7 @@ public class RobotConfig {
         public static int clawMaxRange = 1;
         public static double wristSpeed = 0.02;
         public static String clawServo = "clawServo";
-        //        public static String colorSensor = "colorSensor";
+//        public static String colorSensor = "colorSensor";
         public static String handServo1 = "wristServo1";
         public static String handServo2 = "wristServo2";
         public static double closePos = 0.3;
