@@ -17,7 +17,7 @@ public class RobotConfig {
     public static class Presets {
 
         //Led Power
-        public static double LightPower = 0;
+        public static double LightPower = 0.8;
         public static String LEDName = "LED";
 
 

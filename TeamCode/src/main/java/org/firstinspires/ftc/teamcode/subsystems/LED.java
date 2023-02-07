@@ -32,7 +32,7 @@ public class LED implements DiInterfaces.IInitializable, DiInterfaces.IDisposabl
     }
     @Override
     public void onDispose() {
-        LED.setPower(RobotConfig.Presets.LightPower);
+        LED.setPower(0);
     }
 
 }
