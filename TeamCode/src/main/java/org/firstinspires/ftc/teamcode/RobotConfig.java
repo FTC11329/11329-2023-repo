@@ -22,7 +22,7 @@ public class RobotConfig {
     public static class LED {
         public static double MaxLightPower = 0.8;
         public static String LEDName = "LED";
-        public static LEDEffect defaultLEDEffect = LEDEffect.CONSTANT;
+        public static LEDEffect defaultLEDEffect = LEDEffect.BREATHING;
 
         // note: all powers are from 0-1, with normalization to MaxLightPower occuring at the end
         public static double CONSTANT_POWER = 1;
@@ -42,7 +42,7 @@ public class RobotConfig {
         public static double WristPlacing = 0.250;
 
         //High
-        public static int SlidesHigh = -905;
+        public static int SlidesHigh = -1220;
         public static int Arm1High = 386;
 
         //High Auto
@@ -58,7 +58,7 @@ public class RobotConfig {
         public static int Arm1HighFromRevAuto = 260;
 
         //High Reverse
-        public static int SlidesHighRev = -1800;
+        public static int SlidesHighRev = -1700;
         public static int Arm1HighRev = 610;
 
         //Medium
@@ -109,7 +109,7 @@ public class RobotConfig {
         public static double WristPickupFall = 0;
 
         //Drive Position
-        public static int DriveSlides = -1444;
+        public static int DriveSlides = -970;
     }
 
     public static class Slides {
@@ -119,9 +119,9 @@ public class RobotConfig {
         public static String leftLimitSwitch = "leftSlideLimitSwitch";
         public static String rightLimitSwitch = "rightSlideLimitSwitch";
         public static int maxSlidePosition = -2200;
-        public static int minSlidePosition = 0;
+        public static int minSlidePosition = 5;
 
-        public static double slidePower = 75;//50;
+        public static double slidePower = 85;//50;
     }
 
     public static class Claw {

@@ -61,7 +61,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
 
         slidePosition += (upPower - downPower) * RobotConfig.Slides.slidePower;
         slidePosition = Math.max(Math.min(slidePosition, RobotConfig.Slides.minSlidePosition), RobotConfig.Slides.maxSlidePosition);
-        slides.toPosition(slidePosition);
+        slides.setTargetPosition(slidePosition);
 
         telemetry.addData("slidesTarget", slidePosition);
 
@@ -103,7 +103,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             slidePosition = RobotConfig.Presets.SlidesHighRev;
             arm.toPosition(RobotConfig.Presets.Arm1HighRev);
             claw.grab();
-            claw.setPos(RobotConfig.Presets.WristPickup);
+            claw.setPos(RobotConfig.Presets.WristPlacing);
             preset = true;
             claw.setPresetBool(true);
         }
@@ -185,7 +185,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPresetBool(false);
         }
         //Drive Preset
-        if (gamepad1.a) {
+        if (gamepad1.a || gamepad2.left_bumper) {
             slidePosition = RobotConfig.Presets.DriveSlides;
             claw.setPos(RobotConfig.Wrist.startingPosition);
         }

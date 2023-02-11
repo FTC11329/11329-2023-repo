@@ -35,7 +35,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         }
     }
 
-    public void toPosition(int pos) {
+    public void setTargetPosition(int pos) {
         setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftSlideMotor.setTargetPosition(pos);
         rightSlideMotor.setTargetPosition(pos);
