@@ -35,14 +35,16 @@ public class LED implements DiInterfaces.IInitializable, DiInterfaces.IDisposabl
         elapsedTime.reset();
     }
 
-    // note: bad things happen, if this returns more than 1
+    // note: bad things happen if this returns more than 1
     public static double getPower(double seconds, LEDEffect ledEffect) {
         double power = 0;
 
-        if (ledEffect == LEDEffect.BREATHING) {
+        if (ledEffect == LEDEffect.PULSE) {
             double sinInput = (Math.PI * seconds) / 2;
 
             power = Math.abs((Math.sin(sinInput)));
+        } else if (ledEffect == LEDEffect.BREATHING) {
+            power = (Math.sin(Math.PI * seconds) / 2) + 0.5;
         } else if (ledEffect == LEDEffect.CONSTANT) {
             power = RobotConfig.LED.CONSTANT_POWER;
         } else if (ledEffect == LEDEffect.MORSE) {
