@@ -6,8 +6,10 @@ import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializable, DiInterfaces.ITickable {
     @DiContainer.Inject(id = "leftSlideMotor")
@@ -22,6 +24,8 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     RevTouchSensor rightLimitSwitch;
 
     DcMotor.RunMode currentRunmode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
+
+    boolean rightTriggerState = false;
 
     public void setMode(DcMotorEx.RunMode runMode) {
         if (runMode != currentRunmode) {
@@ -44,7 +48,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     public void displayToTelemetry() {
         telemetry.addData("Left Slide", leftSlideMotor.getCurrentPosition());
         telemetry.addData("Right Slide", rightSlideMotor.getCurrentPosition());
-        telemetry.addData("Slide PIDF Coefficients RUN_TO_POSITION", rightSlideMotor.getPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION));
+//        telemetry.addData("Slide PIDF Coefficients RUN_TO_POSITION", rightSlideMotor.getPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION));
         telemetry.addData("Left Limit Switch", leftLimitSwitch.isPressed());
         telemetry.addData("Right Limit Switch", rightLimitSwitch.isPressed());
     }
@@ -54,7 +58,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         zero();
         setTargetPositionTolerance(100);
-        setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         leftSlideMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         leftSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -65,18 +69,24 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     }
     @Override
     public void onTick() {
-        if (rightSlideMotor.getCurrentPosition() < rightSlideMotor.getTargetPosition() && rightLimitSwitch.isPressed()) {
-
-            rightSlideMotor.setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
-            rightSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            rightSlideMotor.setTargetPosition(rightSlideMotor.getCurrentPosition());
+        if ((leftLimitSwitch.isPressed() || rightLimitSwitch.isPressed()) && rightTriggerState) {
+            setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
+            setTargetPosition(-1);
+            setMode(DcMotor.RunMode.RUN_TO_POSITION);
         }
-        if (leftSlideMotor.getCurrentPosition() < leftSlideMotor.getTargetPosition() && leftLimitSwitch.isPressed()) {
 
-            leftSlideMotor.setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
-            leftSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            leftSlideMotor.setTargetPosition(rightSlideMotor.getCurrentPosition());
-        }
+//        if (rightSlideMotor.getCurrentPosition() < rightSlideMotor.getTargetPosition() && rightLimitSwitch.isPressed()) {
+//            setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
+//            setTargetPosition(-1);
+//        }
+//        if (leftSlideMotor.getCurrentPosition() < leftSlideMotor.getTargetPosition() && leftLimitSwitch.isPressed()) {
+//            setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
+//            setTargetPosition(-1);
+//        }
+    }
+
+    public void setRightTriggerState(boolean state) {
+        rightTriggerState = state;
     }
 
     public void setTargetPositionTolerance(int tolerance) {

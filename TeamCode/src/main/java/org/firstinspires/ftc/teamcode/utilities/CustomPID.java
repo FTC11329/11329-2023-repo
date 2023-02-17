@@ -62,6 +62,16 @@ public class CustomPID {
         return this.Kp * error + Ki*integral + Kd* derivative;
     }
     //adds Feedforward
+    public double getPIDfOutputNoAngle(double currentPosition){
+        //Similar to getPIDoutput but adds feedforward based on cos() of currentAngle
+        double error = this.reference - currentPosition;
+        //Find the Porportioanl, Integral, and derivative based on the PID values
+        double derivative = (error-lastError)/timer.seconds();
+        this.integral  =  this.integral + (error * timer.seconds());
+        timer.reset();
+        lastError = error;
+        return this.Kp * error + Ki*integral + Kd* derivative + this.Kf;
+    }
     public double getPIDfOutput(double currentPosition, double currentAngle){
         //Similar to getPIDoutput but adds feedforward based on cos() of currentAngle
         double error = this.reference - currentPosition;

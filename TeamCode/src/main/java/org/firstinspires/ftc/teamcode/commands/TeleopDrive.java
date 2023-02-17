@@ -59,6 +59,8 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
 
         drivetrain.MecanumDrive(vertical, horizontal, rotational, maxSpeed);
 
+        slides.setRightTriggerState(gamepad2.right_trigger == 0);
+
         slidePosition += (upPower - downPower) * RobotConfig.Slides.slidePower;
         slidePosition = Math.max(Math.min(slidePosition, RobotConfig.Slides.minSlidePosition), RobotConfig.Slides.maxSlidePosition);
         slides.setTargetPosition(slidePosition);

@@ -122,6 +122,10 @@ public class RobotConfig {
         public static int minSlidePosition = 5;
 
         public static double slidePower = 85;//50;
+        public static double kp = 0.0002;
+        public static double ki = 0.0000;
+        public static double kd = 0.0000;
+        public static double kf = 0.00;
     }
 
     public static class Claw {
@@ -149,11 +153,11 @@ public class RobotConfig {
         public static int maxArmPosition = 890;
         public static int minArmPosition = 0;
 
-        public static double kp = 0.005;//0.005
-        public static double ki = 0;//0
+        public static double kp = 0.0050;
+        public static double ki = 0.0000;
+        public static double kd = 0.0005;
+        public static double kf = 0.2000;
         // d was too small                                 <--Joke haha funny
-        public static double kd = 0.0005;//0.0005
-        public static double kf = 0.2;//0.2
     }
 
     public static class Wrist {
