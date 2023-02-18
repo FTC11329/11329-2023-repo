@@ -40,13 +40,14 @@ public class RobotConfig {
 
         //Claw placing
         public static double WristPlacing = 0.250;
+        public static double WristPlacingHigh = 0.376;
 
         //High
         public static int SlidesHigh = -1220;
         public static int Arm1High = 386;
 
         //High Auto
-        public static int SlidesHighAuto = -905;
+        public static int SlidesHighAuto = -600;
         public static int Arm1HighAuto = 386;
 
         //High From Reverse Pickup
