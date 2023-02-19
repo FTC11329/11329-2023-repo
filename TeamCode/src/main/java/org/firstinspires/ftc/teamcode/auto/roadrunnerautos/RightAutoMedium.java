@@ -287,14 +287,14 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
 
                 .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesMed + 50);
-                    arm.toPosition(RobotConfig.Presets.Arm1Med);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedAuto + 50);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedAuto);
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
 
                 .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesMed - 50);
-                    arm.toPosition(RobotConfig.Presets.Arm1Med - 30);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedAuto - 50);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedAuto - 30);
                 })
 
                 .lineToLinearHeading(new Pose2d(44.25, 16.75, Math.toRadians(224)))

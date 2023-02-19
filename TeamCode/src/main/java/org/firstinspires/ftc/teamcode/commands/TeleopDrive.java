@@ -150,7 +150,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         }
         // Low from Rev
         if (gamepad2.dpad_down && reverse) {
-            slidePosition = RobotConfig.Presets.Arm1LowFromRev;
+            slidePosition = RobotConfig.Presets.SlidesLowFromRev;
             arm.toPosition(RobotConfig.Presets.Arm1LowFromRev);
             claw.setPos(RobotConfig.Presets.WristPickupRev);
             claw.grab();
@@ -188,7 +188,8 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         }
         //Drive Preset
         if (gamepad1.a || gamepad2.left_bumper) {
-            slidePosition = RobotConfig.Presets.DriveSlides;
+            arm.toPosition(RobotConfig.Presets.Arm1Drive);
+            slidePosition = RobotConfig.Presets.SlidesDrive;
             claw.setPos(RobotConfig.Wrist.startingPosition);
         }
     }

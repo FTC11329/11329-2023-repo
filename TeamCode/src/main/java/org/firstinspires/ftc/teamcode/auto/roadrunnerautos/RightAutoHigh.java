@@ -24,13 +24,14 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
     Claw claw;
     Slides slides;
 
-    Pose2d placeLocationHigh = new Pose2d(57, 1.5, Math.toRadians(50));
-    Pose2d placeLocationMed  = new Pose2d(46, 1, Math.toRadians(130));
-    Pose2d placeLocationLow  = new Pose2d(50, -19, Math.toRadians(0));
+    Pose2d placeLocationHigh = new Pose2d(52, -1, Math.toRadians(50));
+    Pose2d placeLocationMed  = new Pose2d(44, 0, Math.toRadians(130));
+    Pose2d placeLocationLow  = new Pose2d(48, -12, Math.toRadians(0));
+    Pose2d placeLocationFarHigh = new Pose2d(49.5, 21.5, Math.toRadians(135));
 
     Vector2d intermediatePosition = new Vector2d(51.5, -17);
 
-    Vector2d pickupLocation  = new Vector2d(54, -29.75);
+    Vector2d pickupLocation = new Vector2d(51, -29.75);
 
     //Auto path: High contested, Medium, Low, High speed stack, high contested if we have time
 
@@ -52,8 +53,10 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
 
                 //Puts the arm in placing position
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighAuto - 300);
                     claw.setPos(RobotConfig.Presets.WristPlacingHigh);
+                    arm.toPosition(RobotConfig.Presets.Arm1HighAuto);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighAuto);
+
                 })
 
                 .setConstraints(new TrajectoryVelocityConstraint() {
@@ -71,12 +74,8 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                 //Go to 8, -4 without turning
                 .lineTo(new Vector2d(17, -4))
 
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1HighAuto);
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighAuto);
-                })
-
                 .resetConstraints()
+
                 //Go to HIGH pole and let go
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighAuto + 500);
@@ -101,7 +100,8 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
 
                 //ANOTHER MEDIUM CONE !!!!!!!!!!!!!!!
                 //Go to pickup a cone
-                .lineToLinearHeading(new Pose2d(pickupLocation.getX(), pickupLocation.getY(), Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(intermediatePosition.getX(), intermediatePosition.getY(), Math.toRadians(90)))
+                .lineTo(new Vector2d(pickupLocation.getX(), pickupLocation.getY()))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
@@ -148,7 +148,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
 
                 //Go to pickup a cone
                 .lineToLinearHeading(new Pose2d(intermediatePosition.getX(), intermediatePosition.getY(), Math.toRadians(90)))
-                .splineTo(new Vector2d(pickupLocation.getX(), pickupLocation.getY()), Math.toRadians(90))
+                .lineTo(new Vector2d(pickupLocation.getX(), pickupLocation.getY()))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
@@ -161,7 +161,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                 .waitSeconds(0.2)
 
                 .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1Low);
+                    arm.toPosition(RobotConfig.Presets.Arm1PickupRev);
                     claw.setPos(RobotConfig.Presets.WristPickupRev);
                 })
 
@@ -174,7 +174,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                 .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
                     claw.grab();
                 })
-                //ANOTHER CONE !!!!!!!!!!!!!!!
+                //ANOTHER HIGH CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
                 .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTopRev + 302);
@@ -187,7 +187,8 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                 })
 
                 //Go to pickup a cone
-                .lineToLinearHeading(new Pose2d(pickupLocation.getX(), pickupLocation.getY(), Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(intermediatePosition.getX(), intermediatePosition.getY(), Math.toRadians(90)))
+                .lineTo(new Vector2d(pickupLocation.getX() + 0.5, pickupLocation.getY()))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
@@ -209,7 +210,9 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPickupRev);
                 })
 
-                .lineToLinearHeading(placeLocationHigh)
+                .lineToLinearHeading(new Pose2d(placeLocationFarHigh.getX(), placeLocationFarHigh.getY(), placeLocationFarHigh.getHeading()))
+
+                .waitSeconds(0.3)
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
