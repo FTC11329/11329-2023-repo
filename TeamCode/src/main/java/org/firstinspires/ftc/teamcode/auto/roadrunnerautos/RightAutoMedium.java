@@ -123,6 +123,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
                     claw.grab();
                 })
+
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
                 .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
