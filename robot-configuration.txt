@@ -1,0 +1,49 @@
+USB devices:
+	control hub portal
+		Expansion Hub 2
+			Motors
+				0: GoBILDA 5202/3/4 series: leftSlideMotor
+				1: GoBILDA 5202/3/4 series: rightSlideMotor
+				2: GoBILDA 5202/3/4 series: arm
+				3: GoBILDA 5202/3/4 series: LED
+			Servos
+				(nothing)
+			Digital Devices
+				1: Rev Touch Sensor: leftSlideLimitSwitch
+				(nothing on any of the other ports)
+			Analog Input Devices
+				(nothing)
+			I2C Bus 0
+				(nothing)
+			I2C Bus 1
+				(nothing)
+			I2C Bus 2
+				(nothing)
+			I2C Bus 3
+				(nothing)
+		Control Hub
+			Motors
+				0: GoBILDA 5202/3/4 series: frontLeft
+				1: GoBILDA 5202/3/4 series: backLeft
+				2: GoBILDA 5202/3/4 series: backRight
+				3: GoBILDA 5202/3/4 series: frontRight
+			Servos:
+				0: Servo: clawServo
+				3: Servo: wristServo1
+				4: Servo: wristServo2
+				(nothing in any other port)
+			Digital Devices:
+				1: Rev Touch Sensor: rightSlideLimitSwitch
+				(nothing in any other port)
+			Analog Input Devices:
+				(nothing)
+			I2C Bus 0:
+				0: REV internal IMU (BNO055): imu
+			I2C Bus 1:
+				(nothing)
+			I2C Bus 2:
+				(nothing)
+			I2C Bus 3:
+				(nothing)
+	Webcam 1
+		name: Webcam 1
