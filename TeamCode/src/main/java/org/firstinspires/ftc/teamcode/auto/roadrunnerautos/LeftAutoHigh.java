@@ -25,7 +25,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
     Slides slides;
 
     Pose2d placeLocationMed = new Pose2d(47.75, -0.25, Math.toRadians(50));
-    Pose2d placeLocationHigh = new Pose2d(52.5, 1, Math.toRadians(45));
+    Pose2d placeLocationHigh = new Pose2d(52.5, 1, Math.toRadians(315));
     Vector2d pickupLocation = new Vector2d(47.25, 30.25);
 
     @Override
@@ -92,7 +92,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop);
                     arm.toPosition(5);
                 })
-                .lineToLinearHeading(new Pose2d(50, 17, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(48, 17, Math.toRadians(0)))
                 .splineTo(new Vector2d(pickupLocation.getX(), pickupLocation.getY()), Math.toRadians(90))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -426,7 +426,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedAuto - 30);
                 })
 
-                .lineToLinearHeading(new Pose2d(46.5, 16.75, Math.toRadians(224)))
+                .lineToLinearHeading(new Pose2d(45.25, -13.25, Math.toRadians(138)))
 
                 .waitSeconds(0.05)
 
