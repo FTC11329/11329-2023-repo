@@ -31,7 +31,7 @@ public class April {
         if (currentDetections.size() > 0) {
             marker = currentDetections.get(0).id;
         }
-
+ 
         if (marker == 0) {
             return ParkLocation.LEFT;
         } else if (marker == 1) {

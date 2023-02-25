@@ -22,7 +22,7 @@ public class RobotConfig {
     public static class LED {
         public static double MaxLightPower = 0.8;
         public static String LEDName = "LED";
-        public static LEDEffect defaultLEDEffect = LEDEffect.CONSTANT;
+        public static LEDEffect defaultLEDEffect = LEDEffect.BREATHING;
 
         // note: all powers are from 0-1, with normalization to MaxLightPower occuring at the end
         public static double CONSTANT_POWER = 1;
