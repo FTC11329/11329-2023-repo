@@ -4,7 +4,6 @@ import com.fizzyapple12.javadi.DiContainer;
 import com.fizzyapple12.javadi.DiInterfaces;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.robot.Robot;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -36,23 +35,22 @@ public class LED implements DiInterfaces.IInitializable, DiInterfaces.IDisposabl
         elapsedTime.reset();
     }
 
-    // note: bad things happen, if this returns more than 1
-    private double getPower(double seconds) {
+    // note: bad things happen if this returns more than 1
+    public static double getPower(double seconds, LEDEffect ledEffect) {
         double power = 0;
 
-        if (effect == LEDEffect.BREATHING) {
+        if (ledEffect == LEDEffect.PULSE) {
             double sinInput = (Math.PI * seconds) / 2;
 
             power = Math.abs((Math.sin(sinInput)));
-        }
-        else if (effect == LEDEffect.CONSTANT) {
+        } else if (ledEffect == LEDEffect.BREATHING) {
+            power = (Math.sin(Math.PI * seconds) / 2) + 0.5;
+        } else if (ledEffect == LEDEffect.CONSTANT) {
             power = RobotConfig.LED.CONSTANT_POWER;
-        }
-        else if(effect == LEDEffect.MORSE){
-            power = RobotConfig.LED.Custom.ICEMORSE[((int) (seconds*2))%RobotConfig.LED.Custom.ICEMORSE.length];
-        }
-        else if(effect == LEDEffect.FLASH){
-            power = RobotConfig.LED.Custom.FLASH[((int) (seconds*2))%RobotConfig.LED.Custom.FLASH.length];
+        } else if (ledEffect == LEDEffect.MORSE) {
+            power = RobotConfig.LED.Custom.ICEMORSE[((int) (seconds * 2)) % RobotConfig.LED.Custom.ICEMORSE.length];
+        } else if (ledEffect == LEDEffect.FLASH) {
+            power = RobotConfig.LED.Custom.FLASH[((int) (seconds * 2)) % RobotConfig.LED.Custom.FLASH.length];
         }
 
         return Range.clip(power, 0, 1);
@@ -60,7 +58,7 @@ public class LED implements DiInterfaces.IInitializable, DiInterfaces.IDisposabl
 
     @Override
     public void onTick() {
-        LED.setPower(getPower(elapsedTime.seconds()) * RobotConfig.LED.MaxLightPower);
+        LED.setPower(getPower(elapsedTime.seconds(), effect) * RobotConfig.LED.MaxLightPower);
     }
 
     @Override

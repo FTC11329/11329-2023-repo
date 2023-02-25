@@ -24,7 +24,7 @@ public class RobotConfig {
         public static String LEDName = "LED";
         public static LEDEffect defaultLEDEffect = LEDEffect.BREATHING;
 
-        // note: all powers are from 0-1, with normalization to MaxLightPower occuring at the end
+        // note: all powers are from 0-1, with normalization to MaxLightPower occurring at the end
         public static double CONSTANT_POWER = 1;
 
         // in seconds
@@ -39,31 +39,37 @@ public class RobotConfig {
     public static class Presets {
 
         //Claw placing
-        public static double WristPlacing = 0.250;
+        public static double WristPlacing = 0.200;
+        public static double WristPlacingHigh = 0.390;
 
         //High
-        public static int SlidesHigh = -905;
+        public static int SlidesHigh = -1220;
         public static int Arm1High = 386;
 
         //High Auto
-        public static int SlidesHighAuto = -905;
-        public static int Arm1HighAuto = 386;
+        public static int SlidesHighAuto = -1000;
+        public static int Arm1HighAuto = 330;
 
         //High From Reverse Pickup
         public static int SlidesHighFromRev = -2075;//-1900;
         public static int Arm1HighFromRev = 260;
 
         //High From Reverse Pickup Auto
-        public static int SlidesHighFromRevAuto = -2075;
+        public static int SlidesHighFromRevAuto = -1950;
         public static int Arm1HighFromRevAuto = 260;
 
         //High Reverse
-        public static int SlidesHighRev = -1800;
+        public static int SlidesHighRev = -1700;
         public static int Arm1HighRev = 610;
 
         //Medium
-        public static int SlidesMed = -100;
-        public static int Arm1Med = 400;
+        public static int SlidesMed = 0;
+        public static int Arm1Med = 352;
+
+        //Medium Auto
+        public static int SlidesMedAuto = -100;
+        public static int Arm1MedAuto = 400;
+
 
         //Medium From Reverse Pickup
         public static int SlidesMedFromRev = -450;
@@ -109,7 +115,9 @@ public class RobotConfig {
         public static double WristPickupFall = 0;
 
         //Drive Position
-        public static int DriveSlides = -1444;
+        public static int SlidesDrive = -970;
+        public static int Arm1Drive = -970;
+
     }
 
     public static class Slides {
@@ -119,9 +127,13 @@ public class RobotConfig {
         public static String leftLimitSwitch = "leftSlideLimitSwitch";
         public static String rightLimitSwitch = "rightSlideLimitSwitch";
         public static int maxSlidePosition = -2200;
-        public static int minSlidePosition = 0;
+        public static int minSlidePosition = 5;
 
-        public static double slidePower = 75;//50;
+        public static double slidePower = 85;//50;
+        public static double kp = 0.0002;
+        public static double ki = 0.0000;
+        public static double kd = 0.0000;
+        public static double kf = 0.00;
     }
 
     public static class Claw {
@@ -149,11 +161,11 @@ public class RobotConfig {
         public static int maxArmPosition = 890;
         public static int minArmPosition = 0;
 
-        public static double kp = 0.005;//0.005
-        public static double ki = 0;//0
+        public static double kp = 0.0050;
+        public static double ki = 0.0000;
+        public static double kd = 0.0005;
+        public static double kf = 0.2000;
         // d was too small                                 <--Joke haha funny
-        public static double kd = 0.0005;//0.0005
-        public static double kf = 0.2;//0.2
     }
 
     public static class Wrist {

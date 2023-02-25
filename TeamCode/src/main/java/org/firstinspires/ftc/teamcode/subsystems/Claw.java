@@ -118,11 +118,10 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     public void displayToTelemetry() {
         telemetry.addData("Hand1 Position", handWave1.getPosition());
         telemetry.addData("Hand2 Position", handWave2.getPosition());
-
         //telemetry.addData("Cone Present", isConePresent());
-
         //telemetry.addData("Cone Color", getConeColor());
     }
+
     public boolean getPresetBool(){
         return isAtPreset;
     }

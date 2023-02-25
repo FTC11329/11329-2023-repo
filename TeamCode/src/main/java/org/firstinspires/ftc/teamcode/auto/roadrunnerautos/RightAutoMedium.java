@@ -24,8 +24,8 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
     Claw claw;
     Slides slides;
 
-    Pose2d placeLocation = new Pose2d(46.5, 0.4 , Math.toRadians(310));
-    Vector2d pickupLocation = new Vector2d(50.25, -29.5);
+    Pose2d placeLocation = new Pose2d(46, 1, Math.toRadians(310));
+    Vector2d pickupLocation = new Vector2d(50.25, -29.75);
 
     @Override
     public void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException {
@@ -44,7 +44,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
                 //Puts the arm in placing position
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto - 300);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedRevAuto - 300);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
@@ -64,14 +64,14 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .lineTo(new Vector2d(17, -4))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto - 20);
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRev - 100);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedRev - 100);
                 })
                 .splineTo(new Vector2d(55, -5), Math.toRadians(0))
                 .resetConstraints()
                 //Go to pole and let go
-                .lineToLinearHeading(new Pose2d(placeLocation.getX() + 1.75, placeLocation.getY() + -0.4, Math.toRadians(310)))
-
+                .lineToLinearHeading(new Pose2d(placeLocation.getX() , placeLocation.getY() - 0.75, Math.toRadians(310)))
+                //comp day allen stared at this for three minutes and didn't change anything
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
@@ -80,7 +80,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 })
 
                 .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesPickupTop);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Presets.WristPickup);
 
@@ -100,13 +100,13 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
                 //Moves off the stack
                 .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesHigh - 300);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 .waitSeconds(0.2)
 
                 //Going to Medium
                 .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
@@ -114,7 +114,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(new Pose2d(placeLocation.getX() + 0.5, placeLocation.getY(),placeLocation.getHeading()))
+                .lineToLinearHeading(new Pose2d(placeLocation.getX() + 0.5, placeLocation.getY(), placeLocation.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -123,10 +123,11 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
                     claw.grab();
                 })
+
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
                 .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesPickupTop + 151);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 151);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Presets.WristPickup);
 
@@ -143,18 +144,18 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 })
 
                 //Moves off the stack
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesHigh - 300);
+                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .waitSeconds(0.4)
+                .waitSeconds(0.2)
 
                 //Going to Medium
-                .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
+                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(1, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
@@ -170,7 +171,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
                 .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesPickupTop+302);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 302);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Presets.WristPickup);
 
@@ -187,18 +188,18 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 })
 
                 //Moves off the stack
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesHigh - 300);
+                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .waitSeconds(0.4)
+                .waitSeconds(0.2)
 
                 //Going to Medium
-                .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
+                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(1, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
@@ -215,7 +216,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
                 .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesPickupTop + 453);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 453);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Presets.WristPickup);
 
@@ -232,22 +233,22 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 })
 
                 //Moves off the stack
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesHigh - 300);
+                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .waitSeconds(0.4)
+                .waitSeconds(0.2)
 
                 //Going to Medium
-                .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
+                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(1, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(new Pose2d(placeLocation.getX() - 2.3, placeLocation.getY() - 0.8,placeLocation.getHeading()))
+                .lineToLinearHeading(new Pose2d(placeLocation.getX() - 2.3, placeLocation.getY() - 0.8, placeLocation.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -268,7 +269,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
                 .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesPickup);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
@@ -285,13 +286,19 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
                 .waitSeconds(0.2)
 
+
                 .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMed - 200);
-                    arm.toPosition(RobotConfig.Presets.Arm1Med);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedAuto + 50);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedAuto);
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
 
-                .lineToLinearHeading(new Pose2d(45, 17, Math.toRadians(224)))
+                .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedAuto - 50);
+                    arm.toPosition(RobotConfig.Presets.Arm1MedAuto - 30);
+                })
+
+                .lineToLinearHeading(new Pose2d(44.25, 16.75, Math.toRadians(224)))
 
                 .waitSeconds(0.05)
 
@@ -302,7 +309,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .waitSeconds(0.25)
 
                 .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesPickup);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
@@ -318,7 +325,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
                 .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesPickup);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
@@ -333,22 +340,22 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 })
 
                 //Moves off the stack
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesHigh - 300);
+                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .waitSeconds(0.4)
+                .waitSeconds(0.2)
 
                 //Going to Medium
-                .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
+                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(1, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(new Pose2d(placeLocation.getX() - 2.5, placeLocation.getY() -1,placeLocation.getHeading()))
+                .lineToLinearHeading(new Pose2d(placeLocation.getX() - 2.5, placeLocation.getY() - 1, placeLocation.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -358,7 +365,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .waitSeconds(0.1)
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesPickup);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
@@ -374,7 +381,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
                 .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesPickup);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
@@ -389,22 +396,22 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 })
 
                 //Moves off the stack
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesHigh - 300);
+                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .waitSeconds(0.4)
+                .waitSeconds(0.2)
 
                 //Going to Medium
-                .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesMedRevAuto);
+                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(1, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(new Pose2d(placeLocation.getX() - 2.5, placeLocation.getY() - 1,placeLocation.getHeading()))
+                .lineToLinearHeading(new Pose2d(placeLocation.getX() - 2.5, placeLocation.getY() - 1, placeLocation.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -414,7 +421,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .waitSeconds(0.1)
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    slides.toPosition(RobotConfig.Presets.SlidesPickup);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
