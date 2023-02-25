@@ -24,8 +24,8 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
     Claw claw;
     Slides slides;
 
-    Pose2d placeLocationMed = new Pose2d(47.75, -0.25, Math.toRadians(50));
-    Pose2d placeLocationHigh = new Pose2d(52.5, 1, Math.toRadians(315));
+    Pose2d placeLocationMed = new Pose2d(47.5, -1.5, Math.toRadians(50));
+    Pose2d placeLocationHigh = new Pose2d(52.75, 1.5, Math.toRadians(315));
     Vector2d pickupLocation = new Vector2d(47.25, 30.25);
 
     @Override
@@ -93,7 +93,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                     arm.toPosition(5);
                 })
                 .lineToLinearHeading(new Pose2d(48, 17, Math.toRadians(0)))
-                .splineTo(new Vector2d(pickupLocation.getX(), pickupLocation.getY()), Math.toRadians(90))
+                .splineTo(new Vector2d(pickupLocation.getX(), pickupLocation.getY()- 1.5), Math.toRadians(90))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
@@ -115,7 +115,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(new Pose2d(placeLocationMed.getX() + 1.75, placeLocationMed.getY() - 0.75, placeLocationMed.getHeading()))
+                .lineToLinearHeading(new Pose2d(placeLocationMed.getX() + 1, placeLocationMed.getY() - 0.75, placeLocationMed.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -204,7 +204,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(placeLocationMed)
+                .lineToLinearHeading(new Pose2d(placeLocationMed.getX(), placeLocationMed.getY() + 0.5, placeLocationMed.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -255,7 +255,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0.07, () -> {
                     claw.grab();
                 })
 
@@ -426,7 +426,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedAuto - 30);
                 })
 
-                .lineToLinearHeading(new Pose2d(45.25, -13.25, Math.toRadians(138)))
+                .lineToLinearHeading(new Pose2d(44.75, -13.5, Math.toRadians(138)))
 
                 .waitSeconds(0.05)
 
