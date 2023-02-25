@@ -91,7 +91,12 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                 .UNSTABLE_addTemporalMarkerOffset(0.5 , () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop);
                     arm.toPosition(5);
+                    claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
+                .UNSTABLE_addTemporalMarkerOffset(1.5,() -> {
+                    claw.setPos(RobotConfig.Presets.WristPickup);
+                })
+
                 .lineToLinearHeading(new Pose2d(50, -17, Math.toRadians(0)))
                 .splineTo(new Vector2d(pickupLocation.getX(), pickupLocation.getY()), Math.toRadians(270))
 
