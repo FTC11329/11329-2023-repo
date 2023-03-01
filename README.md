@@ -1,17 +1,14 @@
-# Road Runner Quickstart
+# Ice Robotics 2023
 
-An example FTC project using [Road Runner](https://github.com/acmerobotics/road-runner). **Note:** Road Runner is in alpha and many of its APIs are incubating.
+## Info
 
-## Installation
+This repository was for our 2022-2023 Power Play robot Glacier.
 
-For more detailed instructions on getting Road Runner setup in your own project, see the [Road Runner README](https://github.com/acmerobotics/road-runner#core).
+We use a fairly standard roadrunner and EasyOpenCV system, with a custom dependency injection system. In retrospect, the dependency injector added a layer of complexity unfit for the majority of teams.
 
-1. Download or clone this repo with `git clone https://github.com/acmerobotics/road-runner-quickstart`.
+## Setup
 
-1. Open the project in Android Studio and build `TeamCode` like any other `ftc_app` project.
-
-1. If you have trouble with multidex, enable proguard by changing `useProguard` to `true` in `build.common.gradle`.
-
-## Documentation
-
-Check out the new [online quickstart documentation](https://acme-robotics.gitbook.io/road-runner/quickstart/introduction).
+- Hardware map in [robot-configuration.txt](./robot-configuration.txt)
+- Standard Android Studio Install
+- Upload `libOpenCvAndroid453.so` from the [Open CV Repackaged repository](https://github.com/OpenFTC/OpenCV-Repackaged/blob/e6b694b2d601213a0adcca724bb40dadf30244fe/doc/native_libs/arm64-v8a/libOpenCvAndroid453.so) into the FIRST folder on the USB storage of the Robot
+  Controller
