@@ -24,9 +24,12 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
     Claw claw;
     Slides slides;
 
-    Pose2d placeLocationMed = new Pose2d(47.75, 1, Math.toRadians(300));
+    Pose2d placeLocationMed = new Pose2d(47.75, 0.75, Math.toRadians(300));
     Pose2d placeLocationHigh = new Pose2d(52.5, -1, Math.toRadians(45));
     Vector2d pickupLocation = new Vector2d(49.5, -29.75);
+
+    Vector2d placeLocationOffset = new Vector2d(0.5, -0.25);
+    Vector2d pickupLocationOffset = new Vector2d(-0.25, 0.15);
 
     @Override
     public void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException {
@@ -68,7 +71,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
 
                 .resetConstraints()
 
-                //Go to HIGH pole and let go
+                //Go to HIGH pole and let go (this is after we are in position)
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighAuto + 500);
                 })
@@ -80,9 +83,6 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
 
                 .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
-                })
-                .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
-                    claw.ungrab();
                 })
                 .waitSeconds(0.2)
 
@@ -120,7 +120,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(new Pose2d(placeLocationMed.getX() + 1.75, placeLocationMed.getY() + 0.75, placeLocationMed.getHeading()))
+                .lineToLinearHeading(new Pose2d(placeLocationMed.getX(), placeLocationMed.getY(), placeLocationMed.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -165,7 +165,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(placeLocationMed)
+                .lineToLinearHeading(new Pose2d(placeLocationMed.getX() + 1 * placeLocationOffset.getX(),placeLocationMed.getY() + 1 * placeLocationOffset.getY(), placeLocationMed.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -209,7 +209,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(placeLocationMed)
+                .lineToLinearHeading(new Pose2d(placeLocationMed.getX() + 2 * placeLocationOffset.getX(),placeLocationMed.getY() + 2 * placeLocationOffset.getY(), placeLocationMed.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -254,7 +254,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(new Pose2d(placeLocationMed.getX() - 1.8, placeLocationMed.getY() - 0.8, placeLocationMed.getHeading()))
+                .lineToLinearHeading(new Pose2d(placeLocationMed.getX() + 3 * placeLocationOffset.getX(),placeLocationMed.getY() + 3 * placeLocationOffset.getY(), placeLocationMed.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -304,7 +304,8 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedAuto - 30);
                 })
 
-                .lineToLinearHeading(new Pose2d(46.5, 16.75, Math.toRadians(224)))
+                //final place
+                .lineToLinearHeading(new Pose2d(47, 17, Math.toRadians(224)))
 
                 .waitSeconds(0.05)
 
@@ -320,7 +321,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
 
-                .lineToLinearHeading(new Pose2d(51, 18.5, Math.toRadians(180)));
+                .lineToLinearHeading(new Pose2d(51.25, 18.75, Math.toRadians(180)));
 
     }
 
@@ -361,7 +362,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(new Pose2d(placeLocationMed.getX() - 2.5, placeLocationMed.getY() - 1, placeLocationMed.getHeading()))
+                .lineToLinearHeading(new Pose2d(placeLocationMed.getX() + 4 * placeLocationOffset.getX(),placeLocationMed.getY() + 4 * placeLocationOffset.getY(), placeLocationMed.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -417,7 +418,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
-                .lineToLinearHeading(new Pose2d(placeLocationMed.getX() - 2.5, placeLocationMed.getY() - 1, placeLocationMed.getHeading()))
+                .lineToLinearHeading(new Pose2d(placeLocationMed.getX() + 4 * placeLocationOffset.getX(),placeLocationMed.getY() + 4 * placeLocationOffset.getY(), placeLocationMed.getHeading()))
 
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
