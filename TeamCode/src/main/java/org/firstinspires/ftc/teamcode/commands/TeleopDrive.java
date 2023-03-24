@@ -61,7 +61,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
 
         slides.setRightTriggerState(gamepad2.right_trigger == 0);
 
-        slidePosition += (upPower - downPower) * RobotConfig.Slides.slidePower;
+        slidePosition += (upPower - downPower) * RobotConfig.Slides.manualSlidePower;
         slidePosition = Math.max(Math.min(slidePosition, RobotConfig.Slides.minSlidePosition), RobotConfig.Slides.maxSlidePosition);
         slides.setTargetPosition(slidePosition);
 
@@ -177,8 +177,15 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             preset = false;
             claw.setPresetBool(false);
         }
+        //Reverse low
+        if (gamepad2.dpad_left && !reverse){
+            arm.toPosition(650);
+            slidePosition = 0;
+            claw.setPos(RobotConfig.Presets.WristPickup);
+            claw.grab();
+        }
         //Pickup Fallen Cone
-        if (gamepad2.dpad_left && !reverse) {
+        if (gamepad1.a && !reverse) {
             slidePosition = RobotConfig.Presets.SlidesPickupFall;
             arm.toPosition(RobotConfig.Presets.Arm1PickupFall);
             claw.setPos(RobotConfig.Presets.WristPickupFall);
@@ -187,7 +194,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPresetBool(false);
         }
         //Drive Preset
-        if (gamepad1.a || gamepad2.left_bumper) {
+        if (gamepad1.b || gamepad2.left_bumper) {
             arm.toPosition(RobotConfig.Presets.Arm1Drive);
             slidePosition = RobotConfig.Presets.SlidesDrive;
             claw.setPos(RobotConfig.Wrist.startingPosition);

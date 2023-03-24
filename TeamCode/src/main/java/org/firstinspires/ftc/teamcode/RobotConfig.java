@@ -16,7 +16,7 @@ public class RobotConfig {
         public static String backLeftMotorName = "backLeft";
         public static String backRightMotorName = "backRight";
         public static double slowSpeed = 0.3;
-        public static double fastSpeed = 0.55;//0.5
+        public static double fastSpeed = 0.75;//0.5
     }
 
     public static class LED {
@@ -47,7 +47,7 @@ public class RobotConfig {
         public static int Arm1High = 386;
 
         //High Auto
-        public static int SlidesHighAuto = -1200;
+        public static int SlidesHighAuto = -1150;
         public static int Arm1HighAuto = 330;
 
         //High From Reverse Pickup
@@ -59,7 +59,7 @@ public class RobotConfig {
         public static int Arm1HighFromRevAuto = 260;
 
         //High Reverse
-        public static int SlidesHighRev = -1700;
+        public static int SlidesHighRev = -1600;
         public static int Arm1HighRev = 610;
 
         //Medium
@@ -129,7 +129,8 @@ public class RobotConfig {
         public static int maxSlidePosition = -2200;
         public static int minSlidePosition = 5;
 
-        public static double slidePower = 85;//50;
+        public static double manualSlidePower = 85;//50;
+        public static double automaticSlidePower = 1;// 0 to 1 power where 1 is max
         public static double kp = 0.0002;
         public static double ki = 0.0000;
         public static double kd = 0.0000;

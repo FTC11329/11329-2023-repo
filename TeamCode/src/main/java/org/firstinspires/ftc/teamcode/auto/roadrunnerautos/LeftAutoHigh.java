@@ -24,8 +24,8 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
     Claw claw;
     Slides slides;
 
-    Pose2d placeLocationHigh = new Pose2d(52.75, 1.5, Math.toRadians(315));
-    Pose2d placeLocationMed = new Pose2d(48, -3, Math.toRadians(50));
+    Pose2d placeLocationHigh = new Pose2d(52.75, 1.25, Math.toRadians(315));
+    Pose2d placeLocationMed = new Pose2d(48.25, -2.75, Math.toRadians(50));
     Vector2d pickupLocation = new Vector2d(47, 30.25);
 
     Vector2d placeLocationOffset = new Vector2d(-0.45, 0.45);
