@@ -76,8 +76,8 @@ public class RobotConfig {
         public static int Arm1MedFromRev = 300;
 
         //Medium Reverse
-        public static int SlidesMedRev = -440;
-        public static int Arm1MedRev = 584;
+        public static int SlidesMedRev = -181;
+        public static int Arm1MedRev = 533;
 
         //Medium Reverse Auto
         public static int SlidesMedRevAuto = -900;
@@ -143,7 +143,7 @@ public class RobotConfig {
         public static int clawMaxRange = 1;
         public static double wristSpeed = 0.02;
         public static String clawServo = "clawServo";
-        //        public static String colorSensor = "colorSensor";
+        public static String colorSensor = "colorSensor";
         public static String handServo1 = "wristServo1";
         public static String handServo2 = "wristServo2";
         public static double closePos = 0.3;
@@ -151,6 +151,8 @@ public class RobotConfig {
 
         public static double maxConeDistance = 8; //CM
         public static int maxAutoGrabHeight = -200;
+
+        public static boolean autoGrab = true;
     }
 
     public static class Arm {
