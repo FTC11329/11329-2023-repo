@@ -16,7 +16,7 @@ public class RobotConfig {
         public static String backLeftMotorName = "backLeft";
         public static String backRightMotorName = "backRight";
         public static double slowSpeed = 0.3;
-        public static double fastSpeed = 0.55;//0.5
+        public static double fastSpeed = 0.75;//0.5
     }
 
     public static class LED {
@@ -40,14 +40,14 @@ public class RobotConfig {
 
         //Claw placing
         public static double WristPlacing = 0.250;
-        public static double WristPlacingHigh = 0.390;
+        public static double WristPlacingHigh = 0.420;
 
         //High
         public static int SlidesHigh = -1220;
         public static int Arm1High = 386;
 
         //High Auto
-        public static int SlidesHighAuto = -1100;
+        public static int SlidesHighAuto = -1150;
         public static int Arm1HighAuto = 330;
 
         //High From Reverse Pickup
@@ -59,15 +59,15 @@ public class RobotConfig {
         public static int Arm1HighFromRevAuto = 260;
 
         //High Reverse
-        public static int SlidesHighRev = -1700;
+        public static int SlidesHighRev = -1600;
         public static int Arm1HighRev = 610;
 
         //Medium
         public static int SlidesMed = 0;
-        public static int Arm1Med = 352;
+        public static int Arm1Med = 370;
 
         //Medium Auto
-        public static int SlidesMedAuto = -100;
+        public static int SlidesMedAuto = -200;
         public static int Arm1MedAuto = 400;
 
 
@@ -76,11 +76,11 @@ public class RobotConfig {
         public static int Arm1MedFromRev = 300;
 
         //Medium Reverse
-        public static int SlidesMedRev = -715;
-        public static int Arm1MedRev = 584;
+        public static int SlidesMedRev = -181;
+        public static int Arm1MedRev = 533;
 
         //Medium Reverse Auto
-        public static int SlidesMedRevAuto = -700;
+        public static int SlidesMedRevAuto = -900;
         public static int Arm1MedRevAuto = 640;
 
         //Low
@@ -129,7 +129,8 @@ public class RobotConfig {
         public static int maxSlidePosition = -2200;
         public static int minSlidePosition = 5;
 
-        public static double slidePower = 85;//50;
+        public static double manualSlidePower = 85;//50;
+        public static double automaticSlidePower = 1;// 0 to 1 power where 1 is max
         public static double kp = 0.0002;
         public static double ki = 0.0000;
         public static double kd = 0.0000;
@@ -142,7 +143,7 @@ public class RobotConfig {
         public static int clawMaxRange = 1;
         public static double wristSpeed = 0.02;
         public static String clawServo = "clawServo";
-        //        public static String colorSensor = "colorSensor";
+        public static String colorSensor = "colorSensor";
         public static String handServo1 = "wristServo1";
         public static String handServo2 = "wristServo2";
         public static double closePos = 0.3;
@@ -150,6 +151,8 @@ public class RobotConfig {
 
         public static double maxConeDistance = 8; //CM
         public static int maxAutoGrabHeight = -200;
+
+        public static boolean autoGrab = true;
     }
 
     public static class Arm {

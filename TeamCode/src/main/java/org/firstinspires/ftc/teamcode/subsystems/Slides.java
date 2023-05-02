@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
+import org.firstinspires.ftc.teamcode.RobotConfig;
 
 public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializable, DiInterfaces.ITickable {
     @DiContainer.Inject(id = "leftSlideMotor")
@@ -33,7 +34,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
             leftSlideMotor.setMode(runMode);
             rightSlideMotor.setMode(runMode);
             if (runMode == DcMotor.RunMode.RUN_TO_POSITION) {
-                leftSlideMotor.setPower(1);
+                leftSlideMotor.setPower(RobotConfig.Slides.automaticSlidePower);
                 rightSlideMotor.setPower(1);
             }
         }
