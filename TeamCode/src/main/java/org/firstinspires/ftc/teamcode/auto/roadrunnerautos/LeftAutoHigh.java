@@ -7,8 +7,10 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryAccelerationConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityConstraint;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.RobotConfig;
+import org.firstinspires.ftc.teamcode.commands.TeleopDrive;
 import org.firstinspires.ftc.teamcode.roadrunner.RoadRunnerAutoBase;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.subsystems.Arm;
@@ -19,7 +21,7 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 import java.lang.reflect.InvocationTargetException;
 
 @Autonomous(name = "Left Auto High", group = "Competition")
-public class LeftAutoHigh extends RoadRunnerAutoBase {
+public class  LeftAutoHigh extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
@@ -45,6 +47,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
         trajectorySequenceBuilder
                 .addDisplacementMarker(() -> {
                     claw.grab(); //Grabs preload
+                    Claw.isAtPreset = true;
                 })
 
                 //Puts the arm in placing position
@@ -90,6 +93,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                 })
                 .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
+                    Claw.isAtPreset = false;
                 })
                 .waitSeconds(0.2)
 
@@ -109,6 +113,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
+                    Claw.isAtPreset = true;
                 })
 
                 //Moves off the stack
@@ -151,6 +156,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                 })
                 .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
+                    Claw.isAtPreset = false;
                 })
 
                 //Go to pickup a cone
@@ -158,6 +164,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
+                    Claw.isAtPreset = true;
                 })
 
                 //Moves off the stack
@@ -199,6 +206,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                 })
                 .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
+                    Claw.isAtPreset = false;
                 })
 
                 //Go to pickup a cone
@@ -206,6 +214,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
+                    Claw.isAtPreset = true;
                 })
 
                 //Moves off the stack
@@ -248,6 +257,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                 })
                 .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
+                    Claw.isAtPreset = false;
                 })
 
                 //Go to pickup a cone
@@ -255,6 +265,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
+                    Claw.isAtPreset = true;
                 })
 
                 //Moves off the stack
@@ -302,12 +313,14 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                 })
                 .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
+                    Claw.isAtPreset = false;
                 })
                 //Go to pickup a cone
                 .splineTo(pickupLocation, Math.toRadians(90))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
+                    Claw.isAtPreset = true;
                 })
 
                 //Moves off the stack
@@ -335,6 +348,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
+                    Claw.isAtPreset = false;
                 })
 
                 .waitSeconds(0.1)
@@ -378,12 +392,14 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                 })
                 .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
+                    Claw.isAtPreset = false;
                 })
                 //Go to pickup a cone
                 .splineTo(pickupLocation, Math.toRadians(90))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
+                    Claw.isAtPreset = true;
                 })
 
                 //Moves off the stack
@@ -411,6 +427,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
                 //Ungrabs
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
+                    Claw.isAtPreset = false;
                 })
 
                 .waitSeconds(0.1)
@@ -438,12 +455,14 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
+                    Claw.isAtPreset = false;
                 })
                 //Go to pickup a cone
                 .splineTo(pickupLocation, Math.toRadians(90))
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.grab();
+                    Claw.isAtPreset = true;
                 })
 
                 .waitSeconds(0.2)
@@ -465,6 +484,7 @@ public class LeftAutoHigh extends RoadRunnerAutoBase {
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
+                    Claw.isAtPreset = false;
                 })
 
                 .waitSeconds(0.25)

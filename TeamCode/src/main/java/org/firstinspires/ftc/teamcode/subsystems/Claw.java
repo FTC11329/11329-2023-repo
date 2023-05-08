@@ -29,7 +29,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     Telemetry telemetry;
     private boolean grabbing = true;
     private boolean grabbingDebounce = false;
-    private boolean isAtPreset = false;
+    static public boolean isAtPreset = false;
 
     double power = 0;
     double targetPosition = 0;

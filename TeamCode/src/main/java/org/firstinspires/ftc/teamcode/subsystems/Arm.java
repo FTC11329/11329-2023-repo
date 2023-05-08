@@ -28,6 +28,9 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
      * !!! ------------------------------------- !!!
      */
 
+    //How do you make your messages green? - Allen
+    /** nvm found out how */
+
     @DiContainer.Inject(id = "arm")
     public DcMotorEx arm;
     @DiContainer.Inject()
