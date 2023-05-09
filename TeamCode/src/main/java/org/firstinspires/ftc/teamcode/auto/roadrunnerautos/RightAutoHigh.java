@@ -47,7 +47,7 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                 })
 
                 //Puts the arm in placing position
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.setPos(RobotConfig.Presets.WristPlacingHigh);
                     arm.toPosition(RobotConfig.Presets.Arm1HighAuto);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighAuto);
@@ -72,195 +72,195 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                 .resetConstraints()
 
                 //Go to HIGH pole and let go (this is after we are in position)
-                .UNSTABLE_addTemporalMarkerOffset(1, () -> {
+                .addTemporalMarkerOffset(1, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighAuto + 500);
                 })
                 .splineToSplineHeading(new Pose2d(placeLocationHigh.getX() , placeLocationHigh.getY() , placeLocationHigh.getHeading()), placeLocationHigh.getHeading())
 
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
+                .addTemporalMarkerOffset(0.15, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
                 .waitSeconds(0.2)
 
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 //Go to pickup a cone
-                .UNSTABLE_addTemporalMarkerOffset(0.5 , () -> {
+                .addTemporalMarkerOffset(0.5 , () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .UNSTABLE_addTemporalMarkerOffset(1.5,() -> {
+                .addTemporalMarkerOffset(1.5,() -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
 
                 .lineToLinearHeading(new Pose2d(50, -17, Math.toRadians(0)))
                 .splineTo(new Vector2d(pickupLocation.getX(), pickupLocation.getY()), Math.toRadians(270))
 
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
 
                 //Moves off the stack
-                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 .waitSeconds(0.2)
 
                 //Going to Medium
-                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
+                .addTemporalMarkerOffset(0.4, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
+                .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(new Pose2d(placeLocationMed.getX(), placeLocationMed.getY(), placeLocationMed.getHeading()))
 
                 //Ungrabs
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                .addTemporalMarkerOffset(0.05, () -> {
                     claw.grab();
                 })
 
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
-                .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
+                .addTemporalMarkerOffset(0.15, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 151);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Presets.WristPickup);
 
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
                 })
 
                 //Go to pickup a cone
                 .splineTo(pickupLocation, Math.toRadians(270))
 
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
 
                 //Moves off the stack
-                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 .waitSeconds(0.2)
 
                 //Going to Medium
-                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
+                .addTemporalMarkerOffset(0.4, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
+                .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(new Pose2d(placeLocationMed.getX() + 1 * placeLocationOffset.getX(),placeLocationMed.getY() + 1 * placeLocationOffset.getY(), placeLocationMed.getHeading()))
 
                 //Ungrabs
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                .addTemporalMarkerOffset(0.05, () -> {
                     claw.grab();
                 })
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
-                .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
+                .addTemporalMarkerOffset(0.15, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 302);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Presets.WristPickup);
 
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
                 })
 
                 //Go to pickup a cone
                 .splineTo(pickupLocation, Math.toRadians(270))
 
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
 
                 //Moves off the stack
-                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 .waitSeconds(0.2)
 
                 //Going to Medium
-                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
+                .addTemporalMarkerOffset(0.4, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
+                .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(new Pose2d(placeLocationMed.getX() + 2 * placeLocationOffset.getX(),placeLocationMed.getY() + 2 * placeLocationOffset.getY(), placeLocationMed.getHeading()))
 
                 //Ungrabs
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                .addTemporalMarkerOffset(0.05, () -> {
                     claw.grab();
                 })
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
-                .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
+                .addTemporalMarkerOffset(0.15, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 453);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Presets.WristPickup);
 
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
                 })
 
                 //Go to pickup a cone
                 .splineTo(pickupLocation, Math.toRadians(270))
 
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
 
                 //Moves off the stack
-                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 .waitSeconds(0.2)
 
                 //Going to Medium
-                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
+                .addTemporalMarkerOffset(0.4, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
+                .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(new Pose2d(placeLocationMed.getX() + 3 * placeLocationOffset.getX(),placeLocationMed.getY() + 3 * placeLocationOffset.getY(), placeLocationMed.getHeading()))
 
                 //Ungrabs
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                .addTemporalMarkerOffset(0.05, () -> {
                     claw.grab();
                 })
 
@@ -274,32 +274,32 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
         trajectorySequenceBuilder
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
-                .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
+                .addTemporalMarkerOffset(0.15, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
                 })
                 //Go to pickup a cone
                 .splineTo(pickupLocation, Math.toRadians(270))
 
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
 
                 .waitSeconds(0.2)
 
 
-                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
+                .addTemporalMarkerOffset(0.4, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesMedAuto + 50);
                     arm.toPosition(RobotConfig.Presets.Arm1MedAuto);
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(0.6, () -> {
+                .addTemporalMarkerOffset(0.6, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesMedAuto - 50);
                     arm.toPosition(RobotConfig.Presets.Arm1MedAuto - 30);
                 })
@@ -309,13 +309,13 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
 
                 .waitSeconds(0.05)
 
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
 
                 .waitSeconds(0.25)
 
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
+                .addTemporalMarkerOffset(0.2, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
@@ -331,47 +331,47 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
 
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
-                .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
+                .addTemporalMarkerOffset(0.15, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
                 })
                 //Go to pickup a cone
                 .splineTo(pickupLocation, Math.toRadians(270))
 
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
 
                 //Moves off the stack
-                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 .waitSeconds(0.2)
 
                 //Going to Medium
-                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
+                .addTemporalMarkerOffset(0.4, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
+                .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(new Pose2d(placeLocationMed.getX() + 4 * placeLocationOffset.getX(),placeLocationMed.getY() + 4 * placeLocationOffset.getY(), placeLocationMed.getHeading()))
 
                 //Ungrabs
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
 
                 .waitSeconds(0.1)
 
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);
@@ -387,47 +387,47 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
 
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 .waitSeconds(0.05)
-                .UNSTABLE_addTemporalMarkerOffset(0.15, () -> {
+                .addTemporalMarkerOffset(0.15, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(5);
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
                 })
                 //Go to pickup a cone
                 .splineTo(pickupLocation, Math.toRadians(270))
 
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
 
                 //Moves off the stack
-                .UNSTABLE_addTemporalMarkerOffset(0.05, () -> {
+                .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 .waitSeconds(0.2)
 
                 //Going to Medium
-                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> {
+                .addTemporalMarkerOffset(0.4, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesMedRevAuto);
                     claw.setPos(RobotConfig.Presets.WristPlacing);
                 })
 
-                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
+                .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1MedRevAuto);
                 })
 
                 .lineToLinearHeading(new Pose2d(placeLocationMed.getX() + 4 * placeLocationOffset.getX(),placeLocationMed.getY() + 4 * placeLocationOffset.getY(), placeLocationMed.getHeading()))
 
                 //Ungrabs
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
 
                 .waitSeconds(0.1)
 
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     claw.setPos(RobotConfig.Wrist.startingPosition);

@@ -152,7 +152,7 @@ public class RobotConfig {
         public static double maxConeDistance = 8; //CM
         public static int maxAutoGrabHeight = -200;
 
-        public static boolean autoGrab = true;
+        public static boolean autoGrab = false;
     }
 
     public static class Arm {

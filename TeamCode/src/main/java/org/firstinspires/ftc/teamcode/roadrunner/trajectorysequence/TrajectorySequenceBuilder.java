@@ -386,7 +386,7 @@ public class TrajectorySequenceBuilder {
         return this.addTemporalMarker(currentDuration, callback);
     }
 
-    public TrajectorySequenceBuilder UNSTABLE_addTemporalMarkerOffset(double offset, MarkerCallback callback) {
+    public TrajectorySequenceBuilder addTemporalMarkerOffset(double offset, MarkerCallback callback) {
         return this.addTemporalMarker(currentDuration + offset, callback);
     }
 
