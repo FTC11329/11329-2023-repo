@@ -126,6 +126,7 @@ public class RobotConfig {
         public static String leftSlideMotor = "leftSlideMotor";
         public static String leftLimitSwitch = "leftSlideLimitSwitch";
         public static String rightLimitSwitch = "rightSlideLimitSwitch";
+        public static String bracePlateServo = "bracePlate";
         public static int maxSlidePosition = -2200;
         public static int minSlidePosition = 5;
 

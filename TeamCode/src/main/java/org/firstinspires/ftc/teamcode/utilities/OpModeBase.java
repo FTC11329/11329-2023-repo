@@ -47,6 +47,7 @@ public abstract class OpModeBase extends DiOpMode {
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.frontRightMotorName)).withId("frontRightMotor");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.backLeftMotorName)).withId("backLeftMotor");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.backRightMotorName)).withId("backRightMotor");
+
         Container.bindInstance(hardwareMap.get(RevTouchSensor.class, RobotConfig.Slides.leftLimitSwitch)).withId("leftSlideLimitSwitch");
         Container.bindInstance(hardwareMap.get(RevTouchSensor.class, RobotConfig.Slides.rightLimitSwitch)).withId("rightSlideLimitSwitch");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Arm.arm)).withId("arm");
@@ -61,6 +62,8 @@ public abstract class OpModeBase extends DiOpMode {
 
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.leftSlideMotor)).withId("leftSlideMotor");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Slides.rightSlideMotor)).withId("rightSlideMotor");
+        Container.bindInstance(hardwareMap.get(Servo.class, RobotConfig.Slides.bracePlateServo)).withId("bracePlate");
+
 
         Container.bind(Slides.class).asSingle();
         Container.bind(Arm.class).asSingle();

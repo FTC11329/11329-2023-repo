@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
@@ -23,6 +24,8 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     RevTouchSensor leftLimitSwitch;
     @DiContainer.Inject(id = "rightSlideLimitSwitch")
     RevTouchSensor rightLimitSwitch;
+    @DiContainer.Inject(id = "bracePlate")
+    Servo bracePlateServo;
 
     DcMotor.RunMode currentRunmode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
 
@@ -45,6 +48,18 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         leftSlideMotor.setTargetPosition(pos);
         rightSlideMotor.setTargetPosition(pos);
     }
+    public void setBracePos(double bracePos) {
+
+    }
+
+
+//    public void brace() {
+//
+//    }
+//
+//    public void unbrace() {
+//
+//    }
 
     public void displayToTelemetry() {
         telemetry.addData("Left Slide", leftSlideMotor.getCurrentPosition());
