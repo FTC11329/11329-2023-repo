@@ -48,18 +48,16 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         leftSlideMotor.setTargetPosition(pos);
         rightSlideMotor.setTargetPosition(pos);
     }
-    public void setBracePos(double bracePos) {
-
+    private double braceIncrement = 0.0;
+    public void brace() {
+        braceIncrement += 0.05;
+        bracePlateServo.setPosition(braceIncrement);
     }
 
-
-//    public void brace() {
-//
-//    }
-//
-//    public void unbrace() {
-//
-//    }
+    public void unbrace() {
+        braceIncrement += 0.05;
+        bracePlateServo.setPosition(braceIncrement);
+    }
 
     public void displayToTelemetry() {
         telemetry.addData("Left Slide", leftSlideMotor.getCurrentPosition());
@@ -67,6 +65,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
 //        telemetry.addData("Slide PIDF Coefficients RUN_TO_POSITION", rightSlideMotor.getPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION));
         telemetry.addData("Left Limit Switch", leftLimitSwitch.isPressed());
         telemetry.addData("Right Limit Switch", rightLimitSwitch.isPressed());
+        telemetry.addData("Brace Plate Pos", bracePlateServo.getPosition());
     }
 
     @Override
@@ -82,6 +81,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         rightSlideMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         rightSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        unbrace();
     }
     @Override
     public void onTick() {

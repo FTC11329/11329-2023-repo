@@ -13,30 +13,26 @@ import org.firstinspires.ftc.teamcode.subsystems.Slides;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitializable {
+    @DiContainer.Inject(id = "gamepad1")
+    public Gamepad gamepad1;
+    @DiContainer.Inject(id = "gamepad2")
+    public Gamepad gamepad2;
+    @DiContainer.Inject()
+    public Arm arm;
+    @DiContainer.Inject()
+    public Claw claw;
+    @DiContainer.Inject()
+    public RobotSide side;
+    public int slidePosition = 0;
+    public boolean reverse = false;
+    public boolean preset = false;
     @DiContainer.Inject()
     Telemetry telemetry;
     @DiContainer.Inject()
     Drivetrain drivetrain;
     @DiContainer.Inject()
     Slides slides;
-
-    @DiContainer.Inject(id = "gamepad1")
-    public Gamepad gamepad1;
-    @DiContainer.Inject(id = "gamepad2")
-    public Gamepad gamepad2;
-
-    @DiContainer.Inject()
-    public Arm arm;
-    @DiContainer.Inject()
-    public Claw claw;
-
-    @DiContainer.Inject()
-    public RobotSide side;
-
-    public int slidePosition = 0;
     private double maxSpeed;
-    public boolean reverse = false;
-    public boolean preset = false;
 
     @Override
     public void onTick() {
@@ -108,6 +104,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPos(RobotConfig.Presets.WristPlacing);
             preset = true;
             claw.setPresetBool(true);
+//            slides.brace();
         }
         // Medium
         if (gamepad2.dpad_right && !reverse) {
@@ -116,6 +113,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPos(RobotConfig.Presets.WristPickup);
             preset = true;
             claw.setPresetBool(true);
+//            slides.brace();
         }
         // Medium From Reverse Pickup
         if (gamepad2.dpad_right && reverse) {
@@ -133,6 +131,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPos(RobotConfig.Presets.WristPlacing);
             preset = true;
             claw.setPresetBool(true);
+//            slides.brace();
         }
         // Low
         if (gamepad2.dpad_down) {
@@ -141,12 +140,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPos(RobotConfig.Presets.WristPickup);
             preset = true;
             claw.setPresetBool(true);
-        }
-        //Low Reverse
-        if (gamepad2.dpad_left && reverse) {
-            slidePosition = RobotConfig.Presets.SlidesLow;
-            preset = true;
-            claw.setPresetBool(true);
+//            slides.unbrace();
         }
         // Low from Rev
         if (gamepad2.dpad_down && reverse) {
@@ -156,6 +150,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.grab();
             preset = true;
             claw.setPresetBool(true);
+
         }
         //Pickup
         if (gamepad2.a) {
@@ -166,6 +161,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             reverse = false;
             preset = false;
             claw.setPresetBool(false);
+//            slides.unbrace();
         }
         //Pickup Reverse
         if (gamepad2.x) {
@@ -178,11 +174,12 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPresetBool(false);
         }
         //Reverse low
-        if (gamepad2.dpad_left && !reverse){
+        if (gamepad2.dpad_left && !reverse) {
             arm.toPosition(650);
             slidePosition = 0;
             claw.setPos(RobotConfig.Presets.WristPickup);
             claw.grab();
+//            slides.brace();
         }
         //Pickup Fallen Cone
         if (gamepad1.a && !reverse) {
@@ -192,15 +189,23 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.ungrab();
             preset = false;
             claw.setPresetBool(false);
+//            slides.unbrace();
         }
         //Drive Preset
-        if (gamepad1.b || gamepad2.left_bumper) {
+        if (gamepad1.right_stick_button || gamepad2.left_bumper) {
             arm.toPosition(RobotConfig.Presets.Arm1Drive);
             slidePosition = RobotConfig.Presets.SlidesDrive;
             claw.setPos(RobotConfig.Wrist.startingPosition);
+//            slides.unbrace();
         }
         if (gamepad1.y) {
             slidePosition = -700;
+        }
+        if (gamepad1.dpad_up){
+            slides.brace();
+        }
+        if (gamepad1.dpad_down){
+            slides.unbrace();
         }
     }
 
