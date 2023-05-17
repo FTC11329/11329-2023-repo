@@ -48,15 +48,12 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         leftSlideMotor.setTargetPosition(pos);
         rightSlideMotor.setTargetPosition(pos);
     }
-    private double braceIncrement = 0.0;
     public void brace() {
-        braceIncrement += 0.05;
-        bracePlateServo.setPosition(braceIncrement);
+        bracePlateServo.setPosition(0.2);
     }
 
     public void unbrace() {
-        braceIncrement += 0.05;
-        bracePlateServo.setPosition(braceIncrement);
+        bracePlateServo.setPosition(0);
     }
 
     public void displayToTelemetry() {
@@ -80,6 +77,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
 
         rightSlideMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         rightSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        bracePlateServo.setPosition(0);
 
         unbrace();
     }
