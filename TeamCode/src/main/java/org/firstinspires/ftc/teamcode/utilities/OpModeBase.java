@@ -4,6 +4,7 @@ import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.robot.Robot;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.RobotConfig;
@@ -49,6 +50,7 @@ public abstract class OpModeBase extends DiOpMode {
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.backLeftMotorName)).withId("backLeftMotor");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Drivetrain.backRightMotorName)).withId("backRightMotor");
 
+        Container.bindInstance(hardwareMap.get(RevTouchSensor.class, RobotConfig.Brace.braceName)).withId("LineBreak");
         Container.bindInstance(hardwareMap.get(RevTouchSensor.class, RobotConfig.Slides.leftLimitSwitch)).withId("leftSlideLimitSwitch");
         Container.bindInstance(hardwareMap.get(RevTouchSensor.class, RobotConfig.Slides.rightLimitSwitch)).withId("rightSlideLimitSwitch");
         Container.bindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.Arm.arm)).withId("arm");

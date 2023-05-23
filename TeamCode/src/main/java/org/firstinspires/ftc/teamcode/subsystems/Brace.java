@@ -14,9 +14,13 @@ import org.firstinspires.ftc.teamcode.RobotConfig;
 public class Brace implements DiInterfaces.IDisposable, DiInterfaces.IInitializable, DiInterfaces.ITickable {
     @DiContainer.Inject(id = "bracePlate")
     Servo bracePlateServo;
+    @DiContainer.Inject(id = "LineBreak")
+    RevTouchSensor LineBreak;
     @DiContainer.Inject()
     Telemetry telemetry;
     boolean rightTriggerState = false;
+
+    boolean atPole = false;
 
 
     public void setTargetPosition(int pos) {}
@@ -31,6 +35,7 @@ public class Brace implements DiInterfaces.IDisposable, DiInterfaces.IInitializa
 
     public void displayToTelemetry() {
         telemetry.addData("Brace Plate Pos", bracePlateServo.getPosition());
+        telemetry.addData("LineBreak", LineBreak.isPressed());
     }
 
     @Override
@@ -41,6 +46,7 @@ public class Brace implements DiInterfaces.IDisposable, DiInterfaces.IInitializa
     }
     @Override
     public void onTick() {
+        atPole = LineBreak.isPressed();
     }
 
     public void setRightTriggerState(boolean state) {
