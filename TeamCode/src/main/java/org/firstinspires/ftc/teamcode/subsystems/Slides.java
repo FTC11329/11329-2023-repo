@@ -24,8 +24,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     RevTouchSensor leftLimitSwitch;
     @DiContainer.Inject(id = "rightSlideLimitSwitch")
     RevTouchSensor rightLimitSwitch;
-    @DiContainer.Inject(id = "bracePlate")
-    Servo bracePlateServo;
+
 
     DcMotor.RunMode currentRunmode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
 
@@ -48,13 +47,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         leftSlideMotor.setTargetPosition(pos);
         rightSlideMotor.setTargetPosition(pos);
     }
-    public void brace() {
-        bracePlateServo.setPosition(0.2);
-    }
 
-    public void unbrace() {
-        bracePlateServo.setPosition(0);
-    }
 
     public void displayToTelemetry() {
         telemetry.addData("Left Slide", leftSlideMotor.getCurrentPosition());
@@ -62,7 +55,6 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
 //        telemetry.addData("Slide PIDF Coefficients RUN_TO_POSITION", rightSlideMotor.getPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION));
         telemetry.addData("Left Limit Switch", leftLimitSwitch.isPressed());
         telemetry.addData("Right Limit Switch", rightLimitSwitch.isPressed());
-        telemetry.addData("Brace Plate Pos", bracePlateServo.getPosition());
     }
 
     @Override
@@ -77,9 +69,6 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
 
         rightSlideMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         rightSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        bracePlateServo.setPosition(0);
-
-        unbrace();
     }
     @Override
     public void onTick() {
