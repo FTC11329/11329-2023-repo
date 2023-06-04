@@ -45,79 +45,79 @@ public class RobotConfig {
         public static double WristPlacingHigh = 0.420;
 
         //High
-        public static int SlidesHigh = -1220*66/96;
+        public static int SlidesHigh = -1220;
         public static int Arm1High = 386;
 
         //High Auto
-        public static int SlidesHighAuto = -1150*66/96;
+        public static int SlidesHighAuto = -1150;
         public static int Arm1HighAuto = 330;
 
         //High From Reverse Pickup
-        public static int SlidesHighFromRev = -2075*66/96;//-1900;
+        public static int SlidesHighFromRev = -2075;//-1900;
         public static int Arm1HighFromRev = 260;
 
         //High From Reverse Pickup Auto
-        public static int SlidesHighFromRevAuto = -1950*66/96;
+        public static int SlidesHighFromRevAuto = -1950;
         public static int Arm1HighFromRevAuto = 260;
 
         //High Reverse
-        public static int SlidesHighRev = -1600*66/96;
+        public static int SlidesHighRev = -1600;
         public static int Arm1HighRev = 610;
 
         //Medium
-        public static int SlidesMed = 0*66/96;
+        public static int SlidesMed = 0;
         public static int Arm1Med = 370;
 
         //Medium Auto
-        public static int SlidesMedAuto = -200*66/96;
+        public static int SlidesMedAuto = -200;
         public static int Arm1MedAuto = 400;
 
 
         //Medium From Reverse Pickup
-        public static int SlidesMedFromRev = -450*66/96;
+        public static int SlidesMedFromRev = -450;
         public static int Arm1MedFromRev = 300;
 
         //Medium Reverse
-        public static int SlidesMedRev = -347*66/96;
+        public static int SlidesMedRev = -347;
         public static int Arm1MedRev = 610;
 
         //Medium Reverse Auto
-        public static int SlidesMedRevAuto = -900*66/96;
+        public static int SlidesMedRevAuto = -900;
         public static int Arm1MedRevAuto = 640;
 
         //Low
-        public static int SlidesLow = -1740*66/96;
+        public static int SlidesLow = -1740;
         public static int Arm1Low = 25;
 
         //Low From Reverse Pickup
-        public static int SlidesLowFromRev = 0*66/96;
+        public static int SlidesLowFromRev = 0;
         public static int Arm1LowFromRev = 230;
 
         //Pick up
-        public static int SlidesPickup = 0*66/96;
+        public static int SlidesPickup = 0;
         public static int Arm1Pickup = 0;
         public static double WristPickup = 0.300;
 
         //Pick up Reverse
-        public static int SlidesPickupRev = 0*66/96;
+        public static int SlidesPickupRev = 0;
         public static int Arm1PickupRev = 890;
         public static double WristPickupRev = 0.964;
 
         //Pick up top cone
-        public static int SlidesPickupTop = -616*66/96;
+        public static int SlidesPickupTop = -616;
         public static int Arm1PickupTop = 2;
 
         //Pick up top cone reverse
-        public static int SlidesPickupTopRev = -616*66/96;
+        public static int SlidesPickupTopRev = -616;
         public static int Arm1PickupTopRev = 890;
 
         //Pickup Fallen Cone
-        public static int SlidesPickupFall = -345*66/96;
+        public static int SlidesPickupFall = -345;
         public static int Arm1PickupFall = 50;
         public static double WristPickupFall = 0;
 
         //Drive Position
-        public static int SlidesDrive = -970*66/96;
+        public static int SlidesDrive = -970;
         public static int Arm1Drive = -970;
 
     }
@@ -156,6 +156,7 @@ public class RobotConfig {
         public static int maxAutoGrabHeight = -200;
 
         public static boolean autoGrab = false;
+        public static boolean autoRelease = true;
     }
 
     public static class Arm {
@@ -171,6 +172,8 @@ public class RobotConfig {
         public static double ki = 0.0000;
         public static double kd = 0.0005;
         public static double kf = 0.2000;
+
+        public static double gearRatio = 13.2/19.7;
         // d was too small                                 <--Joke haha funny
     }
 

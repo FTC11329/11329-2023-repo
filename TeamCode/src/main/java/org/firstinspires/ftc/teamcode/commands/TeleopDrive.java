@@ -80,6 +80,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         slides.displayToTelemetry();
         arm.displayToTelemetry();
         claw.displayToTelemetry();
+        brace.displayToTelemetry();
 
         telemetry.update();
 
@@ -203,6 +204,9 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         }
         if (gamepad1.y) {
             slidePosition = -700;
+        }
+        if(gamepad1.b){
+            brace.brace();
         }
     }
 

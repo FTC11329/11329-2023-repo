@@ -20,17 +20,20 @@ public class Brace implements DiInterfaces.IDisposable, DiInterfaces.IInitializa
     Telemetry telemetry;
     boolean rightTriggerState = false;
 
-    boolean atPole = false;
+    public boolean atPole = false;
+    public boolean activated = false;
 
 
     public void setTargetPosition(int pos) {}
 
     public void brace() {
-        bracePlateServo.setPosition(0.2);
+        bracePlateServo.setPosition(0.34);
+        activated = true;
     }
 
     public void unbrace() {
-        bracePlateServo.setPosition(0);
+        bracePlateServo.setPosition(0.075);
+        activated = false;
     }
 
     public void displayToTelemetry() {
@@ -41,7 +44,6 @@ public class Brace implements DiInterfaces.IDisposable, DiInterfaces.IInitializa
     @Override
     public void onInitialize() {
         bracePlateServo.setPosition(0);
-
         unbrace();
     }
     @Override

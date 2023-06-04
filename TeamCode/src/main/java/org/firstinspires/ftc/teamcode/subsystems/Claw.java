@@ -24,6 +24,8 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     public RevColorSensorV3 colorSensor;
     @DiContainer.Inject()
     public RobotSide side;
+    @DiContainer.Inject()
+    Brace brace;
 
     @DiContainer.Inject()
     Telemetry telemetry;
@@ -56,6 +58,9 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         handWave1.setPosition(targetPosition);
         if(!isAtPreset && RobotConfig.Claw.autoGrab && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))){
             grab();
+        }
+        if(brace.activated && brace.atPole){
+            ungrab();
         }
     }
 
@@ -118,7 +123,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     public void displayToTelemetry() {
         telemetry.addData("Hand1 Position", handWave1.getPosition());
         telemetry.addData("Hand2 Position", handWave2.getPosition());
-        //telemetry.addData("Cone Present", isConePresent());
+        telemetry.addData("Cone Present", isConePresent());
         //telemetry.addData("Cone Color", getConeColor());
     }
 

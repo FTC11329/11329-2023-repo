@@ -47,6 +47,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     @Override
     public void onInitialize() {
         arm.setTargetPosition(0);
+
         arm.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         arm.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         //arm.setPower(GlacierDrive.armPower);
@@ -63,7 +64,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
         double armPow = armPID.getPIDfOutput(arm.getCurrentPosition(), (arm.getCurrentPosition() - zeroAngle) * tickToDegrees);
         arm.setPower(armPow);
         //double currentPosition = arm.getCurrentPosition();
-
+        telemetry.addData("Arm Power", armPow);
     }
 
     public void toPosition(int pos) {
@@ -78,7 +79,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     public void displayToTelemetry() {
         telemetry.addData("Arm Position", arm.getCurrentPosition());
         telemetry.addData("Arm Target Position", targetPosition);
-        telemetry.addData("Arm PIDF", arm.getPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION));
+
     }
 
     @Override

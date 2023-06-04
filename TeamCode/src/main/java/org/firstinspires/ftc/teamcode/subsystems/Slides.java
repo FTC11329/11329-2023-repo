@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.robot.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
@@ -43,6 +44,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     }
 
     public void setTargetPosition(int pos) {
+        pos =(int) (pos * RobotConfig.Arm.gearRatio);
         setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftSlideMotor.setTargetPosition(pos);
         rightSlideMotor.setTargetPosition(pos);
