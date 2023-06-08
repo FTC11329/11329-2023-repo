@@ -64,7 +64,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
         double armPow = armPID.getPIDfOutput(arm.getCurrentPosition(), (arm.getCurrentPosition() - zeroAngle) * tickToDegrees);
         arm.setPower(armPow);
         //double currentPosition = arm.getCurrentPosition();
-        telemetry.addData("Arm Power", armPow);
+
     }
 
     public void toPosition(int pos) {

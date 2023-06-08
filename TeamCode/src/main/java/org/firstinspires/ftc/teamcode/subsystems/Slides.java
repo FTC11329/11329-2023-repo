@@ -31,6 +31,8 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
 
     boolean rightTriggerState = false;
 
+    public boolean atPosition = false;
+
     public void setMode(DcMotorEx.RunMode runMode) {
         if (runMode != currentRunmode) {
             currentRunmode = runMode;
@@ -57,6 +59,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
 //        telemetry.addData("Slide PIDF Coefficients RUN_TO_POSITION", rightSlideMotor.getPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION));
         telemetry.addData("Left Limit Switch", leftLimitSwitch.isPressed());
         telemetry.addData("Right Limit Switch", rightLimitSwitch.isPressed());
+        telemetry.addData("At Positon", atPosition);
     }
 
     @Override
@@ -78,6 +81,9 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
             setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
             setTargetPosition(-1);
             setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
+        if(Math.abs(leftSlideMotor.getCurrentPosition()-leftSlideMotor.getTargetPosition())<50){
+           atPosition=true;
         }
 
 //        if (rightSlideMotor.getCurrentPosition() < rightSlideMotor.getTargetPosition() && rightLimitSwitch.isPressed()) {
