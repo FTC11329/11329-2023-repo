@@ -25,7 +25,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     @DiContainer.Inject()
     public RobotSide side;
     @DiContainer.Inject()
-    Brace brace;
+    public Brace brace;
 
     @DiContainer.Inject()
     Telemetry telemetry;

@@ -96,7 +96,7 @@ public class RobotConfig {
         //Pick up
         public static int SlidesPickup = 0;
         public static int Arm1Pickup = 0;
-        public static double WristPickup = 0.300;
+        public static double WristPickup = 0.3;
 
         //Pick up Reverse
         public static int SlidesPickupRev = 0;
@@ -155,7 +155,7 @@ public class RobotConfig {
         public static double maxConeDistance = 8; //CM
         public static int maxAutoGrabHeight = -200;
 
-        public static boolean autoGrab = false;
+        public static boolean autoGrab = true;
         public static boolean autoRelease = true;
     }
 

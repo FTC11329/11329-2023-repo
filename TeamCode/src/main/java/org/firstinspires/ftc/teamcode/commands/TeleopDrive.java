@@ -206,8 +206,11 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad1.y) {
             slidePosition = -700;
         }
-        if(gamepad1.b){
+        if(gamepad1.dpad_up){
             brace.brace();
+        }
+        if(gamepad1.dpad_down){
+            brace.unbrace();
         }
     }
 

@@ -70,11 +70,11 @@ public abstract class OpModeBase extends DiOpMode {
 
         Container.bind(Slides.class).asSingle();
         Container.bind(Arm.class).asSingle();
+        Container.bind(Brace.class).asSingle();
         Container.bind(Claw.class).asSingle();
         //Container.bind(ComputerVision.class).asSingle();
         Container.bind(Drivetrain.class).asSingle();
         Container.bind(LED.class).asSingle();
-        Container.bind(Brace.class).asSingle();
 
         InstallLower();
     }
