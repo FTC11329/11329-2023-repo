@@ -26,8 +26,8 @@ public abstract class OpModeBase extends DiOpMode {
     @Override
     public void Install() throws IllegalAccessException, InstantiationException, InvocationTargetException {
         //this declares the motors and classes allowed to be injected with the @Inject() function in all future OpModes (both teleop and autonomouse)
-        //If a certin motor or class is only used in teleop then you can "bindInstance()" in the TeleopBase script
-        //the .withId() determines the name used to get the motor or clas in teh @Inject(id=x) function
+        //If a certain motor or class is only used in teleop then you can "bindInstance()" in the TeleopBase script
+        //the .withId() determines the name used to get the motor or class in teh @Inject(id=x) function
         Container.bindInstance(telemetry);
 
         Container.bindInstance(GetSide());

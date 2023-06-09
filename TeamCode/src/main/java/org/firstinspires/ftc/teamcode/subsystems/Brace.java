@@ -27,12 +27,12 @@ public class Brace implements DiInterfaces.IDisposable, DiInterfaces.IInitializa
     public void setTargetPosition(int pos) {}
 
     public void brace() {
-        bracePlateServo.setPosition(0.44);//0.44
+        bracePlateServo.setPosition(0.41);//0.44
         activated = true;
     }
 
     public void unbrace() {
-        bracePlateServo.setPosition(0.74);//0.74
+        bracePlateServo.setPosition(0.71);//0.74
         activated = false;
     }
 

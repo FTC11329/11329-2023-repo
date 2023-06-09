@@ -9,8 +9,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.RobotConfig;
-import org.firstinspires.ftc.teamcode.commands.TeleopDrive;
-import org.firstinspires.ftc.teamcode.teleop.TeleopBlue;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, DiInterfaces.IInitializable {
@@ -26,6 +24,8 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     public RobotSide side;
     @DiContainer.Inject()
     public Brace brace;
+    @DiContainer.Inject()
+    public Slides slides;
 
     @DiContainer.Inject()
     Telemetry telemetry;
@@ -56,10 +56,10 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
 
         handWave2.setPosition(1.0 - targetPosition);
         handWave1.setPosition(targetPosition);
-        if(!isAtPreset && RobotConfig.Claw.autoGrab && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))){
+        if (!isAtPreset && RobotConfig.Claw.autoGrab && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))) {
             grab();
         }
-        if(brace.activated && brace.atPole){
+        if (brace.activated && brace.atPole) {
             ungrab();
         }
     }
@@ -127,11 +127,12 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         //telemetry.addData("Cone Color", getConeColor());
     }
 
-    public boolean getPresetBool(){
+    public boolean getPresetBool() {
         return isAtPreset;
     }
-    public void setPresetBool(boolean isAtPreset){
-        this.isAtPreset = isAtPreset;
+
+    public void setPresetBool(boolean isAtPreset) {
+        Claw.isAtPreset = isAtPreset;
     }
 
     @Override

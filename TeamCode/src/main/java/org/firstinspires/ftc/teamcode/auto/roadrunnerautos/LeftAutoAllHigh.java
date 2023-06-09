@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.RobotConfig;
 import org.firstinspires.ftc.teamcode.roadrunner.RoadRunnerAutoBase;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.subsystems.Arm;
+import org.firstinspires.ftc.teamcode.subsystems.Brace;
 import org.firstinspires.ftc.teamcode.subsystems.Claw;
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
@@ -23,6 +24,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
+    Brace brace;
 
     Pose2d placeLocationHigh = new Pose2d(43.75, -24.3, Math.toRadians(60));
     Pose2d placeLocationMed = new Pose2d(48.25, -2.75, Math.toRadians(50));
@@ -38,6 +40,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
         arm = (Arm) Container.resolve(Arm.class);
         claw = (Claw) Container.resolve(Claw.class);
         slides = (Slides) Container.resolve(Slides.class);
+        brace = (Brace) Container.resolve(Brace.class);
     }
 
     @Override
