@@ -15,7 +15,7 @@ public class RobotConfig {
         public static String frontRightMotorName = "frontRight";
         public static String backLeftMotorName = "backLeft";
         public static String backRightMotorName = "backRight";
-        public static double slowSpeed = 0.375;
+        public static double slowSpeed = 0.425;
         public static double fastSpeed = 0.75;//0.5
     }
     public static class Brace{
