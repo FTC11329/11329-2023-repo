@@ -150,12 +150,12 @@ public class RobotConfig {
         public static String handServo1 = "wristServo1";
         public static String handServo2 = "wristServo2";
         public static double closePos = 0.3;
-        public static double openPos = 0.066;
+        public static double openPos = 0.09;
 
         public static double maxConeDistance = 8; //CM
         public static int maxAutoGrabHeight = -200;
 
-        public static boolean autoGrab = true;
+        public static boolean autoGrab = false;
         public static boolean autoRelease = true;
     }
 
