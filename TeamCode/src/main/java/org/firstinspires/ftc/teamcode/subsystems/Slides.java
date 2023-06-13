@@ -32,7 +32,8 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     boolean rightTriggerState = false;
 
     public boolean atPosition = false;
-    public int targetPos;
+    private int targetPos;
+
     public void setMode(DcMotorEx.RunMode runMode) {
         if (runMode != currentRunmode) {
             currentRunmode = runMode;
@@ -45,8 +46,12 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         }
     }
 
+    public int getTargetPosition() {
+        return (int) (Math.round(targetPos * RobotConfig.Arm.gearRatio));
+    }
+
     public void setTargetPosition(int pos) {
-        pos =(int) (pos * RobotConfig.Arm.gearRatio);
+        pos = (int) (pos * RobotConfig.Arm.gearRatio);
         setMode(DcMotor.RunMode.RUN_TO_POSITION);
         targetPos = pos;
         leftSlideMotor.setTargetPosition(pos);
@@ -76,6 +81,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         rightSlideMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         rightSlideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
+
     @Override
     public void onTick() {
         if ((leftLimitSwitch.isPressed() || rightLimitSwitch.isPressed()) && rightTriggerState) {
@@ -83,8 +89,8 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
             setTargetPosition(-1);
             setMode(DcMotor.RunMode.RUN_TO_POSITION);
         }
-        if(Math.abs(leftSlideMotor.getCurrentPosition()-leftSlideMotor.getTargetPosition())<50){
-           atPosition=true;
+        if (Math.abs(leftSlideMotor.getCurrentPosition() - leftSlideMotor.getTargetPosition()) < 50) {
+            atPosition = true;
         }
 
 //        if (rightSlideMotor.getCurrentPosition() < rightSlideMotor.getTargetPosition() && rightLimitSwitch.isPressed()) {

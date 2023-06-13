@@ -62,25 +62,29 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
 
         handWave2.setPosition(1.0 - targetPosition);
         handWave1.setPosition(targetPosition);
+
         if (!isAtPreset && RobotConfig.Claw.autoGrab && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))) {
             grab();
         }
-        if(brace.activated && brace.atPole){
-            if(controlBrace) {
-                myStopwatch.reset();
-                slidesTemp = slides.targetPos;
-                slides.setTargetPosition(slidesTemp + 200);
-                controlBrace = false;
-            }
-        } else{
-            controlBrace = true;
-        }
-        if(myStopwatch.time() >= 0.1 && !controlBrace){
+        if(brace.activated && brace.atPole) {
             ungrab();
         }
-        if(myStopwatch.time() >= 0.2 && !controlBrace){
-            slides.setTargetPosition(slidesTemp);
-        }
+//        if(brace.activated && brace.atPole){
+//            if(controlBrace) {
+//                myStopwatch.reset();
+//                slidesTemp = slides.getTargetPosition();
+//                slides.setTargetPosition(slidesTemp + 200);
+//                controlBrace = false;
+//            }
+//        } else{
+//            controlBrace = true;
+//        }
+//        if(myStopwatch.time() >= 0.1 && !controlBrace){
+//            ungrab();
+//        }
+//        if(myStopwatch.time() >= 0.2 && !controlBrace){
+//           slides.setTargetPosition(slidesTemp);
+//        }
     }
 
     public void setWristPower(double wristPower) {

@@ -60,11 +60,9 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         drivetrain.MecanumDrive(vertical, horizontal, rotational, maxSpeed);
 
         slides.setRightTriggerState(gamepad2.right_trigger == 0);
-
         slidePosition += (upPower - downPower) * RobotConfig.Slides.manualSlidePower;
         slidePosition = Math.max(Math.min(slidePosition, RobotConfig.Slides.minSlidePosition), RobotConfig.Slides.maxSlidePosition);
         slides.setTargetPosition(slidePosition);
-
         telemetry.addData("slidesTarget", slidePosition);
 
         arm.setPower(armPower);
@@ -78,16 +76,17 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (grab) claw.toggle();
         else claw.resetToggle();
 
-        slides.displayToTelemetry();
-        arm.displayToTelemetry();
-        claw.displayToTelemetry();
-        brace.displayToTelemetry();
-
-        telemetry.update();
+//        slides.displayToTelemetry();
+//        arm.displayToTelemetry();
+//        claw.displayToTelemetry();
+//        brace.displayToTelemetry();
+//
+//        telemetry.update();
 
         // High
         if (gamepad2.dpad_up && !reverse) {
             slidePosition = RobotConfig.Presets.SlidesHigh;
+
             arm.toPosition(RobotConfig.Presets.Arm1High);
             claw.setPos(RobotConfig.Presets.WristPickup);
             preset = true;
@@ -206,16 +205,16 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad1.y) {
             slidePosition = -700;
         }
-        if(gamepad1.dpad_up){
+        if (gamepad1.dpad_up) {
             brace.brace();
         }
-        if(gamepad1.dpad_down){
+        if (gamepad1.dpad_down) {
             brace.unbrace();
         }
-        if (gamepad1.dpad_left){
+        if (gamepad1.dpad_left) {
             drivetrain.backLeftMotor.setPower(0.3);
         }
-        if (gamepad1.dpad_right){
+        if (gamepad1.dpad_right) {
             drivetrain.backRightMotor.setPower(0.3);
         }
     }
