@@ -32,7 +32,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     boolean rightTriggerState = false;
 
     public boolean atPosition = false;
-
+    public int targetPos;
     public void setMode(DcMotorEx.RunMode runMode) {
         if (runMode != currentRunmode) {
             currentRunmode = runMode;
@@ -48,6 +48,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     public void setTargetPosition(int pos) {
         pos =(int) (pos * RobotConfig.Arm.gearRatio);
         setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        targetPos = pos;
         leftSlideMotor.setTargetPosition(pos);
         rightSlideMotor.setTargetPosition(pos);
     }

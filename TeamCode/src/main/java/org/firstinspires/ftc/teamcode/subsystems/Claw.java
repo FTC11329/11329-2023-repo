@@ -5,6 +5,7 @@ import com.fizzyapple12.javadi.DiInterfaces;
 import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -26,15 +27,22 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     public RobotSide side;
     @DiContainer.Inject()
     public Brace brace;
+    @DiContainer.Inject()
+    public Slides slides;
 
     @DiContainer.Inject()
     Telemetry telemetry;
     private boolean grabbing = true;
     private boolean grabbingDebounce = false;
     static public boolean isAtPreset = false;
+    private boolean controlBrace = true;
+
+    private static ElapsedTime myStopwatch = new ElapsedTime();
 
     double power = 0;
     double targetPosition = 0;
+    int slidesTemp;
+
 
     public enum ConeColor {
         RED,
@@ -60,13 +68,27 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
             grab();
         }
         if(brace.activated && brace.atPole){
+            if(controlBrace) {
+                myStopwatch.reset();
+                slidesTemp = slides.targetPos;
+                slides.setTargetPosition(slidesTemp + 200);
+                controlBrace = false;
+            }
+        } else{
+            controlBrace = true;
+        }
+        if(myStopwatch.time() >= 0.1 && !controlBrace){
             ungrab();
+        }
+        if(myStopwatch.time() >= 0.2 && !controlBrace){
+            slides.setTargetPosition(slidesTemp);
         }
     }
 
     public void setWristPower(double wristPower) {
         power = wristPower;
     }
+    
 
     public void setPos(double pos) {
         targetPosition = pos;
