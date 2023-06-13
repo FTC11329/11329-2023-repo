@@ -65,7 +65,6 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         if (!isAtPreset && RobotConfig.Claw.autoGrab && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))) {
             grab();
         }
-<<<<<<< HEAD
         if(brace.activated && brace.atPole){
             if(controlBrace) {
                 myStopwatch.reset();
@@ -77,9 +76,6 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
             controlBrace = true;
         }
         if(myStopwatch.time() >= 0.1 && !controlBrace){
-=======
-        if (brace.activated && brace.atPole) {
->>>>>>> d510b4faf15939962badefd428aedac614676bbd
             ungrab();
         }
         if(myStopwatch.time() >= 0.2 && !controlBrace){
