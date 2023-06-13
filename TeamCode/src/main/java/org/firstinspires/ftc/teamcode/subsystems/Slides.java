@@ -118,4 +118,5 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         leftSlideMotor.setPower(0);
         rightSlideMotor.setPower(0);
     }
+
 }

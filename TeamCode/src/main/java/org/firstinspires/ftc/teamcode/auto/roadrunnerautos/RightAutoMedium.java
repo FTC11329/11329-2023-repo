@@ -51,7 +51,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .setConstraints(new TrajectoryVelocityConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 55;
+                        return 57;
                     }
                 }, new TrajectoryAccelerationConstraint() {
                     @Override
@@ -88,7 +88,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
                 })
-                .waitSeconds(0.2)
+                .waitSeconds(0.05)
 
                 //ANOTHER CONE !!!!!!!!!!!!!!!
                 //Go to pickup a cone
@@ -97,15 +97,12 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-                .addTemporalMarkerOffset(0.02, () -> {
-                    claw.grab();
-                })
 
                 //Moves off the stack
                 .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .waitSeconds(0.2)
+                .waitSeconds(0.05)
 
                 //Going to Medium
                 .addTemporalMarkerOffset(0.4, () -> {
@@ -145,16 +142,13 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-                .addTemporalMarkerOffset(0.02, () -> {
-                    claw.grab();
-                })
 
 
                 //Moves off the stack
                 .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .waitSeconds(0.2)
+                .waitSeconds(0.05)
 
                 //Going to Medium
                 .addTemporalMarkerOffset(0.4, () -> {
@@ -202,7 +196,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .waitSeconds(0.2)
+                .waitSeconds(0.05)
 
                 //Going to Medium
                 .addTemporalMarkerOffset(0.4, () -> {
@@ -251,7 +245,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .waitSeconds(0.2)
+                .waitSeconds(0.05)
 
                 //Going to Medium
                 .addTemporalMarkerOffset(0.4, () -> {

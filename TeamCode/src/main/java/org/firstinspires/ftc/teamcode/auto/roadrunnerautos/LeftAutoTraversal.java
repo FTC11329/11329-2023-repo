@@ -20,24 +20,24 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Right Auto Traversal", group = "Competition")
-public class RightAutoTraversal extends RoadRunnerAutoBase {
+@Autonomous(name = "Left Auto Traversal", group = "Competition")
+public class LeftAutoTraversal extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
     Brace brace;
 
-    Pose2d placeLocationHigh = new Pose2d(44, 27.5, Math.toRadians(315));
-    Pose2d placeLocationMed  = new Pose2d(43.5, 2.5, Math.toRadians(310));
-    Pose2d placeLocationLow  = new Pose2d(44, -6, Math.toRadians(270));
+    Pose2d placeLocationHigh = new Pose2d(44, 27.5, Math.toRadians(45));
+    Pose2d placeLocationMed  = new Pose2d(48.25, -2.75, Math.toRadians(50));
+    Pose2d placeLocationLow  = new Pose2d(44, -6, Math.toRadians(90));
 
-    Pose2d intermediatePosition1 = new Pose2d(53,-8, Math.toRadians(270));
-    Pose2d intermediatePosition2 = new Pose2d(56, 19.5, Math.toRadians(315));
-    Pose2d intermediatePosition3 = new Pose2d(48, 15, Math.toRadians(270));
+    Pose2d intermediatePosition1 = new Pose2d(53,-8, Math.toRadians(90));
+    Pose2d intermediatePosition2 = new Pose2d(56, 19.5, Math.toRadians(45));
+    Pose2d intermediatePosition3 = new Pose2d(48, 15, Math.toRadians(90));
 
     Pose2d parkLeft = new Pose2d(47.5, 18, Math.toRadians(0));
-    Pose2d parkCenter = new Pose2d(54, -5 ,Math.toRadians(270));
-    Pose2d parkRight = new Pose2d(54, -28, Math.toRadians(270));
+    Pose2d parkCenter = new Pose2d(54, -5 ,Math.toRadians(90));
+    Pose2d parkRight = new Pose2d(54, -28, Math.toRadians(90));
 
     //not tuned yet
     Pose2d pickupOffset = new Pose2d(-4,0,Math.toRadians(0));
@@ -148,7 +148,7 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 })
 //                .lineToLinearHeading(intermediatePosition1)
 //                .lineTo(pickupLocation)
-                .splineTo(pickupLocation, Math.toRadians(270))
+                .splineTo(pickupLocation, Math.toRadians(90))
 
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
@@ -192,7 +192,7 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 })
 //                .lineToLinearHeading(intermediatePosition1)
 //                .lineTo(pickupLocation)
-                .splineTo(pickupLocation, Math.toRadians(270))
+                .splineTo(pickupLocation, Math.toRadians(90))
 
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
@@ -235,7 +235,7 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 })
 //                .lineToLinearHeading(intermediatePosition1)
 //                .lineTo(pickupLocation)
-                .splineTo(pickupLocation, Math.toRadians(270))
+                .splineTo(pickupLocation, Math.toRadians(90))
 
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
@@ -264,7 +264,7 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 });
-                //MED CONE 5---------------------------------------------------------------------
+        //MED CONE 5---------------------------------------------------------------------
 
 
     }
@@ -288,7 +288,7 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 //Go to pickup a cone
 //                .lineToLinearHeading(intermediatePosition1)
 //                .lineTo(new Vector2d(pickupLocation.getX() + pickupOffset.getX(), pickupLocation.getY() + pickupOffset.getY()))
-                .splineTo(pickupLocation, Math.toRadians(270))
+                .splineTo(pickupLocation, Math.toRadians(90))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -332,8 +332,8 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 })
 //                .waitSeconds(0.05)
 
-                .splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(270))
-                .splineTo(new Vector2d(parkLeft.getX(), parkLeft.getY()), Math.toRadians(270));
+                .splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(90))
+                .splineTo(new Vector2d(parkLeft.getX(), parkLeft.getY()), Math.toRadians(90));
 //                .lineToLinearHeading(intermediatePosition3)
 //                .lineToLinearHeading(parkCenter);
 
@@ -357,7 +357,7 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 //Go to pickup a cone
 //                .lineToLinearHeading(intermediatePosition1)
 //                .lineTo(new Vector2d(pickupLocation.getX() + pickupOffset.getX(), pickupLocation.getY() + pickupOffset.getY()))
-                .splineTo(pickupLocation, Math.toRadians(270))
+                .splineTo(pickupLocation, Math.toRadians(90))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -401,8 +401,8 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 })
 //                .waitSeconds(0.05)
 
-                .splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(270))
-                .splineTo(new Vector2d(parkCenter.getX(), parkCenter.getY()), Math.toRadians(270));
+                .splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(90))
+                .splineTo(new Vector2d(parkCenter.getX(), parkCenter.getY()), Math.toRadians(90));
 //                .lineToLinearHeading(intermediatePosition3)
 //                .lineToLinearHeading(parkCenter);
     }
@@ -425,7 +425,7 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 //Go to pickup a cone
 //                .lineToLinearHeading(intermediatePosition1)
 //                .lineTo(new Vector2d(pickupLocation.getX() + pickupOffset.getX(), pickupLocation.getY() + pickupOffset.getY()))
-                .splineTo(pickupLocation, Math.toRadians(270))
+                .splineTo(pickupLocation, Math.toRadians(90))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -468,8 +468,8 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                     brace.unbrace();
                 })
 
-                .splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(270))
-                .splineTo(new Vector2d(parkRight.getX(), parkRight.getY()), Math.toRadians(270));
+                .splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(90))
+                .splineTo(new Vector2d(parkRight.getX(), parkRight.getY()), Math.toRadians(90));
 //                .lineToLinearHeading(intermediatePosition3)
 //                .lineToLinearHeading(parkCenter);
     }

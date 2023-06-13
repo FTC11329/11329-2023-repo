@@ -15,7 +15,7 @@ public class RobotConfig {
         public static String frontRightMotorName = "frontRight";
         public static String backLeftMotorName = "backLeft";
         public static String backRightMotorName = "backRight";
-        public static double slowSpeed = 0.375;
+        public static double slowSpeed = 0.425;
         public static double fastSpeed = 0.75;//0.5
     }
     public static class Brace{
@@ -61,8 +61,8 @@ public class RobotConfig {
         public static int Arm1HighFromRevAuto = 260;
 
         //High Reverse
-        public static int SlidesHighRev = -1600;
-        public static int Arm1HighRev = 610;
+        public static int SlidesHighRev = -1756;
+        public static int Arm1HighRev = 583;
 
         //Medium
         public static int SlidesMed = 0;
@@ -78,8 +78,8 @@ public class RobotConfig {
         public static int Arm1MedFromRev = 300;
 
         //Medium Reverse
-        public static int SlidesMedRev = -347;
-        public static int Arm1MedRev = 610;
+        public static int SlidesMedRev = -590;
+        public static int Arm1MedRev = 600;
 
         //Medium Reverse Auto
         public static int SlidesMedRevAuto = -900;
@@ -96,7 +96,7 @@ public class RobotConfig {
         //Pick up
         public static int SlidesPickup = 0;
         public static int Arm1Pickup = 0;
-        public static double WristPickup = 0.3;
+        public static double WristPickup = 0.32;
 
         //Pick up Reverse
         public static int SlidesPickupRev = 0;
@@ -150,12 +150,12 @@ public class RobotConfig {
         public static String handServo1 = "wristServo1";
         public static String handServo2 = "wristServo2";
         public static double closePos = 0.3;
-        public static double openPos = 0.066;
+        public static double openPos = 0.09;
 
         public static double maxConeDistance = 8; //CM
         public static int maxAutoGrabHeight = -200;
 
-        public static boolean autoGrab = true;
+        public static boolean autoGrab = false;
         public static boolean autoRelease = true;
     }
 

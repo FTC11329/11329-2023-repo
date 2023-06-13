@@ -40,7 +40,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
     @Override
     public void onTick() {
         double vertical = (-gamepad1.left_stick_y) + gamepad1.right_trigger - gamepad1.left_trigger;
-        double horizontal = gamepad1.left_stick_x;
+        double horizontal = -gamepad1.left_stick_x;
         double rotational = gamepad1.right_stick_x;
 
         double upPower = gamepad2.left_trigger;
@@ -73,7 +73,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
 
         //if (slidePosition > RobotConfig.Claw.maxAutoGrabHeight && claw.isConePresent() && claw.getConeColor() == ((side == RobotSide.Red) ? Claw.ConeColor.RED : Claw.ConeColor.BLUE)) claw.ungrab();
 
-        if (gamepad1.left_bumper) claw.ungrab();
+//        if (gamepad1.left_bumper) claw.ungrab();
 
         if (grab) claw.toggle();
         else claw.resetToggle();
@@ -184,7 +184,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             slidePosition = 0;
             claw.setPos(RobotConfig.Presets.WristPickup);
             claw.grab();
-            brace.brace();
+            brace.unbrace();
         }
         //Pickup Fallen Cone
         if (gamepad1.a && !reverse) {
@@ -197,7 +197,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             brace.unbrace();
         }
         //Drive Preset
-        if (gamepad1.right_stick_button || gamepad2.left_bumper) {
+        if (gamepad1.right_stick_button || gamepad2.left_bumper || gamepad1.left_bumper) {
             arm.toPosition(RobotConfig.Presets.Arm1Drive);
             slidePosition = RobotConfig.Presets.SlidesDrive;
             claw.setPos(RobotConfig.Wrist.startingPosition);

@@ -10,8 +10,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.RobotConfig;
-import org.firstinspires.ftc.teamcode.commands.TeleopDrive;
-import org.firstinspires.ftc.teamcode.teleop.TeleopBlue;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, DiInterfaces.IInitializable {
@@ -64,9 +62,10 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
 
         handWave2.setPosition(1.0 - targetPosition);
         handWave1.setPosition(targetPosition);
-        if(!isAtPreset && RobotConfig.Claw.autoGrab && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))){
+        if (!isAtPreset && RobotConfig.Claw.autoGrab && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))) {
             grab();
         }
+<<<<<<< HEAD
         if(brace.activated && brace.atPole){
             if(controlBrace) {
                 myStopwatch.reset();
@@ -78,6 +77,9 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
             controlBrace = true;
         }
         if(myStopwatch.time() >= 0.1 && !controlBrace){
+=======
+        if (brace.activated && brace.atPole) {
+>>>>>>> d510b4faf15939962badefd428aedac614676bbd
             ungrab();
         }
         if(myStopwatch.time() >= 0.2 && !controlBrace){
@@ -149,11 +151,12 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         //telemetry.addData("Cone Color", getConeColor());
     }
 
-    public boolean getPresetBool(){
+    public boolean getPresetBool() {
         return isAtPreset;
     }
-    public void setPresetBool(boolean isAtPreset){
-        this.isAtPreset = isAtPreset;
+
+    public void setPresetBool(boolean isAtPreset) {
+        Claw.isAtPreset = isAtPreset;
     }
 
     @Override
