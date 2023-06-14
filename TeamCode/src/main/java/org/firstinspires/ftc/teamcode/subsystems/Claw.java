@@ -114,6 +114,10 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         grabbing = true;
         closeClaw.setPosition(RobotConfig.Claw.closePos);
     }
+    public void halfGrab(){
+        closeClaw.setPosition(RobotConfig.Claw.halfPos);
+        grabbing = true;
+    }
 
     public void grab() {
         grabbing = false;

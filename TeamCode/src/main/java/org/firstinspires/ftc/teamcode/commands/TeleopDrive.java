@@ -76,6 +76,10 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (grab) claw.toggle();
         else claw.resetToggle();
 
+        if (gamepad2.right_stick_button){
+            claw.halfGrab();
+        }
+
 //        slides.displayToTelemetry();
 //        arm.displayToTelemetry();
 //        claw.displayToTelemetry();
@@ -132,7 +136,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             slidePosition = RobotConfig.Presets.SlidesMedRev;
             arm.toPosition(RobotConfig.Presets.Arm1MedRev);
             claw.grab();
-            claw.setPos(RobotConfig.Presets.WristPlacing);
+            claw.setPos(RobotConfig.Presets.WristPickup);
             preset = true;
             claw.setPresetBool(true);
             brace.brace();

@@ -49,7 +49,7 @@ public class RobotConfig {
         public static int Arm1High = 386;
 
         //High Auto
-        public static int SlidesHighAuto = -1150;
+        public static int SlidesHighAuto = -1200;
         public static int Arm1HighAuto = 330;
 
         //High From Reverse Pickup
@@ -61,7 +61,7 @@ public class RobotConfig {
         public static int Arm1HighFromRevAuto = 260;
 
         //High Reverse
-        public static int SlidesHighRev = -1600;
+        public static int SlidesHighRev = -1800;
         public static int Arm1HighRev = 610;
 
         //Medium
@@ -78,7 +78,7 @@ public class RobotConfig {
         public static int Arm1MedFromRev = 300;
 
         //Medium Reverse
-        public static int SlidesMedRev = -347;
+        public static int SlidesMedRev = -550;
         public static int Arm1MedRev = 610;
 
         //Medium Reverse Auto
@@ -150,7 +150,8 @@ public class RobotConfig {
         public static String handServo1 = "wristServo1";
         public static String handServo2 = "wristServo2";
         public static double closePos = 0.3;
-        public static double openPos = 0.09;
+        public static double halfPos = 0.22;
+        public static double openPos = 0.1;
 
         public static double maxConeDistance = 8; //CM
         public static int maxAutoGrabHeight = -200;
