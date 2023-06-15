@@ -27,13 +27,13 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
     Slides slides;
     Brace brace;
 
-    Pose2d placeLocationHigh = new Pose2d(44, 27.5, Math.toRadians(45));
-    Pose2d placeLocationMed  = new Pose2d(48.25, -2.75, Math.toRadians(50));
-    Pose2d placeLocationLow  = new Pose2d(44, -6, Math.toRadians(90));
+    Pose2d placeLocationHigh = new Pose2d(46.5, -25.5, Math.toRadians(45));
+    Pose2d placeLocationMed  = new Pose2d(45.5, 0.5, Math.toRadians(50));
+    Pose2d placeLocationLow  = new Pose2d(42, 6, Math.toRadians(90));
 
-    Pose2d intermediatePosition1 = new Pose2d(53,-8, Math.toRadians(90));
-    Pose2d intermediatePosition2 = new Pose2d(56, 19.5, Math.toRadians(45));
-    Pose2d intermediatePosition3 = new Pose2d(48, 15, Math.toRadians(90));
+    Pose2d intermediatePosition1 = new Pose2d(53.5,5, Math.toRadians(90));
+    Pose2d intermediatePosition2 = new Pose2d(53.5, -20, Math.toRadians(45));
+    Pose2d intermediatePosition3 = new Pose2d(50.5, -6, Math.toRadians(90));
 
     Pose2d parkLeft = new Pose2d(47.5, 18, Math.toRadians(0));
     Pose2d parkCenter = new Pose2d(54, -5 ,Math.toRadians(90));
@@ -43,8 +43,7 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
     Pose2d pickupOffset = new Pose2d(-4,0,Math.toRadians(0));
     Pose2d placeOffset = new Pose2d(0.5,1,Math.toRadians(0));
 
-
-    Vector2d pickupLocation = new Vector2d(52.5, -30);
+    Vector2d pickupLocation = new Vector2d(51, 28);
 
     //Auto path: Low near stack, Medium, High speed stack, Medium * 2
 
@@ -190,8 +189,6 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1PickupTop);
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
-//                .lineToLinearHeading(intermediatePosition1)
-//                .lineTo(pickupLocation)
                 .splineTo(pickupLocation, Math.toRadians(90))
 
                 .addTemporalMarkerOffset(0, () -> {
@@ -233,8 +230,6 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1PickupTop);
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
-//                .lineToLinearHeading(intermediatePosition1)
-//                .lineTo(pickupLocation)
                 .splineTo(pickupLocation, Math.toRadians(90))
 
                 .addTemporalMarkerOffset(0, () -> {
