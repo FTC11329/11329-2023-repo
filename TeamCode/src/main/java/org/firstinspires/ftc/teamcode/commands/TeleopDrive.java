@@ -37,6 +37,8 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
     @DiContainer.Inject()
     Brace brace;
 
+    private boolean releaseContorller = false;
+
     @Override
     public void onTick() {
         double vertical = (-gamepad1.left_stick_y) + gamepad1.right_trigger - gamepad1.left_trigger;
@@ -79,6 +81,19 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad2.right_stick_button){
             claw.halfGrab();
         }
+        if (gamepad2.left_stick_button) {
+            if(releaseContorller == true) {
+                claw.autoRelease = true;
+                releaseContorller = false;
+            }
+        }
+        else{
+           if(releaseContorller = false){
+               claw.autoRelease = false;
+               releaseContorller = true;
+           }
+        }
+
 
 //        slides.displayToTelemetry();
 //        arm.displayToTelemetry();

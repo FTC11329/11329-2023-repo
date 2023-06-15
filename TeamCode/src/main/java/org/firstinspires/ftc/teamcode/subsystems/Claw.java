@@ -41,7 +41,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     double targetPosition = 0;
     int slidesTemp;
 
-
+    public boolean autoRelease = true;
     public enum ConeColor {
         RED,
         BLUE,
@@ -55,6 +55,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         handWave1.setPosition(targetPosition);
     }
 
+
     @Override
     public void onTick() {
         targetPosition += RobotConfig.Claw.wristSpeed * power;
@@ -66,7 +67,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         if (!isAtPreset && RobotConfig.Claw.autoGrab && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))) {
             grab();
         }
-        if(brace.activated && brace.atPole) {
+        if(brace.activated && brace.atPole && autoRelease) {
             ungrab();
         }
 //        if(brace.activated && brace.atPole){
