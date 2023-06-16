@@ -65,7 +65,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         slidePosition += (upPower - downPower) * RobotConfig.Slides.manualSlidePower;
         slidePosition = Math.max(Math.min(slidePosition, RobotConfig.Slides.minSlidePosition), RobotConfig.Slides.maxSlidePosition);
         slides.setTargetPosition(slidePosition);
-        telemetry.addData("slidesTarget", slidePosition);
+//        telemetry.addData("slidesTarget", slidePosition);
 
         arm.setPower(armPower);
 
@@ -95,12 +95,12 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         }
 
 
-//        slides.displayToTelemetry();
-//        arm.displayToTelemetry();
-//        claw.displayToTelemetry();
-//        brace.displayToTelemetry();
-//
-//        telemetry.update();
+        slides.displayToTelemetry();
+        arm.displayToTelemetry();
+        claw.displayToTelemetry();
+        brace.displayToTelemetry();
+
+        telemetry.update();
 
         // High
         if (gamepad2.dpad_up && !reverse) {
@@ -124,7 +124,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             slidePosition = RobotConfig.Presets.SlidesHighRev;
             arm.toPosition(RobotConfig.Presets.Arm1HighRev);
             claw.grab();
-            claw.setPos(RobotConfig.Presets.WristPlacing);
+            claw.setPos(RobotConfig.Presets.WristPickup);
             preset = true;
             claw.setPresetBool(true);
             brace.brace();
@@ -198,11 +198,11 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
 //        }
         //Reverse low
         if (gamepad2.dpad_left && !reverse) {
-            arm.toPosition(650);
-            slidePosition = 0;
-            claw.setPos(RobotConfig.Presets.WristPickup);
+            arm.toPosition(RobotConfig.Presets.Arm1LowRev);
+            slidePosition = RobotConfig.Presets.SlidesLowRev;
+            claw.setPos(RobotConfig.Presets.WristLowRev);
             claw.grab();
-            brace.brace();
+            brace.unbrace();
         }
         //Pickup Fallen Cone
         if (gamepad1.a && !reverse) {

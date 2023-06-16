@@ -26,8 +26,8 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
     Slides slides;
     Brace brace;
 
-    Pose2d placeLocationHigh = new Pose2d(43.75, -24.3, Math.toRadians(60));
-    Pose2d placeLocationMed = new Pose2d(48.25, -2.75, Math.toRadians(50));
+    Pose2d placeLocationHigh = new Pose2d(43, -25.5, Math.toRadians(60));
+    Pose2d placeLocationMed = new Pose2d(47, -2.75, Math.toRadians(50));
     Pose2d intermediatePos = new Pose2d(51.9, -6.8, Math.toRadians(90));
     Vector2d pickupLocation = new Vector2d(46, 30.25);
 

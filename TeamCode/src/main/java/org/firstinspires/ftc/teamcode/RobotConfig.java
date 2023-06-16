@@ -93,6 +93,11 @@ public class RobotConfig {
         public static int SlidesLowFromRev = 0;
         public static int Arm1LowFromRev = 230;
 
+        //Low Reverse
+        public static int SlidesLowRev = 0;
+        public static int Arm1LowRev = 695;
+        public static double WristLowRev = 0.41;
+
         //Pick up
         public static int SlidesPickup = 0;
         public static int Arm1Pickup = 0;
