@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotConfig;
+import org.firstinspires.ftc.teamcode.commands.TeleopDrive;
 
 public class Brace implements DiInterfaces.IDisposable, DiInterfaces.IInitializable, DiInterfaces.ITickable {
     @DiContainer.Inject(id = "bracePlate")
@@ -18,6 +19,7 @@ public class Brace implements DiInterfaces.IDisposable, DiInterfaces.IInitializa
     RevTouchSensor LineBreak;
     @DiContainer.Inject()
     Telemetry telemetry;
+
     boolean rightTriggerState = false;
 
     public boolean atPole = false;
@@ -27,8 +29,10 @@ public class Brace implements DiInterfaces.IDisposable, DiInterfaces.IInitializa
     public void setTargetPosition(int pos) {}
 
     public void brace() {
-        bracePlateServo.setPosition(0.41);//0.44
-        activated = true;
+        if (!TeleopDrive.callBeacon()) {
+            bracePlateServo.setPosition(0.41);//0.44
+            activated = true;
+        }
     }
 
     public void unbrace() {

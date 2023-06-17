@@ -61,8 +61,8 @@ public class RobotConfig {
         public static int Arm1HighFromRevAuto = 260;
 
         //High Reverse
-        public static int SlidesHighRev = -1800;
-        public static int Arm1HighRev = 610;
+        public static int SlidesHighRev = -1660;
+        public static int Arm1HighRev = 590;
 
         //Medium
         public static int SlidesMed = 0;
@@ -78,8 +78,8 @@ public class RobotConfig {
         public static int Arm1MedFromRev = 300;
 
         //Medium Reverse
-        public static int SlidesMedRev = -550;
-        public static int Arm1MedRev = 610;
+        public static int SlidesMedRev = -330;
+        public static int Arm1MedRev = 570;
 
         //Medium Reverse Auto
         public static int SlidesMedRevAuto = -900;
@@ -174,10 +174,11 @@ public class RobotConfig {
         public static int maxArmPosition = 890;
         public static int minArmPosition = 0;
 
-        public static double kp = 0.0050;
-        public static double ki = 0.0000;
-        public static double kd = 0.0005;
-        public static double kf = 0.2000;
+        public static double kp = 0.0050;//0.0050
+        public static double ki = 0.0000;//0.0000
+        public static double kd = 0.0005;//0.0005
+        public static double kf = 0.2000;//0.2000
+        public static double kfBeacon = 0.2300;//0.2000
 
         public static double gearRatio = 13.2/19.7;
         // d was too small                                 <--Joke haha funny

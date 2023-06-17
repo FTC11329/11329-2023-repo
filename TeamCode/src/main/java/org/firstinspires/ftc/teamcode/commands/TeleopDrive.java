@@ -27,6 +27,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
     public int slidePosition = 0;
     public boolean reverse = false;
     public boolean preset = false;
+    public static boolean beacon = false;
     @DiContainer.Inject()
     Telemetry telemetry;
     @DiContainer.Inject()
@@ -185,6 +186,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             preset = false;
             claw.setPresetBool(false);
             brace.unbrace();
+            arm.noBeaconPIDF();
         }
         //Pickup Reverse
 //        if (gamepad2.x) {
@@ -196,6 +198,12 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
 //            preset = false;
 //            claw.setPresetBool(false);
 //        }
+        //Beacon pickup
+        if (gamepad2.x){
+            claw.grab();
+            beacon = true;
+            arm.BeaconPIDF();
+        }
         //Reverse low
         if (gamepad2.dpad_left && !reverse) {
             arm.toPosition(RobotConfig.Presets.Arm1LowRev);
@@ -213,6 +221,8 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             preset = false;
             claw.setPresetBool(false);
             brace.unbrace();
+            beacon = false;
+            arm.noBeaconPIDF();
         }
         //Drive Preset
         if (gamepad1.right_stick_button || gamepad2.left_bumper) {
@@ -236,6 +246,14 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad1.dpad_right) {
             drivetrain.backRightMotor.setPower(0.3);
         }
+    }
+
+    public static void setBeacon (boolean tempBeacon) {
+        beacon = tempBeacon;
+    }
+
+    public static boolean callBeacon () {
+        return beacon;
     }
 
     @Override

@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.RobotConfig;
+import org.firstinspires.ftc.teamcode.commands.TeleopDrive;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, DiInterfaces.IInitializable {
@@ -102,7 +103,13 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         if (grabbing && !grabbingDebounce) {
             grab();
         } else if (!grabbing && !grabbingDebounce) {
-            ungrab();
+            if (TeleopDrive.callBeacon()){
+                halfGrab();
+                TeleopDrive.setBeacon(false);
+            } else {
+                ungrab();
+            }
+
         }
         grabbingDebounce = true;
     }
