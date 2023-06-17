@@ -61,7 +61,7 @@ public class RobotConfig {
         public static int Arm1HighFromRevAuto = 260;
 
         //High Reverse
-        public static int SlidesHighRev = -1660;
+        public static int SlidesHighRev = -1620;
         public static int Arm1HighRev = 590;
 
         //Medium
@@ -79,7 +79,7 @@ public class RobotConfig {
 
         //Medium Reverse
         public static int SlidesMedRev = -330;
-        public static int Arm1MedRev = 570;
+        public static int Arm1MedRev = 590;
 
         //Medium Reverse Auto
         public static int SlidesMedRevAuto = -900;
@@ -163,6 +163,8 @@ public class RobotConfig {
 
         public static boolean autoGrab = false;
         public static boolean autoRelease = true;
+
+        public static double coneFlip = 0.38;
     }
 
     public static class Arm {
