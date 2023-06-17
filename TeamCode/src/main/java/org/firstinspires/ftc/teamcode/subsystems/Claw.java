@@ -161,6 +161,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         telemetry.addData("Hand2 Position", handWave2.getPosition());
         telemetry.addData("Cone Present", isConePresent());
         telemetry.addData("Claw Fingers pos", closeClaw.getPosition());
+        telemetry.addData("Auto Release", autoRelease);
         //telemetry.addData("Cone Color", getConeColor());
     }
 

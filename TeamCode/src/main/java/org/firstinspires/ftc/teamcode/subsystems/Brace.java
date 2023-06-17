@@ -29,7 +29,7 @@ public class Brace implements DiInterfaces.IDisposable, DiInterfaces.IInitializa
     public void setTargetPosition(int pos) {}
 
     public void brace() {
-        if (!TeleopDrive.callBeacon()) {
+        if (!TeleopDrive.callBeacon() && !TeleopDrive.auto) {
             bracePlateServo.setPosition(0.41);//0.44
             activated = true;
         }

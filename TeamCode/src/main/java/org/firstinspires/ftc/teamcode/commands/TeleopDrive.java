@@ -39,7 +39,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
     public boolean preset = false;
     public static boolean beacon = false;
     public static boolean manualAdjust = false;
-
+    public static boolean auto = false;
     private boolean releaseContorller = false;
 
     @Override
@@ -88,12 +88,11 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.halfGrab();
         }
         if (gamepad2.back) {
-            if(releaseContorller == true) {
+            if (releaseContorller == true) {
                 claw.autoRelease = !claw.autoRelease;
                 releaseContorller = false;
             }
-        }
-        else{
+        } else {
            if(releaseContorller == false){
                releaseContorller = true;
            }
