@@ -42,7 +42,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     double targetPosition = 0;
     int slidesTemp;
 
-    public boolean autoRelease = true;
+//    public boolean autoRelease = true;
     public enum ConeColor {
         RED,
         BLUE,
@@ -68,25 +68,9 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         if (!isAtPreset && RobotConfig.Claw.autoGrab && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))) {
             grab();
         }
-        if(brace.activated && brace.atPole && autoRelease) {
+        /*if(brace.activated && brace.atPole && autoRelease) {
             ungrab();
-        }
-//        if(brace.activated && brace.atPole){
-//            if(controlBrace) {
-//                myStopwatch.reset();
-//                slidesTemp = slides.getTargetPosition();
-//                slides.setTargetPosition(slidesTemp + 200);
-//                controlBrace = false;
-//            }
-//        } else{
-//            controlBrace = true;
-//        }
-//        if(myStopwatch.time() >= 0.1 && !controlBrace){
-//            ungrab();
-//        }
-//        if(myStopwatch.time() >= 0.2 && !controlBrace){
-//           slides.setTargetPosition(slidesTemp);
-//        }
+        }*/
     }
 
     public void setWristPower(double wristPower) {
