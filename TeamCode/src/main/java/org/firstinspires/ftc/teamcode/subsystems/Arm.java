@@ -66,13 +66,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
         //double currentPosition = arm.getCurrentPosition();
     }
 
-    public void BeaconPIDF() {
-        armPID = new CustomPID(RobotConfig.Arm.kp, RobotConfig.Arm.ki, RobotConfig.Arm.kd, RobotConfig.Arm.kfBeacon);
-    }
-    public void noBeaconPIDF() {
-        armPID = new CustomPID(RobotConfig.Arm.kp, RobotConfig.Arm.ki, RobotConfig.Arm.kd, RobotConfig.Arm.kf);
 
-    }
     public void toPosition(int pos) {
         targetPosition = pos;
         power = 0;

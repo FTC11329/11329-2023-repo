@@ -24,10 +24,6 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
     public Claw claw;
     @DiContainer.Inject()
     public RobotSide side;
-    public int slidePosition = 0;
-    public boolean reverse = false;
-    public boolean preset = false;
-    public static boolean beacon = false;
     @DiContainer.Inject()
     Telemetry telemetry;
     @DiContainer.Inject()
@@ -37,6 +33,12 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
     private double maxSpeed;
     @DiContainer.Inject()
     Brace brace;
+
+    public int slidePosition = 0;
+    public boolean reverse = false;
+    public boolean preset = false;
+    public static boolean beacon = false;
+    public static boolean manualAdjust = false;
 
     private boolean releaseContorller = false;
 
@@ -58,6 +60,9 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             maxSpeed = RobotConfig.Drivetrain.fastSpeed;
         } else {
             maxSpeed = RobotConfig.Drivetrain.slowSpeed;
+        }
+        if (gamepad2.left_stick_y > 0.1 || gamepad2.left_stick_y < -0.1 || gamepad2.left_trigger > 0.1 || gamepad2.right_trigger > 0.1) {
+            manualAdjust = true;
         }
 
         drivetrain.MecanumDrive(vertical, horizontal, rotational, maxSpeed);
@@ -106,12 +111,12 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         // High
         if (gamepad2.dpad_up && !reverse) {
             slidePosition = RobotConfig.Presets.SlidesHigh;
-
             arm.toPosition(RobotConfig.Presets.Arm1High);
             claw.setPos(RobotConfig.Presets.WristPickup);
             preset = true;
             claw.setPresetBool(true);
             brace.unbrace();
+            manualAdjust = false;
         }
         // High From Reverse Pickup
         if (gamepad2.dpad_up && reverse) {
@@ -120,6 +125,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPos(RobotConfig.Presets.WristPickupRev);
             preset = true;
             claw.setPresetBool(true);
+            manualAdjust = false;
         }
         // High Reverse
         if (gamepad2.y) {
@@ -130,6 +136,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             preset = true;
             claw.setPresetBool(true);
             brace.brace();
+            manualAdjust = false;
         }
         // Medium
         if (gamepad2.dpad_right && !reverse) {
@@ -139,6 +146,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             preset = true;
             claw.setPresetBool(true);
             brace.unbrace();
+            manualAdjust = false;
         }
         // Medium From Reverse Pickup
         if (gamepad2.dpad_right && reverse) {
@@ -147,6 +155,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPos(RobotConfig.Presets.WristPickupRev);
             preset = true;
             claw.setPresetBool(true);
+            manualAdjust = false;
         }
         //Medium Reverse
         if (gamepad2.b) {
@@ -157,6 +166,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             preset = true;
             claw.setPresetBool(true);
             brace.brace();
+            manualAdjust = false;
         }
         // Low
         if (gamepad2.dpad_down) {
@@ -166,6 +176,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             preset = true;
             claw.setPresetBool(true);
             brace.unbrace();
+            manualAdjust = false;
         }
         // Low from Rev
         if (gamepad2.dpad_down && reverse) {
@@ -175,6 +186,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.grab();
             preset = true;
             claw.setPresetBool(true);
+            manualAdjust = false;
         }
         //Pickup
         if (gamepad2.a) {
@@ -186,7 +198,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             preset = false;
             claw.setPresetBool(false);
             brace.unbrace();
-            arm.noBeaconPIDF();
+            manualAdjust = false;
         }
         //Pickup Reverse
 //        if (gamepad2.x) {
@@ -202,7 +214,6 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad2.x){
             claw.grab();
             beacon = true;
-            arm.BeaconPIDF();
         }
         //Reverse low
         if (gamepad2.dpad_left && !reverse) {
@@ -211,6 +222,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPos(RobotConfig.Presets.WristLowRev);
             claw.grab();
             brace.unbrace();
+            manualAdjust = false;
         }
         //Pickup Fallen Cone
         if (gamepad1.a && !reverse) {
@@ -222,7 +234,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPresetBool(false);
             brace.unbrace();
             beacon = false;
-            arm.noBeaconPIDF();
+            manualAdjust = false;
         }
         //Drive Preset
         if (gamepad1.right_stick_button || gamepad2.left_bumper) {
@@ -230,6 +242,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             slidePosition = RobotConfig.Presets.SlidesDrive;
             claw.setPos(RobotConfig.Wrist.startingPosition);
             brace.unbrace();
+            manualAdjust = false;
         }
         if (gamepad1.y) {
             slidePosition = -700;
@@ -250,6 +263,9 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
 
     public static void setBeacon (boolean tempBeacon) {
         beacon = tempBeacon;
+    }
+    public static void setManualAdjust (boolean manualAdjustTemp) {
+        manualAdjust = manualAdjustTemp;
     }
 
     public static boolean callBeacon () {

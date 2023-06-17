@@ -100,7 +100,7 @@ public class RobotConfig {
 
         //Pick up
         public static int SlidesPickup = 0;
-        public static int Arm1Pickup = 0;
+        public static int Arm1Pickup = 8;
         public static double WristPickup = 0.32;
 
         //Pick up Reverse
@@ -176,9 +176,8 @@ public class RobotConfig {
 
         public static double kp = 0.0050;//0.0050
         public static double ki = 0.0000;//0.0000
-        public static double kd = 0.0005;//0.0005
+        public static double kd = 0.0004;//0.0005
         public static double kf = 0.2000;//0.2000
-        public static double kfBeacon = 0.2300;//0.2000
 
         public static double gearRatio = 13.2/19.7;
         // d was too small                                 <--Joke haha funny
