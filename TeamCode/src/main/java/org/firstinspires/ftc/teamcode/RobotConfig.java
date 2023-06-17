@@ -136,6 +136,7 @@ public class RobotConfig {
         public static String bracePlateServo = "bracePlate";
         public static int maxSlidePosition = -2200;
         public static int minSlidePosition = 5;
+        public static int dip = 150; // amount to dip when line break sensor detects cone is lined up
 
         public static double manualSlidePower = 85;//50;
         public static double automaticSlidePower = 1;// 0 to 1 power where 1 is max

@@ -25,6 +25,8 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     RevTouchSensor leftLimitSwitch;
     @DiContainer.Inject(id = "rightSlideLimitSwitch")
     RevTouchSensor rightLimitSwitch;
+    @DiContainer.Inject()
+    public Brace brace;
 
 
     DcMotor.RunMode currentRunmode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
@@ -33,6 +35,8 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
 
     public boolean atPosition = false;
     private int targetPos;
+    private boolean dipped;
+    private int unDippedPos;
 
     public void setMode(DcMotorEx.RunMode runMode) {
         if (runMode != currentRunmode) {
@@ -56,6 +60,7 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         targetPos = pos;
         leftSlideMotor.setTargetPosition(pos);
         rightSlideMotor.setTargetPosition(pos);
+        dipped = false;
     }
 
 
@@ -92,6 +97,16 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         }
         if (Math.abs(leftSlideMotor.getCurrentPosition() - leftSlideMotor.getTargetPosition()) < 50) {
             atPosition = true;
+        }
+
+        if (brace.activated && brace.atPole && ! leftSlideMotor.isBusy() && ! rightSlideMotor.isBusy()) {
+            unDippedPos = getTargetPosition();
+            setTargetPosition(unDippedPos + RobotConfig.Slides.dip);
+            dipped = true;
+        }
+        if (dipped && (! brace.activated || ! brace.atPole)){
+            dipped = false;
+            setTargetPosition(unDippedPos);
         }
     }
 
