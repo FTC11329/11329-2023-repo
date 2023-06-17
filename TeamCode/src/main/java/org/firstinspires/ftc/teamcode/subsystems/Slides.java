@@ -93,15 +93,6 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         if (Math.abs(leftSlideMotor.getCurrentPosition() - leftSlideMotor.getTargetPosition()) < 50) {
             atPosition = true;
         }
-
-//        if (rightSlideMotor.getCurrentPosition() < rightSlideMotor.getTargetPosition() && rightLimitSwitch.isPressed()) {
-//            setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
-//            setTargetPosition(-1);
-//        }
-//        if (leftSlideMotor.getCurrentPosition() < leftSlideMotor.getTargetPosition() && leftLimitSwitch.isPressed()) {
-//            setMode((DcMotor.RunMode.STOP_AND_RESET_ENCODER));
-//            setTargetPosition(-1);
-//        }
     }
 
     public void setRightTriggerState(boolean state) {
