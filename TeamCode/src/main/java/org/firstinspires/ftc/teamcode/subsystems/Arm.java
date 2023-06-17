@@ -39,7 +39,8 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     double targetPosition = 0;
     double power;
 
-    double zeroAngle = 199;
+    double zeroAngle = 205;
+    //zero angle = arm being strait out
     //455 straight UP
     double tickToDegrees = 0.3854389722;
     private CustomPID armPID;
@@ -79,7 +80,6 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     public void displayToTelemetry() {
         telemetry.addData("Arm Position", arm.getCurrentPosition());
         telemetry.addData("Arm Target Position", targetPosition);
-
     }
 
     @Override

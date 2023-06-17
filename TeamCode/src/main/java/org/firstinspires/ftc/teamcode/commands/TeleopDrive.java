@@ -110,6 +110,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPos(RobotConfig.Presets.WristPickup);
             preset = true;
             claw.setPresetBool(true);
+            brace.unbrace();
         }
         // High From Reverse Pickup
         if (gamepad2.dpad_up && reverse) {
@@ -136,7 +137,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPos(RobotConfig.Presets.WristPickup);
             preset = true;
             claw.setPresetBool(true);
-            brace.brace();
+            brace.unbrace();
         }
         // Medium From Reverse Pickup
         if (gamepad2.dpad_right && reverse) {
@@ -173,7 +174,6 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.grab();
             preset = true;
             claw.setPresetBool(true);
-
         }
         //Pickup
         if (gamepad2.a) {
