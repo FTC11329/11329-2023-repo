@@ -95,7 +95,7 @@ public class RobotConfig {
 
         //Low Reverse
         public static int SlidesLowRev = 0;
-        public static int Arm1LowRev = 695;
+        public static int Arm1LowRev = 680;
         public static double WristLowRev = 0.41;
 
         //Pick up
