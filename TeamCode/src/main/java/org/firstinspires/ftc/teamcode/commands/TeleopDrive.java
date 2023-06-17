@@ -87,15 +87,14 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad2.right_stick_button){
             claw.halfGrab();
         }
-        if (gamepad2.left_stick_button) {
+        if (gamepad2.back) {
             if(releaseContorller == true) {
-                claw.autoRelease = true;
+                claw.autoRelease = !claw.autoRelease;
                 releaseContorller = false;
             }
         }
         else{
-           if(releaseContorller = false){
-               claw.autoRelease = false;
+           if(releaseContorller == false){
                releaseContorller = true;
            }
         }
