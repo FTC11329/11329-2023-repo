@@ -36,7 +36,6 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
     public boolean atPosition = false;
     private int targetPos;
     private boolean dipped;
-    private int unDippedPos;
 
     public void setMode(DcMotorEx.RunMode runMode) {
         if (runMode != currentRunmode) {
@@ -100,15 +99,24 @@ public class Slides implements DiInterfaces.IDisposable, DiInterfaces.IInitializ
         }
 
         if (brace.activated && brace.atPole && ! leftSlideMotor.isBusy() && ! rightSlideMotor.isBusy()) {
-            unDippedPos = getTargetPosition();
-            setTargetPosition(unDippedPos + RobotConfig.Slides.dip);
-            dipped = true;
+            dip();
         }
         if (dipped && (! brace.activated || ! brace.atPole)){
-            dipped = false;
-            setTargetPosition(unDippedPos);
+            unDip();
         }
     }
+
+    public void dip(){
+        setTargetPosition(getTargetPosition() + RobotConfig.Slides.dip);
+        dipped = true;
+    }
+
+    public void unDip(){
+        dipped = false; // redundant, but for consistency
+        setTargetPosition(getTargetPosition() - RobotConfig.Slides.dip);
+    }
+
+    public boolean dipped(){return dipped;}
 
     public void setRightTriggerState(boolean state) {
         rightTriggerState = state;
