@@ -5,6 +5,7 @@ import com.fizzyapple12.javadi.DiInterfaces;
 import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.robot.Robot;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -36,13 +37,15 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     static public boolean isAtPreset = false;
     private boolean controlBrace = true;
 
-    private static ElapsedTime myStopwatch = new ElapsedTime();
+    private static ElapsedTime autoReleaseTimer = new ElapsedTime();
 
     double power = 0;
     double targetPosition = 0;
     int slidesTemp;
-
+    public int slidesOffset;
     public boolean autoRelease = true;
+    public boolean autoReleaseTimerTriggered = false;
+    public boolean controlbracetiming = false;
     public enum ConeColor {
         RED,
         BLUE,
@@ -68,8 +71,23 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         if (!isAtPreset && RobotConfig.Claw.autoGrab && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))) {
             grab();
         }
-        if(brace.activated && brace.atPole && autoRelease) {
+        if(brace.activated && brace.atPole && autoRelease && controlbracetiming) {
+            //ungrab();
+            slidesOffset = 180;
+            autoReleaseTimer.reset();
+            autoReleaseTimerTriggered = true;
+            controlbracetiming = false;
+        }
+        if(autoReleaseTimerTriggered && autoReleaseTimer.time() >= 0.3){
+            grab();
+            autoReleaseTimerTriggered = false;
+        }
+        else if(autoReleaseTimerTriggered && autoReleaseTimer.time() >= 0.2){
             ungrab();
+        }
+
+        if(!brace.activated || !brace.atPole){
+            controlbracetiming = true;
         }
 //        if(brace.activated && brace.atPole){
 //            if(controlBrace) {

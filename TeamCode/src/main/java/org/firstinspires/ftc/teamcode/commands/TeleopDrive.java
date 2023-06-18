@@ -70,7 +70,8 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         slides.setRightTriggerState(gamepad2.right_trigger == 0);
         slidePosition += (upPower - downPower) * RobotConfig.Slides.manualSlidePower;
         slidePosition = Math.max(Math.min(slidePosition, RobotConfig.Slides.minSlidePosition), RobotConfig.Slides.maxSlidePosition);
-        slides.setTargetPosition(slidePosition);
+
+        slides.setTargetPosition(slidePosition + claw.slidesOffset);
 //        telemetry.addData("slidesTarget", slidePosition);
 
         arm.setPower(armPower);
@@ -115,6 +116,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPresetBool(true);
             brace.unbrace();
             manualAdjust = false;
+            claw.slidesOffset = 0;
         }
         // High From Reverse Pickup
         if (gamepad2.dpad_up && reverse) {
@@ -124,6 +126,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             preset = true;
             claw.setPresetBool(true);
             manualAdjust = false;
+            claw.slidesOffset = 0;
         }
         // High Reverse
         if (gamepad2.y) {
@@ -135,6 +138,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPresetBool(true);
             brace.brace();
             manualAdjust = false;
+            claw.slidesOffset = 0;
         }
         // Medium
         if (gamepad2.dpad_right && !reverse) {
@@ -145,6 +149,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPresetBool(true);
             brace.unbrace();
             manualAdjust = false;
+            claw.slidesOffset = 0;
         }
         // Medium From Reverse Pickup
         if (gamepad2.dpad_right && reverse) {
@@ -154,6 +159,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             preset = true;
             claw.setPresetBool(true);
             manualAdjust = false;
+            claw.slidesOffset = 0;
         }
         //Medium Reverse
         if (gamepad2.b) {
@@ -165,6 +171,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPresetBool(true);
             brace.brace();
             manualAdjust = false;
+            claw.slidesOffset = 0;
         }
         // Low
         if (gamepad2.dpad_down) {
@@ -175,6 +182,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPresetBool(true);
             brace.unbrace();
             manualAdjust = false;
+            claw.slidesOffset = 0;
         }
         // Low from Rev
         if (gamepad2.dpad_down && reverse) {
@@ -185,6 +193,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             preset = true;
             claw.setPresetBool(true);
             manualAdjust = false;
+            claw.slidesOffset = 0;
         }
         //Pickup
         if (gamepad2.a) {
@@ -197,6 +206,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPresetBool(false);
             brace.unbrace();
             manualAdjust = false;
+            claw.slidesOffset = 0;
         }
         //Pickup Reverse
 //        if (gamepad2.x) {
@@ -212,6 +222,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad2.x){
             claw.grab();
             beacon = true;
+            claw.slidesOffset = 0;
         }
         //Reverse low
         if (gamepad2.dpad_left && !reverse) {
@@ -221,6 +232,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.grab();
             brace.unbrace();
             manualAdjust = false;
+            claw.slidesOffset = 0;
         }
         //Pickup Fallen Cone
         if (gamepad1.a && !reverse) {
@@ -233,6 +245,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             brace.unbrace();
             beacon = false;
             manualAdjust = false;
+            claw.slidesOffset = 0;
         }
         //Drive Preset
         if (gamepad1.right_stick_button || gamepad2.left_bumper) {
@@ -241,9 +254,11 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             claw.setPos(RobotConfig.Wrist.startingPosition);
             brace.unbrace();
             manualAdjust = false;
+            claw.slidesOffset = 0;
         }
         if (gamepad1.y) {
             slidePosition = -700;
+            claw.slidesOffset = 0;
         }
         if (gamepad1.dpad_up) {
             brace.brace();
