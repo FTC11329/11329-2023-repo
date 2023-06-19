@@ -20,7 +20,7 @@ public class SlidesTest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        slidesPID = new CustomPID(RobotConfig.Slides.kp, RobotConfig.Slides.ki, RobotConfig.Slides.kd, RobotConfig.Slides.kf);
+        slidesPID = new CustomPID(RobotConfig.Slides.kp, RobotConfig.Slides.ki, RobotConfig.Slides.kd, RobotConfig.Slides.kf, 0);
         leftSlideMotor = hardwareMap.get(DcMotor.class, RobotConfig.Slides.leftSlideMotor);
         rightSlideMotor = hardwareMap.get(DcMotor.class, RobotConfig.Slides.rightSlideMotor);
         leftSlideMotor.setDirection(DcMotorSimple.Direction.REVERSE);

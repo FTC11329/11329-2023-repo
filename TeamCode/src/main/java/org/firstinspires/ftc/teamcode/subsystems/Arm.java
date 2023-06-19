@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.robot.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotConfig;
+import org.firstinspires.ftc.teamcode.roadrunner.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.roadrunner.drive.GlacierDrive;
 import org.firstinspires.ftc.teamcode.utilities.CustomPID;
 
@@ -53,7 +54,8 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
         arm.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         //arm.setPower(GlacierDrive.armPower);
         arm.setDirection(DcMotorSimple.Direction.REVERSE);
-        armPID = new CustomPID(RobotConfig.Arm.kp, RobotConfig.Arm.ki, RobotConfig.Arm.kd, RobotConfig.Arm.kf);
+        armPID = new CustomPID(DriveConstants.P, DriveConstants.I, DriveConstants.D, DriveConstants.F, DriveConstants.minPow);
+        //armPID = new CustomPID(RobotConfig.Arm.kp, RobotConfig.Arm.ki, RobotConfig.Arm.kd, RobotConfig.Arm.kf);
     }
 
     @Override

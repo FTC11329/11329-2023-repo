@@ -10,6 +10,7 @@ public class CustomPID {
     private double Ki = 0;
     private double Kd = 0;
     private double Kf = 0;
+    private double min = 0;
 
     private double reference = 0;
     private double lastReference = reference;
@@ -35,11 +36,12 @@ public class CustomPID {
         this.Kd = Kd;
         this.timer = new ElapsedTime();
     }
-    public CustomPID(double Kp, double Ki,double  Kd, double Kf){
+    public CustomPID(double Kp, double Ki,double  Kd, double Kf, double min){
         this.Kp = Kp;
         this.Ki = Ki;
         this.Kd = Kd;
         this.Kf = Kf;
+        this.min =   min;
         this.timer = new ElapsedTime();
     }
     public void setTargetPosition(double desiredPosition){
@@ -71,17 +73,24 @@ public class CustomPID {
         this.integral  =  this.integral + (error * timer.seconds());
         timer.reset();
         lastError = error;
-        return this.Kp * error + Ki*integral + Kd* derivative + this.Kf;
+        return this.Kp * error + Ki*integral + Kd* derivative + this.Kf  ;
     }
     public double getPIDfOutput(double currentPosition, double currentAngle){
         //Similar to getPIDoutput but adds feedforward based on cos() of currentAngle
         double error = this.reference - currentPosition;
         //Find the Porportioanl, Integral, and derivative based on the PID values
+
         double derivative = (error-lastError)/timer.seconds();
         this.integral  =  this.integral + (error * timer.seconds());
         timer.reset();
         lastError = error;
-        return this.Kp * error + Ki*integral + Kd* derivative + Math.cos(Math.toRadians(currentAngle))*this.Kf;
+        if(Math.abs(error) > 7){
+            return this.Kp * error + Ki*integral + Kd* derivative + Math.cos(Math.toRadians(currentAngle))*this.Kf + error/(Math.abs(error)) * this.min;
+        }
+        else{
+            return this.Kp * error + Ki*integral + Kd* derivative + Math.cos(Math.toRadians(currentAngle))*this.Kf;
+//
+        }
     }
     public double getPIDfOutputFancy(double currentPosition, double currentAngle){
         /*adds:
