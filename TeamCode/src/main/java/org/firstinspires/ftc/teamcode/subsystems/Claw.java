@@ -73,16 +73,16 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         }
         if(brace.activated && brace.atPole && autoRelease && controlbracetiming) {
             //ungrab();
-            slidesOffset = 180;
+            slidesOffset = 450;
             autoReleaseTimer.reset();
             autoReleaseTimerTriggered = true;
             controlbracetiming = false;
         }
-        if(autoReleaseTimerTriggered && autoReleaseTimer.time() >= 0.3){
-            grab();
+        if(autoReleaseTimerTriggered && autoReleaseTimer.time() >= 0.2){
+            
             autoReleaseTimerTriggered = false;
         }
-        else if(autoReleaseTimerTriggered && autoReleaseTimer.time() >= 0.2){
+        else if(autoReleaseTimerTriggered && autoReleaseTimer.time() >= 0.1){
             ungrab();
         }
 

@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.utilities;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.RobotConfig;
+
 public class CustomPID {
     /*
      * Proportional Integral Derivative Controller w/ Low pass filter and anti-windup
@@ -84,7 +86,7 @@ public class CustomPID {
         this.integral  =  this.integral + (error * timer.seconds());
         timer.reset();
         lastError = error;
-        if(Math.abs(error) > 7){
+        if(Math.abs(error) > 7 && this.reference != RobotConfig.Presets.Arm1Pickup){
             return this.Kp * error + Ki*integral + Kd* derivative + Math.cos(Math.toRadians(currentAngle))*this.Kf + error/(Math.abs(error)) * this.min;
         }
         else{
