@@ -20,7 +20,7 @@ public class CustomPID {
 
     private double a = 0.8; // a can be anything from 0 < a < 1
     private double lastFilterEstimate = 0;
-    private double maxIntegral = 0.25;
+    private double maxIntegral = 0.5;
     private ElapsedTime timer;
 
 

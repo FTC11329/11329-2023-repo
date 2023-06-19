@@ -177,9 +177,9 @@ public class RobotConfig {
         public static int minArmPosition = 0;
 
         public static double kp = 0.0050;//0.0050
-        public static double ki = 0.0000;//0.0000
-        public static double kd = 0.0004;//0.0005
-        public static double kf = 0.2000;//0.2000
+        public static double ki = 0.0;//0.0000 0.1-0.25
+        public static double kd = 0.0005;//0.0005
+        public static double kf = 0.2400;//0.2000
 
         public static double gearRatio = 13.2/19.7;
         // d was too small                                 <--Joke haha funny

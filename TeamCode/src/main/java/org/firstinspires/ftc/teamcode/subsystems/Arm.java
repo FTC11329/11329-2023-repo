@@ -79,6 +79,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     public void displayToTelemetry() {
         telemetry.addData("Arm Position", arm.getCurrentPosition());
         telemetry.addData("Arm Target Position", targetPosition);
+        telemetry.addData("Arm Estimate Angle:", (arm.getCurrentPosition() - zeroAngle) * tickToDegrees);
     }
 
     @Override

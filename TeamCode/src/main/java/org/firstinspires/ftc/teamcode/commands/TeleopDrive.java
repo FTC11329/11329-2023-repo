@@ -71,7 +71,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         slidePosition += (upPower - downPower) * RobotConfig.Slides.manualSlidePower;
         slidePosition = Math.max(Math.min(slidePosition, RobotConfig.Slides.minSlidePosition), RobotConfig.Slides.maxSlidePosition);
 
-        slides.setTargetPosition(slidePosition + claw.slidesOffset);
+        //slides.setTargetPosition(slidePosition + claw.slidesOffset);
 //        telemetry.addData("slidesTarget", slidePosition);
 
         arm.setPower(armPower);
