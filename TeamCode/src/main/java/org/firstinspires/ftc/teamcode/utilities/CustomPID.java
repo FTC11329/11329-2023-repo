@@ -45,6 +45,7 @@ public class CustomPID {
     public void setTargetPosition(double desiredPosition){
         //Sets the postion the motor should go to
         this.lastReference = reference;
+        this.integral = 0;
         this.reference = desiredPosition;
     }
     public void setMaxIntegral(double maxIntegral){
@@ -78,9 +79,6 @@ public class CustomPID {
         //Find the Porportioanl, Integral, and derivative based on the PID values
         double derivative = (error-lastError)/timer.seconds();
         this.integral  =  this.integral + (error * timer.seconds());
-        if(reference != lastReference){
-            integral = 0;
-        }
         timer.reset();
         lastError = error;
         return this.Kp * error + Ki*integral + Kd* derivative + Math.cos(Math.toRadians(currentAngle))*this.Kf;

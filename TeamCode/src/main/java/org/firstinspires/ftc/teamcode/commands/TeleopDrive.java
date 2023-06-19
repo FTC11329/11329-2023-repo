@@ -39,7 +39,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
     public boolean preset = false;
     public static boolean beacon = false;
     public static boolean manualAdjust = false;
-
+    public static boolean auto = false;
     private boolean releaseContorller = false;
 
     @Override
@@ -97,14 +97,14 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         /*if (gamepad2.left_stick_button) {
             if(releaseContorller == true) {
                 claw.autoRelease = true;
+        if (gamepad2.back) {
+            if (releaseContorller == true) {
+                claw.autoRelease = !claw.autoRelease;
+
                 releaseContorller = false;
             }
-        }
-        else{
-           if(releaseContorller = false){
-               claw.autoRelease = false;
-               releaseContorller = true;
-           }
+        
+
         }*/
 
 
@@ -265,6 +265,9 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         }
         if (gamepad1.dpad_right) {
             drivetrain.backRightMotor.setPower(0.3);
+        }
+        if (gamepad1.x) {
+            claw.setPos(RobotConfig.Claw.coneFlip);
         }
     }
 

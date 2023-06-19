@@ -9,6 +9,7 @@ import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityCons
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.RobotConfig;
+import org.firstinspires.ftc.teamcode.commands.TeleopDrive;
 import org.firstinspires.ftc.teamcode.roadrunner.RoadRunnerAutoBase;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.subsystems.Arm;
@@ -37,7 +38,7 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
 
     Pose2d parkLeft =  new Pose2d(47.5, 28, Math.toRadians(0));
     Pose2d parkCenter = new Pose2d(54, -5 ,Math.toRadians(90));
-    Pose2d parkRight = new Pose2d(43, -24, Math.toRadians(90));
+    Pose2d parkRight = new Pose2d(43, -20, Math.toRadians(90));
 
     //not tuned yet
     Pose2d pickupOffset = new Pose2d(-4,0,Math.toRadians(0));
@@ -472,8 +473,8 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
                 })
 
                 //.splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(90))
-                .splineToLinearHeading(parkRight, Math.toRadians(45))
-                .turn(Math.toRadians(-45));
+                .splineToLinearHeading(parkRight, Math.toRadians(45));
+                //.turn(Math.toRadians(-45));
 
 //                .lineToLinearHeading(intermediatePosition3)
 //                .lineToLinearHeading(parkCenter);
