@@ -37,6 +37,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     static public boolean isAtPreset = false;
     private boolean controlBrace = true;
 
+
     private static ElapsedTime autoReleaseTimer = new ElapsedTime();
 
     double power = 0;
@@ -73,16 +74,16 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         }
         if(brace.activated && brace.atPole && autoRelease && controlbracetiming) {
             //ungrab();
-            slidesOffset = 450;
+            slidesOffset = 500;
             autoReleaseTimer.reset();
             autoReleaseTimerTriggered = true;
             controlbracetiming = false;
         }
-        if(autoReleaseTimerTriggered && autoReleaseTimer.time() >= 0.2){
-            
+        if(autoReleaseTimerTriggered && autoReleaseTimer.time() >= 0.3){
+            slidesOffset = 0;
             autoReleaseTimerTriggered = false;
         }
-        else if(autoReleaseTimerTriggered && autoReleaseTimer.time() >= 0.1){
+        else if(autoReleaseTimerTriggered && autoReleaseTimer.time() >= 0.2){
             ungrab();
         }
 
@@ -138,6 +139,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
 
     public void ungrab() {
         grabbing = true;
+        brace.setBraceEnabled(true);
         closeClaw.setPosition(RobotConfig.Claw.closePos);
     }
     public void halfGrab(){

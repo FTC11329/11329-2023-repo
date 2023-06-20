@@ -221,6 +221,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         //Beacon pickup
         if (gamepad2.x){
             claw.grab();
+            brace.setBraceEnabled(false);
             beacon = true;
             claw.slidesOffset = 0;
         }
@@ -274,6 +275,9 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         }
         if (gamepad1.x) {
             claw.setPos(RobotConfig.Claw.coneFlip);
+        }
+        if (gamepad1.b) {
+            claw.setPos(RobotConfig.Presets.WristPickupRev);
         }
     }
 
