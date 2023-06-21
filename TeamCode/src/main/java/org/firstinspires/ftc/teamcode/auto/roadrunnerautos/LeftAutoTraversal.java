@@ -29,16 +29,17 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
     Brace brace;
 
     Pose2d placeLocationHigh = new Pose2d(41, -26.5, Math.toRadians(45));
-    Pose2d placeLocationMed  = new Pose2d(44.5, -0.5, Math.toRadians(50));
+    Pose2d placeLocationMed  = new Pose2d(44.5, -1.5, Math.toRadians(50));
     Pose2d placeLocationLow  = new Pose2d(44.5, 6, Math.toRadians(90));
 
     Pose2d intermediatePosition1 = new Pose2d(53.5,5, Math.toRadians(90));
-    Pose2d intermediatePosition2 = new Pose2d(49, -20, Math.toRadians(45));
+    Pose2d intermediatePosition2 = new Pose2d(53, -20, Math.toRadians(45));
     Pose2d intermediatePosition3 = new Pose2d(50.5, -6, Math.toRadians(90));
+    Pose2d intermediatePosition4 = new Pose2d(25, 6, Math.toRadians(90));
 
-    Pose2d parkLeft =  new Pose2d(47.5, 28, Math.toRadians(0));
-    Pose2d parkCenter = new Pose2d(54, -5 ,Math.toRadians(90));
-    Pose2d parkRight = new Pose2d(43, -20, Math.toRadians(90));
+    Pose2d parkLeft =  new Pose2d(47.5, 28, Math.toRadians(-90));
+    Pose2d parkCenter = new Pose2d(50, 8 ,Math.toRadians(180));
+    Pose2d parkRight = new Pose2d(43, -20, Math.toRadians(180));
 
     //not tuned yet
     Pose2d pickupOffset = new Pose2d(-4,0,Math.toRadians(0));
@@ -61,7 +62,7 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
     public void build(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         claw.grab();
         trajectorySequenceBuilder
-                .addDisplacementMarker(() -> {
+        .addDisplacementMarker(() -> {
                     claw.grab(); //Grabs preload
                     brace.unbrace();
                     claw.setPresetBool(true);
@@ -70,12 +71,12 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
                 .setConstraints(new TrajectoryVelocityConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 55;
+                        return 57;
                     }
                 }, new TrajectoryAccelerationConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 52;
+                        return 55;
                     }
                 })
 
@@ -86,8 +87,10 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesLow);
                 })
                 //A LOW CONE DROP !!!!!!!!!!!!!!!!!!
+                //.splineToLinearHeading(intermediatePosition4, 0)
 
-                .lineToLinearHeading(placeLocationLow)
+                .splineToSplineHeading(placeLocationLow, 0)
+                //.splineToLinearHeading(placeLocationLow, 20)
 
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
@@ -318,6 +321,7 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
                         return 55;
                     }
                 })
+
                 .lineToLinearHeading(intermediatePosition2)
                 .lineToLinearHeading(new Pose2d(placeLocationHigh.getX(), placeLocationHigh.getY() , placeLocationHigh.getHeading()))
 
@@ -335,9 +339,19 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
                     brace.unbrace();
                 })
 //                .waitSeconds(0.05)
-
+                .setConstraints(new TrajectoryVelocityConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 57;
+                    }
+                }, new TrajectoryAccelerationConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 57;
+                    }
+                })
                 .splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(90))
-                .splineTo(new Vector2d(parkLeft.getX(), parkLeft.getY()), Math.toRadians(90));
+                .splineTo(new Vector2d(parkLeft.getX(), parkLeft.getY()), Math.toRadians(0));
 //                .lineToLinearHeading(intermediatePosition3)
 //                .lineToLinearHeading(parkCenter);
 
@@ -404,9 +418,9 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
                     brace.unbrace();
                 })
 //                .waitSeconds(0.05)
-
-                .splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(90))
-                .splineTo(new Vector2d(parkCenter.getX(), parkCenter.getY()), Math.toRadians(90));
+                .splineToLinearHeading(parkCenter, Math.toRadians(90));
+                //.splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(90))
+                //.splineTo(new Vector2d(parkCenter.getX(), parkCenter.getY()), Math.toRadians(90));
 //                .lineToLinearHeading(intermediatePosition3)
 //                .lineToLinearHeading(parkCenter);
     }

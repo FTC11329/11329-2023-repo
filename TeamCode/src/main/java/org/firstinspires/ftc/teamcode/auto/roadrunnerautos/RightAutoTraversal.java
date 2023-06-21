@@ -27,12 +27,12 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
     Slides slides;
     Brace brace;
 
-    Pose2d placeLocationHigh = new Pose2d(43, 26.5, Math.toRadians(315));
+    Pose2d placeLocationHigh = new Pose2d(41, 26.5, Math.toRadians(315));
     Pose2d placeLocationMed  = new Pose2d(43.5, 2.5, Math.toRadians(310));
-    Pose2d placeLocationLow  = new Pose2d(44, -6, Math.toRadians(270));
+    Pose2d placeLocationLow  = new Pose2d(44.5, -6, Math.toRadians(270));
 
     Pose2d intermediatePosition1 = new Pose2d(53,-8, Math.toRadians(270));
-    Pose2d intermediatePosition2 = new Pose2d(56, 19.5, Math.toRadians(315));
+    Pose2d intermediatePosition2 = new Pose2d(52, 18.5, Math.toRadians(315));
     Pose2d intermediatePosition3 = new Pose2d(48, 15, Math.toRadians(270));
 
     Pose2d parkLeft = new Pose2d(47.5, 18, Math.toRadians(0));
@@ -44,7 +44,7 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
     Pose2d placeOffset = new Pose2d(0.5,1,Math.toRadians(0));
 
 
-    Vector2d pickupLocation = new Vector2d(52.5, -30);
+    Vector2d pickupLocation = new Vector2d(51.75, -30);
 
     //Auto path: Low near stack, Medium, High speed stack, Medium * 2
 
@@ -135,6 +135,9 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.05, () -> {
                     claw.grab();
                 })
+                .addTemporalMarkerOffset(0.2, () -> {
+                    claw.ungrab();
+                })
 
                 //MED CONE 2--------------------------------------------------------------------
                 //A MEDIUM CONE PICKUP !!!!!!!!!!!!!!!
@@ -180,6 +183,9 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.05, () -> {
                     claw.grab();
                 })
+                .addTemporalMarkerOffset(0.2, () -> {
+                    claw.ungrab();
+                })
                 //---------------------------------------------------------------
                 //MED CONE 3------------------------------------------------------
                 //A MEDIUM CONE PICKUP !!!!!!!!!!!!!!!
@@ -223,6 +229,9 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 })
                 .addTemporalMarkerOffset(0.05, () -> {
                     claw.grab();
+                })
+                .addTemporalMarkerOffset(0.2, () -> {
+                    claw.ungrab();
                 })
                 //MID CONE 4------------------------------------
                 //A MEDIUM CONE PICKUP !!!!!!!!!!!!!!!
@@ -332,8 +341,9 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 })
 //                .waitSeconds(0.05)
 
-                .splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(270))
-                .splineTo(new Vector2d(parkLeft.getX(), parkLeft.getY()), Math.toRadians(270));
+                //.splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(270))
+                //splineTo(new Vector2d(parkLeft.getX(), parkLeft.getY()), Math.toRadians(270));
+                .splineToLinearHeading(parkLeft, Math.toRadians(45));
 //                .lineToLinearHeading(intermediatePosition3)
 //                .lineToLinearHeading(parkCenter);
 
