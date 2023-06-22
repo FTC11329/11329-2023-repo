@@ -101,7 +101,7 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1PickupTop);
                     claw.setPos(RobotConfig.Presets.WristPickup);
                 })
-
+                //FIX ME!!!!!!!!!! THIS CAN SAVE TIME!!!!!!--------------------------------------
                 .lineToLinearHeading(intermediatePosition1)
                 .lineTo(pickupLocation)
 

@@ -88,8 +88,8 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
                 })
                 //A LOW CONE DROP !!!!!!!!!!!!!!!!!!
                 //.splineToLinearHeading(intermediatePosition4, 0)
-
-                .splineToSplineHeading(placeLocationLow, 0)
+                .lineToLinearHeading(placeLocationLow)
+                //.splineToSplineHeading(placeLocationLow, 0)
                 //.splineToLinearHeading(placeLocationLow, 20)
 
                 .addTemporalMarkerOffset(0, () -> {
@@ -351,7 +351,7 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
                     }
                 })
                 .splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(90))
-                .splineTo(new Vector2d(parkLeft.getX(), parkLeft.getY()), Math.toRadians(0));
+                .splineTo(new Vector2d(parkLeft.getX(), parkLeft.getY()), Math.toRadians(180));
 //                .lineToLinearHeading(intermediatePosition3)
 //                .lineToLinearHeading(parkCenter);
 
