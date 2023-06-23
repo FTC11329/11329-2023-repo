@@ -30,7 +30,7 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
 
     Pose2d placeLocationHigh = new Pose2d(41, -26.5, Math.toRadians(45));
     Pose2d placeLocationMed  = new Pose2d(44.5, -1.5, Math.toRadians(50));
-    Pose2d placeLocationLow  = new Pose2d(44.5, 6, Math.toRadians(90));
+    Pose2d placeLocationLow  = new Pose2d(23.5, 6, Math.toRadians(225));
 
     Pose2d intermediatePosition1 = new Pose2d(53.5,5, Math.toRadians(90));
     Pose2d intermediatePosition2 = new Pose2d(53, -20, Math.toRadians(45));
@@ -82,15 +82,16 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
 
                 //Puts the arm in placing position
                 .addTemporalMarkerOffset(0, () -> {
-                    claw.setPos(RobotConfig.Presets.WristPickup);
-                    arm.toPosition(RobotConfig.Presets.Arm1Low);
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesLow);
+                    claw.setPos(0.3383);
+                    arm.toPosition(195);
+                    //slides.setTargetPosition(Ro);
                 })
                 //A LOW CONE DROP !!!!!!!!!!!!!!!!!!
                 //.splineToLinearHeading(intermediatePosition4, 0)
-                .lineToLinearHeading(placeLocationLow)
-                //.splineToSplineHeading(placeLocationLow, 0)
-                //.splineToLinearHeading(placeLocationLow, 20)
+                //.lineToLinearHeading(placeLocationLow)
+                //.splineToSplreineHeading(placeLocationLow, 0)
+                //.splineTo(placeLocationLow)
+                .splineTo(new Vector2d(placeLocationLow.getX(), placeLocationLow.getY()), placeLocationLow.getHeading())
 
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();

@@ -29,9 +29,9 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
 
     Pose2d placeLocationHigh = new Pose2d(41, 26.5, Math.toRadians(315));
     Pose2d placeLocationMed  = new Pose2d(43.5, 2.5, Math.toRadians(310));
-    Pose2d placeLocationLow  = new Pose2d(44.5, -6, Math.toRadians(270));
+    Pose2d placeLocationLow  = new Pose2d(27.5, -4.5, 5.6);
 
-    Pose2d intermediatePosition1 = new Pose2d(53,-8, Math.toRadians(270));
+    Pose2d intermediatePosition1 = new Pose2d(53,-6, Math.toRadians(270));
     Pose2d intermediatePosition2 = new Pose2d(52, 18.5, Math.toRadians(315));
     Pose2d intermediatePosition3 = new Pose2d(48, 15, Math.toRadians(270));
 
@@ -81,9 +81,9 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
 
                 //Puts the arm in placing position
                 .addTemporalMarkerOffset(0, () -> {
-                    claw.setPos(RobotConfig.Presets.WristPickup);
-                    arm.toPosition(RobotConfig.Presets.Arm1Low);
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesLow);
+                    claw.setPos(0.3383);
+                    arm.toPosition(230);
+                    //slides.setTargetPosition(Ro);
                 })
                 //A LOW CONE DROP !!!!!!!!!!!!!!!!!!
 
@@ -96,7 +96,7 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                 //A MEDIUM CONE PICKUP !!!!!!!!!!!!!!!
                 //Go to pickup a cone
 
-                .addTemporalMarkerOffset(0.35, () -> {
+                .addTemporalMarkerOffset(1.1, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop);
                     arm.toPosition(RobotConfig.Presets.Arm1PickupTop);
                     claw.setPos(RobotConfig.Presets.WristPickup);
