@@ -27,16 +27,16 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
     Slides slides;
     Brace brace;
 
-    Pose2d placeLocationHigh = new Pose2d(41, 26.5, Math.toRadians(315));
+    Pose2d placeLocationHigh = new Pose2d(35.5, 26.0, Math.toRadians(315));
     Pose2d placeLocationMed  = new Pose2d(43.5, 2.5, Math.toRadians(310));
     Pose2d placeLocationLow  = new Pose2d(27.5, -4.5, 5.6);
 
     Pose2d intermediatePosition1 = new Pose2d(53,-6, Math.toRadians(270));
-    Pose2d intermediatePosition2 = new Pose2d(52, 18.5, Math.toRadians(315));
+    Pose2d intermediatePosition2 = new Pose2d(50, 18.5, Math.toRadians(315));
     Pose2d intermediatePosition3 = new Pose2d(48, 15, Math.toRadians(270));
 
     Pose2d parkLeft = new Pose2d(47.5, 18, Math.toRadians(0));
-    Pose2d parkCenter = new Pose2d(53, -5 ,Math.toRadians(270));
+    Pose2d parkCenter = new Pose2d(51, -3 ,Math.toRadians(270));
     Pose2d parkRight = new Pose2d(53, -28, Math.toRadians(270));
 
     //not tuned yet

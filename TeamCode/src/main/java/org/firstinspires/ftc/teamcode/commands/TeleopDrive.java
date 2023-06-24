@@ -35,6 +35,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
     Brace brace;
 
     public int slidePosition = 0;
+    public int tempSlidePosition = 0;
     public boolean reverse = false;
     public boolean preset = false;
     public static boolean beacon = false;
@@ -69,9 +70,16 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
 
         slides.setRightTriggerState(gamepad2.right_trigger == 0);
         slidePosition += (upPower - downPower) * RobotConfig.Slides.manualSlidePower;
-        slidePosition = Math.max(Math.min(slidePosition, RobotConfig.Slides.minSlidePosition), RobotConfig.Slides.maxSlidePosition);
+        if(slidePosition ==  RobotConfig.Presets.SlidesHighRev && claw.slidesOffset != 0){
+            tempSlidePosition = slidePosition + claw.slidesOffset ;
+        }
+        else{
+            tempSlidePosition = slidePosition + claw.slidesOffset;
+        }
 
-        slides.setTargetPosition(slidePosition + claw.slidesOffset);
+        tempSlidePosition = Math.max(Math.min(tempSlidePosition, RobotConfig.Slides.minSlidePosition), RobotConfig.Slides.maxSlidePosition);
+
+        slides.setTargetPosition(tempSlidePosition);
 //        telemetry.addData("slidesTarget", slidePosition);
 
         arm.setPower(armPower);

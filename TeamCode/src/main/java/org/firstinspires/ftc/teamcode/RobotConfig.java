@@ -15,14 +15,14 @@ public class RobotConfig {
         public static String frontRightMotorName = "frontRight";
         public static String backLeftMotorName = "backLeft";
         public static String backRightMotorName = "backRight";
-        public static double slowSpeed = 0.425;
-        public static double fastSpeed = 0.75;//0.5
+        public static double slowSpeed = 0.425;//0.425
+        public static double fastSpeed = 0.6;//0.5
     }
     public static class Brace{
         public static String braceName = "LineBreak";
     }
     public static class LED {
-        public static double MaxLightPower = 0.8;
+        public static double MaxLightPower = 0.3;
         public static String LEDName = "LED";
         public static LEDEffect defaultLEDEffect = LEDEffect.BREATHING;
 
@@ -80,7 +80,6 @@ public class RobotConfig {
         //Medium Reverse
         public static int SlidesMedRev = -330;
         public static int Arm1MedRev = 590;
-
         //Medium Reverse Auto
         public static int SlidesMedRevAuto = -900;
         public static int Arm1MedRevAuto = 640;

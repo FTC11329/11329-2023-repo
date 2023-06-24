@@ -21,8 +21,8 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
     public Servo handWave1;
     @DiContainer.Inject(id = "wristServo2")
     public Servo handWave2;
-    @DiContainer.Inject(id = "colorSensor")
-    public RevColorSensorV3 colorSensor;
+//    @DiContainer.Inject(id = "colorSensor")
+//    public RevColorSensorV3 colorSensor;
     @DiContainer.Inject()
     public RobotSide side;
     @DiContainer.Inject()
@@ -69,9 +69,9 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         handWave2.setPosition(1.0 - targetPosition);
         handWave1.setPosition(targetPosition);
 
-        if (!isAtPreset && RobotConfig.Claw.autoGrab && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))) {
-            grab();
-        }
+//        if (!isAtPreset && RobotConfig.Claw.autoGrab && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))) {
+//            grab();
+//        }
         if(brace.activated && brace.atPole && autoRelease && controlbracetiming) {
             //ungrab();
             slidesOffset = 500;
@@ -79,7 +79,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
             autoReleaseTimerTriggered = true;
             controlbracetiming = false;
         }
-        if(autoReleaseTimerTriggered && autoReleaseTimer.time() >= 0.3){
+        if(autoReleaseTimerTriggered && autoReleaseTimer.time() >= 1){
             slidesOffset = 0;
             autoReleaseTimerTriggered = false;
         }
@@ -152,34 +152,34 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
         closeClaw.setPosition(RobotConfig.Claw.openPos);
     }
 
-    public boolean isConePresent() {
-        return colorSensor.getDistance(DistanceUnit.CM) <= RobotConfig.Claw.maxConeDistance;
-    }
+//    public boolean isConePresent() {
+//        return colorSensor.getDistance(DistanceUnit.CM) <= RobotConfig.Claw.maxConeDistance;
+//    }
 
-    public ConeColor getConeColor() {
-        if (!isConePresent()) return ConeColor.NONE;
-
-        NormalizedRGBA rgba = colorSensor.getNormalizedColors();
-
-        double RtoG = Math.abs(rgba.red - rgba.green);
-        double GtoB = Math.abs(rgba.green - rgba.blue);
-        return (RtoG > GtoB) ? ConeColor.RED : ConeColor.BLUE;
-
-//        ^These lines do the same thing v
+//    public ConeColor getConeColor() {
+//        if (!isConePresent()) return ConeColor.NONE;
 //
-//        if (rgba.red > rgba.green && rgba.red > rgba.blue  && isConePresent()){
-//            return ConeColor.RED;
-//        } else if (rgba.blue > rgba.red && rgba.blue > rgba.green && isConePresent()) {
-//            return ConeColor.BLUE;
-//        } else {
-//            return ConeColor.NONE;
-//        }
-    }
+//        NormalizedRGBA rgba = colorSensor.getNormalizedColors();
+//
+//        double RtoG = Math.abs(rgba.red - rgba.green);
+//        double GtoB = Math.abs(rgba.green - rgba.blue);
+//        return (RtoG > GtoB) ? ConeColor.RED : ConeColor.BLUE;
+//
+////        ^These lines do the same thing v
+////
+////        if (rgba.red > rgba.green && rgba.red > rgba.blue  && isConePresent()){
+////            return ConeColor.RED;
+////        } else if (rgba.blue > rgba.red && rgba.blue > rgba.green && isConePresent()) {
+////            return ConeColor.BLUE;
+////        } else {
+////            return ConeColor.NONE;
+////        }
+   // }
 
     public void displayToTelemetry() {
         telemetry.addData("Hand1 Position", handWave1.getPosition());
         telemetry.addData("Hand2 Position", handWave2.getPosition());
-        telemetry.addData("Cone Present", isConePresent());
+       // telemetry.addData("Cone Present", isConePresent());
         telemetry.addData("Claw Fingers pos", closeClaw.getPosition());
         telemetry.addData("Auto Release", autoRelease);
         //telemetry.addData("Cone Color", getConeColor());

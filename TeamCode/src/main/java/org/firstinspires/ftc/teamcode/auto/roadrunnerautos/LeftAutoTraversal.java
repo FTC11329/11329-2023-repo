@@ -29,7 +29,7 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
     Brace brace;
 
     Pose2d placeLocationHigh = new Pose2d(41, -26.5, Math.toRadians(45));
-    Pose2d placeLocationMed  = new Pose2d(44.5, -1.5, Math.toRadians(50));
+    Pose2d placeLocationMed  = new Pose2d(44.5, -2.5, Math.toRadians(50));
     Pose2d placeLocationLow  = new Pose2d(27.5, 4.5, -5.6);
 
     Pose2d intermediatePosition1 = new Pose2d(53.5,5, Math.toRadians(90));
@@ -37,7 +37,7 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
     Pose2d intermediatePosition3 = new Pose2d(50.5, -6, Math.toRadians(90));
     Pose2d intermediatePosition4 = new Pose2d(25, 6, Math.toRadians(90));
 
-    Pose2d parkLeft =  new Pose2d(47.5, 28, Math.toRadians(-90));
+    Pose2d parkLeft =  new Pose2d(45.5, 28, Math.toRadians(-90));
     Pose2d parkCenter = new Pose2d(50, 8 ,Math.toRadians(180));
     Pose2d parkRight = new Pose2d(43, -20, Math.toRadians(180));
 
@@ -354,7 +354,7 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
                     }
                 })
                 .splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(90))
-                .splineTo(new Vector2d(parkLeft.getX(), parkLeft.getY()), Math.toRadians(180));
+                .splineTo(new Vector2d(parkLeft.getX(), parkLeft.getY()), Math.toRadians(90));
 //                .lineToLinearHeading(intermediatePosition3)
 //                .lineToLinearHeading(parkCenter);
 
