@@ -232,6 +232,7 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
             brace.setBraceEnabled(false);
             beacon = true;
             claw.slidesOffset = 0;
+            brace.unbrace();
         }
         //Reverse low
         if (gamepad2.dpad_left && !reverse) {

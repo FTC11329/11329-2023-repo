@@ -21,14 +21,16 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Left Auto Medium", group = "Competition")
+@Autonomous(name = "Left Contested High (zBroken)", group = "Competition")
 public class LeftAutoMedium extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
     Brace brace;
 
-    Pose2d placeLocationHighContested = new Pose2d(53, 20, 5.6);
+    Pose2d placeLocationHighContested = new Pose2d(57, -1.5, 3.01);//
+    //Pose2d placeLocationHighContested = new Pose2d(58, -3, 2.51);//
+
     Pose2d placeLocationMed  = new Pose2d(44.5, -1.5, Math.toRadians(50));
     Pose2d placeLocationLow  = new Pose2d(27.5, 4.5, -5.6);
 
@@ -38,8 +40,8 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
     Pose2d intermediatePosition4 = new Pose2d(25, 6, Math.toRadians(90));
 
     Pose2d parkLeft =  new Pose2d(47.5, 28, Math.toRadians(-90));
-    Pose2d parkCenter = new Pose2d(50, 8 ,Math.toRadians(180));
-    Pose2d parkRight = new Pose2d(43, -20, Math.toRadians(180));
+    Pose2d parkCenter = new Pose2d(45, 8 ,Math.toRadians(180));
+    Pose2d parkRight = new Pose2d(40, -20, Math.toRadians(180));
 
     //not tuned yet
     Pose2d pickupOffset = new Pose2d(-4,0,Math.toRadians(0));
@@ -313,19 +315,20 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     brace.brace();
                 })
-                .setConstraints(new TrajectoryVelocityConstraint() {
-                    @Override
-                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 62;
-                    }
-                }, new TrajectoryAccelerationConstraint() {
-                    @Override
-                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 55;
-                    }
-                })
+//                .setConstraints(new TrajectoryVelocityConstraint() {
+//                    @Override
+//                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+//                        return 62;
+//                    }
+//                }, new TrajectoryAccelerationConstraint() {
+//                    @Override
+//                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+//                        return 55;
+//                    }
+//                })
                 //.lineToLinearHeading(intermediatePosition2)
                 //.lineToLinearHeading(new Pose2d(placeLocationHigh.getX() + placeOffset.getX(), placeLocationHigh.getY() + placeOffset.getX(), placeLocationHigh.getHeading() + placeOffset.getHeading() ))
+                .lineToLinearHeading(intermediatePosition3)
                 .lineToLinearHeading(placeLocationHighContested)
                 //Ungrabs
                 .addTemporalMarkerOffset(0, () -> {
@@ -413,7 +416,7 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
                     brace.unbrace();
                 })
 //                .waitSeconds(0.05)
-                .lineToLinearHeading(parkCenter);
+                .lineToLinearHeading(new Pose2d(parkCenter.getX(), parkCenter.getY(), Math.toRadians(180)));
         //.lineTo(Pose2dUtilities.extractVector2d(parkCenter));
         //.splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(270))
         //.splineTo(new Vector2d(parkCenter.getX(), parkCenter.getY()), Math.toRadians(270));
@@ -485,7 +488,8 @@ public class LeftAutoMedium extends RoadRunnerAutoBase {
                 //.splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(270))
                 //.splineTo(new Vector2d(parkRight.getX(), parkRight.getY()), Math.toRadians(270));
 //                .lineToLinearHeading(intermediatePosition3)
-                .lineToLinearHeading(parkRight);
+                //.lineToLinearHeading(parkRight);
+                .splineToLinearHeading(parkRight, Math.toRadians(-90));
     }
 
     @Override

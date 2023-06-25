@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Left Auto Traversal", group = "Competition")
+@Autonomous(name = "Left Safe High", group = "Competition")
 public class LeftAutoTraversal extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
@@ -83,7 +83,7 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
                 //Puts the arm in placing position
                 .addTemporalMarkerOffset(0, () -> {
                     claw.setPos(0.3383);
-                    arm.toPosition(230);
+                    arm.toPosition(260);
                     //slides.setTargetPosition(Ro);
                 })
                 //A LOW CONE DROP !!!!!!!!!!!!!!!!!!

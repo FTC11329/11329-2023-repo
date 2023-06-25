@@ -154,7 +154,7 @@ public class RobotConfig {
         public static String handServo1 = "wristServo1";
         public static String handServo2 = "wristServo2";
         public static double closePos = 0.3;
-        public static double halfPos = 0.22;
+        public static double halfPos = 0.21;
         public static double openPos = 0.1;
 
         public static double maxConeDistance = 8; //CM

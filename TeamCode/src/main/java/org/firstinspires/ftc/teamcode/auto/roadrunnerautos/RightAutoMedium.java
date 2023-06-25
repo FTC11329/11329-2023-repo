@@ -19,14 +19,14 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Right Auto Medium", group = "Competition")
+@Autonomous(name = "Right Contested High", group = "Competition")
 public class RightAutoMedium extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
     Brace brace;
 
-    Pose2d placeLocationHighContested = new Pose2d(59, 4, 4.53);
+    Pose2d placeLocationHighContested = new Pose2d(58, 3.5, 4.33);//4.53
     Pose2d placeLocationMed  = new Pose2d(43.5, 2.5, Math.toRadians(310));
     Pose2d placeLocationLow  = new Pose2d(27.5, -4.5, 5.6);
 
@@ -34,8 +34,8 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
     Pose2d intermediatePosition2 = new Pose2d(50, 18.5, Math.toRadians(315));
     Pose2d intermediatePosition3 = new Pose2d(48, 15, Math.toRadians(270));
 
-    Pose2d parkLeft = new Pose2d(47.5, 18, Math.toRadians(0));
-    Pose2d parkCenter = new Pose2d(51, -3 ,Math.toRadians(270));
+    Pose2d parkLeft = new Pose2d(47.5, 20, Math.toRadians(180));
+    Pose2d parkCenter = new Pose2d(49, -3 ,Math.toRadians(270));
     Pose2d parkRight = new Pose2d(53, -28, Math.toRadians(270));
 
     //not tuned yet
@@ -84,12 +84,17 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     arm.toPosition(230);
                     //slides.setTargetPosition(Ro);
                 })
+
                 //A LOW CONE DROP !!!!!!!!!!!!!!!!!!
 
                 .lineToLinearHeading(placeLocationLow)
 
                 .addTemporalMarkerOffset(0, () -> {
+                    arm.toPosition(100);
                     claw.ungrab();
+                })
+                .addTemporalMarkerOffset(0.1, () -> {
+                    arm.toPosition(230);
                 })
 
                 //A MEDIUM CONE PICKUP !!!!!!!!!!!!!!!
@@ -314,19 +319,19 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 .setConstraints(new TrajectoryVelocityConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 62;
+                        return 65;
                     }
                 }, new TrajectoryAccelerationConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 55;
+                        return 60;
                     }
                 })
                 //.lineToLinearHeading(intermediatePosition2)
                 //.lineToLinearHeading(new Pose2d(placeLocationHigh.getX() + placeOffset.getX(), placeLocationHigh.getY() + placeOffset.getX(), placeLocationHigh.getHeading() + placeOffset.getHeading() ))
                 .lineToLinearHeading(placeLocationHighContested)
                 //Ungrabs
-                .addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0.1, () -> {
                     claw.ungrab();
                 })
 
@@ -344,6 +349,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 //splineTo(new Vector2d(parkLeft.getX(), parkLeft.getY()), Math.toRadians(270));
                 //.splineToLinearHeading(parkLeft, Math.toRadians(45));
                 //.lineTo(Pose2dUtilities.extractVector2d(parkLeft));
+                .lineTo(new Vector2d(50, -2.0))
                 .lineToLinearHeading(parkLeft);
 //                .lineToLinearHeading(intermediatePosition3)
 //                .lineToLinearHeading(parkCenter);
@@ -398,7 +404,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 //.lineToLinearHeading(new Pose2d(placeLocationHigh.getX() + placeOffset.getX(), placeLocationHigh.getY() + placeOffset.getX(), placeLocationHigh.getHeading() + placeOffset.getHeading() ))
                 .lineToLinearHeading(placeLocationHighContested)
                 //Ungrabs
-                .addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0.1, () -> {
                     claw.ungrab();
                 })
 
@@ -466,7 +472,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 //CHANGE ME---------------------------------
                 .lineToLinearHeading(placeLocationHighContested)
                 //Ungrabs
-                .addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0.1, () -> {
                     claw.ungrab();
                 })
 
