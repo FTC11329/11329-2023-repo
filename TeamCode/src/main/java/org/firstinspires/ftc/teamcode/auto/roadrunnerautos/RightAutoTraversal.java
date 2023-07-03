@@ -44,7 +44,7 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
     Pose2d placeOffset = new Pose2d(0.5,1,Math.toRadians(0));
 
 
-    Vector2d pickupLocation = new Vector2d(51.75, -30);
+    Vector2d pickupLocation = new Vector2d(50.2, -31);
 
     //Auto path: Low near stack, Medium, High speed stack, Medium * 2
 
@@ -85,12 +85,22 @@ public class RightAutoTraversal extends RoadRunnerAutoBase {
                     arm.toPosition(260);
                     //slides.setTargetPosition(Ro);
                 })
+
                 //A LOW CONE DROP !!!!!!!!!!!!!!!!!!
 
                 .lineToLinearHeading(placeLocationLow)
 
                 .addTemporalMarkerOffset(0, () -> {
+                    arm.toPosition(100);
+
+                })
+                .addTemporalMarkerOffset(0.08, () -> {
+
                     claw.ungrab();
+                })
+                .addTemporalMarkerOffset(0.1, () -> {
+                    //arm.toPosition(260);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesLow);
                 })
 
                 //A MEDIUM CONE PICKUP !!!!!!!!!!!!!!!

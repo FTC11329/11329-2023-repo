@@ -26,7 +26,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
     Slides slides;
     Brace brace;
 
-    Pose2d placeLocationHighContested = new Pose2d(58, 3.5, 4.33);//4.53
+    Pose2d placeLocationHighContested = new Pose2d(58, 3.5, 4.23);//4.53
     Pose2d placeLocationMed  = new Pose2d(43.5, 2.5, Math.toRadians(310));
     Pose2d placeLocationLow  = new Pose2d(27.5, -4.5, 5.6);
 
@@ -35,7 +35,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
     Pose2d intermediatePosition3 = new Pose2d(48, 15, Math.toRadians(270));
 
     Pose2d parkLeft = new Pose2d(47.5, 20, Math.toRadians(180));
-    Pose2d parkCenter = new Pose2d(49, -3 ,Math.toRadians(270));
+    Pose2d parkCenter = new Pose2d(47, -4 ,Math.toRadians(270));
     Pose2d parkRight = new Pose2d(53, -28, Math.toRadians(270));
 
     //not tuned yet
@@ -43,7 +43,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
     Pose2d placeOffset = new Pose2d(0.5,1,Math.toRadians(0));
 
 
-    Vector2d pickupLocation = new Vector2d(51.75, -30);
+    Vector2d pickupLocation = new Vector2d(50.2, -31);
 
     //Auto path: Low near stack, Medium, High speed stack, Medium * 2
 
@@ -81,7 +81,7 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 //Puts the arm in placing position
                 .addTemporalMarkerOffset(0, () -> {
                     claw.setPos(0.3383);
-                    arm.toPosition(230);
+                    arm.toPosition(260);
                     //slides.setTargetPosition(Ro);
                 })
 
@@ -91,10 +91,15 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
 
                 .addTemporalMarkerOffset(0, () -> {
                     arm.toPosition(100);
+
+                })
+                .addTemporalMarkerOffset(0.08, () -> {
+
                     claw.ungrab();
                 })
                 .addTemporalMarkerOffset(0.1, () -> {
-                    arm.toPosition(230);
+                    //arm.toPosition(260);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesLow);
                 })
 
                 //A MEDIUM CONE PICKUP !!!!!!!!!!!!!!!
@@ -331,11 +336,11 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 //.lineToLinearHeading(new Pose2d(placeLocationHigh.getX() + placeOffset.getX(), placeLocationHigh.getY() + placeOffset.getX(), placeLocationHigh.getHeading() + placeOffset.getHeading() ))
                 .lineToLinearHeading(placeLocationHighContested)
                 //Ungrabs
-                .addTemporalMarkerOffset(0.1, () -> {
+                .addTemporalMarkerOffset(0.15, () -> {
                     claw.ungrab();
                 })
 
-                .waitSeconds(0.1)
+                .waitSeconds(0.15)
 
                 .addTemporalMarkerOffset(0.3, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
@@ -400,15 +405,15 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                         return 55;
                     }
                 })
-                //.lineToLinearHeading(intermediatePosition2)
+                //.lineToLinearHeading(intermediatePosition1)
                 //.lineToLinearHeading(new Pose2d(placeLocationHigh.getX() + placeOffset.getX(), placeLocationHigh.getY() + placeOffset.getX(), placeLocationHigh.getHeading() + placeOffset.getHeading() ))
                 .lineToLinearHeading(placeLocationHighContested)
                 //Ungrabs
-                .addTemporalMarkerOffset(0.1, () -> {
+                .addTemporalMarkerOffset(0.15, () -> {
                     claw.ungrab();
                 })
 
-                .waitSeconds(0.1)
+                .waitSeconds(0.15)
 
                 .addTemporalMarkerOffset(0.3, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
@@ -472,11 +477,11 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                 //CHANGE ME---------------------------------
                 .lineToLinearHeading(placeLocationHighContested)
                 //Ungrabs
-                .addTemporalMarkerOffset(0.1, () -> {
+                .addTemporalMarkerOffset(0.15, () -> {
                     claw.ungrab();
                 })
 
-                .waitSeconds(0.1)
+                .waitSeconds(0.15)
 
                 .addTemporalMarkerOffset(0.3, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);

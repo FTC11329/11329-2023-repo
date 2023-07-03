@@ -78,8 +78,8 @@ public class RobotConfig {
         public static int Arm1MedFromRev = 300;
 
         //Medium Reverse
-        public static int SlidesMedRev = -330;
-        public static int Arm1MedRev = 590;
+        public static int SlidesMedRev = -360;
+        public static int Arm1MedRev = 610;
         //Medium Reverse Auto
         public static int SlidesMedRevAuto = -900;
         public static int Arm1MedRevAuto = 640;
@@ -154,7 +154,7 @@ public class RobotConfig {
         public static String handServo1 = "wristServo1";
         public static String handServo2 = "wristServo2";
         public static double closePos = 0.3;
-        public static double halfPos = 0.21;
+        public static double halfPos = 0.235;
         public static double openPos = 0.1;
 
         public static double maxConeDistance = 8; //CM

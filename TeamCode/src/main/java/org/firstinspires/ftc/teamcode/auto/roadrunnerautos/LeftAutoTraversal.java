@@ -86,17 +86,17 @@ public class LeftAutoTraversal extends RoadRunnerAutoBase {
                     arm.toPosition(260);
                     //slides.setTargetPosition(Ro);
                 })
+
                 //A LOW CONE DROP !!!!!!!!!!!!!!!!!!
-                //.splineToLinearHeading(intermediatePosition4, 0)
-                //.lineToLinearHeading(placeLocationLow)
-                //.splineToSplreineHeading(placeLocationLow, 0)
-                //.splineTo(placeLocationLow)
-                //.splineTo(new Vector2d(placeLocationLow.getX(), placeLocationLow.getY()), placeLocationLow.getHeading())
+
                 .lineToLinearHeading(placeLocationLow)
 
-
                 .addTemporalMarkerOffset(0, () -> {
+                    arm.toPosition(100);
                     claw.ungrab();
+                })
+                .addTemporalMarkerOffset(0.1, () -> {
+                    arm.toPosition(260);
                 })
 
                 //A MEDIUM CONE PICKUP !!!!!!!!!!!!!!!
