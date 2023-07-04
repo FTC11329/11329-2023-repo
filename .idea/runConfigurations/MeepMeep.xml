@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MeepMeep" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="Embedded JDK" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <option name="MAIN_CLASS_NAME" value="com.example.meepmeep.MeepMeepMain" />
+    <module name="11329-2023-repo.meepmeep.main" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
