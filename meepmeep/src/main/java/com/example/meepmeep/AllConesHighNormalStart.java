@@ -12,16 +12,18 @@ public class AllConesHighNormalStart {
 
         return drive.trajectorySequenceBuilder(initialPosition)
                 .splineTo(new Vector2d(40 + initialPosition.getX() , -1 + initialPosition.getY()), 0)
+                //Preload
                 .splineTo(new Vector2d(50.2 + initialPosition.getX(), -10 + initialPosition.getY()), Math.toRadians(270))
                 .lineToLinearHeading(new Pose2d(58 + initialPosition.getX(), 3.5 + initialPosition.getY(), 4.23))
 
-
+                //CONE 1
+                .splineTo(new Vector2d(50.2 + initialPosition.getX(), -31 + initialPosition.getY()), Math.toRadians(270))
+                .lineToLinearHeading(new Pose2d(58 + initialPosition.getX(), 3.5 + initialPosition.getY(), 4.23))
+                //CONE 2
                 .splineTo(new Vector2d(50.2 + initialPosition.getX(), -31 + initialPosition.getY()), Math.toRadians(270))
                 .lineToLinearHeading(new Pose2d(58 + initialPosition.getX(), 3.5 + initialPosition.getY(), 4.23))
 
-                .splineTo(new Vector2d(50.2 + initialPosition.getX(), -31 + initialPosition.getY()), Math.toRadians(270))
-                .lineToLinearHeading(new Pose2d(58 + initialPosition.getX(), 3.5 + initialPosition.getY(), 4.23))
-
+                //CONE 3
                 .splineTo(new Vector2d(50.2 + initialPosition.getX(), -31 + initialPosition.getY()), Math.toRadians(270))
                 .lineToLinearHeading(new Pose2d(58 + initialPosition.getX(), 3.5 + initialPosition.getY(), 4.23))
 

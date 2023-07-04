@@ -52,7 +52,6 @@ public class RightAutoHigh extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPlacingHigh);
                     arm.toPosition(RobotConfig.Presets.Arm1HighAuto);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighAuto);
-
                 })
 
                 .setConstraints(new TrajectoryVelocityConstraint() {
