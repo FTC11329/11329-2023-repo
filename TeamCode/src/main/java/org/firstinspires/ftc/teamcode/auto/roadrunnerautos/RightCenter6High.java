@@ -7,6 +7,7 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryAccelerationConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityConstraint;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.RobotConfig;
 import org.firstinspires.ftc.teamcode.roadrunner.RoadRunnerAutoBase;
@@ -18,9 +19,9 @@ import org.firstinspires.ftc.teamcode.subsystems.Slides;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
-
-@Autonomous(name = "RIGHT Auto All High (Untested)", group = "Competition")
-public class RightAutoAllHigh extends RoadRunnerAutoBase {
+@Disabled
+@Autonomous(name = "RIGHT Center 6 High (Untested)", group = "Competition")
+public class RightCenter6High extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
@@ -57,17 +58,17 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                         return 60;
                     }
                 })
-                //Move through intermediate positions
-                .splineTo(new Vector2d(40 , -1), 0)
-                .splineTo(new Vector2d(50.2, -10 ), Math.toRadians(270))
+                .splineTo(new Vector2d(35.5, 0), 0)
+                .splineTo(new Vector2d(50.2, -58.5), Math.toRadians(-90))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                     brace.brace();
                 })
-                //Travel to preload place
-                .lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
+                .setReversed(true)
+                .splineTo(new Vector2d(60 , -40), 1.09)
+                .setReversed(false)
                 .addTemporalMarkerOffset(0.08, () -> {
                     claw.ungrab();
                 })
@@ -82,8 +83,8 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 })
 
 
-                //goto pickup 1st cone------------------------------------------------------------------------------
-                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                //REPEATED---------------------
+                .splineTo(new Vector2d(50.2, -76), Math.toRadians(-90))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -95,37 +96,9 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
-                .lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
-                .addTemporalMarkerOffset(0, () -> {
-                    claw.ungrab();
-                })
-                .addTemporalMarkerOffset(0.1, () -> {
-                    claw.setPos(RobotConfig.Presets.WristPickup);
-                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop);
-                    claw.grab();
-                })
-                .addTemporalMarkerOffset(0.08, () -> {
-                    claw.ungrab();
-                })
-
-
-
-
-                //goto pickup 2nd cone------------------------------------------------------------------------------
-                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
-                .addTemporalMarkerOffset(0, () -> {
-                    claw.grab();
-                })
-                .addTemporalMarkerOffset(0.05, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
-                })
-                //goto place 2nd cone
-                .addTemporalMarkerOffset(1, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1HighRev);
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
-                })
-                .lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
+                .setReversed(true)
+                .splineTo(new Vector2d(60 , -40), 1.09)
+                .setReversed(false)
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
@@ -139,20 +112,22 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                     claw.ungrab();
                 })
 
-                //goto pickup 3rd cone------------------------------------------------------------------------------
-                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                //REPEATED---------------------
+                .splineTo(new Vector2d(50.2, -76), Math.toRadians(-90))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
                 .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                //goto place 3rd cone
+                //goto place 1st cone
                 .addTemporalMarkerOffset(1, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
-                .lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
+                .setReversed(true)
+                .splineTo(new Vector2d(60 , -40), 1.09)
+                .setReversed(false)
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
@@ -165,23 +140,22 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.08, () -> {
                     claw.ungrab();
                 })
-
-
-
-                //goto pickup 4th cone------------------------------------------------------------------------------
-                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                //REPEATED---------------------
+                .splineTo(new Vector2d(50.2, -76), Math.toRadians(-90))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
                 .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                //goto place 4th cone
+                //goto place 1st cone
                 .addTemporalMarkerOffset(1, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
-                .lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
+                .setReversed(true)
+                .splineTo(new Vector2d(60 , -40), 1.09)
+                .setReversed(false)
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
@@ -194,21 +168,22 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.08, () -> {
                     claw.ungrab();
                 })
-
-                //goto pickup 5th cone------------------------------------------------------------------------------
-                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                //REPEATED---------------------
+                .splineTo(new Vector2d(50.2, -76), Math.toRadians(-90))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
                 .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                //goto place 5th cone
+                //goto place 1st cone
                 .addTemporalMarkerOffset(1, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
-                .lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
+                .setReversed(true)
+                .splineTo(new Vector2d(60 , -40), 1.09)
+                .setReversed(false)
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
@@ -220,7 +195,38 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 })
                 .addTemporalMarkerOffset(0.08, () -> {
                     claw.ungrab();
+                })
+                //REPEATED---------------------
+                .splineTo(new Vector2d(50.2, -76), Math.toRadians(-90))
+                .addTemporalMarkerOffset(0, () -> {
+                    claw.grab();
+                })
+                .addTemporalMarkerOffset(0.05, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
+                })
+                //goto place 1st cone
+                .addTemporalMarkerOffset(1, () -> {
+                    arm.toPosition(RobotConfig.Presets.Arm1HighRev);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
+                })
+                .setReversed(true)
+                .splineTo(new Vector2d(60 , -40), 1.09)
+                .setReversed(false)
+                .addTemporalMarkerOffset(0, () -> {
+                    claw.ungrab();
+                })
+                .addTemporalMarkerOffset(0.1, () -> {
+                    claw.setPos(RobotConfig.Presets.WristPickup);
+                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop);
+                    claw.grab();
+                })
+                .addTemporalMarkerOffset(0.08, () -> {
+                    claw.ungrab();
                 });
+
+
+
 
 
 

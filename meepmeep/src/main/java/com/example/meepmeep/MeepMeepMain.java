@@ -27,10 +27,16 @@ public class MeepMeepMain {
                 .followTrajectorySequence(
                         AllConesHighNormalStart::generateTrajectorySequence
                 );
+        RoadRunnerBotEntity myBot4 = new DefaultBotBuilder(meepMeep)
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.125)
+                .setDimensions(13, 13)
+                .followTrajectorySequence(
+                        RightCenter6High::generateTrajectorySequence
+                );
         meepMeep.setBackground(MeepMeep.Background.FIELD_POWERPLAY_OFFICIAL)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
-                .addEntity(myBot1)
+                .addEntity(myBot4)
                 //.addEntity(myBot2)
                 //.addEntity(myBot3)
                 .start();
