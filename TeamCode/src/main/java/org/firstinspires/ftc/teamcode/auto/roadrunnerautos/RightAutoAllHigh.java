@@ -95,7 +95,7 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 }, new TrajectoryAccelerationConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 53;
+                        return 56;
                     }
                 })
 
