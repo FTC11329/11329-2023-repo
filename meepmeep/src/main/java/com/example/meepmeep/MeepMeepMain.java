@@ -31,12 +31,12 @@ public class MeepMeepMain {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.125)
                 .setDimensions(13, 13)
                 .followTrajectorySequence(
-                        RightCenter6High::generateTrajectorySequence
+                        FastGrab::generateTrajectorySequence
                 );
         meepMeep.setBackground(MeepMeep.Background.FIELD_POWERPLAY_OFFICIAL)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
-                .addEntity(myBot3)
+                .addEntity(myBot4)
                 //.addEntity(myBot2)
                 //.addEntity(myBot3)
                 .start();
