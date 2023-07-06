@@ -72,7 +72,7 @@ public class Claw implements DiInterfaces.IDisposable, DiInterfaces.ITickable, D
 //        if (!isAtPreset && RobotConfig.Claw.autoGrab && ((side == RobotSide.Red && getConeColor() == ConeColor.RED) || ((side == RobotSide.Blue && getConeColor() == ConeColor.BLUE)))) {
 //            grab();
 //        }
-        if(brace.activated && brace.atPole && autoRelease && controlbracetiming) {
+        if(brace.activated && brace.atPole && autoRelease && controlbracetiming && !TeleopDrive.auto) {
             //ungrab();
             slidesOffset = 500;
             autoReleaseTimer.reset();

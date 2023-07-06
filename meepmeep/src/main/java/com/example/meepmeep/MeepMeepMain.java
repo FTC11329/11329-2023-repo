@@ -36,7 +36,7 @@ public class MeepMeepMain {
         meepMeep.setBackground(MeepMeep.Background.FIELD_POWERPLAY_OFFICIAL)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
-                .addEntity(myBot4)
+                .addEntity(myBot3)
                 //.addEntity(myBot2)
                 //.addEntity(myBot3)
                 .start();

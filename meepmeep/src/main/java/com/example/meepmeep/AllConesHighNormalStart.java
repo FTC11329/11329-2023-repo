@@ -36,10 +36,13 @@ public class AllConesHighNormalStart {
                 .lineToLinearHeading(new Pose2d(58 + initialPosition.getX(), 3.5 + initialPosition.getY(), 4.23))
 
                 //CONE 1
-                .splineTo(new Vector2d(50.2 + initialPosition.getX(), -31 + initialPosition.getY()), Math.toRadians(270))
-                .lineToLinearHeading(new Pose2d(58 + initialPosition.getX(), 3.5 + initialPosition.getY(), 4.23))
+                .splineTo(new Vector2d(55.2 + initialPosition.getX(), -29 + initialPosition.getY()), Math.toRadians(270))
+                .setReversed(true)
+                .splineTo(new Vector2d(58 + initialPosition.getX(), 3.5 + initialPosition.getY()), 0.9)
+                .setReversed(false)
+                //.lineToLinearHeading(new Pose2d(58 + initialPosition.getX(), 3.5 + initialPosition.getY(), 4.23))
                 //CONE 2
-                .splineTo(new Vector2d(50.2 + initialPosition.getX(), -31 + initialPosition.getY()), Math.toRadians(270))
+                .splineTo(new Vector2d(55.2 + initialPosition.getX(), -29 + initialPosition.getY()), Math.toRadians(270))
                 .lineToLinearHeading(new Pose2d(58 + initialPosition.getX(), 3.5 + initialPosition.getY(), 4.23))
 
                 //CONE 3

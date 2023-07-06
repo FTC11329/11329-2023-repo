@@ -348,16 +348,8 @@ public class RightAutoMedium extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                     brace.unbrace();
                 })
-//                .waitSeconds(0.05)
-
-                //.splineTo(new Vector2d(intermediatePosition3.getX(), intermediatePosition3.getY()), Math.toRadians(270))
-                //splineTo(new Vector2d(parkLeft.getX(), parkLeft.getY()), Math.toRadians(270));
-                //.splineToLinearHeading(parkLeft, Math.toRadians(45));
-                //.lineTo(Pose2dUtilities.extractVector2d(parkLeft));
                 .lineTo(new Vector2d(50, -2.0))
                 .lineToLinearHeading(parkLeft);
-//                .lineToLinearHeading(intermediatePosition3)
-//                .lineToLinearHeading(parkCenter);
 
     }
 
