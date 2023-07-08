@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Slides;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
-@Disabled
+
 @Autonomous(name = "RIGHT Center 6 High (Untested)", group = "Competition")
 public class RightCenter6High extends RoadRunnerAutoBase {
     Arm arm;
@@ -40,12 +40,14 @@ public class RightCenter6High extends RoadRunnerAutoBase {
 
     @Override
     public void build(TrajectorySequenceBuilder trajectorySequenceBuilder) {
+        claw.grab();
         trajectorySequenceBuilder
                 //Setup
                 .addDisplacementMarker(() -> {
                     claw.grab(); //Grabs preload
                     brace.unbrace();
                     claw.setPresetBool(true);
+                    //claw.setPos(RobotConfig.Presets.WristPickup);
                 })
                 .setConstraints(new TrajectoryVelocityConstraint() {
                     @Override
@@ -55,11 +57,12 @@ public class RightCenter6High extends RoadRunnerAutoBase {
                 }, new TrajectoryAccelerationConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 60;
+                        return 65;
                     }
                 })
-                .splineTo(new Vector2d(35.5, 0), 0)
-                .splineTo(new Vector2d(50.2, -58.5), Math.toRadians(-90))
+                .splineToLinearHeading(new Pose2d(53.2, -8, Math.toRadians(-90)), 0)
+                //.splineTo(new Vector2d(35.5, 0), 0)
+                .splineTo(new Vector2d(53.2, -58.5), Math.toRadians(-90))//was 50.2
                 .addTemporalMarkerOffset(0, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
@@ -67,7 +70,18 @@ public class RightCenter6High extends RoadRunnerAutoBase {
                     brace.brace();
                 })
                 .setReversed(true)
-                .splineTo(new Vector2d(60 , -40), 1.09)
+                .setConstraints(new TrajectoryVelocityConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 60;
+                    }
+                }, new TrajectoryAccelerationConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 58;
+                    }
+                })
+                .splineTo(new Vector2d(65 , -40), 1.09)
                 .setReversed(false)
                 .addTemporalMarkerOffset(0.08, () -> {
                     claw.ungrab();
@@ -76,7 +90,7 @@ public class RightCenter6High extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop);
-                    claw.grab();
+                    //claw.grab();
                 })
                 .addTemporalMarkerOffset(0.08, () -> {
                     claw.ungrab();
@@ -84,7 +98,7 @@ public class RightCenter6High extends RoadRunnerAutoBase {
 
 
                 //REPEATED---------------------
-                .splineTo(new Vector2d(50.2, -76), Math.toRadians(-90))
+                .splineTo(new Vector2d(58.7, -76), Math.toRadians(-90))//was -75
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -92,28 +106,28 @@ public class RightCenter6High extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 //goto place 1st cone
-                .addTemporalMarkerOffset(1, () -> {
+                .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
                 .setReversed(true)
-                .splineTo(new Vector2d(60 , -40), 1.09)
+                .splineTo(new Vector2d(65 , -40), 1.09)
                 .setReversed(false)
-                .addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0.2, () -> {
                     claw.ungrab();
                 })
-                .addTemporalMarkerOffset(0.1, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop+151);
-                    claw.grab();
+                    //claw.grab();
                 })
-                .addTemporalMarkerOffset(0.08, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
                 })
 
                 //REPEATED---------------------
-                .splineTo(new Vector2d(50.2, -76), Math.toRadians(-90))
+                .splineTo(new Vector2d(58.7, -76), Math.toRadians(-90))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -121,27 +135,27 @@ public class RightCenter6High extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 //goto place 1st cone
-                .addTemporalMarkerOffset(1, () -> {
+                .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
                 .setReversed(true)
-                .splineTo(new Vector2d(60 , -40), 1.09)
+                .splineTo(new Vector2d(65 , -40), 1.09)
                 .setReversed(false)
-                .addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0.2, () -> {
                     claw.ungrab();
                 })
-                .addTemporalMarkerOffset(0.1, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop+302);
-                    claw.grab();
+                    //claw.grab();
                 })
-                .addTemporalMarkerOffset(0.08, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
                 })
                 //REPEATED---------------------
-                .splineTo(new Vector2d(50.2, -76), Math.toRadians(-90))
+                .splineTo(new Vector2d(58.7, -76), Math.toRadians(-90))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -149,27 +163,27 @@ public class RightCenter6High extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 //goto place 1st cone
-                .addTemporalMarkerOffset(1, () -> {
+                .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
                 .setReversed(true)
-                .splineTo(new Vector2d(60 , -40), 1.09)
+                .splineTo(new Vector2d(65 , -40), 1.09)
                 .setReversed(false)
-                .addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0.2, () -> {
                     claw.ungrab();
                 })
-                .addTemporalMarkerOffset(0.1, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop+453);
-                    claw.grab();
+                    //claw.grab();
                 })
-                .addTemporalMarkerOffset(0.08, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
                 })
                 //REPEATED---------------------
-                .splineTo(new Vector2d(50.2, -76), Math.toRadians(-90))
+                .splineTo(new Vector2d(58.7, -76), Math.toRadians(-90))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -177,27 +191,27 @@ public class RightCenter6High extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 //goto place 1st cone
-                .addTemporalMarkerOffset(1, () -> {
+                .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
                 .setReversed(true)
-                .splineTo(new Vector2d(60 , -40), 1.09)
+                .splineTo(new Vector2d(65 , -40), 1.09)
                 .setReversed(false)
-                .addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0.2, () -> {
                     claw.ungrab();
                 })
-                .addTemporalMarkerOffset(0.1, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
-                    claw.grab();
+                    //claw.grab();
                 })
-                .addTemporalMarkerOffset(0.08, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
                 })
                 //REPEATED---------------------
-                .splineTo(new Vector2d(50.2, -76), Math.toRadians(-90))
+                .splineTo(new Vector2d(58.7, -76), Math.toRadians(-90))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -205,24 +219,39 @@ public class RightCenter6High extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 //goto place 1st cone
-                .addTemporalMarkerOffset(1, () -> {
+                .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
                 .setReversed(true)
-                .splineTo(new Vector2d(60 , -40), 1.09)
+                .splineTo(new Vector2d(65 , -40), 1.09)
                 .setReversed(false)
-                .addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0.2, () -> {
                     claw.ungrab();
                 })
-                .addTemporalMarkerOffset(0.1, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop);
-                    claw.grab();
+                    //claw.grab();
                 })
-                .addTemporalMarkerOffset(0.08, () -> {
+                .addTemporalMarkerOffset(0.25, () -> {
                     claw.ungrab();
+                    brace.unbrace();
+                })
+                .addTemporalMarkerOffset(0.5, () -> {
+                    claw.setPos(RobotConfig.Wrist.startingPosition);
+                })
+                .setConstraints(new TrajectoryVelocityConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 70;
+                    }
+                }, new TrajectoryAccelerationConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 68;
+                    }
                 });
 
 
@@ -237,7 +266,7 @@ public class RightCenter6High extends RoadRunnerAutoBase {
     @Override
     public void buildParkLeft(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
-                .splineToLinearHeading(new Pose2d(51, 40 , Math.toRadians(180)), Math.toRadians(90));
+                .splineToLinearHeading(new Pose2d(56, -4 , Math.toRadians(90)), Math.toRadians(90));//was 51
     }
 
     @Override

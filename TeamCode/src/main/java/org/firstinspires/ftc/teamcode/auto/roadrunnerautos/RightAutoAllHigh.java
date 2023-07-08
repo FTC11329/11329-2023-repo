@@ -299,7 +299,7 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .splineToLinearHeading(new Pose2d(53, 44 , Math.toRadians(180)), Math.toRadians(85));
+                .splineToLinearHeading(new Pose2d(47, 44 , Math.toRadians(180)), Math.toRadians(85));
     }
 
     @Override

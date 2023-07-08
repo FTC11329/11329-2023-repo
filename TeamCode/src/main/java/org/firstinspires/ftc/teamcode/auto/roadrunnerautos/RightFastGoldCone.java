@@ -47,7 +47,8 @@ public class RightFastGoldCone extends RoadRunnerAutoBase {
                     claw.grab(); //Grabs preload
                     brace.unbrace();
                     claw.setPresetBool(true);
-                    claw.setPos(RobotConfig.Presets.WristPickup);
+                    //claw.setPos(RobotConfig.Presets.WristPickup);
+                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                 })
 //                .addTemporalMarker(0.75, () ->{
 //                    //arm.toPosition(RobotConfig.Presets.Arm1Pickup+150);
@@ -72,57 +73,61 @@ public class RightFastGoldCone extends RoadRunnerAutoBase {
                 }, new TrajectoryAccelerationConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 60;
+                        return 54;
                     }
                 })
-
-                .splineTo(new Vector2d(40.5, -6), 0)
+                .splineToLinearHeading(new Pose2d(79, -6, Math.toRadians(-90)), 0)
+               // .splineTo(new Vector2d(42, -7.5), 0)
+               // .splineTo(new Vector2d(42, -4), 0)
                 .setConstraints(new TrajectoryVelocityConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 60;
+                    }
+                }, new TrajectoryAccelerationConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 54;
+                    }
+                })
+                //.splineTo(new Vector2d(79, -50), Math.toRadians(-90))
+                .setConstraints(new TrajectoryVelocityConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 60;
+                    }
+                }, new TrajectoryAccelerationConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
                         return 55;
                     }
-                }, new TrajectoryAccelerationConstraint() {
-                    @Override
-                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 52;
-                    }
                 })
-                .splineTo(new Vector2d(77, -20.5), Math.toRadians(-90))
-                .setConstraints(new TrajectoryVelocityConstraint() {
-                    @Override
-                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 57;
-                    }
-                }, new TrajectoryAccelerationConstraint() {
-                    @Override
-                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 52;
-                    }
-                })
-
-                .splineTo(new Vector2d(83.0 , -40.5), Math.toRadians(-90))
-                //.waitSeconds(10)
-                .splineTo(new Vector2d(90.5  ,-47.5 ), Math.toRadians(-90))
-                .splineTo(new Vector2d(95.5  ,-57.0 ), Math.toRadians(-70))//was 100.5 -57.5
-                //.waitSeconds(5)
-                //.waitSeconds(20)
-                .addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0.5, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     claw.ungrab();
 
                 })
-                .addTemporalMarkerOffset(1, () -> {
+                //.splineTo(new Vector2d(97, -73.25), Math.toRadians(-70))
+                .splineToLinearHeading(new Pose2d(98, -71, Math.toRadians(-70)), Math.toRadians(-70))
+                //.splineTo(new Vector2d(83.0 , -40.5), Math.toRadians(-90))
+                //.waitSeconds(10)
+                //.splineTo(new Vector2d(83.0  ,-47.5 ), Math.toRadians(-90))
+                //.splineTo(new Vector2d(95.5  ,-60.0 ), Math.toRadians(-90))//was 100.5 -57.5
+                //.waitSeconds(5)
+                //.waitSeconds(20)
+
+
+                .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
 
                 })
-                .addTemporalMarkerOffset(3, () -> {
+                .addTemporalMarkerOffset(   0.25, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop);
 
                 })
-                .waitSeconds(5)
+                //.waitSeconds(0.75)
                 .lineTo(new Vector2d(78, -55))
-                .waitSeconds(10.3)
+                .waitSeconds(18.3)
                 .addTemporalMarkerOffset(0, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
@@ -130,17 +135,28 @@ public class RightFastGoldCone extends RoadRunnerAutoBase {
                     brace.brace();
                 })
                 //.waitSeconds(1)
-                .lineToLinearHeading(new Pose2d(72.7 , -43.5, Math.toRadians(310)))
+                .lineToLinearHeading(new Pose2d(69., -40.6, Math.toRadians(330)))
 
-                .addTemporalMarkerOffset(2, () -> {
+                .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
-                .waitSeconds(3);
+                //.waitSeconds(3);
 //                .addTemporalMarkerOffset(3, () -> {
 //                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
 //                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
 //                    brace.unbrace();
 //                });
+            .setConstraints(new TrajectoryVelocityConstraint() {
+                @Override
+                public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                    return 60;
+                }
+            }, new TrajectoryAccelerationConstraint() {
+                @Override
+                public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                    return 60;
+                }
+            });
 
 
     }
@@ -155,7 +171,7 @@ public class RightFastGoldCone extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     brace.unbrace();
                 })
-                .splineToLinearHeading(new Pose2d(72, 0, 0), Math.toRadians(90));
+                .splineToLinearHeading(new Pose2d(72, -3, 0), Math.toRadians(90));
     }
     @Override
     public void buildParkCenter(TrajectorySequenceBuilder trajectorySequenceBuilder) {
@@ -177,7 +193,7 @@ public class RightFastGoldCone extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     brace.unbrace();
                 })
-                .splineToLinearHeading(new Pose2d(70.5, -47.5 , 0), Math.toRadians(90));
+                .splineToLinearHeading(new Pose2d(76.5, -47.5 , 0), Math.toRadians(90));
     }
 
     @Override
