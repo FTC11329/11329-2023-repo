@@ -53,7 +53,7 @@ import java.util.List;
 @Config
 public class GlacierDrive extends MecanumDrive {
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(5, 1, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(10, 0, 0);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(12, 0,0 );//was 10,0,0| 12 100 0
 
     public static double LATERAL_MULTIPLIER = 1;
 

@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.roadrunner.drive.GlacierDrive;
 @Config
 @Autonomous(group = "drive")
 public class TurnTest extends LinearOpMode {
-    public static double ANGLE = 360; // deg
+    public static double ANGLE = 1800; // deg
 
     @Override
     public void runOpMode() throws InterruptedException {

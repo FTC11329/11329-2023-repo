@@ -6,15 +6,20 @@ import com.noahbres.meepmeep.roadrunner.DriveShim;
 import com.noahbres.meepmeep.roadrunner.trajectorysequence.TrajectorySequence;
 
 public class CenterStartNoPreloadToHigh implements MeepMeepOpMode {
-    static Pose2d initialPosition = new Pose2d(-63.5, 13.5, 0);
+    static Pose2d initialPosition = new Pose2d(-63.5, 16.5, Math.toRadians(180));
 
     static TrajectorySequence generateTrajectorySequence(DriveShim drive) {
 
        return drive.trajectorySequenceBuilder(initialPosition)
-               .splineTo(new Vector2d(65.5+initialPosition.getX(), 0+initialPosition.getY()), initialPosition.getHeading())
-               .splineTo(new Vector2d(75.5+initialPosition.getX(), -43.5+initialPosition.getY()), Math.toRadians(-90)+initialPosition.getHeading())
-               .splineTo(new Vector2d(75.7 + initialPosition.getX(), -58.5+initialPosition.getY()), Math.toRadians(-90)+initialPosition.getHeading())
-               .splineTo(new Vector2d(83.5 + initialPosition.getX() ,-75.5 + initialPosition.getY()), Math.toRadians(-85)+ initialPosition.getHeading())
+               .setReversed(true)
+               .splineTo(new Vector2d(45+initialPosition.getX(), -6+initialPosition.getY()), 0)//should be 0
+
+               .splineTo(new Vector2d(85+initialPosition.getX(), -6+initialPosition.getY()), 0)//should be 0
+               .setReversed(false)
+               .splineTo(new Vector2d(75.5+initialPosition.getX(), -43.5+initialPosition.getY()), Math.toRadians(-90))
+               .splineTo(new Vector2d(75.7+initialPosition.getX(), -58.5+initialPosition.getY()), Math.toRadians(-90))
+               //.splineTo(new Vector2d(75.7 + initialPosition.getX(), -58.5+initialPosition.getY()), Math.toRadians(-90)+initialPosition.getHeading())
+               .splineTo(new Vector2d(83.5 + initialPosition.getX() ,-75.5 + initialPosition.getY()), Math.toRadians(-85))
                .waitSeconds(0.3)
                //.splineTo(new Vector2d(12, -45), Math.toRadians(-90)).setReversed(true)
                .strafeRight(5)

@@ -16,7 +16,7 @@ public class MeepMeepMain {
                 );
         RoadRunnerBotEntity myBot2 = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(600, 600, Math.toRadians(180), Math.toRadians(180), 11.125)
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.125)
                 .setDimensions(13, 13)
                 .followTrajectorySequence(
                         CenterStartNoPreloadToHigh::generateTrajectorySequence
@@ -36,7 +36,7 @@ public class MeepMeepMain {
         meepMeep.setBackground(MeepMeep.Background.FIELD_POWERPLAY_OFFICIAL)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
-                .addEntity(myBot4)
+                .addEntity(myBot2)
                 //.addEntity(myBot2)
                 //.addEntity(myBot3)
                 .start();

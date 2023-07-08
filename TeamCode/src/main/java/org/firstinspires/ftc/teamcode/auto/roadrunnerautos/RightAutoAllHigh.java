@@ -165,7 +165,7 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 .setReversed(true)
                 .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 1.09)
                 .setReversed(false)
-                .waitSeconds(0.3)
+                .waitSeconds(0.15)
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
@@ -196,7 +196,7 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 .setReversed(true)
                 .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), .95)
                 .setReversed(false)
-                .waitSeconds(0.3)
+                .waitSeconds(0.15)
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
@@ -229,7 +229,7 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 .setReversed(true)
                 .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 1.09)
                 .setReversed(false)
-                .waitSeconds(0.3)
+                .waitSeconds(0.15)
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
@@ -260,7 +260,7 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 .setReversed(true)
                 .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 1.09)
                 .setReversed(false)
-                .waitSeconds(0.3)
+                .waitSeconds(0.15)
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
@@ -299,7 +299,7 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .splineToLinearHeading(new Pose2d(49, 44 , Math.toRadians(180)), Math.toRadians(90));
+                .splineToLinearHeading(new Pose2d(53, 44 , Math.toRadians(180)), Math.toRadians(85));
     }
 
     @Override
