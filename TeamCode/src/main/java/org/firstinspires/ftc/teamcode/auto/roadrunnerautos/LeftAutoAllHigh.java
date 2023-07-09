@@ -296,7 +296,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .splineToLinearHeading(new Pose2d(47, -44, Math.toRadians(180)), Math.toRadians(-95));
+                .splineToLinearHeading(new Pose2d(50.7, -5, Math.toRadians(180)), Math.toRadians(85));
     }
 
     @Override
@@ -316,7 +316,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .splineToLinearHeading(new Pose2d(50.5, -25, Math.toRadians(180)), Math.toRadians(-90));
+                .splineToLinearHeading(new Pose2d(50.5, -25, Math.toRadians(180)), Math.toRadians(90));
     }
 
     @Override
@@ -336,8 +336,9 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .splineToLinearHeading(new Pose2d(50.7, 5, Math.toRadians(180)), Math.toRadians(-90));
+                .splineToLinearHeading(new Pose2d(50.5, -44, Math.toRadians(90)), Math.toRadians(90));
     }
+
 
     @Override
     public RobotSide GetSide() {
