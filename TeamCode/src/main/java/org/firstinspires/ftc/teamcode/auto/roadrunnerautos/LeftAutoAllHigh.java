@@ -15,6 +15,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Arm;
 import org.firstinspires.ftc.teamcode.subsystems.Brace;
 import org.firstinspires.ftc.teamcode.subsystems.Claw;
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
+import org.firstinspires.ftc.teamcode.utilities.Pose2dUtilities;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
@@ -26,9 +27,11 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
     Slides slides;
     Brace brace;
 
-    Pose2d pickupPosition = new Pose2d(55, 29.0, Math.toRadians(90));
-    Pose2d highLocation = new Pose2d(57.5, -5, 2.05);//4.23
+    Pose2d pickupPosition = new Pose2d(51, 28.75, Math.toRadians(90));
+    Pose2d highLocationPreload = new Pose2d(62.5, -3, Math.toRadians(140));
+    Pose2d highLocation = new Pose2d(63, -1, Math.toRadians(300));
     Pose2d intermediate1 = new Pose2d();
+
     @Override
     public void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException {
         arm = (Arm) Container.resolve(Arm.class);
@@ -56,18 +59,18 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 .setConstraints(new TrajectoryVelocityConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 57;
+                        return 50;
                     }
                 }, new TrajectoryAccelerationConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 52;
+                        return 45;
                     }
                 })
 
                 //Move through intermediate positions
-                .splineTo(new Vector2d(40 , 2), 0)
-                .splineTo(new Vector2d(49.2, 15 ), Math.toRadians(90))
+                .splineTo(new Vector2d(40, 2), 0)
+                .splineTo(new Vector2d(49.2, 15), Math.toRadians(90))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
@@ -86,7 +89,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                     }
                 })
                 //Travel to preload place
-                .lineToLinearHeading(new Pose2d(highLocation.getX() + 5, highLocation.getY()+3, highLocation.getHeading() +0.2))
+                .lineToLinearHeading(highLocationPreload)
                 .setConstraints(new TrajectoryVelocityConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
@@ -117,7 +120,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
 
 
                 //goto pickup 1st cone------------------------------------------------------------------------------
-                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY()), pickupPosition.getHeading())
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -130,7 +133,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
                 .setReversed(true)
-                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 5.19)//was 1.09
+                .splineTo(highLocation.vec(), highLocation.getHeading())
                 .setReversed(false)
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
                 .addTemporalMarkerOffset(0, () -> {
@@ -139,7 +142,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop+151);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 151);
                     //claw.grab();
                 })
                 .addTemporalMarkerOffset(0.08, () -> {
@@ -147,10 +150,8 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 })
 
 
-
-
                 //goto pickup 2nd cone------------------------------------------------------------------------------
-                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY()), pickupPosition.getHeading())
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -163,7 +164,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
                 .setReversed(true)
-                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 5.19)
+                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), highLocation.getHeading())
                 .setReversed(false)
                 .waitSeconds(0.15)
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
@@ -173,7 +174,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop+302);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 302);
                     //claw.grab();
                 })
                 .addTemporalMarkerOffset(0.08, () -> {
@@ -181,7 +182,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 })
 
                 //goto pickup 3rd cone------------------------------------------------------------------------------
-                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY()), pickupPosition.getHeading())
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -194,7 +195,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
                 .setReversed(true)
-                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 5.33)
+                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), highLocation.getHeading())
                 .setReversed(false)
                 .waitSeconds(0.15)
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
@@ -204,7 +205,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop+453);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 453);
                     //claw.grab();
                 })
                 .addTemporalMarkerOffset(0.08, () -> {
@@ -212,9 +213,8 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 })
 
 
-
                 //goto pickup 4th cone------------------------------------------------------------------------------
-                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY()), pickupPosition.getHeading())
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -227,7 +227,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
                 .setReversed(true)
-                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 5.19)
+                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), highLocation.getHeading())
                 .setReversed(false)
                 .waitSeconds(0.15)
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
@@ -237,7 +237,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop+604);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 604);
                     //claw.grab();
                 })
                 .addTemporalMarkerOffset(0.08, () -> {
@@ -245,7 +245,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 })
 
                 //goto pickup 5th cone------------------------------------------------------------------------------
-                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY()), pickupPosition.getHeading())
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
@@ -258,7 +258,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
                 .setReversed(true)
-                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 1.09)
+                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), highLocation.getHeading())
                 .setReversed(false)
                 .waitSeconds(0.15)
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
@@ -275,9 +275,6 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                     claw.ungrab();
                     brace.unbrace();
                 });
-
-
-
 
 
     }
@@ -299,7 +296,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .splineToLinearHeading(new Pose2d(47, -44 , Math.toRadians(180)), Math.toRadians(-95));
+                .splineToLinearHeading(new Pose2d(47, -44, Math.toRadians(180)), Math.toRadians(-95));
     }
 
     @Override
@@ -319,7 +316,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .splineToLinearHeading(new Pose2d(50.5, -25 ,  Math.toRadians(180)), Math.toRadians(-90));
+                .splineToLinearHeading(new Pose2d(50.5, -25, Math.toRadians(180)), Math.toRadians(-90));
     }
 
     @Override
@@ -339,7 +336,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .splineToLinearHeading(new Pose2d(50.7 , 5 , Math.toRadians(180)), Math.toRadians(-90));
+                .splineToLinearHeading(new Pose2d(50.7, 5, Math.toRadians(180)), Math.toRadians(-90));
     }
 
     @Override
