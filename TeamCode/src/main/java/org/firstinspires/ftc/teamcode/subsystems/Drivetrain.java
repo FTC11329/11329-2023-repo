@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.RobotConfig;
 
 public class Drivetrain implements DiInterfaces.IInitializable, DiInterfaces.IDisposable {
     @DiContainer.Inject()
@@ -51,10 +52,10 @@ public class Drivetrain implements DiInterfaces.IInitializable, DiInterfaces.IDi
     }
 
     public void MecanumDrive(double vertical, double horizontal, double clockwise, double maxSpeed) {
-        frontRightMotor.setPower((-clockwise + horizontal + vertical) * maxSpeed);
-        backRightMotor.setPower((-clockwise - horizontal + vertical) * maxSpeed);
-        frontLeftMotor.setPower(-(-clockwise + horizontal - vertical) * maxSpeed);
-        backLeftMotor.setPower(-(-clockwise - horizontal - vertical) * maxSpeed);
+        frontRightMotor.setPower((-clockwise + horizontal + vertical) * maxSpeed * RobotConfig.Drivetrain.frontLeftMotorMultiplier);
+        backRightMotor.setPower((-clockwise - horizontal + vertical) * maxSpeed * RobotConfig.Drivetrain.frontRightMotorMultiplier);
+        frontLeftMotor.setPower(-(-clockwise + horizontal - vertical) * maxSpeed * RobotConfig.Drivetrain.backLeftMotorMultiplier);
+        backLeftMotor.setPower(-(-clockwise - horizontal - vertical) * maxSpeed * RobotConfig.Drivetrain.backRightMotorMultiplier);
     }
 
     public double powerCurve(double stickInput) {

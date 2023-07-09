@@ -7,7 +7,6 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryAccelerationConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityConstraint;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.RobotConfig;
 import org.firstinspires.ftc.teamcode.roadrunner.RoadRunnerAutoBase;
@@ -19,23 +18,17 @@ import org.firstinspires.ftc.teamcode.subsystems.Slides;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
-@Disabled
-@Autonomous(name = "Left Auto All High", group = "Competition")
+
+@Autonomous(name = "LEFT Auto All High", group = "Competition")
 public class LeftAutoAllHigh extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
     Brace brace;
 
-    Pose2d placeLocationHigh = new Pose2d(43, -25.5, Math.toRadians(60));
-    Pose2d placeLocationMed = new Pose2d(47, -2.75, Math.toRadians(50));
-    Pose2d intermediatePos = new Pose2d(51.9, -6.8, Math.toRadians(90));
-    Vector2d pickupLocation = new Vector2d(46, 30.25);
-
-    Vector2d placeLocationOffset = new Vector2d(-0.45, 0.45);
-
-    int slidesDrop = 300;
-
+    Pose2d pickupPosition = new Pose2d(55, 29.0, Math.toRadians(90));
+    Pose2d highLocation = new Pose2d(57.5, -5, 2.05);//4.23
+    Pose2d intermediate1 = new Pose2d();
     @Override
     public void ResolveSubsystems() throws InvocationTargetException, IllegalAccessException, InstantiationException {
         arm = (Arm) Container.resolve(Arm.class);
@@ -48,20 +41,22 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
     public void build(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         claw.grab();
         trajectorySequenceBuilder
+                //Setup
                 .addDisplacementMarker(() -> {
                     claw.grab(); //Grabs preload
+                    brace.unbrace();
+                    claw.setPresetBool(true);
                 })
-
-                //Puts the arm in placing position
-                .addTemporalMarkerOffset(0, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedRev - 300);
+                .addTemporalMarkerOffset(1.25, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
+                    arm.toPosition(RobotConfig.Presets.Arm1HighRev);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
+                    brace.brace();
                 })
-
                 .setConstraints(new TrajectoryVelocityConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 55;
+                        return 57;
                     }
                 }, new TrajectoryAccelerationConstraint() {
                     @Override
@@ -70,434 +65,281 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                     }
                 })
 
-                //Go to 8, -4 without turning
-                .lineTo(new Vector2d(17, 4))
-
+                //Move through intermediate positions
+                .splineTo(new Vector2d(40 , 2), 0)
+                .splineTo(new Vector2d(49.2, 15 ), Math.toRadians(90))
                 .addTemporalMarkerOffset(0, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1MedRev);
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedRev - 100);
-                })
-                .splineTo(new Vector2d(54.5, 5), Math.toRadians(0))
-                .resetConstraints()
-                //Go to pole and let go
-                .addTemporalMarkerOffset(0.9, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedRev + 500);
-                })
-                .lineToLinearHeading(new Pose2d(placeLocationMed.getX() - 1.25, placeLocationMed.getY() - 1.3, Math.toRadians(50)))
-
-                .addTemporalMarkerOffset(0, () -> {
-                    claw.ungrab();
-                })
-
-                .addTemporalMarkerOffset(0.15, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
+                    arm.toPosition(RobotConfig.Presets.Arm1HighRev);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
+                    brace.brace();
                 })
-                .addTemporalMarkerOffset(0.25, () -> {
+                .setConstraints(new TrajectoryVelocityConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 57;
+                    }
+                }, new TrajectoryAccelerationConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 56;
+                    }
+                })
+                //Travel to preload place
+                .lineToLinearHeading(new Pose2d(highLocation.getX() + 5, highLocation.getY()+3, highLocation.getHeading() +0.2))
+                .setConstraints(new TrajectoryVelocityConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 57;
+                    }
+                }, new TrajectoryAccelerationConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 56;
+                    }
+                })
+
+                .addTemporalMarkerOffset(0.08, () -> {
                     claw.ungrab();
                 })
-                .waitSeconds(0.2)
-
-                //ANOTHER CONE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                //Go to pickup a cone
-                .addTemporalMarkerOffset(0.5, () -> {
+                .addTemporalMarkerOffset(0.1, () -> {
+                    claw.ungrab();
+                })
+                .addTemporalMarkerOffset(0.1, () -> {
+                    claw.setPos(RobotConfig.Presets.WristPickup);
+                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop);
-                    arm.toPosition(5);
-                    claw.setPos(RobotConfig.Presets.WristPickup);
+                    //claw.grab();
+                })
+                .addTemporalMarkerOffset(0.08, () -> {
+                    claw.ungrab();
                 })
 
-                .splineTo(new Vector2d(pickupLocation.getX(), pickupLocation.getY()), Math.toRadians(90))
 
-                .addTemporalMarkerOffset(-0.2, () -> {
+                //goto pickup 1st cone------------------------------------------------------------------------------
+                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-
-                //Moves off the stack
                 .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .waitSeconds(0.15)
-
-                //Going to High
-                .addTemporalMarkerOffset(0.4, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
-                    claw.setPos(RobotConfig.Presets.WristPickup);
-                })
-
+                //goto place 1st cone
                 .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
-
-                .lineToLinearHeading(new Pose2d(intermediatePos.getX(), intermediatePos.getY(), intermediatePos.getHeading()))
-                .splineToSplineHeading(new Pose2d(placeLocationHigh.getX(), placeLocationHigh.getY(),placeLocationHigh.getHeading()),placeLocationHigh.getHeading())
-
-                .addTemporalMarkerOffset(-0.35, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev + slidesDrop);
-                })
-
-                //Ungrabs
+                .setReversed(true)
+                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 5.19)//was 1.09
+                .setReversed(false)
+                //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
-                .addTemporalMarkerOffset(0.05, () -> {
-                    claw.grab();
-                })
-
-                //ANOTHER CONE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                .waitSeconds(0.05)
-                .addTemporalMarkerOffset(0.15, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 151);
-                    arm.toPosition(5);
+                .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
-
+                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop+151);
+                    //claw.grab();
                 })
-                .addTemporalMarkerOffset(0.25, () -> {
+                .addTemporalMarkerOffset(0.08, () -> {
                     claw.ungrab();
                 })
-                .waitSeconds(0.2)
 
-                .lineToLinearHeading(new Pose2d(intermediatePos.getX(), intermediatePos.getY(), intermediatePos.getHeading()))
-                .splineToSplineHeading(new Pose2d(pickupLocation.getX(), pickupLocation.getY(), Math.toRadians(90)), Math.toRadians(90))
 
-                .addTemporalMarkerOffset(-0.2, () -> {
+
+
+                //goto pickup 2nd cone------------------------------------------------------------------------------
+                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-
-                //Moves off the stack
                 .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .waitSeconds(0.15)
-
-                //Going to High
-                .addTemporalMarkerOffset(0.4, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
-                    claw.setPos(RobotConfig.Presets.WristPickup);
-                })
-
+                //goto place 2nd cone
                 .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
-
-                .lineToLinearHeading(new Pose2d(intermediatePos.getX(), intermediatePos.getY(), intermediatePos.getHeading()))
-                .splineToSplineHeading(new Pose2d(placeLocationHigh.getX(), placeLocationHigh.getY(),placeLocationHigh.getHeading()),placeLocationHigh.getHeading())
-
-                .addTemporalMarkerOffset(-0.35, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev + slidesDrop);
-                })
-
-                //Ungrabs
+                .setReversed(true)
+                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 5.19)
+                .setReversed(false)
+                .waitSeconds(0.15)
+                //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
-                .addTemporalMarkerOffset(0.05, () -> {
-                    claw.grab();
-                })
-
-                //ANOTHER CONE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                .waitSeconds(0.05)
-                .addTemporalMarkerOffset(0.15, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + (151 * 2));
-                    arm.toPosition(5);
+                .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
-
+                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop+302);
+                    //claw.grab();
                 })
-                .addTemporalMarkerOffset(0.25, () -> {
+                .addTemporalMarkerOffset(0.08, () -> {
                     claw.ungrab();
                 })
-                .waitSeconds(0.2)
 
-                .lineToLinearHeading(new Pose2d(intermediatePos.getX(), intermediatePos.getY(), intermediatePos.getHeading()))
-                .splineToSplineHeading(new Pose2d(pickupLocation.getX(), pickupLocation.getY(), Math.toRadians(90)), Math.toRadians(90))
-
-                .addTemporalMarkerOffset(-0.2, () -> {
+                //goto pickup 3rd cone------------------------------------------------------------------------------
+                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-
-                //Moves off the stack
                 .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .waitSeconds(0.15)
-
-                //Going to High
-                .addTemporalMarkerOffset(0.4, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
-                    claw.setPos(RobotConfig.Presets.WristPickup);
-                })
-
+                //goto place 3rd cone
                 .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
-
-                .lineToLinearHeading(new Pose2d(intermediatePos.getX(), intermediatePos.getY(), intermediatePos.getHeading()))
-                .splineToSplineHeading(new Pose2d(placeLocationHigh.getX(), placeLocationHigh.getY(),placeLocationHigh.getHeading()),placeLocationHigh.getHeading())
-
-                .addTemporalMarkerOffset(-0.35, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev + slidesDrop);
-                })
-
-                //Ungrabs
+                .setReversed(true)
+                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 5.33)
+                .setReversed(false)
+                .waitSeconds(0.15)
+                //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
-                .addTemporalMarkerOffset(0.05, () -> {
-                    claw.grab();
-                })
-
-                //ANOTHER CONE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                .waitSeconds(0.05)
-                .addTemporalMarkerOffset(0.15, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + (151 * 3));
-                    arm.toPosition(5);
+                .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
-
+                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop+453);
+                    //claw.grab();
                 })
-                .addTemporalMarkerOffset(0.25, () -> {
+                .addTemporalMarkerOffset(0.08, () -> {
                     claw.ungrab();
                 })
-                .waitSeconds(0.2)
 
-                .lineToLinearHeading(new Pose2d(intermediatePos.getX(), intermediatePos.getY(), intermediatePos.getHeading()))
-                .splineToSplineHeading(new Pose2d(pickupLocation.getX(), pickupLocation.getY(), Math.toRadians(90)), Math.toRadians(90))
 
-                .addTemporalMarkerOffset(-0.2, () -> {
+
+                //goto pickup 4th cone------------------------------------------------------------------------------
+                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-
-                //Moves off the stack
                 .addTemporalMarkerOffset(0.05, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .waitSeconds(0.15)
-
-                //Going to High
-                .addTemporalMarkerOffset(0.4, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
-                    claw.setPos(RobotConfig.Presets.WristPickup);
-                })
-
+                //goto place 4th cone
                 .addTemporalMarkerOffset(0.5, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
-
-                .lineToLinearHeading(new Pose2d(intermediatePos.getX(), intermediatePos.getY(), intermediatePos.getHeading()))
-                .splineToSplineHeading(new Pose2d(placeLocationHigh.getX(), placeLocationHigh.getY(),placeLocationHigh.getHeading()),placeLocationHigh.getHeading())
-
-                .addTemporalMarkerOffset(-0.35, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev + slidesDrop);
-                })
-
-                //Ungrabs
+                .setReversed(true)
+                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 5.19)
+                .setReversed(false)
+                .waitSeconds(0.15)
+                //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
                 })
-                .addTemporalMarkerOffset(0.05, () -> {
+                .addTemporalMarkerOffset(0.1, () -> {
+                    claw.setPos(RobotConfig.Presets.WristPickup);
+                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop+604);
+                    //claw.grab();
+                })
+                .addTemporalMarkerOffset(0.08, () -> {
+                    claw.ungrab();
+                })
+
+                //goto pickup 5th cone------------------------------------------------------------------------------
+                .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY() ), pickupPosition.getHeading())
+                .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-
-                //ANOTHER CONE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                .waitSeconds(0.05)
-                .addTemporalMarkerOffset(0.15, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + (151 * 4));
-                    arm.toPosition(5);
-                    claw.setPos(RobotConfig.Presets.WristPickup);
-
+                .addTemporalMarkerOffset(0.05, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
-                .addTemporalMarkerOffset(0.25, () -> {
+                //goto place 5th cone
+                .addTemporalMarkerOffset(0.5, () -> {
+                    arm.toPosition(RobotConfig.Presets.Arm1HighRev);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
+                })
+                .setReversed(true)
+                .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 1.09)
+                .setReversed(false)
+                .waitSeconds(0.15)
+                //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
+                .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();
+                })
+                .addTemporalMarkerOffset(0.1, () -> {
+                    //claw.setPos(RobotConfig.Wrist.startingPosition);
+                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+                    slides.setTargetPosition(0);//RobotConfig.Presets.SlidesPickupTop+755
+                    //claw.grab();
+                })
+                .addTemporalMarkerOffset(0.08, () -> {
+                    claw.ungrab();
+                    brace.unbrace();
                 });
+
+
+
+
+
     }
 
     @Override
     public void buildParkLeft(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
-
-                //ANOTHER CONE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                .waitSeconds(0.05)
-                .addTemporalMarkerOffset(0.15, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup-151*3);
-                    arm.toPosition(5);
-                    claw.setPos(RobotConfig.Presets.WristPickup);
-                })
-                .addTemporalMarkerOffset(0.25, () -> {
-                    claw.ungrab();
-                })
-                //Go to pickup a cone
-                .lineToLinearHeading(new Pose2d(intermediatePos.getX(), intermediatePos.getY(), intermediatePos.getHeading()))
-                .splineToSplineHeading(new Pose2d(placeLocationHigh.getX(), placeLocationHigh.getY(),placeLocationHigh.getHeading()),placeLocationHigh.getHeading())
-
-                .addTemporalMarkerOffset(0, () -> {
-                    claw.grab();
-                })
-
-                .waitSeconds(0.07)
-
-                //Going to Medium
-                .addTemporalMarkerOffset(0.4, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
-                    claw.setPos(RobotConfig.Presets.WristPlacing);
-                })
-
-                .addTemporalMarkerOffset(0.5, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1HighRev);
-                })
-
-                .lineToLinearHeading(new Pose2d(intermediatePos.getX(), intermediatePos.getY(), intermediatePos.getHeading()))
-                .splineToSplineHeading(new Pose2d(placeLocationHigh.getX(), placeLocationHigh.getY(),placeLocationHigh.getHeading()),placeLocationHigh.getHeading())
-
-                .addTemporalMarkerOffset(-0.25, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev + slidesDrop);
-                })
-
-                //Ungrabs
-                .addTemporalMarkerOffset(0, () -> {
-                    claw.ungrab();
-                })
-
-                .waitSeconds(0.1)
-
-                .addTemporalMarkerOffset(0, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
-                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
-                    claw.setPos(RobotConfig.Wrist.startingPosition);
-                })
-
                 .setConstraints(new TrajectoryVelocityConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 55;
+                        return 57;
                     }
                 }, new TrajectoryAccelerationConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 52;
+                        return 55;
                     }
                 })
-
-                .splineToLinearHeading(new Pose2d(50.5, 28, Math.toRadians(90)), Math.toRadians(90))
-                .addTemporalMarkerOffset(0, () -> {
-                    claw.ungrab();
+                .addTemporalMarkerOffset(0.1, () -> {
+                    claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .resetConstraints();
-
+                .splineToLinearHeading(new Pose2d(47, -44 , Math.toRadians(180)), Math.toRadians(-95));
     }
 
     @Override
     public void buildParkCenter(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
-
-                //ANOTHER CONE !!!!!!!!!!!!!!!
-                .waitSeconds(0.05)
-                .addTemporalMarkerOffset(0.15, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup-151*3);
-                    arm.toPosition(5);
-                    claw.setPos(RobotConfig.Presets.WristPickup);
+                .setConstraints(new TrajectoryVelocityConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 57;
+                    }
+                }, new TrajectoryAccelerationConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 55;
+                    }
                 })
-                .addTemporalMarkerOffset(0.25, () -> {
-                    claw.ungrab();
-                })
-                //Go to pickup a cone
-                .lineToLinearHeading(new Pose2d(intermediatePos.getX(), intermediatePos.getY(), intermediatePos.getHeading()))
-                .splineToSplineHeading(new Pose2d(placeLocationHigh.getX(), placeLocationHigh.getY(),placeLocationHigh.getHeading()),placeLocationHigh.getHeading())
-
-                .addTemporalMarkerOffset(0, () -> {
-                    claw.grab();
-                })
-
-                //Moves off the stack
-                .addTemporalMarkerOffset(0.05, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
-                })
-                .waitSeconds(0.2)
-
-                //Going to Medium
-                .addTemporalMarkerOffset(0.4, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
-                    claw.setPos(RobotConfig.Presets.WristPlacing);
-                })
-
-                .addTemporalMarkerOffset(0.5, () -> {
-                    arm.toPosition(RobotConfig.Presets.Arm1HighRev);
-                })
-
-                .lineToLinearHeading(new Pose2d(intermediatePos.getX(), intermediatePos.getY(), intermediatePos.getHeading()))
-                .splineToSplineHeading(new Pose2d(placeLocationHigh.getX(), placeLocationHigh.getY(),placeLocationHigh.getHeading()),placeLocationHigh.getHeading())
-
-                .addTemporalMarkerOffset(-0.25, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev + slidesDrop);
-                })
-
-                //Ungrabs
-                .addTemporalMarkerOffset(0, () -> {
-                    claw.ungrab();
-                })
-
-                .waitSeconds(0.1)
-
-                .addTemporalMarkerOffset(0, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
-                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+                .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .waitSeconds(0.1)
-                .lineToLinearHeading(new Pose2d(49, 7, Math.toRadians(270)));
+                .splineToLinearHeading(new Pose2d(50.5, -25 ,  Math.toRadians(180)), Math.toRadians(-90));
     }
 
     @Override
     public void buildParkRight(TrajectorySequenceBuilder trajectorySequenceBuilder) {
         trajectorySequenceBuilder
-
-                //ANOTHER CONE !!!!!!!!!!!!!!!
-                .waitSeconds(0.05)
-                .addTemporalMarkerOffset(0.15, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup-151*3);
-                    arm.toPosition(5);
-                    claw.setPos(RobotConfig.Presets.WristPickup);
+                .setConstraints(new TrajectoryVelocityConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 57;
+                    }
+                }, new TrajectoryAccelerationConstraint() {
+                    @Override
+                    public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
+                        return 55;
+                    }
                 })
-
-                .addTemporalMarkerOffset(0.25, () -> {
-                    claw.ungrab();
-                })
-                //Go to pickup a cone
-                .lineToLinearHeading(new Pose2d(intermediatePos.getX(), intermediatePos.getY(), intermediatePos.getHeading()))
-                .splineToSplineHeading(new Pose2d(placeLocationHigh.getX(), placeLocationHigh.getY(),placeLocationHigh.getHeading()),placeLocationHigh.getHeading())
-
-                .addTemporalMarkerOffset(0, () -> {
-                    claw.grab();
-                })
-
-                .waitSeconds(0.2)
-
-                .addTemporalMarkerOffset(0.4, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedAuto + 50);
-                    arm.toPosition(RobotConfig.Presets.Arm1MedAuto);
-                    claw.setPos(RobotConfig.Presets.WristPickup);
-                })
-
-                .addTemporalMarkerOffset(0.6, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesMedAuto - 50);
-                    arm.toPosition(RobotConfig.Presets.Arm1MedAuto - 30);
-                })
-
-                .lineToLinearHeading(new Pose2d(intermediatePos.getX(), intermediatePos.getY(), intermediatePos.getHeading()))
-                .splineToSplineHeading(new Pose2d(placeLocationHigh.getX(), placeLocationHigh.getY(),placeLocationHigh.getHeading()),placeLocationHigh.getHeading())
-
-                .waitSeconds(0.05)
-
-                .addTemporalMarkerOffset(0, () -> {
-                    claw.ungrab();
-                })
-
-                .waitSeconds(0.25)
-
-                .addTemporalMarkerOffset(0.2, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
-                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+                .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-
-                .lineToLinearHeading(new Pose2d(48, -17, Math.toRadians(180)));
-
+                .splineToLinearHeading(new Pose2d(50.7 , 5 , Math.toRadians(180)), Math.toRadians(-90));
     }
 
     @Override

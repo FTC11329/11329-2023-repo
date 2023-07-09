@@ -38,6 +38,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
+import org.firstinspires.ftc.teamcode.RobotConfig;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequenceRunner;
@@ -53,7 +54,7 @@ import java.util.List;
 @Config
 public class GlacierDrive extends MecanumDrive {
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(5, 1, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(12, 0,0 );//was 10,0,0| 12 100 0
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(12, 0, 0);//was 10,0,0| 12 100 0
 
     public static double LATERAL_MULTIPLIER = 1;
 
@@ -68,9 +69,8 @@ public class GlacierDrive extends MecanumDrive {
 
     private TrajectoryFollower follower;
 
-    private DcMotorEx leftFront, leftRear, rightRear, rightFront;
+    private DcMotorEx frontLeft, backLeft, backRight, frontRight;
     private List<DcMotorEx> motors;
-
 
 
 //    private BNO055IMU imu;
@@ -119,12 +119,12 @@ public class GlacierDrive extends MecanumDrive {
         // For example, if +Y in this diagram faces downwards, you would use AxisDirection.NEG_Y.
         // BNO055IMUUtil.remapZAxis(imu, AxisDirection.NEG_Y);
 
-        leftFront = hardwareMap.get(DcMotorEx.class, "frontLeft");
-        leftRear = hardwareMap.get(DcMotorEx.class, "backLeft");
-        rightRear = hardwareMap.get(DcMotorEx.class, "backRight");
-        rightFront = hardwareMap.get(DcMotorEx.class, "frontRight");
+        frontLeft = hardwareMap.get(DcMotorEx.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
+        backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
+        backRight = hardwareMap.get(DcMotorEx.class, "backRight");
 
-        motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
+        motors = Arrays.asList(frontLeft, backLeft, backRight, frontRight);
 
         for (DcMotorEx motor : motors) {
             MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
@@ -144,8 +144,8 @@ public class GlacierDrive extends MecanumDrive {
 
         // TODO: reverse any motors using DcMotor.setDirection()
 
-        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         // TODO: if desired, use setLocalizer() to change the localization method
         setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
 
@@ -290,10 +290,10 @@ public class GlacierDrive extends MecanumDrive {
 
     @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
-        leftFront.setPower(v);
-        leftRear.setPower(v1);
-        rightRear.setPower(v2);
-        rightFront.setPower(v3);
+        frontLeft.setPower(v * RobotConfig.Drivetrain.frontLeftMotorMultiplier);
+        frontRight.setPower(v3 * RobotConfig.Drivetrain.frontRightMotorMultiplier);
+        backLeft.setPower(v1 * RobotConfig.Drivetrain.backLeftMotorMultiplier);
+        backRight.setPower(v2 * RobotConfig.Drivetrain.backRightMotorMultiplier);
     }
 
     @Override
