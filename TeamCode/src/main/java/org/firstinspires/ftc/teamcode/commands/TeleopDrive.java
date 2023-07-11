@@ -276,12 +276,6 @@ public class TeleopDrive implements DiInterfaces.ITickable, DiInterfaces.IInitia
         if (gamepad1.dpad_down) {
             brace.unbrace();
         }
-        if (gamepad1.dpad_left) {
-            drivetrain.backLeftMotor.setPower(0.3);
-        }
-        if (gamepad1.dpad_right) {
-            drivetrain.backRightMotor.setPower(0.3);
-        }
         if (gamepad1.x) {
             claw.setPos(RobotConfig.Claw.coneFlip);
         }
