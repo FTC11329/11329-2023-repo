@@ -84,7 +84,7 @@ public class RobotConfig {
 
         //Medium Reverse
         public static int SlidesMedRev = -500;
-        public static int Arm1MedRev = 610;
+        public static int Arm1MedRev = 580;
         //Medium Reverse Auto
         public static int SlidesMedRevAuto = -900;
         public static int Arm1MedRevAuto = 640;

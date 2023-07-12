@@ -70,7 +70,7 @@ public class GrabFast extends RoadRunnerAutoBase {
 //                })
                 .splineTo(new Vector2d(55, -1 ), 0)
 
-                .splineTo(new Vector2d(87, -20), Math.toRadians(290))
+                .splineTo(new Vector2d(86, -22), Math.toRadians(290))
 
                 .addTemporalMarkerOffset(0, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
@@ -79,8 +79,9 @@ public class GrabFast extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.grab();
                 })
-                .addTemporalMarkerOffset(3, () -> {//delay was 0.1
-                    claw.setPos(RobotConfig.Wrist.startingPosition);
+                .addTemporalMarkerOffset(0.2, () -> {//delay was 0.1
+                    //claw.setPos(RobotConfig.Wrist.startingPosition);
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop);
                 })
                 .strafeRight(10)
                 .setReversed(true)
@@ -92,7 +93,7 @@ public class GrabFast extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     brace.brace();
                 })
-                .splineTo(new Vector2d(68,0), Math.toRadians(150))//ADDED 30 TO ALL OF THEM
+                .splineTo(new Vector2d(75,5), Math.toRadians(130))//ADDED 30 TO ALL OF THEM
                 .back(4)
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.ungrab();
@@ -116,7 +117,7 @@ public class GrabFast extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .splineToLinearHeading(new Pose2d(76 , 40 , Math.toRadians(180)), Math.toRadians(90));
+                .splineToLinearHeading(new Pose2d(75 , 40 , Math.toRadians(270)), Math.toRadians(90));
 
 
     }
