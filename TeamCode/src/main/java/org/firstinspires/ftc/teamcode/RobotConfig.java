@@ -67,7 +67,7 @@ public class RobotConfig {
 
         //High Reverse
         public static int SlidesHighRev = -1620;
-        public static int Arm1HighRev = 590;
+        public static int Arm1HighRev = 600;
 
         //Medium
         public static int SlidesMed = 0;

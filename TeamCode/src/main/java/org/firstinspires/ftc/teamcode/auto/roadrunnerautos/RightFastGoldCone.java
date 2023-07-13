@@ -108,7 +108,7 @@ public class RightFastGoldCone extends RoadRunnerAutoBase {
 
                 })
                 //.splineTo(new Vector2d(97, -73.25), Math.toRadians(-70))
-                .splineToLinearHeading(new Pose2d(98, -71, Math.toRadians(-70)), Math.toRadians(-70))
+                .splineToLinearHeading(new Pose2d(104, -71, Math.toRadians(-70)), Math.toRadians(-50))
                 //.splineTo(new Vector2d(83.0 , -40.5), Math.toRadians(-90))
                 //.waitSeconds(10)
                 //.splineTo(new Vector2d(83.0  ,-47.5 ), Math.toRadians(-90))

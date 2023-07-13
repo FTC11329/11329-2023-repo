@@ -23,8 +23,8 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Left Center Fast GoldCone", group = "Competition")
-public class LeftFastGoldCone extends RoadRunnerAutoBase {
+@Autonomous(name = "Right Center Fast GoldCone HOLD", group = "Competition")
+public class RightFastGoldConeHold extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
@@ -76,7 +76,7 @@ public class LeftFastGoldCone extends RoadRunnerAutoBase {
                         return 54;
                     }
                 })
-                .splineToLinearHeading(new Pose2d(76 , 8, Math.toRadians(90)), 0)
+                .splineToLinearHeading(new Pose2d(79, -6, Math.toRadians(-90)), 0)
                 // .splineTo(new Vector2d(42, -7.5), 0)
                 // .splineTo(new Vector2d(42, -4), 0)
                 .setConstraints(new TrajectoryVelocityConstraint() {
@@ -107,8 +107,8 @@ public class LeftFastGoldCone extends RoadRunnerAutoBase {
                     claw.ungrab();
 
                 })
-
-                .splineToLinearHeading(new Pose2d(84 , 76, Math.toRadians(85 )), Math.toRadians(90))
+                //.splineTo(new Vector2d(97, -73.25), Math.toRadians(-70))
+                .splineToLinearHeading(new Pose2d(104, -71, Math.toRadians(-70)), Math.toRadians(-50))
                 //.splineTo(new Vector2d(83.0 , -40.5), Math.toRadians(-90))
                 //.waitSeconds(10)
                 //.splineTo(new Vector2d(83.0  ,-47.5 ), Math.toRadians(-90))
@@ -126,20 +126,8 @@ public class LeftFastGoldCone extends RoadRunnerAutoBase {
 
                 })
                 //.waitSeconds(0.75)
-                .lineTo(new Vector2d(71, 55))
-                .waitSeconds(18.3)
-                .addTemporalMarkerOffset(0, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
-                    arm.toPosition(RobotConfig.Presets.Arm1HighRev);
-                    claw.setPos(RobotConfig.Presets.WristPickup);
-                    brace.brace();
-                })
-                //.waitSeconds(1)
-                .lineToLinearHeading(new Pose2d(63., 40.6, Math.toRadians(60)))
+                .lineTo(new Vector2d(78, -55))
 
-                .addTemporalMarkerOffset(0, () -> {
-                    claw.ungrab();
-                })
                 //.waitSeconds(3);
 //                .addTemporalMarkerOffset(3, () -> {
 //                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
@@ -171,8 +159,7 @@ public class LeftFastGoldCone extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     brace.unbrace();
                 })
-
-                .splineToLinearHeading(new Pose2d(76.5, 50 , 0), Math.toRadians(-90));
+                .splineToLinearHeading(new Pose2d(72, -3, 0), Math.toRadians(90));
     }
     @Override
     public void buildParkCenter(TrajectorySequenceBuilder trajectorySequenceBuilder) {
@@ -183,7 +170,7 @@ public class LeftFastGoldCone extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     brace.unbrace();
                 })
-                .splineToLinearHeading(new Pose2d(75.5, 25.5, 0), Math.toRadians(-90));
+                .splineToLinearHeading(new Pose2d(75.5, -23.5, 0), Math.toRadians(90));
     }
     @Override
     public void buildParkRight(TrajectorySequenceBuilder trajectorySequenceBuilder) {
@@ -194,7 +181,7 @@ public class LeftFastGoldCone extends RoadRunnerAutoBase {
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     brace.unbrace();
                 })
-                .splineToLinearHeading(new Pose2d(72, 3, 0), Math.toRadians(-90));
+                .splineToLinearHeading(new Pose2d(76.5, -47.5 , 0), Math.toRadians(90));
     }
 
     @Override

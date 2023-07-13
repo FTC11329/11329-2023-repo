@@ -23,8 +23,8 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Left Center Fast GoldCone", group = "Competition")
-public class LeftFastGoldCone extends RoadRunnerAutoBase {
+@Autonomous(name = "Left Center Fast GoldCone HOLD", group = "Competition")
+public class LeftCenterGoldConeHold extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
@@ -127,19 +127,7 @@ public class LeftFastGoldCone extends RoadRunnerAutoBase {
                 })
                 //.waitSeconds(0.75)
                 .lineTo(new Vector2d(71, 55))
-                .waitSeconds(18.3)
-                .addTemporalMarkerOffset(0, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
-                    arm.toPosition(RobotConfig.Presets.Arm1HighRev);
-                    claw.setPos(RobotConfig.Presets.WristPickup);
-                    brace.brace();
-                })
-                //.waitSeconds(1)
-                .lineToLinearHeading(new Pose2d(63., 40.6, Math.toRadians(60)))
 
-                .addTemporalMarkerOffset(0, () -> {
-                    claw.ungrab();
-                })
                 //.waitSeconds(3);
 //                .addTemporalMarkerOffset(3, () -> {
 //                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
@@ -167,7 +155,7 @@ public class LeftFastGoldCone extends RoadRunnerAutoBase {
         trajectorySequenceBuilder
                 .addTemporalMarkerOffset(0, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
+
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     brace.unbrace();
                 })
@@ -179,7 +167,7 @@ public class LeftFastGoldCone extends RoadRunnerAutoBase {
         trajectorySequenceBuilder
                 .addTemporalMarkerOffset(0, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
+
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     brace.unbrace();
                 })
@@ -190,7 +178,7 @@ public class LeftFastGoldCone extends RoadRunnerAutoBase {
         trajectorySequenceBuilder
                 .addTemporalMarkerOffset(0, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
+                    
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     brace.unbrace();
                 })
