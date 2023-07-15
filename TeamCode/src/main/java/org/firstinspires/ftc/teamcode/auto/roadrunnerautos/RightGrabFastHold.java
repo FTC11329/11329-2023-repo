@@ -19,8 +19,8 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Left Fast GrabHold", group = "Competition")
-public class LeftGrabFastHold extends RoadRunnerAutoBase {
+@Autonomous(name = "RIGHT Fast Grab Hold", group = "Competition")
+public class RightGrabFastHold extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
@@ -49,48 +49,49 @@ public class LeftGrabFastHold extends RoadRunnerAutoBase {
                 .setConstraints(new TrajectoryVelocityConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 70;//70
+                        return 70;
                     }
                 }, new TrajectoryAccelerationConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                        return 65;//65
+                        return 65;
                     }
                 })
                 .addDisplacementMarker(() -> {
-                    //claw.setPos(RobotConfig.Presets.WristPickup);
+                    claw.setPos(RobotConfig.Presets.WristPickup);
 
                 })
-                .splineTo(new Vector2d(40  , 8.5), 0)
+                .splineTo(new Vector2d(40  , -1 ), 0)
                 .addDisplacementMarker(() -> {
                     claw.ungrab();
                 })
 //                .addDisplacementMarker(2, () -> {
 //                    claw.setPos(RobotConfig.Wrist.startingPosition);
 //                })
-                .splineTo(new Vector2d(65, 8.5), 0)
+                .splineTo(new Vector2d(55, -1 ), 0)
+
+                .splineTo(new Vector2d(86, -22), Math.toRadians(290))
+
                 .addTemporalMarkerOffset(0, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     claw.ungrab();
                 })
-                .splineTo(new Vector2d(79, 32.5), Math.toRadians(95))
-
-
                 .addTemporalMarkerOffset(0.05, () -> {
                     claw.grab();
                 })
-                .waitSeconds(0.05)
-                .addTemporalMarkerOffset(0.2, () -> {//delay was 0.1
+                .addTemporalMarkerOffset(0.1, () -> {//delay was 0.1
                     //claw.setPos(RobotConfig.Wrist.startingPosition);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop);
                 })
-                //.strafeLeft(10)
-                .waitSeconds(0.01)
-                .lineTo(new Vector2d(70, 24))
+                .strafeRight(10)
                 .setReversed(true)
-                //.splineTo(new Vector2d( 75, 10 ), Math.toRadians(80))
+                .splineTo(new Vector2d( 73.5, -10.5 ), Math.toRadians(100))
 
-
+                .addTemporalMarkerOffset(0.3, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
+                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
+                    brace.unbrace();
+                })
                 .waitSeconds(1);
 
 
@@ -105,8 +106,7 @@ public class LeftGrabFastHold extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .splineToLinearHeading(new Pose2d(76  , 10, Math.toRadians(90)), Math.toRadians(250));
-
+                .splineToLinearHeading(new Pose2d(65 , 48 , Math.toRadians(-90)), Math.toRadians(90));
 
 
     }
@@ -117,7 +117,7 @@ public class LeftGrabFastHold extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .splineToLinearHeading(new Pose2d(78 , -14 , Math.toRadians(0)), Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(70 , 25 , Math.toRadians(-90)), Math.toRadians(90))
         ;
 
     }
@@ -128,7 +128,8 @@ public class LeftGrabFastHold extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0.1, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
                 })
-                .splineToLinearHeading(new Pose2d(78 , -30 , Math.toRadians(0)), Math.toRadians(90));
+                .splineToLinearHeading(new Pose2d(76  , 3, Math.toRadians(270)), Math.toRadians(250))
+        ;
 
     }
 

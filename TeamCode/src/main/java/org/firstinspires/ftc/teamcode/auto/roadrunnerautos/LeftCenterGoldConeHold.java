@@ -178,7 +178,7 @@ public class LeftCenterGoldConeHold extends RoadRunnerAutoBase {
         trajectorySequenceBuilder
                 .addTemporalMarkerOffset(0, () -> {
                     claw.setPos(RobotConfig.Wrist.startingPosition);
-                    
+
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     brace.unbrace();
                 })

@@ -73,7 +73,7 @@ public class LeftGrabFast extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     claw.ungrab();
                 })
-                .splineTo(new Vector2d(75, 35.5), Math.toRadians(83))
+                .splineTo(new Vector2d(79, 32.5), Math.toRadians(95))
 
 
                 .addTemporalMarkerOffset(0.05, () -> {
@@ -96,12 +96,12 @@ public class LeftGrabFast extends RoadRunnerAutoBase {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     brace.brace();
                 })
-                .splineTo(new Vector2d(71,5), Math.toRadians(230))//ADDED 30 TO ALL OF THEM
+                .splineTo(new Vector2d(71,5), Math .toRadians(230))//ADDED 30 TO ALL OF THEM
                 .back(4)
                 .addTemporalMarkerOffset(0.05, () -> {
                     claw.ungrab();
                 })
-                .addTemporalMarkerOffset(0.2, () -> {
+                .addTemporalMarkerOffset(0.3, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     brace.unbrace();

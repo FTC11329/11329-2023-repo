@@ -122,8 +122,8 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-                .addTemporalMarkerOffset(0.05, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
+                .addTemporalMarkerOffset(0.03, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 450);
                 })
                 //goto place 1st cone
                 .addTemporalMarkerOffset(0.5, () -> {
@@ -153,8 +153,8 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-                .addTemporalMarkerOffset(0.05, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
+                .addTemporalMarkerOffset(0.03, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 450);
                 })
                 //goto place 2nd cone
                 .addTemporalMarkerOffset(0.5, () -> {

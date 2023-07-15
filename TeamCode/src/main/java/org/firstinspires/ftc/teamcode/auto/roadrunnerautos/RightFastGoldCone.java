@@ -108,7 +108,7 @@ public class RightFastGoldCone extends RoadRunnerAutoBase {
 
                 })
                 //.splineTo(new Vector2d(97, -73.25), Math.toRadians(-70))
-                .splineToLinearHeading(new Pose2d(104, -71, Math.toRadians(-70)), Math.toRadians(-50))
+                .splineToLinearHeading(new Pose2d(98, -69, Math.toRadians(-65)), Math.toRadians(-90))
                 //.splineTo(new Vector2d(83.0 , -40.5), Math.toRadians(-90))
                 //.waitSeconds(10)
                 //.splineTo(new Vector2d(83.0  ,-47.5 ), Math.toRadians(-90))
@@ -126,7 +126,7 @@ public class RightFastGoldCone extends RoadRunnerAutoBase {
 
                 })
                 //.waitSeconds(0.75)
-                .lineTo(new Vector2d(78, -55))
+                .lineTo(new Vector2d(82, -55))
                 .waitSeconds(18.3)
                 .addTemporalMarkerOffset(0, () -> {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
@@ -135,7 +135,7 @@ public class RightFastGoldCone extends RoadRunnerAutoBase {
                     brace.brace();
                 })
                 //.waitSeconds(1)
-                .lineToLinearHeading(new Pose2d(69., -40.6, Math.toRadians(330)))
+                .lineToLinearHeading(new Pose2d(74., -40.6, Math.toRadians(330)))
 
                 .addTemporalMarkerOffset(0, () -> {
                     claw.ungrab();

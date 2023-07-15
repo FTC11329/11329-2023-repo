@@ -98,12 +98,12 @@ public class RightCenter6High extends RoadRunnerAutoBase {
 
 
                 //REPEATED---------------------
-                .splineTo(new Vector2d(58.7, -74), Math.toRadians(-90))//was -75
+                .splineTo(new Vector2d(58.7, -74), Math.toRadians(-80))//was -75
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-                .addTemporalMarkerOffset(0.05, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
+                .addTemporalMarkerOffset(0.025, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 500);
                 })
                 //goto place 1st cone
                 .addTemporalMarkerOffset(0.5, () -> {
@@ -127,12 +127,12 @@ public class RightCenter6High extends RoadRunnerAutoBase {
                 })
 
                 //REPEATED---------------------
-                .splineTo(new Vector2d(58.7, -74), Math.toRadians(-90))
+                .splineTo(new Vector2d(58.7, -74), Math.toRadians(-80))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-                .addTemporalMarkerOffset(0.05, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
+                .addTemporalMarkerOffset(0.025, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 500);
                 })
                 //goto place 1st cone
                 .addTemporalMarkerOffset(0.5, () -> {
@@ -155,12 +155,12 @@ public class RightCenter6High extends RoadRunnerAutoBase {
                     claw.ungrab();
                 })
                 //REPEATED---------------------
-                .splineTo(new Vector2d(58.7, -74), Math.toRadians(-90))
+                .splineTo(new Vector2d(58.7, -74), Math.toRadians(-80))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-                .addTemporalMarkerOffset(0.05, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
+                .addTemporalMarkerOffset(0.025, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 500);
                 })
                 //goto place 1st cone
                 .addTemporalMarkerOffset(0.5, () -> {
@@ -183,12 +183,12 @@ public class RightCenter6High extends RoadRunnerAutoBase {
                     claw.ungrab();
                 })
                 //REPEATED---------------------
-                .splineTo(new Vector2d(58.7, -74), Math.toRadians(-90))
+                .splineTo(new Vector2d(58.7, -74), Math.toRadians(-80))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-                .addTemporalMarkerOffset(0.05, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
+                .addTemporalMarkerOffset(0.025, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 500);
                 })
                 //goto place 1st cone
                 .addTemporalMarkerOffset(0.5, () -> {
@@ -211,12 +211,12 @@ public class RightCenter6High extends RoadRunnerAutoBase {
                     claw.ungrab();
                 })
                 //REPEATED---------------------
-                .splineTo(new Vector2d(58.7, -74), Math.toRadians(-90))
+                .splineTo(new Vector2d(58.7, -74), Math.toRadians(-80))
                 .addTemporalMarkerOffset(0, () -> {
                     claw.grab();
                 })
-                .addTemporalMarkerOffset(0.05, () -> {
-                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
+                .addTemporalMarkerOffset(0.025, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 500);
                 })
                 //goto place 1st cone
                 .addTemporalMarkerOffset(0.5, () -> {
