@@ -126,7 +126,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 450);
                 })
                 //goto place 1st cone
-                .addTemporalMarkerOffset(0.5, () -> {
+                .addTemporalMarkerOffset(0.75, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
@@ -157,7 +157,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 450);
                 })
                 //goto place 2nd cone
-                .addTemporalMarkerOffset(0.5, () -> {
+                .addTemporalMarkerOffset(0.75, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
@@ -188,7 +188,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 //goto place 3rd cone
-                .addTemporalMarkerOffset(0.5, () -> {
+                .addTemporalMarkerOffset(0.75, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
@@ -220,7 +220,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 //goto place 4th cone
-                .addTemporalMarkerOffset(0.5, () -> {
+                .addTemporalMarkerOffset(0.75, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })
@@ -251,7 +251,7 @@ public class LeftAutoAllHigh extends RoadRunnerAutoBase {
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHigh - 300);
                 })
                 //goto place 5th cone
-                .addTemporalMarkerOffset(0.5, () -> {
+                .addTemporalMarkerOffset(0.75, () -> {
                     arm.toPosition(RobotConfig.Presets.Arm1HighRev);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev);
                 })

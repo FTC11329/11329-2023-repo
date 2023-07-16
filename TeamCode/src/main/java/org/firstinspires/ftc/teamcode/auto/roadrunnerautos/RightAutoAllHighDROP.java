@@ -19,8 +19,8 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "RIGHT Auto | All High", group = "Competition")
-public class RightAutoAllHigh extends RoadRunnerAutoBase {
+@Autonomous(name = "RIGHT Auto | All High DROP!!!!", group = "Competition")
+public class RightAutoAllHighDROP extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
@@ -99,7 +99,9 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                         return 56;
                     }
                 })
-
+                .addTemporalMarkerOffset(0.00, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev+250);
+                })
                 .addTemporalMarkerOffset(0.08, () -> {
                     claw.ungrab();
                 })
@@ -133,11 +135,15 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 .setReversed(true)
                 .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 1.09)//was 1.09
                 .setReversed(false)
+                .waitSeconds(0.1)
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
-                .addTemporalMarkerOffset(0, () -> {
-                    claw.ungrab();
+                .addTemporalMarkerOffset(0.00, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev+250);
                 })
                 .addTemporalMarkerOffset(0.1, () -> {
+                    claw.ungrab();
+                })
+                .addTemporalMarkerOffset(0.2, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 151);
@@ -165,19 +171,20 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 1.09)
                 .setReversed(false)
                 .waitSeconds(0.15)
+                .addTemporalMarkerOffset(0.00, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev+250);
+                })
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
-                .addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0.1, () -> {
                     claw.ungrab();
                 })
-                .addTemporalMarkerOffset(0.1, () -> {
+                .addTemporalMarkerOffset(0.2, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 302);
                     //claw.grab();
                 })
-                .addTemporalMarkerOffset(0.08, () -> {
-                    claw.ungrab();
-                })
+
 
                 //goto pickup 3rd cone------------------------------------------------------------------------------
                 .splineTo(new Vector2d(pickupPosition.getX(), pickupPosition.getY()), pickupPosition.getHeading())
@@ -196,11 +203,14 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), .95)
                 .setReversed(false)
                 .waitSeconds(0.15)
+                .addTemporalMarkerOffset(0.00, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev+250);
+                })
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
-                .addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0.1, () -> {
                     claw.ungrab();
                 })
-                .addTemporalMarkerOffset(0.1, () -> {
+                .addTemporalMarkerOffset(0.2, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 453);
@@ -228,11 +238,14 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 1.09)
                 .setReversed(false)
                 .waitSeconds(0.15)
+                .addTemporalMarkerOffset(0.00, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev+250);
+                })
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
-                .addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0.1, () -> {
                     claw.ungrab();
                 })
-                .addTemporalMarkerOffset(0.1, () -> {
+                .addTemporalMarkerOffset(0.2, () -> {
                     claw.setPos(RobotConfig.Presets.WristPickup);
                     arm.toPosition(RobotConfig.Presets.Arm1Pickup);
                     slides.setTargetPosition(RobotConfig.Presets.SlidesPickupTop + 604);
@@ -259,8 +272,11 @@ public class RightAutoAllHigh extends RoadRunnerAutoBase {
                 .splineTo(new Vector2d(highLocation.getX(), highLocation.getY()), 1.09)
                 .setReversed(false)
                 .waitSeconds(0.15)
+                .addTemporalMarkerOffset(0.00, () -> {
+                    slides.setTargetPosition(RobotConfig.Presets.SlidesHighRev+250);
+                })
                 //.lineToLinearHeading(new Pose2d(highLocation.getX(), highLocation.getY(), highLocation.getHeading()))
-                .addTemporalMarkerOffset(0, () -> {
+                .addTemporalMarkerOffset(0.1, () -> {
                     claw.ungrab();
                 })
                 .addTemporalMarkerOffset(0.1, () -> {
