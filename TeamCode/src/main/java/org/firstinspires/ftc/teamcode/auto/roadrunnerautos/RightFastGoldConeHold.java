@@ -23,7 +23,7 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Right Center Fast GoldCone HOLD", group = "Competition")
+@Autonomous(name = "Right Center Auto| GoldCone Hold", group = "Competition")
 public class RightFastGoldConeHold extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
@@ -108,7 +108,7 @@ public class RightFastGoldConeHold extends RoadRunnerAutoBase {
 
                 })
                 //.splineTo(new Vector2d(97, -73.25), Math.toRadians(-70))
-                .splineToLinearHeading(new Pose2d(104, -71, Math.toRadians(-70)), Math.toRadians(-50))
+                .splineToLinearHeading(new Pose2d(98, -69, Math.toRadians(-65)), Math.toRadians(-90))
                 //.splineTo(new Vector2d(83.0 , -40.5), Math.toRadians(-90))
                 //.waitSeconds(10)
                 //.splineTo(new Vector2d(83.0  ,-47.5 ), Math.toRadians(-90))
@@ -126,14 +126,8 @@ public class RightFastGoldConeHold extends RoadRunnerAutoBase {
 
                 })
                 //.waitSeconds(0.75)
-                .lineTo(new Vector2d(78, -55))
+                .lineTo(new Vector2d(82, -55))
 
-                //.waitSeconds(3);
-//                .addTemporalMarkerOffset(3, () -> {
-//                    slides.setTargetPosition(RobotConfig.Presets.SlidesPickup);
-//                    arm.toPosition(RobotConfig.Presets.Arm1Pickup);
-//                    brace.unbrace();
-//                });
                 .setConstraints(new TrajectoryVelocityConstraint() {
                     @Override
                     public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {

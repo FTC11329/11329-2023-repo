@@ -19,14 +19,14 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "RIGHT Auto All High", group = "Competition")
+@Autonomous(name = "RIGHT Auto | All High", group = "Competition")
 public class RightAutoAllHigh extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
     Slides slides;
     Brace brace;
 
-    Pose2d pickupPosition = new Pose2d(55, -29.0, Math.toRadians(270));
+    Pose2d pickupPosition = new Pose2d(54.5, -29.0, Math.toRadians(270));
     Pose2d highLocation = new Pose2d(57.5, 5, 4.23);//4.23
     Pose2d intermediate1 = new Pose2d();
 

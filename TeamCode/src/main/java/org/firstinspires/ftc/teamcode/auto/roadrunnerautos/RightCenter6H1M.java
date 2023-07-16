@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Slides;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
-
+@Disabled
 @Autonomous(name = "RIGHT Center 6H 1M", group = "Competition")
 public class RightCenter6H1M extends RoadRunnerAutoBase {
     Arm arm;

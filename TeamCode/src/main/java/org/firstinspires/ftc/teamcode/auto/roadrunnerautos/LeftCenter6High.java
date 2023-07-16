@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Left Center 6 High", group = "Competition")
+@Autonomous(name = "Left Center Auto | All High", group = "Competition")
 public class LeftCenter6High extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;

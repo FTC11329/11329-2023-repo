@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Left Fast GrabHold", group = "Competition")
+@Autonomous(name = "Left Auto | Gold Cone Hold", group = "Competition")
 public class LeftGrabFastHold extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;

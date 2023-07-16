@@ -23,7 +23,7 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Left Center Fast GoldCone HOLD", group = "Competition")
+@Autonomous(name = "Left Center Auto| GoldCone HOLD", group = "Competition")
 public class LeftCenterGoldConeHold extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
@@ -160,7 +160,7 @@ public class LeftCenterGoldConeHold extends RoadRunnerAutoBase {
                     brace.unbrace();
                 })
 
-                .splineToLinearHeading(new Pose2d(76.5, 50 , 0), Math.toRadians(-90));
+                .splineToLinearHeading(new Pose2d(78, 50 , 0), Math.toRadians(-90));
     }
     @Override
     public void buildParkCenter(TrajectorySequenceBuilder trajectorySequenceBuilder) {

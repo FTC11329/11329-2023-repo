@@ -23,7 +23,7 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Left Center Fast GoldCone", group = "Competition")
+@Autonomous(name = "Left Center Auto | GoldCone", group = "Competition")
 public class LeftFastGoldCone extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;

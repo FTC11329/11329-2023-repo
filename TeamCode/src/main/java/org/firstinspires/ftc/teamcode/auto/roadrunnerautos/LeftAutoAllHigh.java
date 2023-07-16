@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Autonomous(name = "Left Auto All High", group = "Competition")
+@Autonomous(name = "Left Auto | All High", group = "Competition")
 public class LeftAutoAllHigh extends RoadRunnerAutoBase {
     Arm arm;
     Claw claw;
